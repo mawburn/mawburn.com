@@ -1,0 +1,15 @@
+.tagline {
+  animation: fadein 2s;
+  color: #f0f0f0;
+  font-size: 2rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
