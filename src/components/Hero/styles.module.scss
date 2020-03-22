@@ -1,4 +1,7 @@
 .hero {
+  align-items: center;
   background-color: #222222;
+  display: flex;
+  justify-content: space-evenly;
   min-height: 50vh;
 }
