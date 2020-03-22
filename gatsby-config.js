@@ -37,8 +37,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`oswald\:500,700`, `montserrat\:700`],
-        display: "swap",
+        fonts: [`baloo 2\:500,700`],
+        display: 'swap',
       },
     },
   ],
