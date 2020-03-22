@@ -1,7 +1,14 @@
+@import '../vars';
+
 .hero {
-  align-items: center;
-  background-color: #222222;
   display: flex;
-  justify-content: space-evenly;
-  min-height: 50vh;
+  background-color: #222222;
+  height: 50vh;
+
+  .inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+  }
 }

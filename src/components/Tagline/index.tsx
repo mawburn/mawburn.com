@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-import styles from './styles.module.scss'
+import s from './styles.module.scss'
 
 const taglines: string[] = ['just some random software engineer guy']
 
@@ -9,7 +9,7 @@ const Tagline = () => {
     Math.floor(Math.random() * Math.floor(taglines.length))
   )
 
-  return <div className={styles.tagline}>{taglines[index.current]}</div>
+  return <div className={s.tagline}>{taglines[index.current]}</div>
 }
 
 export default Tagline

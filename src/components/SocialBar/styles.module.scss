@@ -1,0 +1,13 @@
+.socialBar {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  height: 3rem;
+
+  img {
+    margin: 0 0.5rem;
+    height: 1.25rem;
+    width: 1.25rem;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.9);
+  }
+}

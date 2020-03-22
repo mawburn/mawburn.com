@@ -1,0 +1,7 @@
+@import './vars';
+
+.max-width {
+  margin: 0 auto;
+  max-width: $max-width;
+  width: 100%;
+}
