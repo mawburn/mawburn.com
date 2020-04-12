@@ -2,13 +2,29 @@
 
 .hero {
   display: flex;
-  background-color: #222222;
+  flex-direction: row;
+  background-color: #101010;
   height: 50vh;
 
   .inner {
+    display: flex;
     align-items: center;
     display: flex;
     justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+  }
+
+  .tagline {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 60%;
+  }
+
+  .img {
+    display: flex;
+    width: 40%;
     height: 100%;
   }
 }
