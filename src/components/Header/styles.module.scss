@@ -1,6 +1,16 @@
 .header {
   display: flex;
+  flex-direction: column;
   background-color: #222222;
-  justify-content: flex-end;
   padding: 0 2rem;
+
+  .inner {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+    h1 {
+      color: #f0f0f0;
+    }
+  }
 }
