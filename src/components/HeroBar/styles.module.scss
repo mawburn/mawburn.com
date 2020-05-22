@@ -1,0 +1,16 @@
+@import '../../vars';
+
+.hero {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: $color-bg;
+  height: 42vh;
+  justify-content: center;
+
+  @media only screen and (max-width: 690px) {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 2rem;
+  }
+}

@@ -1,0 +1,18 @@
+@import '../../../vars';
+
+.header {
+  display: flex;
+  flex-direction: column;
+  background-color: $color-bg;
+  padding: 0 2rem 0 5rem;
+
+  h1 {
+    color: #f0f0f0;
+    font-family: 'Baloo 2', sans-serif;
+  }
+
+  @media only screen and (max-width: 690px) {
+    padding: 0;
+    align-items: center;
+  }
+}
