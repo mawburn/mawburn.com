@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `mawburn.com`,
-    description: `Matt Burnett`,
+    description: `Matt Burnett - Software Engineer`,
     author: `@mawburn_`,
   },
   plugins: [
@@ -31,14 +31,23 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/lars.png`, // This path is relative to the root of the site.
       },
     },
     {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
-        fonts: [`baloo 2\:500,700`],
+        fonts: [`baloo 2\:500,700`, `roboto:300,500`],
         display: 'swap',
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-49913433-3',
+        head: false,
+        pageTransitionDelay: 0,
+        defer: true,
       },
     },
   ],

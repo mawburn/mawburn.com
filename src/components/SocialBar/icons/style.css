@@ -1,16 +1,13 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?5few6w');
-  src:  url('fonts/icomoon.eot?5few6w#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?5few6w') format('truetype'),
-    url('fonts/icomoon.woff?5few6w') format('woff'),
-    url('fonts/icomoon.svg?5few6w#icomoon') format('svg');
+  src: url('icomoon.woff?5few6w') format('woff');
   font-weight: normal;
   font-style: normal;
   font-display: block;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^='icon-'],
+[class*=' icon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -25,30 +22,22 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-envelope:before {
-  content: "\e900";
-}
 .icon-mail:before {
-  content: "\e900";
+  content: '\e900';
 }
-.icon-email:before {
-  content: "\e900";
-}
-.icon-contact:before {
-  content: "\e900";
-}
+
 .icon-instagram:before {
-  content: "\ea92";
+  content: '\ea92';
 }
 .icon-github:before {
-  content: "\eab0";
+  content: '\eab0';
 }
 .icon-hackernews:before {
-  content: "\eac7";
+  content: '\eac7';
 }
 .icon-linkedin:before {
-  content: "\eac9";
+  content: '\eac9';
 }
 .icon-reddit-alien:before {
-  content: "\e901";
+  content: '\e901';
 }
