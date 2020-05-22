@@ -65,11 +65,11 @@ const AboutMe = () => (
     <p>
       This page was totally over-engineered using{' '}
       <a className={s.gatsby} href="https://www.gatsbyjs.org/">
-        Gatsby.js
+        <Color>Gatsby.js</Color>
       </a>{' '}
       and then hosted on{' '}
       <a className={s.netlify} href="https://www.netlify.com/">
-        Netlify
+        <Color>Netlify</Color>
       </a>
       , because they're just awesome.
     </p>
