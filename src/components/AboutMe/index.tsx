@@ -34,8 +34,8 @@ const AboutMe = () => (
           <Color>Portaler</Color>
         </a>
         . Portaler is a collaborative mapping tool and the number one of its kind for the game Albion
-        Online. In about 3 months after I launched it, it started receiving about
-        15,000 monthly active users according to Cloudflare metrics. Which, I believe is a fairly heavy chunk of the games active players
+        Online. In about 3 months after I launched, it started receiving about
+        15,000 monthly active users according to Cloudflare metrics. Which, I believe is a fairly heavy chunk of the game's active players
 .
       </p>
       <Cloudflare />
