@@ -9,6 +9,8 @@ const tags: string[] = [
   'web developer',
   'futurama nerd',
   'father',
+  'tabletop GM',
+  'board game lover',
 ]
 
 const Tagline = () => {

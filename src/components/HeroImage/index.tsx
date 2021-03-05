@@ -15,10 +15,10 @@ import s from './styles.module.scss'
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const LarsImage = () => {
+const HeroImage = () => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "lars.png" }) {
+      placeholderImage: file(relativePath: { eq: "me-site.png" }) {
         childImageSharp {
           fluid(maxWidth: 1500) {
             ...GatsbyImageSharpFluid
@@ -37,4 +37,4 @@ const LarsImage = () => {
   )
 }
 
-export default LarsImage
+export default HeroImage

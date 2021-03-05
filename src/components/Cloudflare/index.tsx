@@ -15,12 +15,12 @@ import s from './styles.module.scss'
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const MyImage = () => {
+const Cloudflare = () => {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "lars.png" }) {
+      placeholderImage: file(relativePath: { eq: "cloudflare.png" }) {
         childImageSharp {
-          fluid(maxWidth: 150) {
+          fluid(maxWidth: 470) {
             ...GatsbyImageSharpFluid
           }
         }
@@ -32,9 +32,9 @@ const MyImage = () => {
     <Img
       fluid={data.placeholderImage.childImageSharp.fluid}
       className={s.img}
-      alt="mawburn"
+      alt="cloudflare metrics"
     />
   )
 }
 
-export default MyImage
+export default Cloudflare

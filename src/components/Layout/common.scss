@@ -16,6 +16,13 @@ body {
   font-family: Roboto, sans-serif;
 }
 
+a,
+a:any-link {
+  color: #142421;
+  text-decoration: underline;
+  text-decoration-color: rgb(42, 42, 42);
+}
+
 .max-width {
   margin: 0 auto;
   max-width: $max-width;
