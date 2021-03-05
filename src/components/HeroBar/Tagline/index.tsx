@@ -6,20 +6,37 @@ const tags: string[] = [
   'software engineer',
   'full-stack developer',
   'js ninja',
+  '❤️ typescript',
   'web developer',
   'futurama nerd',
   'father',
-  'tabletop GM',
+  'husband',
+  'backpacker 🏕 ',
+  '🎲 tabletop GM',
   'board game lover',
 ]
+
+let lastThree: number[] = []
+
+const rand = (): number => {
+  const newIndex = Math.floor(Math.random() * tags.length)
+
+  if (lastThree.includes(newIndex)) {
+    return rand()
+  }
+
+  lastThree.unshift(newIndex)
+  lastThree = lastThree.slice(0, 3)
+  return newIndex
+}
 
 const Tagline = () => {
   const [index, setIndex] = useState<number>(0)
 
   useEffect(() => {
     setTimeout(() => {
-      const next = index + 1 < tags.length ? index + 1 : 0
-      setIndex(next)
+      const newIdx = rand()
+      setIndex(newIdx)
     }, 1000)
   }, [index])
 
