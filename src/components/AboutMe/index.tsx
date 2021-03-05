@@ -40,17 +40,34 @@ const AboutMe = () => (
       <Cloudflare />
       <p>
         The project is written entirely in <Color>TypeScript</Color> using{' '}
-        <Color>Node</Color> & <Color>React</Color>. The repo can be found here:{' '}
-        <a href="https://github.com/Portaler-Zone/portaler-core">
-          github.com/Portaler-Zone/portaler-core
-        </a>
-        . You can find the main site here:{' '}
-        <a href="https://portaler.zone">Portaler.zone</a>, but the real action
-        is at either <a href="https://map.portaler.zone">map.portaler.zone</a>.
-        You can demo it by joining my Discord server linked on both of the other
-        links and then going to{' '}
-        <a href="https://public.portaler.zone">public.portaler.zone</a>.
+        <Color>Node</Color> & <Color>React</Color>.
       </p>
+      <ul>
+        <li>
+          The repo can be found here:{' '}
+          <a href="https://github.com/Portaler-Zone/portaler-core">
+            github.com/Portaler-Zone/portaler-core
+          </a>
+        </li>
+        <li>
+          You can find the main site here:{' '}
+          <a href="https://portaler.zone">Portaler.zone</a>
+        </li>
+        <li>
+          But the real action is at either{' '}
+          <ul>
+            <li>
+              On the curated version done by volunteers here:{' '}
+              <a href="https://map.portaler.zone">map.portaler.zone</a>
+            </li>
+            <li>
+              Or you can demo it by joining my <Color>Discord</Color> server
+              linked on both of the other links and then going to{' '}
+              <a href="https://public.portaler.zone">public.portaler.zone</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
       <p>
         As far as tech goes, it's just a simple crud app, due to rules set by
         the game's owners all user input is manual. It's run on less than &lt;
