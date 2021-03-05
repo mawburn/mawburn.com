@@ -33,10 +33,11 @@ const AboutMe = () => (
         <a href="https://portaler.zone" className={s.portalerLink}>
           <Color>Portaler</Color>
         </a>
-        . Portaler is a collaborative mapping tool and the number one of its kind for the game Albion
-        Online. In about 3 months after I launched, it started receiving about
-        15,000 monthly active users according to Cloudflare metrics. Which, I believe is a fairly heavy chunk of the game's active players
-.
+        . Portaler is a collaborative mapping tool and the number one of its
+        kind for the game Albion Online. In about 3 months after I launched, it
+        started receiving about 15,000 monthly active users according to
+        Cloudflare metrics. Which, I believe is a fairly heavy chunk of the
+        game's active players .
       </p>
       <Cloudflare />
       <p>
@@ -76,7 +77,7 @@ const AboutMe = () => (
       </p>
       <p>
         As of this writing, it doesn't use a GraphDB, but it definitely should
-        and that's probably coming soon. ...or websockets (if you couldn't tell
+        and that's probably coming soon, ...or websockets (if you couldn't tell
         by the insane number of requests it runs off a heartbeat).
       </p>
       <p>
