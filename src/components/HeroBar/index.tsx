@@ -1,6 +1,6 @@
 import React from 'react'
 
-import LarsImage from '../LarsImage'
+import LarsImage from '../HeroImage'
 
 import Tagline from './Tagline'
 
