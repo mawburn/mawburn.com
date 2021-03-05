@@ -16,22 +16,29 @@ const tags: string[] = [
   'board game lover',
 ]
 
-let lastThree: number[] = []
+let indexList: number[] = tags.map((_, i) => i)
+const startIdx = indexList.shift()
 
 const rand = (): number => {
-  const newIndex = Math.floor(Math.random() * tags.length)
+  if (indexList.length === 1) {
+    const ret = indexList[0]
+    indexList = tags.map((_, i) => i)
 
-  if (lastThree.includes(newIndex)) {
-    return rand()
+    const retIndex = indexList.findIndex(n => n === ret)
+    indexList.splice(retIndex, 1)
+
+    return ret
   }
 
-  lastThree.unshift(newIndex)
-  lastThree = lastThree.slice(0, 3)
-  return newIndex
+  const remove = Math.floor(Math.random() * indexList.length)
+  const retVal = indexList[remove]
+  indexList.splice(remove, 1)
+
+  return retVal
 }
 
 const Tagline = () => {
-  const [index, setIndex] = useState<number>(0)
+  const [index, setIndex] = useState<number>(startIdx)
 
   useEffect(() => {
     setTimeout(() => {
