@@ -70,6 +70,7 @@ const AboutMe = () => (
           </ul>
         </li>
       </ul>
+      <p><em>* Sorry, these apps aren't mobile friendly at this time. It kinda just grew from a personal need into something a lot of people use.</em></p>
       <p>
         As far as tech goes, it's just a simple crud app, due to rules set by
         the game's owners all user input is manual. It's run on less than &lt;
