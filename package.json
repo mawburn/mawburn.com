@@ -4,6 +4,9 @@
   "description": "mawburn.com",
   "version": "0.1.0",
   "author": "Matt Burnett <mawburn7@gmail.com>",
+  "engines": {
+    "node": ">=12"
+  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.8.0",
