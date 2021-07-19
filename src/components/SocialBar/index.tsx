@@ -18,7 +18,7 @@ const SocialBar = () => (
         </a>
       </li>
       <li>
-        <a href="https://www.instagram.com/mawburn_/" title="Instagram">
+        <a href="https://www.instagram.com/_mawburn/" title="Instagram">
           <span className="icon-instagram" />
         </a>
       </li>

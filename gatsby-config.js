@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `mawburn.com`,
     description: `Matt Burnett - Software Engineer`,
-    author: `@mawburn_`,
+    author: `@_mawburn`,
   },
   plugins: [
     `gatsby-plugin-typescript`,
