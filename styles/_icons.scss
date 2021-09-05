@@ -1,0 +1,238 @@
+$icomoon-font-family: 'Brands' !default;
+$icomoon-font-path: '/icons/fonts' !default;
+
+$icon-apple: '\e900';
+$icon-csharp: '\e901';
+$icon-deno: '\e902';
+$icon-discord: '\e903';
+$icon-docker: '\e904';
+$icon-github: '\e905';
+$icon-gmail: '\e906';
+$icon-go: '\e907';
+$icon-google: '\e908';
+$icon-instagram: '\e909';
+$icon-java: '\e90a';
+$icon-javascript: '\e90b';
+$icon-ko-fi: '\e90c';
+$icon-linkedin: '\e90d';
+$icon-next-dot-js: '\e90e';
+$icon-node-dot-js: '\e90f';
+$icon-patreon: '\e910';
+$icon-postgresql: '\e911';
+$icon-rails: '\e912';
+$icon-react: '\e913';
+$icon-reddit: '\e914';
+$icon-shopify: '\e915';
+$icon-sitepoint: '\e91d';
+$icon-spotify: '\e916';
+$icon-sublimetext: '\e917';
+$icon-twitch: '\e918';
+$icon-twitter: '\e919';
+$icon-typescript: '\e91a';
+$icon-visualstudiocode: '\e91b';
+$icon-ycombinator: '\e91c';
+
+@font-face {
+  font-family: '#{$icomoon-font-family}';
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?tu59mu') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?tu59mu') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?tu59mu##{$icomoon-font-family}')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: '#{$icomoon-font-family}' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-apple {
+  &:before {
+    content: $icon-apple;
+    color: #999;
+  }
+}
+.icon-csharp {
+  &:before {
+    content: $icon-csharp;
+    color: #239120;
+  }
+}
+.icon-deno {
+  &:before {
+    content: $icon-deno;
+  }
+}
+.icon-discord {
+  &:before {
+    content: $icon-discord;
+    color: #7289da;
+  }
+}
+.icon-docker {
+  &:before {
+    content: $icon-docker;
+    color: #1488c6;
+  }
+}
+.icon-github {
+  &:before {
+    content: $icon-github;
+  }
+}
+.icon-gmail {
+  &:before {
+    content: $icon-gmail;
+    color: #d14836;
+  }
+}
+.icon-go {
+  &:before {
+    content: $icon-go;
+    color: #00add8;
+  }
+}
+.icon-google {
+  &:before {
+    content: $icon-google;
+    color: #4285f4;
+  }
+}
+.icon-instagram {
+  &:before {
+    content: $icon-instagram;
+    color: #e4405f;
+  }
+}
+.icon-java {
+  &:before {
+    content: $icon-java;
+    color: #007396;
+  }
+}
+.icon-javascript {
+  &:before {
+    content: $icon-javascript;
+    color: #f7df1e;
+  }
+}
+.icon-ko-fi {
+  &:before {
+    content: $icon-ko-fi;
+    color: #f16061;
+  }
+}
+.icon-linkedin {
+  &:before {
+    content: $icon-linkedin;
+    color: #0077b5;
+  }
+}
+.icon-next-dot-js {
+  &:before {
+    content: $icon-next-dot-js;
+  }
+}
+.icon-node-dot-js {
+  &:before {
+    content: $icon-node-dot-js;
+    color: #393;
+  }
+}
+.icon-patreon {
+  &:before {
+    content: $icon-patreon;
+    color: #f96854;
+  }
+}
+.icon-postgresql {
+  &:before {
+    content: $icon-postgresql;
+    color: #336791;
+  }
+}
+.icon-rails {
+  &:before {
+    content: $icon-rails;
+    color: #c00;
+  }
+}
+.icon-react {
+  &:before {
+    content: $icon-react;
+    color: #61dafb;
+  }
+}
+.icon-reddit {
+  &:before {
+    content: $icon-reddit;
+    color: #ff4500;
+  }
+}
+.icon-shopify {
+  &:before {
+    content: $icon-shopify;
+    color: #7ab55c;
+  }
+}
+.icon-sitepoint {
+  &:before {
+    content: $icon-sitepoint;
+    color: #258aaf;
+  }
+}
+.icon-spotify {
+  &:before {
+    content: $icon-spotify;
+    color: #1ed760;
+  }
+}
+.icon-sublimetext {
+  &:before {
+    content: $icon-sublimetext;
+    color: #ff9800;
+  }
+}
+.icon-twitch {
+  &:before {
+    content: $icon-twitch;
+    color: #6441a4;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+    color: #1da1f2;
+  }
+}
+.icon-typescript {
+  &:before {
+    content: $icon-typescript;
+    color: #007acc;
+  }
+}
+.icon-visualstudiocode {
+  &:before {
+    content: $icon-visualstudiocode;
+    color: #007acc;
+  }
+}
+.icon-ycombinator {
+  &:before {
+    content: $icon-ycombinator;
+    color: #f0652f;
+  }
+}

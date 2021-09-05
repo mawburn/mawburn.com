@@ -1,0 +1,24 @@
+@import '../node_modules/normalize.css/normalize.css';
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  color: #142421;
+  background-color: #fdfdfd;
+  font-family: Roboto, sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a,
+a:any-link {
+  color: #45026a;
+  text-decoration: none;
+}
+
+@import './icons';
