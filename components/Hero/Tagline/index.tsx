@@ -1,57 +1,26 @@
-import { useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 
 import styles from '../styles.module.scss'
+import getTag from './getTag'
 
-const tags: string[] = [
-  'software engineer',
-  'full-stack developer',
-  'js ninja',
-  '❤️ typescript',
-  'web developer',
-  'futurama nerd',
-  'father',
-  'husband',
-  'backpacker 🏕 ',
-  '🎲 tabletop GM',
-  'board game lover',
-  'ttrpg enthusiast 🎲',
-  'community creator',
-  'creator of content',
-  'entrepreneur',
-]
-
-let indexList: number[] = tags.map((_, i) => i)
-const startIdx = indexList.shift() || 0
-
-const rand = (): number => {
-  if (indexList.length === 1) {
-    const ret = indexList[0]
-    indexList = tags.map((_, i) => i)
-
-    const retIndex = indexList.findIndex(n => n === ret)
-    indexList.splice(retIndex, 1)
-
-    return ret
-  }
-
-  const remove = Math.floor(Math.random() * indexList.length)
-  const retVal = indexList[remove]
-  indexList.splice(remove, 1)
-
-  return retVal
+interface TaglineProps {
+  screen: ScreenType
 }
 
-const Tagline = () => {
-  const [index, setIndex] = useState<number>(startIdx)
+const Tagline = ({ screen }: TaglineProps) => {
+  const [tag, setTag] = useState<ReactNode>(getTag())
 
   useEffect(() => {
-    setTimeout(() => {
-      const newIdx = rand()
-      setIndex(newIdx)
-    }, 1000)
-  }, [index])
+    const size = screen === 'phone' ? 25 : 42
 
-  return <div className={styles.tagline}>{tags[index]}</div>
+    const interval = setInterval(() => {
+      setTag(getTag(size))
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [screen])
+
+  return <div className={styles.tagline}>{tag}</div>
 }
 
 export default Tagline

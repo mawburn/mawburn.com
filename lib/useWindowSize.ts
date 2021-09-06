@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import v from '../styles/exports.module.scss'
 
 interface Size {
-  screen: 'phone' | 'tablet' | 'small' | 'desktop'
+  screen: ScreenType
   width: number | undefined
   height: number | undefined
   isPhone: boolean

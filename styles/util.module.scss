@@ -1,2 +1,63 @@
-.container {
+@import '../styles/vars';
+
+.main {
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 650px;
+
+  figcaption {
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  p {
+    text-indent: 2ch;
+  }
+
+  h2 {
+    margin-top: 2.5rem;
+  }
+
+  details div {
+    font-size: 0.9rem;
+    font-weight: 300;
+    font-style: italic;
+  }
+}
+
+.center {
+  text-align: center;
+}
+
+.nobreak {
+  white-space: nowrap;
+  margin-right: 1ch;
+}
+
+.fontColor {
+  color: #142421 !important;
+}
+
+.hideMobile {
+  display: none;
+
+  @media #{$bpTabletUp} {
+    display: unset;
+  }
+}
+
+.four04 {
+  margin: 2rem auto;
+  font-size: 2.5rem;
+  font-family: 'Baloo 2', cursive;
+}
+
+.imgRounder img {
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.spread {
+  display: flex;
+  justify-content: space-evenly;
 }
