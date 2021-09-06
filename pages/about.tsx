@@ -24,7 +24,11 @@ const About: NextPage = () => (
           &amp; I want to get better at what I do. But because of that, I need a lot of release.
         </p>
         <p>
-          I’ve worked in a ton of stuff over the years, starting out in ColdFusion, then to{' '}
+          I’ve worked in a ton of stuff over the years, starting out in{' '}
+          <span className={styles.nobreak}>
+            <Image src="/img/cf.webp" width={16} height={16} alt="ColdFusion" /> ColdFusion,
+          </span>
+          then to{' '}
           <span className={styles.nobreak}>
             <span className="icon-java" /> Java,
           </span>
@@ -44,7 +48,11 @@ const About: NextPage = () => (
           <span className={styles.nobreak}>
             <span className="icon-go" /> GoLang
           </span>
-          in there too. I am really looking forward to what{' '}
+          in there too, I’ve even dabbled in a bit of{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-scala" /> Scala,
+          </span>
+          but it’s been years. I am really looking forward to what{' '}
           <span className={styles.nobreak}>
             <a href="https://deno.land/" rel="noopener">
               <span className="icon-deno" /> Deno

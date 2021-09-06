@@ -46,4 +46,12 @@ h6 {
   text-align: center;
 }
 
+p {
+  font-size: 1.1rem;
+}
+
 @import './icons';
+
+span[class^='icon-'] {
+  cursor: pointer;
+}

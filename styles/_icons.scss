@@ -1,11 +1,15 @@
 $icomoon-font-family: 'Brands' !default;
 $icomoon-font-path: '/icons/fonts' !default;
 
+$icon-adobephotoshop: '\e923';
 $icon-apple: '\e900';
+$icon-cloudflare: '\e922';
 $icon-csharp: '\e901';
 $icon-deno: '\e902';
 $icon-discord: '\e903';
 $icon-docker: '\e904';
+$icon-facebook: '\e91e';
+$icon-gatsby: '\e91f';
 $icon-github: '\e905';
 $icon-gmail: '\e906';
 $icon-go: '\e907';
@@ -13,6 +17,7 @@ $icon-google: '\e908';
 $icon-instagram: '\e909';
 $icon-java: '\e90a';
 $icon-javascript: '\e90b';
+$icon-kibana: '\e926';
 $icon-ko-fi: '\e90c';
 $icon-linkedin: '\e90d';
 $icon-nextjs: '\e90e';
@@ -22,6 +27,9 @@ $icon-postgresql: '\e911';
 $icon-rails: '\e912';
 $icon-react: '\e913';
 $icon-reddit: '\e914';
+$icon-redis: '\e920';
+$icon-sass: '\e921';
+$icon-scala: '\e924';
 $icon-shopify: '\e915';
 $icon-sitepoint: '\e91d';
 $icon-spotify: '\e916';
@@ -34,13 +42,13 @@ $icon-ycombinator: '\e91c';
 
 @font-face {
   font-family: '#{$icomoon-font-family}';
-  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?tu59mu') format('truetype'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?tu59mu') format('woff'),
-    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?tu59mu##{$icomoon-font-family}')
+  src: url('#{$icomoon-font-path}/#{$icomoon-font-family}.ttf?h32qlf') format('truetype'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.woff?h32qlf') format('woff'),
+    url('#{$icomoon-font-path}/#{$icomoon-font-family}.svg?h32qlf##{$icomoon-font-family}')
       format('svg');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }
 
 [class^='icon-'],
@@ -59,10 +67,22 @@ $icon-ycombinator: '\e91c';
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-adobephotoshop {
+  &:before {
+    content: $icon-adobephotoshop;
+    color: #00c8ff;
+  }
+}
 .icon-apple {
   &:before {
     content: $icon-apple;
     color: #999;
+  }
+}
+.icon-cloudflare {
+  &:before {
+    content: $icon-cloudflare;
+    color: #f38020;
   }
 }
 .icon-csharp {
@@ -74,7 +94,7 @@ $icon-ycombinator: '\e91c';
 .icon-deno {
   &:before {
     content: $icon-deno;
-    color: #000 !important;
+    color: #111 !important;
   }
 }
 .icon-discord {
@@ -87,6 +107,18 @@ $icon-ycombinator: '\e91c';
   &:before {
     content: $icon-docker;
     color: #1488c6;
+  }
+}
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+    color: #1877f2;
+  }
+}
+.icon-gatsby {
+  &:before {
+    content: $icon-gatsby;
+    color: #639;
   }
 }
 .icon-github {
@@ -128,6 +160,12 @@ $icon-ycombinator: '\e91c';
   &:before {
     content: $icon-javascript;
     color: #f7df1e;
+  }
+}
+.icon-kibana {
+  &:before {
+    content: $icon-kibana;
+    color: #005571;
   }
 }
 .icon-ko-fi {
@@ -183,6 +221,24 @@ $icon-ycombinator: '\e91c';
     color: #ff4500;
   }
 }
+.icon-redis {
+  &:before {
+    content: $icon-redis;
+    color: #d82c20;
+  }
+}
+.icon-sass {
+  &:before {
+    content: $icon-sass;
+    color: #c69;
+  }
+}
+.icon-scala {
+  &:before {
+    content: $icon-scala;
+    color: #dc322f;
+  }
+}
 .icon-shopify {
   &:before {
     content: $icon-shopify;
@@ -210,7 +266,7 @@ $icon-ycombinator: '\e91c';
 .icon-twitch {
   &:before {
     content: $icon-twitch;
-    color: #6441a4 !important;
+    color: #6441a4;
   }
 }
 .icon-twitter {

@@ -66,6 +66,13 @@ const Navbar = () => {
           </a>
         </li>
         <li className={utilStyle.hideMobile}>
+          <a href={config.spotify} rel="noopener" title="Spotify">
+            <div className={styles.licontent}>
+              <span className="icon-spotify" />
+            </div>
+          </a>
+        </li>
+        <li className={utilStyle.hideBelowDesktop}>
           <a href={config.hackernews} rel="noopener" title="Hacker News">
             <div className={styles.licontent}>
               <span className="icon-ycombinator" />

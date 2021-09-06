@@ -5,6 +5,11 @@
   margin: 1rem auto;
   max-width: 650px;
 
+  &.mainFull {
+    margin: 1rem 0;
+    max-width: 90%;
+  }
+
   figcaption {
     font-weight: 300;
     font-style: italic;
@@ -23,6 +28,15 @@
     font-weight: 300;
     font-style: italic;
   }
+}
+
+.subTitle {
+  color: rgba(#142421, 0.7);
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Baloo 2', cursive;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .center {
@@ -46,6 +60,14 @@
   }
 }
 
+.hideBelowDesktop {
+  display: none;
+
+  @media #{$bpSmScreenUp} {
+    display: unset;
+  }
+}
+
 .four04 {
   margin: 2rem auto;
   font-size: 2.5rem;
@@ -60,4 +82,23 @@
 .spread {
   display: flex;
   justify-content: space-evenly;
+}
+
+.projects {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0.5rem;
+  }
+}
+
+.flip {
+  display: inline-block;
+  transform: scale(-1, 1);
 }

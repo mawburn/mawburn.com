@@ -12,6 +12,7 @@ const config = {
   linkedin: 'https://www.linkedin.com/in/burnettmatt/',
   github: 'https://github.com/mawburn',
   hackernews: 'https://news.ycombinator.com/user?id=mawburn',
+  spotify: 'https://open.spotify.com/user/mawburn?si=d304846ece0e4462',
 }
 
 export default config
