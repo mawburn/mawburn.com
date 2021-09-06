@@ -126,7 +126,7 @@ const About: NextPage = () => (
           This was pretty early on an my streaming quality picked up a lot before I quit. I picked
           up the name{' '}
           <Image src="/img/hypnoCode-animated.webp" height={20} width={20} alt="hypnoToad gif" />{' '}
-          “hypnoCode” as a streaming name &amp; and have kept it for my main online screen name. My
+          “hypnoCode” as a streaming name &amp; have kept it for my main online screen name. My
           screen name “mawburn” still remains purely professional. You’ll usually find me online
           using this name most actively. Especially on{' '}
           <span className={styles.nobreak}>
@@ -240,8 +240,8 @@ const About: NextPage = () => (
           </a>
           , &amp; others. But Savage Worlds is a great generic system. Deadlands: The Weird West is
           the original setting for Savage Worlds &amp; probably still one of the best. But the
-          system can handle everything from Fantasy to Realism to SciFi &amp; and literally
-          everything in between.
+          system can handle everything from Fantasy to Realism to SciFi &amp; literally everything
+          in between.
         </p>
         <p>
           On my <Link href="/projects">PROJECTS</Link> page, you’ll find 2 main projects I’ve
