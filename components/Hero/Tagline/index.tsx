@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useState } from 'react'
 
+import { ScreenType } from '../../../lib/useWindowSize'
 import styles from '../styles.module.scss'
 import getTag from './getTag'
 

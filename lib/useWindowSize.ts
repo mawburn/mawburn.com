@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import v from '../styles/exports.module.scss'
 
+export type ScreenType = 'phone' | 'tablet' | 'small' | 'desktop'
+
 interface Size {
   screen: ScreenType
   width: number | undefined
