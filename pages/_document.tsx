@@ -4,7 +4,7 @@ import config from '../lib/config'
 
 const descr = 'Matt Burnett - Software Engineer' as const
 
-const ogImg = '/img/photo.jpg' as const
+const ogImg = 'https://mawburn.com/img/photo.jpg' as const
 
 class MyDocument extends Document {
   render() {
