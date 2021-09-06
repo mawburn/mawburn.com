@@ -7,15 +7,18 @@ import styles from './styles.module.scss'
 import Tagline from './Tagline'
 
 const Hero = () => {
-  const [size, setSize] = useState<number>(150)
-
   const { screen } = useWindowSize()
 
   return (
     <div className={styles.hero}>
       <Tagline screen={screen} />
-      <div className={styles.photo}>
-        <Image src={config.photo} width={size} height={size} alt="Matt Burnett" />
+      <div>
+        <div className={styles.photo}>
+          <Image src={config.photo} width={150} height={150} alt="Matt Burnett" />
+        </div>
+        <div style={{ textAlign: 'center', color: '#f0f0f0', paddingTop: '0.5rem' }}>
+          <em>He/Him</em>
+        </div>
       </div>
     </div>
   )
