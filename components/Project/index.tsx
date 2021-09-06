@@ -21,7 +21,7 @@ const Project = ({
 }: ProjectProps) => {
   const bgImg = { backgroundImage: `url(/img/${img})` }
 
-  const link = url || `/projects/${name.toLowerCase().split(' ').join('-')}`
+  const link = url || `/projects/${name.replace(/’/gi, '').toLowerCase().split(' ').join('-')}`
 
   return (
     <a href={link} title={name} className={styles.link}>
