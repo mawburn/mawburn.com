@@ -102,3 +102,17 @@
   display: inline-block;
   transform: scale(-1, 1);
 }
+
+.discordUsers {
+  display: flex;
+  justify-content: center;
+
+  > div {
+    font-size: 1.5rem;
+    padding: 0.5rem;
+
+    span {
+      font-family: monospace;
+    }
+  }
+}

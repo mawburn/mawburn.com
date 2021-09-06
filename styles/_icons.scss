@@ -100,7 +100,7 @@ $icon-ycombinator: '\e91c';
 .icon-discord {
   &:before {
     content: $icon-discord;
-    color: #7289da;
+    color: #7289da !important;
   }
 }
 .icon-docker {
@@ -171,7 +171,7 @@ $icon-ycombinator: '\e91c';
 .icon-ko-fi {
   &:before {
     content: $icon-ko-fi;
-    color: #f16061;
+    color: #f16061 !important;
   }
 }
 .icon-linkedin {
@@ -194,7 +194,7 @@ $icon-ycombinator: '\e91c';
 .icon-patreon {
   &:before {
     content: $icon-patreon;
-    color: #f96854;
+    color: #f96854 !important;
   }
 }
 .icon-postgresql {
