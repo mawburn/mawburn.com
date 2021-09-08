@@ -47,10 +47,10 @@ const Home: NextPage = () => (
         <p>
           The tools of my trade are mostly{' '}
           <span className={styles.nobreak}>
-            <span className="icon-typescript" /> <strong>TypeScript</strong>,
+            <span className="icon-react" /> <strong>React</strong>,
           </span>
           <span className={styles.nobreak}>
-            <span className="icon-react" /> <strong>React</strong>,
+            <span className="icon-typescript" /> <strong>TypeScript</strong>,
           </span>
           <span className={styles.nobreak}>
             <span className="icon-nodejs" /> <strong>NodeJS</strong>,
@@ -88,8 +88,12 @@ const Home: NextPage = () => (
         </p>
         <p>
           If I can’t find something or something I want doesn’t exist, I end up just making it. I’m
-          definitely a serial community creator &amp; run a few <span className="icon-discord" />{' '}
-          Discord servers, with the most being somewhere around 3,000 members.
+          definitely a serial community creator &amp; run a few{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-discord" />
+            Discord
+          </span>
+          servers, with the most being somewhere around 3,000 members.
         </p>
         <p>
           On my <Link href="/projects">PROJECTS</Link> page you can find more about the stuff I have

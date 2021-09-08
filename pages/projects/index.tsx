@@ -85,8 +85,6 @@ const Projects: NextPage = () => (
               tech={
                 <>
                   <span className="icon-typescript" title="Typescript" />
-                  <span className="icon-react" title="ReactJS" />
-                  <span className="icon-nextjs" title="NextJS" />
                   <FoundryIcon />
                 </>
               }
