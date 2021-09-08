@@ -29,16 +29,18 @@ const CLTRPG = () => (
         <p>
           This is just a Discord group that myself &amp; some others started to build a local
           community of Game, System, &amp; Store agnostic TTRPG players. I probably wouldn’t have
-          made a site for it, but I noticed that{' '}
+          made a site for it but I noticed that{' '}
           <strong>
-            <a href="https://CLTRPG.com" rel="nofollow">
+            <a href="https://CLTRPG.com" rel="noopener">
               CLTRPG.com
             </a>
           </strong>{' '}
           was available &amp; couldn’t pass up the opportunity! The only reason this is a{' '}
-          <span className="icon-nextjs" /> NextJS site is to get a user count on the site. Similar
-          to what I did over on the <Link href="/projects/portaler">Portaler</Link> section of this
-          site.
+          <span className={styles.nobreak}>
+            <span className="icon-nextjs" /> NextJS
+          </span>
+          site is to get a user count on the site. Similar to what I did over on the{' '}
+          <Link href="/projects/portaler">Portaler</Link> section of this site.
         </p>
         <p>This group is growing fairly well. Hopefully we’ll be able to grow it some more.</p>
         <h3>WE EVEN HAVE STICKERS!</h3>
@@ -51,8 +53,8 @@ const CLTRPG = () => (
           />
         </div>
         <p>
-          Again, these probably wouldn’t exist if I didn’t accidentally create what I think is my
-          best logo to date. Plus... we can hand them out at events or leave them at stores.
+          Again, these probably wouldn’t exist if I didn’t accidentally a logo I’m super proud of.
+          Plus... we can hand them out at events or leave them at stores.
         </p>
       </section>
     </main>
