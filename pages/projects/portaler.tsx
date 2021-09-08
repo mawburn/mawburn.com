@@ -36,15 +36,21 @@ const Portaler = ({ online, total }: PortalerProps) => (
             public map
           </a>
           , which I can’t garuntee will have any connections. You can join the{' '}
-          <a href="https://discord.gg/W2NteY4dDS" rel="noopener nofollow">
-            <span className="icon-discord" /> Discord
-          </a>{' '}
+          <span className={styles.nobreak}>
+            <a href="https://discord.gg/W2NteY4dDS" rel="noopener nofollow">
+              <span className="icon-discord" /> Discord
+            </a>
+          </span>
           server &amp; make your own if you’d like.
         </p>
         <p>
-          The project is Open Source which you can find on <span className="icon-github" />{' '}
-          <a href="https://github.com/Portaler-Zone/portaler-core">GitHub</a>. It’s currently
-          looking for contributors as I don’t really play the game as much as I used to.
+          The project is Open Source which you can find on{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-github" />{' '}
+            <a href="https://github.com/Portaler-Zone/portaler-core">GitHub</a>.
+          </span>
+          It’s currently looking for contributors as I don’t really play the game as much as I used
+          to.
         </p>
         {online && total && (
           <>
@@ -80,24 +86,42 @@ const Portaler = ({ online, total }: PortalerProps) => (
         </p>
         <h2>Userbase</h2>
         <p>
-          According to <span className="icon-cloudflare" /> Cloudflare metrics, I receive about
-          19,000 to 21,000 Monthly Active Users &amp; according to <span className="icon-discord" />{' '}
-          Discord, the bot that provides Authentication is installed on about 400 servers.
+          According to{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-cloudflare" /> Cloudflare
+          </span>{' '}
+          metrics, I receive about 19,000 to 21,000 Monthly Active Users &amp; according to{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-discord" /> Discord
+          </span>
+          the bot that provides Authentication is installed on about 400 servers.
         </p>
         <p>
           The whole suite of services runs on less than 2gb of memory &amp; barely uses any
-          processor. The entire codebase is written in <span className="icon-typescript" />{' '}
-          TypeScript, including the <span className="icon-nodejs" /> NodeJS portions of the service.
-          It relies on a <span className="icon-postgresql" /> PostgreSQL database for persistent
-          storage &amp; <span className="icon-redis" /> Redis for caching. Albion Online has no API,
-          so authentication is provided through Discord roles which requires a bot to be installed
-          on the user’s server to gain visibility into the user’s role.
+          processor. The entire codebase is written in{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-typescript" /> TypeScript,
+          </span>
+          including the{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-nodejs" /> NodeJS
+          </span>
+          portions of the service. It relies on a{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-postgresql" /> PostgreSQL
+          </span>
+          database for persistent storage &amp;{' '}
+          <span className={styles.nobreak}>
+            <span className="icon-redis" /> Redis
+          </span>
+          for caching. Albion Online has no API, so authentication is provided through Discord
+          Roles, which require a bot to be installed on the user’s server to gain visibility into
+          the users’ role.
         </p>
         <p>
           Overall, I’d say it’s not my best project code wise, but it runs well, scales well, &amp;
           working in the codebase isn’t too challenging. It was originally started to just play
-          around with using Redux hooks, which were new at the time it was created. Then it kind of
-          blew up. 🤣
+          around with using Redux hooks, which were new at the time. Then it kind of blew up. 🤣
         </p>
         <h2>Income? lol no</h2>
         <p>
@@ -105,15 +129,20 @@ const Portaler = ({ online, total }: PortalerProps) => (
           &amp; gave each individual server a subdomain, which I thought was cool, but bit me in the
           ass when it comes to advertising. What I do make comes from generous users donating to my
           small{' '}
-          <a href="https://www.patreon.com/bePatron?u=30652180" rel="noopener">
-            <span className="icon-patreon" /> Patreon
-          </a>{' '}
+          <span className={styles.nobreak}>
+            <a href="https://www.patreon.com/bePatron?u=30652180" rel="noopener">
+              <span className="icon-patreon" /> Patreon
+            </a>
+          </span>
           &amp;{' '}
-          <a href="https://ko-fi.com/mawburn" rel="noopener">
-            <span className="icon-ko-fi" /> Ko-Fi
-          </a>
-          . But it barely pays for the server cost, which admittedly is hosted on a lot more
-          hardware than I need.
+          <span className={styles.nobreak}>
+            <a href="https://ko-fi.com/mawburn" rel="noopener">
+              <span className="icon-ko-fi" /> Ko-Fi.
+            </a>
+          </span>
+          But it barely pays for the server cost, which admittedly is hosted on a lot more hardware
+          than I need. I can say though, that the community generated around the app has surprised
+          the hell out of me with how friendly &amp; supportive they are. They are really great!
         </p>
       </section>
     </main>

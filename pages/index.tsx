@@ -38,7 +38,7 @@ const Home: NextPage = () => (
               .
             </strong>
           </span>
-          Such a great company, with an awesome mission &amp; just scratching the surface of their
+          Great company with an awesome mission &amp; just scratching the surface of their
           potential.
         </p>
       </section>
@@ -60,7 +60,7 @@ const Home: NextPage = () => (
             <span className="icon-visualstudiocode" /> <strong>VSC</strong>.
           </span>
           <a href="https://github.com/mawburn/mawburn.com" rel="noopener">
-            This site was overengineered using{' '}
+            This site was over-engineered using{' '}
             <span className={styles.nobreak}>
               <span className={clsx('icon-nextjs', styles.fontColor)} /> <strong>NextJS</strong>...
             </span>
@@ -89,7 +89,7 @@ const Home: NextPage = () => (
         <p>
           If I can’t find something or something I want doesn’t exist, I end up just making it. I’m
           definitely a serial community creator &amp; run a few <span className="icon-discord" />{' '}
-          Discord servers, with the most somewhere around 3,000 members.
+          Discord servers, with the most being somewhere around 3,000 members.
         </p>
         <p>
           On my <Link href="/projects">PROJECTS</Link> page you can find more about the stuff I have
