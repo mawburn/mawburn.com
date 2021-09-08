@@ -53,8 +53,8 @@ const CLTRPG = () => (
           />
         </div>
         <p>
-          Again, these probably wouldn’t exist if I didn’t accidentally a logo I’m super proud of.
-          Plus... we can hand them out at events or leave them at stores.
+          Again, these probably wouldn’t exist if I didn’t accidentally create a logo I’m super
+          proud of. Plus... we can hand them out at events or leave them at stores.
         </p>
       </section>
     </main>
