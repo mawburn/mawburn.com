@@ -54,17 +54,21 @@ const AgentsOfSyn = () => (
         <p>
           This is half community, half tech. Although I don’t have the tech open sourced, there is a
           good bit going on behind the scenes. We have a{' '}
-          <a href="https://reddit.com/r/AgentsOfSyn" rel="noopener">
-            <span className="icon-reddit" /> Subreddit r/AgentsOfSyn
-          </a>
-          , but that isn’t very active. The Discord community is slightly active, but I’m having fun
+          <span className={styles.nobreak}>
+            <a href="https://reddit.com/r/AgentsOfSyn" rel="noopener">
+              <span className="icon-reddit" /> r/AgentsOfSyn Subreddit
+            </a>
+            ,
+          </span>
+          but that isn’t very active. The Discord community is slightly active, but I’m having fun
           running it &amp; getting people together.
         </p>
         <p>
           On the website, you can log in if you’re a member of our Discord server which will allow
           you to see a list of the known crystals we have found. The site was my first{' '}
           <span className="icon-nextjs" /> NextJS site &amp; uses that for the login. However,
-          working on other things like a character creator have proved a bit of a learning curve.
+          working on other things like a character creator have proved to be a bit of a learning
+          curve, but I worked through them &amp; now I just need to finish it.
         </p>
         <p>
           I also get to GM games when I have the time &amp; write the world. As of this writing, we

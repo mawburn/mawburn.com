@@ -63,7 +63,7 @@ const About: NextPage = () => (
           <span className={styles.nobreak}>
             <span className="icon-rails" /> Ruby on Rails
           </span>
-          shop, I need to learn that soon. And when I have the choice,{' '}
+          shop I need to learn that soon. And when I have the choice,{' '}
           <span className={styles.nobreak}>
             <span className="icon-postgresql" /> PostgreSQL
           </span>
@@ -72,9 +72,9 @@ const About: NextPage = () => (
         <p>
           I’d prefer to not work without a{' '}
           <span className={styles.nobreak}>
-            <span className="icon-apple" /> Mac
+            <span className="icon-apple" /> Mac,
           </span>
-          , but I could deal with Linux if I had to. Even though I love my Macs, I’m not a fan of
+          but I could deal with Linux if I had to. Even though I love my Macs I’m not a fan of
           iPhones &amp; have been a{' '}
           <span className={styles.nobreak}>
             <span className="icon-google" /> Google Pixel/Nexus
@@ -86,14 +86,14 @@ const About: NextPage = () => (
       <section>
         <h2>Hobbies</h2>
         <p>
-          So, like I said on the front page I have a ton of hobbies... probably too many in fact.
-          I’ve done a good bit of backpacking, love playing board or card games, sometimes sculpt
-          with clay, I make mini-terrain out of foam &amp; basically trash, paint minis, 3D
-          printing, dabble in writing, trying to learn to draw again, I’m pretty good at PhotoShop
-          but no professional, huge movie buff when it comes to quality or anything with an
-          action/adventure vibe to it, same thing with TV but I am obsessed with most adult cartoons
-          (Futurama, Rick &amp; Morty, American Dad, Invincible, etc.) or anything nerdy, comic
-          books, fiction novels, &amp; the list goes on.
+          So, like I said on the front page I have a ton of hobbies... probably too many. I’ve done
+          a good bit of backpacking, love playing board or card games, sometimes sculpt with clay, I
+          make mini-terrain out of foam &amp; basically trash, paint minis, 3D printing, dabble in
+          writing, trying to learn to draw again, I’m pretty good at PhotoShop but no professional,
+          huge movie buff when it comes to quality or anything with an action/adventure vibe to it,
+          same thing with TV but I am obsessed with most adult cartoons (Futurama, Rick &amp; Morty,
+          American Dad, Invincible, etc.) or anything nerdy, comic books, fiction novels, &amp; the
+          list goes on.
         </p>
         <p>
           Then I also like mixing in my love of technology &amp; coding skills in with all of these
@@ -113,12 +113,12 @@ const About: NextPage = () => (
           <Image src="/img/hypnoCode-animated.webp" height={100} width={100} alt="hypnoToad gif" />
         </div>
         <p>
-          For a while, I did a bit of{' '}
+          For a while I did a bit of{' '}
           <a href="https://www.twitch.tv/hypnocode" rel="noopener">
-            <span className="icon-twitch" /> <strong>Twitch Streaming</strong>
+            <span className="icon-twitch" /> <strong>Twitch Streaming</strong>,
           </a>
-          , where I mostly streamed programming &amp; a little gaming, but that was mostly demoing
-          my app.{' '}
+          where I mostly streamed programming &amp; a little gaming, but that was mostly demoing my
+          app.{' '}
           <a href="https://youtu.be/pI81UkjKbKA?t=30">
             Here’s a little clip from one of my streams where I died playing Albion Online while
             demoing one of my projects called Portaler.
