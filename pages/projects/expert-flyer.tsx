@@ -53,16 +53,17 @@ const ExpertFlyer = () => (
             >
               ThePointsGuy.com here
             </a>
-            . You can also find the page about it on{' '}
-            <a
-              href="https://www.redventures.com/about/brands/expert-flyer"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Red Venture’s site
-            </a>
-            . It has more screenshots of stuff I built! (but didn’t design 😆).
+            .
           </span>
+          You can also find the page about it on{' '}
+          <a
+            href="https://www.redventures.com/about/brands/expert-flyer"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Red Venture’s site
+          </a>
+          . It has more screenshots of stuff I built! (but didn’t design 😆).
         </p>
       </section>
     </main>
