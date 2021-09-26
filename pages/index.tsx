@@ -48,17 +48,17 @@ const Home: NextPage = () => (
           The tools of my trade are mostly{' '}
           <span className={styles.nobreak}>
             <span className="icon-react" /> <strong>React</strong>,
-          </span>
+          </span>{' '}
           <span className={styles.nobreak}>
             <span className="icon-typescript" /> <strong>TypeScript</strong>,
-          </span>
+          </span>{' '}
           <span className={styles.nobreak}>
             <span className="icon-nodejs" /> <strong>NodeJS</strong>,
           </span>
           &amp;{' '}
           <span className={styles.nobreak}>
             <span className="icon-visualstudiocode" /> <strong>VSC</strong>.
-          </span>
+          </span>{' '}
           <a href="https://github.com/mawburn/mawburn.com" rel="noopener">
             This site was over-engineered using{' '}
             <span className={styles.nobreak}>
