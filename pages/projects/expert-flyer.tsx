@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -49,11 +48,20 @@ const ExpertFlyer = () => (
           <span className={styles.nobreak}>
             <a
               href="https://thepointsguy.com/news/hilton-card-expertflyer-offer/"
-              rel="noopener nofollow"
+              rel="noopener nofollow noreferrer"
+              target="_blank"
             >
               ThePointsGuy.com here
             </a>
-            .
+            . You can also find the page about it on{' '}
+            <a
+              href="https://www.redventures.com/about/brands/expert-flyer"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Red Venture’s site
+            </a>
+            . It has more screenshots of stuff I built! (but didn’t design 😆).
           </span>
         </p>
       </section>
