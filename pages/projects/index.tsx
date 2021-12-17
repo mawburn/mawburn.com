@@ -26,37 +26,12 @@ const Projects: NextPage = () => (
         <ul className={styles.projects}>
           <li>
             <Project
-              name="Portaler"
-              descr="A multi-tenant collaborative mapping tool for Albion Online. 20k+ MAU &amp; a bot on ~400 servers."
-              img="portaler.webp"
-              isOpenSource
+              name="TabletopLand"
+              descr="An online vendor marketplace, specializing in tabletop terrain &amp; miniatures."
+              img="tabletoplandbg.webp"
               tech={
                 <>
-                  <span className="icon-typescript" title="Typescript" />
-                  <span className="icon-react" title="ReactJS" />
-                  <span className="icon-nodejs" title="NodeJS" />
-                  <span className="icon-postgresql" title="PostgreSQL" />
-                  <span className="icon-redis" title="Redis" />
-                  <span className="icon-docker" title="Docker" />
-                  <span className="icon-discord" title="Discord" />
-                </>
-              }
-            />
-          </li>
-          <li>
-            <Project
-              name="Agents of Syn"
-              descr="A TTRPG living world community &amp; infrastructure to run FoundryVTT instances."
-              img="aosbg.webp"
-              tech={
-                <>
-                  <span className="icon-typescript" title="Typescript" />
-                  <span className="icon-react" title="ReactJS" />
-                  <span className="icon-nextjs" title="NextJS" />
-                  <span className="icon-postgresql" title="PostgreSQL" />
-                  <span className="icon-docker" title="Docker" />
-                  <span className="icon-discord" title="Discord" />
-                  <FoundryIcon />
+                  <span className="icon-shopify" title="shopify" />
                 </>
               }
             />
@@ -102,6 +77,43 @@ const Projects: NextPage = () => (
                   <span className="icon-typescript" title="Typescript" />
                   <span className="icon-react" title="ReactJS" />
                   <span className="icon-nextjs" title="NextJS" />
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Project
+              name="Portaler"
+              descr="Was a multi-tenant collaborative mapping tool for Albion Online. 20k+ MAU &amp; a bot on ~400 servers."
+              img="portaler.webp"
+              isOpenSource
+              tech={
+                <>
+                  <span className="icon-typescript" title="Typescript" />
+                  <span className="icon-react" title="ReactJS" />
+                  <span className="icon-nodejs" title="NodeJS" />
+                  <span className="icon-postgresql" title="PostgreSQL" />
+                  <span className="icon-redis" title="Redis" />
+                  <span className="icon-docker" title="Docker" />
+                  <span className="icon-discord" title="Discord" />
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Project
+              name="Agents of Syn"
+              descr="A TTRPG living world community &amp; infrastructure to run FoundryVTT instances."
+              img="aosbg.webp"
+              tech={
+                <>
+                  <span className="icon-typescript" title="Typescript" />
+                  <span className="icon-react" title="ReactJS" />
+                  <span className="icon-nextjs" title="NextJS" />
+                  <span className="icon-postgresql" title="PostgreSQL" />
+                  <span className="icon-docker" title="Docker" />
+                  <span className="icon-discord" title="Discord" />
+                  <FoundryIcon />
                 </>
               }
             />

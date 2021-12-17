@@ -7,12 +7,7 @@ import Header from '../../components/Header'
 import config from '../../lib/config'
 import styles from '../../styles/util.module.scss'
 
-export interface PortalerProps {
-  online?: string
-  total?: string
-}
-
-const Portaler = ({ online, total }: PortalerProps) => (
+const Portaler = () => (
   <div className={styles.container}>
     <Head>
       <title>Portaler - Projects - {config.title}</title>
@@ -26,25 +21,11 @@ const Portaler = ({ online, total }: PortalerProps) => (
           <Image src="/img/portalerlogo.webp" width={300} height={114} alt="Portaler Logo" />
         </div>
         <p>
-          You can find the main website at{' '}
-          <a href="https://portaler.zone" rel="noopener">
-            Portaler.zone
-          </a>
-          , but that is there mostly for SEO purposes &amp; to have a landing page. You can find a
-          demo of it on the{' '}
-          <a href="https://public.portaler.zone" rel="noopener">
-            public map
-          </a>
-          , which I can’t garuntee will have any connections. You can join the{' '}
-          <span className={styles.nobreak}>
-            <a href="https://discord.gg/W2NteY4dDS" rel="noopener nofollow">
-              <span className="icon-discord" /> Discord
-            </a>
-          </span>
-          server &amp; make your own if you’d like.
+          Portaler ran for a little more than a year, it was spun down as a live service on December
+          1, 2021.
         </p>
         <p>
-          The project is Open Source which you can find on{' '}
+          The project is still Open Source which you can find on{' '}
           <span className={styles.nobreak}>
             <span className="icon-github" />{' '}
             <a href="https://github.com/Portaler-Zone/portaler-core">GitHub</a>.
@@ -52,37 +33,33 @@ const Portaler = ({ online, total }: PortalerProps) => (
           It’s currently looking for contributors as I don’t really play the game as much as I used
           to.
         </p>
-        {online && total && (
-          <>
-            <p>
-              The Discord server has quite a few people, which I manage myself, but it’s not hard or
-              time consuming.
-            </p>
-            <h3>Current Live Discord Stats</h3>
-            <div className={styles.discordUsers}>
-              <div>
-                <strong>Online:</strong> <span>{online}</span>
-              </div>
-              <div>
-                <strong>Total:</strong> <span>{total}</span>
-              </div>
-            </div>
-          </>
-        )}
-        <h2>What is it?</h2>
         <p>
-          Portaler is a mult-tenant collaborative mapping tool for{' '}
-          <a href="https://albiononline.com/">Albion Online</a>, that allows users to create private
-          maps for their guilds. Albion Online is a heavy focused on Player <em>vs</em> Player
-          combat, with full loot &amp; territory control.
+          The Discord server had quite a few people, which I managed by myself, but wasn’t hard or
+          time consuming. This was the count just before I made the announcement that I was shutting
+          everything down:
+        </p>
+        <div className={styles.center}>
+          <Image
+            src="/img/portaler-discord-users.webp"
+            width={300}
+            height={40}
+            alt="portaler discord stat"
+          />
+        </div>
+        <h2>What was it?</h2>
+        <p>
+          Portaler was a mult-tenant collaborative mapping tool for{' '}
+          <a href="https://albiononline.com/">Albion Online</a>, that allowed users to create
+          private maps for their guilds. Albion Online is a heavy focused on Player <em>vs</em>{' '}
+          Player combat, with full loot, &amp; territory control.
         </p>
         <p>
-          In 2020, Albion Online introduced “portals” that are randomly spawned gateways to
-          “Avalonian Roads” which have even more connections. These connections only last a certain
-          amount of time then vanish. Portaler helps guilds or groups of players manage maps of
-          their current connections. It is mostly geared towards guilds who make their home base
-          inside of the roads &amp; need a constant, readily available, map to be able to navigate
-          correctly. However, it’s used by many other players as well.
+          In 2020, Albion Online introduced “portals”, which were randomly spawned gateways to
+          “Avalonian Roads” that had even more connections. These connections only lasted a certain
+          amount of time then vanished. Portaler helps guilds or groups of players manage maps of
+          their current connections. Portaler was mostly geared towards guilds who made their home
+          base inside of the roads &amp; needed a constant, readily available, map to be able to
+          navigate correctly. However, it was used by many other players as well.
         </p>
         <h2>Userbase</h2>
         <p>
@@ -90,15 +67,24 @@ const Portaler = ({ online, total }: PortalerProps) => (
           <span className={styles.nobreak}>
             <span className="icon-cloudflare" /> Cloudflare
           </span>{' '}
-          metrics, I receive about 19,000 to 21,000 Monthly Active Users &amp; according to{' '}
+          metrics, I received about 19,000 to 21,000 Monthly Active Users &amp; according to{' '}
           <span className={styles.nobreak}>
             <span className="icon-discord" /> Discord
           </span>
-          the bot that provides Authentication is installed on about 400 servers.
+          the bot that provided Authentication was installed on close to servers. This is the only
+          screenshot I have, but I think it reached 490ish at one point.
         </p>
+        <div className={styles.center}>
+          <Image
+            src="/img/portaler-discord-bot.webp"
+            width={300}
+            height={457}
+            alt="Portaler Discord servers"
+          />
+        </div>
         <p>
-          The whole suite of services runs on less than 2gb of memory &amp; barely uses any
-          processor. The entire codebase is written in{' '}
+          The whole suite of services ran on less than 2gb of memory &amp; barely used any
+          processor. The entire codebase was written in{' '}
           <span className={styles.nobreak}>
             <span className="icon-typescript" /> TypeScript,
           </span>
@@ -106,7 +92,7 @@ const Portaler = ({ online, total }: PortalerProps) => (
           <span className={styles.nobreak}>
             <span className="icon-nodejs" /> NodeJS
           </span>
-          portions of the service. It relies on a{' '}
+          portions of the service. It relied on a{' '}
           <span className={styles.nobreak}>
             <span className="icon-postgresql" /> PostgreSQL
           </span>
@@ -114,8 +100,8 @@ const Portaler = ({ online, total }: PortalerProps) => (
           <span className={styles.nobreak}>
             <span className="icon-redis" /> Redis
           </span>
-          for caching. Albion Online has no API, so authentication is provided through Discord
-          Roles, which require a bot to be installed on the user’s server to gain visibility into
+          for caching. Albion Online had no API, so authentication was provided through Discord
+          Roles, which required a bot to be installed on the users’ server to gain visibility into
           the users’ role.
         </p>
         <p>
@@ -125,53 +111,26 @@ const Portaler = ({ online, total }: PortalerProps) => (
         </p>
         <h2>Income? lol no</h2>
         <p>
-          I don’t make any income from the app, despite the user base. I messed up a little bit
-          &amp; gave each individual server a subdomain, which I thought was cool, but bit me in the
-          ass when it comes to advertising. What I do make comes from generous users donating to my
-          small{' '}
+          I did’t make any income from the app, despite the user base. I messed up a little bit
+          &amp; gave each individual server a subdomain, which I thought was cool when I decided on
+          that, but bit me in the ass when it comes to advertising. What I did make came from
+          generous users donating to my small{' '}
           <span className={styles.nobreak}>
-            <a href="https://www.patreon.com/bePatron?u=30652180" rel="noopener">
-              <span className="icon-patreon" /> Patreon
-            </a>
+            <span className="icon-patreon" /> Patreon
           </span>
           &amp;{' '}
           <span className={styles.nobreak}>
-            <a href="https://ko-fi.com/mawburn" rel="noopener">
-              <span className="icon-ko-fi" /> Ko-Fi.
-            </a>
+            <span className="icon-ko-fi" /> Ko-Fi.
           </span>
-          But it barely pays for the server cost, which admittedly is hosted on a lot more hardware
-          than I need. I can say though, that the community generated around the app has surprised
-          the hell out of me with how friendly &amp; supportive they are. They are really great!
+          But it barely paid for the server cost, which admittedly was hosted on a lot more hardware
+          than I needed. I can say though, that the community generated around the app surprised the
+          hell out of me with how friendly &amp; supportive they were. They were really great &amp;
+          what I miss most about the project!
         </p>
       </section>
     </main>
     <Footer />
   </div>
 )
-
-export async function getServerSideProps() {
-  const headers = new Headers()
-  headers.set('Authorization', `Bot ${process.env.BOT}`)
-  const response = await fetch('https://discord.com/api/guilds/766357630154178562/preview', {
-    method: 'GET',
-    headers,
-  })
-
-  if (response.ok) {
-    const json = await response.json()
-
-    return {
-      props: {
-        online: `${json.approximate_presence_count}`,
-        total: `${json.approximate_member_count}`,
-      },
-    }
-  }
-
-  return {
-    props: {},
-  }
-}
 
 export default Portaler
