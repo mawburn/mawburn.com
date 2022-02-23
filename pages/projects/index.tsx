@@ -38,6 +38,21 @@ const Projects: NextPage = () => (
           </li>
           <li>
             <Project
+              name="TheGameTools"
+              descr="A collection of random online tools I built for boardgames, RPGs, etc."
+              img="thegametools.png"
+              isOpenSource
+              tech={
+                <>
+                  <span className="icon-typescript" title="Typescript" />
+                  <span className="icon-react" title="ReactJS" />
+                  <span className="icon-nextjs" title="NextJS" />
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Project
               name="The Carolina Roleplayers’ Society"
               descr="Mostly just a Discord based community for TTRPG players in the Charlotte, NC area. Great domain CLTRPG.com!"
               img="cltrpgbg.webp"
@@ -55,7 +70,7 @@ const Projects: NextPage = () => (
             <Project
               name="Ping Logger for FoundryVTT"
               descr="A simple plugin for the Foundry Virtual Tabletop to show user’s pings"
-              img="foundrybg.webp"
+              img="foundrybg.png"
               isOpenSource
               tech={
                 <>
