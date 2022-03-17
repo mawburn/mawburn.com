@@ -21,7 +21,7 @@ const GMRules: NextPage = () => (
         <p>
           It’s just easier to list these on a website. Usually I am the one running games, so I can
           just point people here. I like a lot of gritty settings &amp; dark humor, but I still have
-          my rules &amp; I definitely don’t have them all here so use common sense.
+          my limits.
         </p>
       </section>
       <section>
