@@ -35,7 +35,7 @@ const GM: NextPage = () => (
         <h2 style={{ textAlign: 'left' }}>Game Recaps</h2>
         <p>
           I don’t always write down recaps or battle reports of my games, but sometimes they are
-          requested or sometimes I catch the bug.
+          requested or I just catch the bug.
         </p>
         <ul className={styles.noStyleList}>
           <li>
