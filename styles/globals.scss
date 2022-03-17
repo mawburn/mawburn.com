@@ -47,8 +47,16 @@ h6 {
 }
 
 p {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   line-height: 2rem;
+}
+
+blockquote {
+  background-color: #dfdfdf;
+  padding: 1rem;
+  max-width: 600px;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 @import './icons';
