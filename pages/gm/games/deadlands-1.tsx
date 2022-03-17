@@ -26,7 +26,7 @@ const GMing: NextPage = () => (
           <a href="Savage Worlds - Deadlands: The Weird West" rel="noopener" target="_new">
             Savage Worlds - Deadlands
           </a>
-          : The Weird West Wild West Pulp Horror
+          : <em>The Weird West Wild West Pulp Horror</em>
         </p>
         <p>
           It’s set in an alternate 1884 Western USA. The Great Quake of 1868 shattered California
