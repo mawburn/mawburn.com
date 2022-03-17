@@ -11,7 +11,7 @@ import type { NextPage } from 'next'
 const GMRules: NextPage = () => (
   <div className={styles.container}>
     <Head>
-      <title>Matt's Lines & Veils - {config.title}</title>
+      <title>Matt’s Lines & Veils - {config.title}</title>
     </Head>
     <Header />
 
