@@ -23,7 +23,7 @@ const GMing: NextPage = () => (
         <div className={styles.blogDate}>August 8, 2021</div>
         <h3>Setting Summary</h3>
         <p>
-          <a href="Savage Worlds - Deadlands: The Weird West" rel="noopener" target="_new">
+          <a href="https://peginc.com/savage-settings/deadlands/" rel="noopener" target="_new">
             Savage Worlds - Deadlands
           </a>
           : <em>The Weird West Wild West Pulp Horror</em>
