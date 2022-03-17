@@ -78,7 +78,7 @@ const GMRules: NextPage = () => (
             <strong>Romance</strong>
             <br />
             <span className={styles.subText}>
-              (More of a soft veil, but if I’m GM I’m not going to reciprocate flirtation &amp;
+              (More of a soft veil, don’t direct it at me &amp; if I’m GM I’m not going to reciprocate flirtation &amp;
               general romance isn’t my thing. Romantic interests or in-game relationships are fine.)
             </span>
           </li>
