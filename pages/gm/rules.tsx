@@ -17,7 +17,7 @@ const GMRules: NextPage = () => (
 
     <main className={clsx(styles.main)}>
       <section>
-        <h2>My Non-Negotiables</h2>
+        <h2>Non-Negotiables</h2>
         <p>
           It’s just easier to list these on a website. Usually I am the one running games, so I can
           just point people here. I like a lot of gritty settings &amp; dark humor, but I still have
