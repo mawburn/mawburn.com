@@ -68,6 +68,21 @@ const Projects: NextPage = () => (
           </li>
           <li>
             <Project
+              name="Artistic Stuff"
+              descr="Some of the things I've painted, created, written, or otherwise."
+              img="artbg.webp"
+              tech={
+                <>
+                  <span className="icon-adobephotoshop" title="Photoshop" />
+                  <span>
+                    <span className={styles.flip}>✋</span>✋
+                  </span>
+                </>
+              }
+            />
+          </li>
+          <li>
+            <Project
               name="Ping Logger for FoundryVTT"
               descr="A simple plugin for the Foundry Virtual Tabletop to show user’s pings"
               img="foundrybg.png"
@@ -143,21 +158,6 @@ const Projects: NextPage = () => (
                   <span className="icon-typescript" title="Typescript" />
                   <span className="icon-react" title="ReactJS" />
                   <span className="icon-go" title="GoLang" />
-                </>
-              }
-            />
-          </li>
-          <li>
-            <Project
-              name="Artistic Stuff"
-              descr="Some of the things I've painted, created, written, or otherwise."
-              img="artbg.webp"
-              tech={
-                <>
-                  <span className="icon-adobephotoshop" title="Photoshop" />
-                  <span>
-                    <span className={styles.flip}>✋</span>✋
-                  </span>
                 </>
               }
             />

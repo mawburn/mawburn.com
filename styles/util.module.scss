@@ -6,7 +6,7 @@
   max-width: 650px;
 
   &.mainFull {
-    margin: 1rem 0;
+    margin: 1rem auto;
     max-width: 90%;
   }
 
@@ -115,4 +115,40 @@
       font-family: monospace;
     }
   }
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  figure {
+    text-align: center;
+
+    div {
+      border-radius: 6px;
+      overflow: hidden;
+      display: inline-flex;
+    }
+
+    figcaption {
+      text-align: center;
+    }
+  }
+}
+
+ul.noStyleList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    padding: 0.5rem 0;
+    margin: 0;
+  }
+}
+
+.subText {
+  opacity: 0.9;
+  font-size: 0.8rem;
 }

@@ -8,8 +8,6 @@ import Link from 'next/link'
 const Navbar = () => {
   const { pathname } = useRouter()
 
-  console.log(pathname)
-
   return (
     <nav className={styles.nav}>
       <ul>
@@ -23,6 +21,9 @@ const Navbar = () => {
         </li>
         <li className={clsx(styles.navlink, { [styles.active]: pathname === '/projects' })}>
           <Link href="/projects">Projects</Link>
+        </li>
+        <li className={clsx(styles.navlink, { [styles.active]: pathname === '/gm' })}>
+          <Link href="/gm">GMing</Link>
         </li>
       </ul>
       <ul className={styles.social}>
