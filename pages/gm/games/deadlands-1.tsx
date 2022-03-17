@@ -43,7 +43,7 @@ const GMing: NextPage = () => (
           horrors people have been seeing since are true, they might be closer to the truth than
           they would probably prefer.
         </p>
-        <h3>PCs in this session</h3>
+        <h3>Player Characters in this session</h3>
         <ul>
           <li>Rick “Happy” Smith the Mad Scientist</li>
           <li>Curtis “Bullseye” Rivers the Escaped Slave &amp; Ex-Union Soldier</li>
