@@ -20,18 +20,11 @@ const AgentsOfSyn = () => (
       <section>
         <h2>Agents of Syn</h2>
         <div className={styles.center}>
-          <Image src="/img/aos.webp" width={128} height={128} alt="Agents of Syn" />
+          <Image src="/img/aos.png" width={128} height={128} alt="Agents of Syn" />
         </div>
         <p>
-          <a href="https://agentsofsyn.com/" rel="noopener">
-            AgentsOfSyn.com
-          </a>{' '}
-          is a “Living World” or “West Marches” style Tabletop Role-playing Game campaign, I explain
-          more about what these things are{' '}
-          <a href="https://agentsofsyn.com/about#tabletop-rpg-living-world" rel="noopener">
-            the website
-          </a>
-          . It’s ran totally online with an online community that exists mostly on Discord.
+          AgentsOfSyn.com was a “Living World” or “West Marches” style Tabletop Role-playing Game
+          campaign. It was ran online with a community that existed mostly on Discord.
         </p>
         <p>
           The setting is based on the generic roleplaying system{' '}
@@ -41,39 +34,22 @@ const AgentsOfSyn = () => (
           in the setting of{' '}
           <a
             href="https://www.drivethrurpg.com/product/254714/Crystal-Heart-Starter-Set?affiliate_id=2703170"
-            rel="noopener"
+            rel="noopener nofollow"
           >
             Crystal Heart
           </a>
           . It’s a fantastic setting that mixes a lot of different genres together. It’s based on a
           web comic series of the same name on the website{' '}
-          <a href="https://www.uptofourplayers.com/">UpToFourPlayers.com</a>, where the characters
-          in the comic are playing in the world of Crystal Heart.
+          <a href="https://www.uptofourplayers.com/" rel="noooener">
+            UpToFourPlayers.com
+          </a>
+          , where the characters in the comic are playing in the world of Crystal Heart.
         </p>
         <h2>Work put in to it</h2>
         <p>
-          This is half community, half tech. Although I don’t have the tech open sourced, there is a
-          good bit going on behind the scenes. We have a{' '}
-          <span className={styles.nobreak}>
-            <a href="https://reddit.com/r/AgentsOfSyn" rel="noopener">
-              <span className="icon-reddit" /> r/AgentsOfSyn Subreddit
-            </a>
-            ,
-          </span>
-          but that isn’t very active. The Discord community is slightly active, but I’m having fun
-          running it &amp; getting people together.
-        </p>
-        <p>
-          On the website, you can log in if you’re a member of our Discord server which will allow
-          you to see a list of the known crystals we have found. The site was my first{' '}
-          <span className="icon-nextjs" /> NextJS site &amp; uses that for the login. However,
-          working on other things like a character creator have proved to be a bit of a learning
-          curve, but I worked through them &amp; now I just need to finish it.
-        </p>
-        <p>
-          I also get to GM games when I have the time &amp; write the world. As of this writing, we
-          are going through a big shift to make the living world more plausible... which is a lot of
-          fun.
+          This was half community, half tech. Although I don’t have the tech open sourced, there was
+          a good bit going on behind the scenes and I learned a lot. It was also my first Next.js
+          site.
         </p>
         <h2>Foundry</h2>
         <div className={styles.center}>
@@ -84,12 +60,18 @@ const AgentsOfSyn = () => (
             FoundryVTT
           </a>{' '}
           is the Virtual Tabletop we use to run our games. I host 3 instances of this concurrently
-          on my server &amp; have built a little infrastructure around that to clone worlds &amp;
-          allow other GMs to have access to things. I eventually want to incorporate this into the
-          website. However, I do have another project that is a Foundry plugin called{' '}
-          <Link href="/projects/ping-logger-for-foundryvtt">Ping Logger</Link>, but it’s very very
-          simple. Maybe I’ll make more in the future. I did start on a Crystal Heart character sheet
-          using Svelte. 🤔
+          on my server &amp; had built a little infrastructure around that to clone worlds &amp;
+          allow other GMs to have access to things. However, I do have another project that is a
+          Foundry plugin called <Link href="/projects/ping-logger-for-foundryvtt">Ping Logger</Link>
+          , but it’s very very simple. Maybe I’ll make more in the future.
+        </p>
+        <h2>Shutdown</h2>
+        <p>
+          This was a fun project &amp; was working fairly well. But, ultimately I decided to shut it
+          down because I just didn’t have the time to put into it that it needed. With the help of
+          the community, we also had to hack the setting quite a bit to get it to work better with a
+          living wold. The setting is still fantastic, but out of the box didn’t quite work as well
+          for a living world like I thought it would.
         </p>
       </section>
     </main>
