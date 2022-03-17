@@ -11,7 +11,7 @@ import type { NextPage } from 'next'
 const GMRules: NextPage = () => (
   <div className={styles.container}>
     <Head>
-      <title>My Game Master Rules - {config.title}</title>
+      <title>Matt's Lines & Veils - {config.title}</title>
     </Head>
     <Header />
 
@@ -71,7 +71,7 @@ const GMRules: NextPage = () => (
             <br />
             <span className={styles.subText}>
               (Some people play bad characters or non-politically correct characters. That’s fine,
-              but I don’t. Keep it very light or off the table.)
+              but I don’t want to hear it. Keep it very light-hearted or off the table.)
             </span>
           </li>
           <li>
