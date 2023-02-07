@@ -1,10 +1,9 @@
-import { useRouter } from 'next/dist/client/router'
-import { FC } from 'react'
+import { PropsWithChildren } from 'react'
 import Navbar from '../Navbar'
 
 import styles from './styles.module.scss'
 
-const Header: FC = ({ children }) => (
+const Header = ({ children }: PropsWithChildren) => (
   <header className={styles.header}>
     <h1>Matt Burnett</h1>
     {children}

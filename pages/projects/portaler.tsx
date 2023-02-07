@@ -30,8 +30,6 @@ const Portaler = () => (
             <span className="icon-github" />{' '}
             <a href="https://github.com/Portaler-Zone/portaler-core">GitHub</a>.
           </span>
-          It’s currently looking for contributors as I don’t really play the game as much as I used
-          to.
         </p>
         <p>
           The Discord server had quite a few people, which I managed by myself, but wasn’t hard or
@@ -50,7 +48,7 @@ const Portaler = () => (
         <p>
           Portaler was a mult-tenant collaborative mapping tool for{' '}
           <a href="https://albiononline.com/">Albion Online</a>, that allowed users to create
-          private maps for their guilds. Albion Online is a heavy focused on Player <em>vs</em>{' '}
+          private maps for their guilds. Albion Online is a heavily focused on Player <em>vs</em>{' '}
           Player combat, with full loot, &amp; territory control.
         </p>
         <p>
