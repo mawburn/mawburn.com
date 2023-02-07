@@ -93,7 +93,7 @@ const Home: NextPage = () => (
             <span className="icon-discord" />
             Discord
           </span>
-          servers, with the most being somewhere around 3,000 members.
+          servers.
         </p>
         <p>
           On my <Link href="/projects">PROJECTS</Link> page you can find more about the stuff I have
