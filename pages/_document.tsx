@@ -27,7 +27,7 @@ class MyDocument extends Document {
           <meta name="og:description" content={descr} />
           <meta name="twitter:creator" content={`@${config.twitter}`} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
           <link
             href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Roboto:wght@300;500;700&display=swap"
             rel="stylesheet"
