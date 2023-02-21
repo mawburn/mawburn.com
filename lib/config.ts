@@ -3,7 +3,7 @@ const config = {
   screenName: 'mawburn',
   altScreenName: 'hypnoCode',
   realName: 'Matt Burnett',
-  photo: '/img/photo.webp',
+  photo: '/img/Selfie-Small.webp',
   email: 'mawburn7@gmail.com',
   avatar: ['/img/hypnoCode-animated.webp', '/img/lars.webp'],
   reddit: 'https://reddit.com/u/mawburn',
