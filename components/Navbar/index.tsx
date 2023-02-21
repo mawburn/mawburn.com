@@ -22,9 +22,6 @@ const Navbar = () => {
         <li className={clsx(styles.navlink, { [styles.active]: pathname === '/projects' })}>
           <Link href="/projects">Projects</Link>
         </li>
-        <li className={clsx(styles.navlink, { [styles.active]: pathname === '/gm' })}>
-          <Link href="/gm">GMing</Link>
-        </li>
       </ul>
       <ul className={styles.social}>
         <li>
