@@ -9,6 +9,8 @@ const getTag = (size = 25): ReactNode => {
     'js ninja',
     '❤️ typescript',
     'web developer',
+    'the rare ENSP engineer',
+    'type 3 Enneagram',
     <>
       <span>futurama nerd</span>
       <Image src="/img/lars.webp" width={size} height={size} alt="Lars Fillmore" />
@@ -17,7 +19,7 @@ const getTag = (size = 25): ReactNode => {
     'husband',
     'backpacker 🏕 ',
     <>
-      <Image src="/img/savageworlds.webp" width={size} height={size} alt="Savage Worlds" />
+      <Image src="/img/d12.webp" width={size} height={size} alt="d12" />
       <span>tabletop GM</span>
     </>,
     'board game lover',

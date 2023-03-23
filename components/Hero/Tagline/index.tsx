@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 
 import { ScreenType } from '../../../lib/useWindowSize'
 import styles from '../styles.module.scss'
@@ -9,17 +9,34 @@ interface TaglineProps {
 }
 
 const Tagline = ({ screen }: TaglineProps) => {
-  const [tag, setTag] = useState<ReactNode>(getTag())
+  const [tag, setTag] = useState<ReactNode>('software engineer')
+  const lastSeven = useRef<ReactNode[]>(['software engineer'])
+
+  const getNewTag = useCallback((size: number): ReactNode => {
+    const tag = getTag(size)
+
+    if (lastSeven.current.includes(tag)) {
+      return getNewTag(size)
+    }
+
+    lastSeven.current.push(tag)
+
+    if (lastSeven.current.length > 7) {
+      lastSeven.current.shift()
+    }
+
+    return tag
+  }, [])
 
   useEffect(() => {
     const size = screen === 'phone' ? 25 : 42
 
     const interval = setInterval(() => {
-      setTag(getTag(size))
-    }, 1000)
+      setTag(getNewTag(size))
+    }, 650)
 
     return () => clearInterval(interval)
-  }, [screen])
+  }, [screen, getNewTag])
 
   return <div className={styles.tagline}>{tag}</div>
 }
