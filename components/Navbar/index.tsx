@@ -1,89 +1,81 @@
-import styles from './styles.module.scss'
 import clsx from 'clsx'
-import config from '../../lib/config'
-import utilStyle from '../../styles/util.module.scss'
 import { useRouter } from 'next/dist/client/router'
 import Link from 'next/link'
 
+import config from '../../lib/config'
+import utilStyle from '../../styles/util.module.scss'
+import styles from './styles.module.scss'
+
+const SocialLinks = () => {
+  const socials = [
+    { href: config.linkedin, title: 'LinkedIn', icon: 'icon-linkedin' },
+    { href: config.github, title: 'GitHub', icon: 'icon-github' },
+    {
+      href: `https://twitter.com/${config.twitter}`,
+      title: `Twitter @${config.twitter}`,
+      icon: 'icon-twitter',
+    },
+    { href: config.instagram, title: 'Instagram', icon: 'icon-instagram' },
+    { href: config.reddit, title: 'Reddit', icon: 'icon-reddit' },
+    {
+      href: config.spotify,
+      title: 'Spotify',
+      icon: 'icon-spotify',
+      className: utilStyle.hideMobile,
+    },
+    {
+      href: config.hackernews,
+      title: 'Hacker News',
+      icon: 'icon-ycombinator',
+      className: utilStyle.hideBelowDesktop,
+    },
+    { href: `mailto:${config.email}`, title: 'Email', icon: 'icon-gmail' },
+  ]
+
+  return (
+    <>
+      {socials.map(({ href, title, icon, className }) => (
+        <li className={className} key={title}>
+          <a href={href} rel="noopener" title={title}>
+            <div className={styles.liContent}>
+              <span className={icon} />
+            </div>
+          </a>
+        </li>
+      ))}
+    </>
+  )
+}
+
 const Navbar = () => {
   const { pathname } = useRouter()
+
+  const navLinks = [
+    { href: '/about', title: 'About me' },
+    { href: '/projects', title: 'Projects' },
+  ]
 
   return (
     <nav className={styles.nav}>
       <ul>
         {pathname !== '/' && (
-          <li className={styles.navlink}>
+          <li className={styles.navLink}>
             <Link href="/">Home</Link>
           </li>
         )}
-        <li className={clsx(styles.navlink, { [styles.active]: pathname === '/about' })}>
-          <Link href="/about">About me</Link>
-        </li>
-        <li className={clsx(styles.navlink, { [styles.active]: pathname === '/projects' })}>
-          <Link href="/projects">Projects</Link>
-        </li>
+        {navLinks.map(({ href, title }) => (
+          <li
+            className={clsx(styles.navLink, {
+              [styles.active]: pathname === href,
+            })}
+            key={title}
+          >
+            <Link href={href}>{title}</Link>
+          </li>
+        ))}
       </ul>
       <ul className={styles.social}>
-        <li>
-          <a href={config.linkedin} rel="noopener" title="LinkedIn">
-            <div className={styles.licontent}>
-              <span className="icon-linkedin" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href={config.github} rel="noopener" title="GitHub">
-            <div className={styles.licontent}>
-              <span className="icon-github" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            href={`https://twitter.com/${config.twitter}`}
-            rel="noopener"
-            title={`Twitter @${config.twitter}`}
-          >
-            <div className={styles.licontent}>
-              <span className="icon-twitter" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href={config.instagram} rel="noopener" title="Instagram">
-            <div className={styles.licontent}>
-              <span className="icon-instagram" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href={config.reddit} rel="noopener" title="Reddit">
-            <div className={styles.licontent}>
-              <span className="icon-reddit" />
-            </div>
-          </a>
-        </li>
-        <li className={utilStyle.hideMobile}>
-          <a href={config.spotify} rel="noopener" title="Spotify">
-            <div className={styles.licontent}>
-              <span className="icon-spotify" />
-            </div>
-          </a>
-        </li>
-        <li className={utilStyle.hideBelowDesktop}>
-          <a href={config.hackernews} rel="noopener" title="Hacker News">
-            <div className={styles.licontent}>
-              <span className="icon-ycombinator" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href={`mailto:${config.email}`} rel="noopener" title="Email">
-            <div className={styles.licontent}>
-              <span className="icon-gmail" />
-            </div>
-          </a>
-        </li>
+        <SocialLinks />
       </ul>
     </nav>
   )

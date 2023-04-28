@@ -1,3 +1,4 @@
+import clone from 'lodash/cloneDeep'
 import { ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 
 import { ScreenType } from '../../../lib/useWindowSize'
@@ -8,32 +9,40 @@ interface TaglineProps {
   screen: ScreenType
 }
 
+const getSizeFromScreen = (screen: ScreenType) => (screen === 'phone' ? 25 : 42)
+
+const updateLastSevenTags = (lastSeven: ReactNode[], newTag: ReactNode) => {
+  lastSeven.push(newTag)
+
+  if (lastSeven.length > 7) {
+    lastSeven.shift()
+  }
+
+  return lastSeven
+}
+
 const Tagline = ({ screen }: TaglineProps) => {
   const [tag, setTag] = useState<ReactNode>('software engineer')
   const lastSeven = useRef<ReactNode[]>(['software engineer'])
 
-  const getNewTag = useCallback((size: number): ReactNode => {
-    const tag = getTag(size)
+  const getNewTag = useCallback((): ReactNode => {
+    let newTag = getTag()
 
-    if (lastSeven.current.includes(tag)) {
-      return getNewTag(size)
+    while (lastSeven.current.includes(newTag)) {
+      newTag = getTag()
     }
 
-    lastSeven.current.push(tag)
+    lastSeven.current = updateLastSevenTags(clone(lastSeven.current), newTag)
 
-    if (lastSeven.current.length > 7) {
-      lastSeven.current.shift()
-    }
-
-    return tag
+    return newTag
   }, [])
 
   useEffect(() => {
-    const size = screen === 'phone' ? 25 : 42
+    const size = getSizeFromScreen(screen)
 
     const interval = setInterval(() => {
-      setTag(getNewTag(size))
-    }, 650)
+      setTag(getNewTag())
+    }, 1000)
 
     return () => clearInterval(interval)
   }, [screen, getNewTag])

@@ -28,6 +28,11 @@
     font-weight: 300;
     font-style: italic;
   }
+
+  a:any-link {
+    text-transform: uppercase;
+    font-weight: 700;
+  }
 }
 
 .subTitle {
