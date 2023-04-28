@@ -1,13 +1,12 @@
+import clsx from 'clsx'
 import Head from 'next/head'
-import { Header, Layout, MDXLoader, MDXResult, Project } from 'src/components'
-
-import type { NextPage } from 'next'
-
-import config from 'src/lib/localConfig'
-import getPostData from 'src/lib/getPostData'
 import Image from 'next/image'
 import { useState } from 'react'
-import clsx from 'clsx'
+import { Header, Layout, MDXLoader, MDXResult, Project } from 'src/components'
+import getPostData from 'src/lib/getPostData'
+import localConfig from 'src/lib/localConfig'
+
+import type { NextPage } from 'next'
 
 interface Props {
   theBasics: MDXResult
@@ -21,7 +20,7 @@ const Home: NextPage<Props> = ({ theBasics }) => {
   return (
     <>
       <Head>
-        <title>{config.title}</title>
+        <title>{localConfig.title}</title>
       </Head>
       <Layout className="">
         <section
@@ -82,13 +81,37 @@ const Home: NextPage<Props> = ({ theBasics }) => {
               title="Tabletop.Land"
               url="https://tabletop.land"
               image="/img/TTLand.webp"
-              tags={['shopify', 'react', 'next-js']}
+              tags={['shopify', 'react', 'next-js', 'vercel']}
             >
               An online store by my wife & me, targeting tabletop gamers. Features our products &
               various vendors selling their unique gaming goods.
             </Project>
-            <Project title="xyz" url="xyz" image="/img/TTLand.webp" tags={[]} />
-            <Project title="xyz" url="xyz" image="/img/TTLand.webp" tags={[]} />
+            <Project
+              title="Portaler"
+              url="/projects/portaler"
+              image="/img/portaler.webp"
+              tags={[
+                'react',
+                'typescript',
+                'postgresql',
+                'redis',
+                'discord',
+                'docker',
+                'netlify',
+                'cloudflare',
+                'prometheus',
+                'grafana',
+              ]}
+            >
+              An open source mapping tool for Albion Online, boasting 19k-21k monthly users and
+              close to 500 server installations.
+            </Project>
+            <Project
+              title="Logos & Graphics"
+              url="/projects/logos"
+              image="/img/TTLand.webp"
+              tags={['adobephotoshop', 'inkscape']}
+            />
           </section>
         </article>
       </Layout>
@@ -98,12 +121,10 @@ const Home: NextPage<Props> = ({ theBasics }) => {
 
 export async function getStaticProps() {
   const theBasics = await getPostData('basics')
-  const postData = await getPostData('home')
 
   return {
     props: {
       theBasics,
-      postData,
     },
   }
 }

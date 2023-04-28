@@ -14,3 +14,13 @@ body,
 .hardTextShadow {
   text-shadow: 5px 5px rgba(0, 0, 0, 0.8);
 }
+
+.sectionBreak h1,
+.sectionBreak h2,
+.sectionBreak h3 {
+  @apply mt-8;
+}
+
+.sectionBreak p {
+  @apply mt-2;
+}

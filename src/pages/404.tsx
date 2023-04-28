@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Header, Layout } from 'src/components'
-import config from 'src/lib/localConfig'
+import localConfig from 'src/lib/localConfig'
 
 import type { NextPage } from 'next'
 
 const Projects: NextPage = () => (
   <>
     <Head>
-      <title>Projects - {config.title}</title>
+      <title>Projects - {localConfig.title}</title>
     </Head>
     <Layout className="flex flex-col justify-center items-center pt-8">
       <Header.H2>404 - Not Found</Header.H2>
