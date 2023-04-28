@@ -1,7 +1,9 @@
-import { Header } from './Header'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import { PropsWithChildren } from 'react'
 import Image from 'next/image'
+import { PropsWithChildren } from 'react'
+
+import { Header } from './Header'
+import { Icon } from './Icon'
 
 export type MDXResult = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>
 
@@ -14,6 +16,7 @@ const components = {
   h2: Header.H2,
   h3: Header.H3,
   Image: Image,
+  Icon: Icon,
 }
 
 export const MDXLoader = ({ source }: PropsWithChildren<Props>) => (

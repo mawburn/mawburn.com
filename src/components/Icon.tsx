@@ -1,5 +1,3 @@
-import './style.css'
-
 interface IconProps {
   name: string
 }

@@ -1,18 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './icons.css';
 
 html,
 body,
 #__next {
-  @apply w-full h-full font-sans antialiased text-neutral-900 bg-neutral-50;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-header;
+  @apply w-full h-full font-sans antialiased text-neutral-50 bg-neutral-900;
+  background: url("/img/bg.webp");
 }

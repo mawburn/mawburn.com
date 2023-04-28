@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'mawburn-icons';
   src:
-    url('fonts/mawburn-icons.ttf?fvp1ul') format('truetype'),
-    url('fonts/mawburn-icons.woff?fvp1ul') format('woff'),
-    url('fonts/mawburn-icons.svg?fvp1ul#mawburn-icons') format('svg');
+    url('/fonts/mawburn-icons.ttf?fvp1ul') format('truetype'),
+    url('/fonts/mawburn-icons.woff?fvp1ul') format('woff'),
+    url('/fonts/mawburn-icons.svg?fvp1ul#mawburn-icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
