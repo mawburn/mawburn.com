@@ -6,8 +6,11 @@ module.exports = {
       sans: ['Raleway', 'sans-serif'],
     },
     extend: {
+      maxWidth: {
+        myMax: '100ch',
+      },
       fontFamily: {
-        header: ['Itim', 'sans-serif'],
+        header: ['Permanent Marker', 'sans-serif'],
         mono: ['Fira Mono', 'monospace'],
       },
     },
