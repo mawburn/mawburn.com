@@ -19,10 +19,10 @@ interface LogoProps {
 
 const LogoBlock = ({ name, img, size, desc }: LogoProps) => (
   <div className="flex flex-col items-center w-60 h-96">
-    <div className="h-52">
+    <div className="h-52 rounded-lg overflow-hidden">
       <Image src={img} width={size[0]} height={size[1]} alt={name} />
     </div>
-    <span className="text-lg font-bold">{name}</span>
+    <span className="text-lg font-bold text-center">{name}</span>
     {desc && <span className="text-sm text-center">{desc}</span>}
   </div>
 )
@@ -33,11 +33,11 @@ const Logos: NextPage<Props> = ({ logos }) => (
       <title>{localConfig.title}</title>
     </Head>
     <Layout className="flex justify-center items-center gap-8 mt-12 max-w-myMax mx-auto">
-      <article className="sectionBreak mb-4">
-        <section>
+      <article className="flex flex-col items-center sectionBreak mb-4">
+        <section className="max-w-prose">
           <MDXLoader source={logos} />
         </section>
-        <section className="flex mt-8 gap-8">
+        <section className="flex mt-16 gap-8">
           <Link href="https://tabletop.land">
             <LogoBlock
               name="Tabletop.Land"
@@ -58,7 +58,13 @@ const Logos: NextPage<Props> = ({ logos }) => (
             name="Savage Interludes"
             img="/img/SavageInterludes.svg"
             size={[200, 193]}
-            desc="A podcast that is no longer airing"
+            desc="A TTRPG podcast that is no longer airing"
+          />
+          <LogoBlock
+            name="Roleplaying as Smart People"
+            img="/img/RPSP.webp"
+            size={[200, 200]}
+            desc="Another TTRPG podcast that is still airing"
           />
         </section>
       </article>

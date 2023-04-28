@@ -109,9 +109,12 @@ const Home: NextPage<Props> = ({ theBasics }) => {
             <Project
               title="Logos & Graphics"
               url="/projects/logos"
-              image="/img/TTLand.webp"
-              tags={['adobephotoshop', 'inkscape']}
-            />
+              image="/img/Paint.webp"
+              tags={['adobephotoshop', 'inkscape', 'paint-brush']}
+            >
+              Not a pro designer, but enjoy using my artistic flair to create logos for personal
+              projects and others.
+            </Project>
           </section>
         </article>
       </Layout>
