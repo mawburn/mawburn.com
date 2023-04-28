@@ -12,11 +12,11 @@ export const PageHeader = () => {
     }
   }, [])
 
-  const myName =
+  const pageName =
     currentPage === '/' ? (
-      <Header.H1>Matt Burnett</Header.H1>
+      <Header.H1 size="text-3xl">Matt Burnett</Header.H1>
     ) : (
-      <Link href="/" className="text-4xl font-header">
+      <Link href="/" className="text-3xl font-header">
         Matt Burnett
       </Link>
     )
@@ -27,7 +27,7 @@ export const PageHeader = () => {
 
   return (
     <header className="flex justify-between px-4 py-2">
-      {myName}
+      {pageName}
       <nav className={flexFull}>
         <ul
           className={clsx(
@@ -37,11 +37,11 @@ export const PageHeader = () => {
         >
           <li className={clsx(flexFull)}>
             <Link href="/resume" className={clsx(linkClass)}>
-              Resume
+              Resumé
             </Link>
           </li>
           <li className={clsx(flexFull)}>
-            <Link href="/projects" className={clsx(linkClass)}>
+            <Link href="/#projects" className={clsx(linkClass)}>
               Projects
             </Link>
           </li>

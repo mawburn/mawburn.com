@@ -7,11 +7,14 @@ module.exports = {
     },
     extend: {
       maxWidth: {
-        myMax: '100ch',
+        myMax: '80ch',
       },
       fontFamily: {
         header: ['Permanent Marker', 'sans-serif'],
         mono: ['Fira Mono', 'monospace'],
+      },
+      colors: {
+        accent: '#efb44e',
       },
     },
   },
