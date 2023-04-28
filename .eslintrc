@@ -1,31 +1,28 @@
 {
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "sourceType": "module"
   },
   "extends": [
     "next/core-web-vitals",
     "plugin:@next/next/recommended",
     "prettier",
-    "plugin:react-hooks/recommended"
+    "plugin:react-hooks/recommended",
+    "plugin:json/recommended"
   ],
   "plugins": ["prettier", "import", "react"],
   "rules": {
     "arrow-body-style": ["error", "as-needed"],
     "eqeqeq": ["error", "always"],
-    "no-console": [
-      "warn",
-      {
-        "allow": ["warn", "error"]
-      }
-    ],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "no-unexpected-multiline": "error",
+    "no-unused-vars": "error",
+    "no-var": "error",
     "prefer-const": "error",
-    "prettier/prettier": "error",
-    "no-var": "error"
+    "prettier/prettier": "error"
   },
   "env": {
     "browser": true,
@@ -33,9 +30,9 @@
     "jest": true
   },
   "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx", ".mdx", ".json"],
     "react": {
       "version": "detect"
-    },
-    "import/extensions": [".js", ".jsx", ".ts", ".tsx"]
+    }
   }
 }
