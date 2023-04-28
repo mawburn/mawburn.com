@@ -1,0 +1,84 @@
+// import clsx from 'clsx'
+// import { useRouter } from 'next/dist/client/router'
+// import Link from 'next/link'
+
+// import config from '../../src/lib/localConfig'
+// import utilStyle from '../../styles/util.module.scss'
+// import styles from './styles.module.scss'
+
+// const SocialLinks = () => {
+//   const socials = [
+//     { href: config.linkedin, title: 'LinkedIn', icon: 'icon-linkedin' },
+//     { href: config.github, title: 'GitHub', icon: 'icon-github' },
+//     {
+//       href: `https://twitter.com/${config.twitter}`,
+//       title: `Twitter @${config.twitter}`,
+//       icon: 'icon-twitter',
+//     },
+//     { href: config.instagram, title: 'Instagram', icon: 'icon-instagram' },
+//     { href: config.reddit, title: 'Reddit', icon: 'icon-reddit' },
+//     {
+//       href: config.spotify,
+//       title: 'Spotify',
+//       icon: 'icon-spotify',
+//       className: utilStyle.hideMobile,
+//     },
+//     {
+//       href: config.hackernews,
+//       title: 'Hacker News',
+//       icon: 'icon-ycombinator',
+//       className: utilStyle.hideBelowDesktop,
+//     },
+//     { href: `mailto:${config.email}`, title: 'Email', icon: 'icon-gmail' },
+//   ]
+
+//   return (
+//     <>
+//       {socials.map(({ href, title, icon, className }) => (
+//         <li className={className} key={title}>
+//           <a href={href} rel="noopener" title={title}>
+//             <div className={styles.liContent}>
+//               <span className={icon} />
+//             </div>
+//           </a>
+//         </li>
+//       ))}
+//     </>
+//   )
+// }
+
+// const Navbar = () => {
+//   const { pathname } = useRouter()
+
+//   const navLinks = [
+//     { href: '/about', title: 'About me' },
+//     { href: '/projects', title: 'Projects' },
+//   ]
+
+//   return (
+//     <nav className={styles.nav}>
+//       <ul>
+//         {pathname !== '/' && (
+//           <li className={styles.navLink}>
+//             <Link href="/">Home</Link>
+//           </li>
+//         )}
+//         {navLinks.map(({ href, title }) => (
+//           <li
+//             className={clsx(styles.navLink, {
+//               [styles.active]: pathname === href,
+//             })}
+//             key={title}
+//           >
+//             <Link href={href}>{title}</Link>
+//           </li>
+//         ))}
+//       </ul>
+//       <ul className={styles.social}>
+//         <SocialLinks />
+//       </ul>
+//     </nav>
+//   )
+// }
+
+// export default Navbar

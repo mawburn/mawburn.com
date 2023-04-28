@@ -3,11 +3,12 @@ module.exports = {
   content: ['./src/**/*.{ts,jsx,tsx,mdx}'],
   theme: {
     fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
+      sans: ['Raleway', 'sans-serif'],
     },
     extend: {
       fontFamily: {
-        header: ['Baloo 2', 'sans-serif'],
+        header: ['Itim', 'sans-serif'],
+        mono: ['Fira Mono', 'monospace'],
       },
     },
   },

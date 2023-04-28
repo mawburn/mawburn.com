@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html,
-body,
-#__next {
-  @apply w-full h-full font-sans antialiased text-neutral-900 bg-neutral-50;
-}
