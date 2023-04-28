@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { ReactNode } from 'react'
+
 import styles from './styles.module.scss'
 
 interface ProjectProps {
@@ -11,6 +12,16 @@ interface ProjectProps {
   url?: string
 }
 
+const OpenSourceIcon = () => (
+  <div className={styles.openSource}>
+    <span className="icon-github" />
+  </div>
+)
+
+const ProjectHeader = ({ isOpenSource, name }: { isOpenSource: boolean; name: string }) => (
+  <h3 className={clsx({ [styles.openSourceHeader]: isOpenSource })}>{name}</h3>
+)
+
 const Project = ({
   name,
   descr,
@@ -20,20 +31,13 @@ const Project = ({
   url = undefined,
 }: ProjectProps) => {
   const bgImg = { backgroundImage: `url(/img/${img})` }
-
-  const link = url || `/projects/${name.replace(/’/gi, '').toLowerCase().split(' ').join('-')}`
+  const link = url ?? `/projects/${name.replace(/’/gi, '').toLowerCase().split(' ').join('-')}`
 
   return (
     <a href={link} title={name} className={styles.link}>
-      <div className={styles.top}>
-        {isOpenSource && (
-          <div className={styles.openSource}>
-            <span className="icon-github" />
-          </div>
-        )}
-      </div>
+      <div className={styles.top}>{isOpenSource && <OpenSourceIcon />}</div>
       <div className={styles.project}>
-        <h3 className={clsx({ [styles.openSourceHeader]: isOpenSource })}>{name}</h3>
+        <ProjectHeader isOpenSource={isOpenSource} name={name} />
         <div className={styles.preview} style={bgImg} />
         <div className={styles.descr}>{descr}</div>
         <div className={styles.tech}>

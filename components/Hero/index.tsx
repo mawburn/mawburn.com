@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import { useState } from 'react'
 
 import config from '../../lib/config'
 import useWindowSize from '../../lib/useWindowSize'
@@ -16,7 +15,7 @@ const Hero = () => {
         <div className={styles.photo}>
           <Image src={config.photo} width={150} height={150} alt="Matt Burnett" />
         </div>
-        <div style={{ textAlign: 'center', color: '#f0f0f0', paddingTop: '0.5rem' }}>
+        <div className={styles.heHimText}>
           <em>He/Him</em>
         </div>
       </div>
