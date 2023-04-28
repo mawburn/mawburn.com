@@ -1,12 +1,7 @@
-export { Footer } from './Footer'
+export { Footer } from './Layout/Footer'
 export { Header } from './Header'
+export { Icon } from './Icon'
 export { Layout } from './Layout'
 export { MDXLoader } from './MDXLoader'
-export { PageHeader } from './PageHeader'
+export { PageHeader } from './Layout/PageHeader'
 export type { MDXResult } from './MDXLoader'
-
-import dynamic from 'next/dynamic'
-
-export const Icon = dynamic(() => import('./Icon') as any, {
-  loading: () => <p>Loading...</p>,
-})
