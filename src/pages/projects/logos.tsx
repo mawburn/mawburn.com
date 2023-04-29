@@ -20,7 +20,7 @@ interface LogoProps {
 const LogoBlock = ({ name, img, size, desc }: LogoProps) => (
   <div className="flex flex-col items-center w-60 h-96">
     <div className="h-52 rounded-lg overflow-hidden">
-      <Image src={img} width={size[0]} height={size[1]} alt={name} />
+      <Image src={img} width={size[0]} height={size[1]} alt={name} loading="lazy" />
     </div>
     <span className="text-lg font-bold text-center">{name}</span>
     {desc && <span className="text-sm text-center">{desc}</span>}
