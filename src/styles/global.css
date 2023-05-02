@@ -6,7 +6,7 @@
 html,
 body,
 #__next {
-  @apply w-full h-full font-sans antialiased text-neutral-50 bg-neutral-900 text-lg;
+  @apply h-full font-sans antialiased text-neutral-50 bg-neutral-900 text-lg;
   background: url("/img/bg.webp");
   scroll-behavior: smooth;
 }
@@ -21,6 +21,10 @@ body,
   @apply mt-8;
 }
 
-.sectionBreak p {
-  @apply mt-2;
+.parBreak p:not(:first-child) {
+  @apply mt-4 lg:mt-6;
+}
+
+.parIndent p {
+  @apply indent-3;
 }
