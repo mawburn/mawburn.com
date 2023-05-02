@@ -5,4 +5,6 @@ export { Layout } from './Layout'
 export { MDXLoader } from './MDXLoader'
 export { PageHeader } from './Layout/PageHeader'
 export { Project } from './Project'
+export { NoBreak } from './NoBreak'
+
 export type { MDXResult } from './MDXLoader'
