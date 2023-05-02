@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       maxWidth: {
         myMax: '80ch',
+        w1400: '1400px',
       },
       fontFamily: {
         header: ['Permanent Marker', 'sans-serif'],

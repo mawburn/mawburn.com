@@ -1,7 +1,17 @@
-import { useEffect, useState } from 'react'
-import { Header } from '../Header'
 import Link from 'next/link'
-import clsx from 'clsx'
+import { useEffect, useState } from 'react'
+
+import { Header } from '../Header'
+
+const headerStyles =
+  'flex flex-col px-4 py-2 w-full items-center md:flex-row md:justify-between lg:max-w-w1400 lg:mx-auto'
+
+const navStyles = 'flex justify-center items-center h-full w-full mx-4 mt-2 md:mt-0 md:w-fit'
+
+const menuStyles = 'flex justify-center items-center h-full mt-2 mx-auto gap-2 md:gap-8'
+
+const linkStyles =
+  'px-2 h-full text-lg lowercase font-bold cursor tracking-widest border-transparent border-b-2 hover:border-neutral-50 hover:motion-safe:animate-pulse md:text-xl'
 
 export const PageHeader = () => {
   const [currentPage, setCurrentPage] = useState('')
@@ -21,32 +31,23 @@ export const PageHeader = () => {
       </Link>
     )
 
-  const flexFull = 'flex h-full'
-  const linkClass =
-    'px-2 h-full cursor border-transparent border-b-2 hover:border-neutral-50 hover:motion-safe:animate-pulse'
-
   return (
-    <header className="flex justify-between px-4 py-2">
+    <header className={headerStyles}>
       {pageName}
-      <nav className={flexFull}>
-        <ul
-          className={clsx(
-            flexFull,
-            'justify-center items-center gap-4 text-xl font-bold tracking-widest lowercase'
-          )}
-        >
-          <li className={clsx(flexFull)}>
-            <Link href="/resume" className={clsx(linkClass)}>
+      <nav className={navStyles}>
+        <ul className={menuStyles}>
+          <li>
+            <Link href="/resume" className={linkStyles}>
               Resumé
             </Link>
           </li>
-          <li className={clsx(flexFull)}>
-            <Link href="/#projects" className={clsx(linkClass)}>
+          <li>
+            <Link href="/#projects" className={linkStyles}>
               Projects
             </Link>
           </li>
-          <li className={clsx(flexFull)}>
-            <Link href="socials" className={clsx(linkClass)}>
+          <li>
+            <Link href="socials" className={linkStyles}>
               socials
             </Link>
           </li>
