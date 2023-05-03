@@ -21,7 +21,7 @@ body,
   @apply mt-8;
 }
 
-.sectionBreak p {
+.sectionBreak > p {
   @apply mt-4;
 }
 
