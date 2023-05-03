@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
-import { Header, Layout, MDXLoader, MDXResult, Project } from 'src/components'
+import { Header, Icon, Layout, MDXLoader, MDXResult, Project } from 'src/components'
 import getPostData from 'src/lib/getPostData'
 import localConfig from 'src/lib/localConfig'
 
@@ -54,7 +54,7 @@ const WhoAmI = () => {
 }
 
 const NameTitle = () => (
-  <section className="flex flex-col justify-center items-center my-16 gap-8 lg:flex-row lg:gap-16">
+  <section className="flex flex-col justify-center items-center mt-16 gap-8 lg:flex-row lg:gap-16">
     <div className="flex flex-col justify-center items-center">
       <Header.H2 className="hardTextShadow text-center" size="text-5xl">
         Matt Burnett
@@ -67,6 +67,62 @@ const NameTitle = () => (
     <div className="text-3xl text-accent font-bold font-header hardTextShadow">
       He<span className="mx-2">/</span>Him
     </div>
+  </section>
+)
+
+const Socials = () => (
+  <section className="max-w-myMax mx-2 md:mx-auto">
+    <Header.H2 className="sr-only">Socials</Header.H2>
+    <ul className="flex flex-wrap justify-center items-center gap-8 my-8 text-3xl">
+      <li>
+        <a
+          href="https://www.linkedin.com/in/burnettmatt/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Icon name="linkedin" />
+        </a>
+      </li>
+      <li>
+        <a href="https://github.com/mawburn" rel="noopener noreferrer" target="_blank">
+          <Icon name="github" />
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/_mawburn/" rel="noopener noreferrer" target="_blank">
+          <Icon name="instagram" />
+        </a>
+      </li>
+      <li>
+        <a href="https://reddit.com/u/mawburn" rel="noopener noreferrer" target="_blank">
+          <Icon name="reddit" />
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/_mawburn" rel="noopener noreferrer" target="_blank">
+          <Icon name="twitter" />
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://news.ycombinator.com/user?id=mawburn"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <Icon name="hackernews" />
+        </a>
+      </li>
+      <li>
+        <a href="https://open.spotify.com/user/mawburn" rel="noopener noreferrer" target="_blank">
+          <Icon name="spotify" />
+        </a>
+      </li>
+      <li>
+        <a href="mailto:mawburn7+site@gmail.com" rel="noopener noreferrer" target="_blank">
+          <Icon name="email" />
+        </a>
+      </li>
+    </ul>
   </section>
 )
 
@@ -109,6 +165,7 @@ const Projects = () => (
           'cloudflare',
           'prometheus',
           'grafana',
+          'github',
         ]}
       >
         An open source mapping tool for Albion Online, boasting 19k-21k monthly users and close to
@@ -123,6 +180,26 @@ const Projects = () => (
         I’m not a pro designer, but I enjoy using my artistic flair to create logos for personal
         projects and others.
       </Project>
+      <Project
+        title="TheGame.Tools"
+        url="https://thegame.tools"
+        newTab
+        image="/img/TheGameTools.webp"
+        tags={['react', 'typescript', 'next-js', 'vercel', 'github']}
+      >
+        Building open-source gaming tools through community collaboration. Each toolset gets its own
+        subdomain, with a mix of tools & useful resources.
+      </Project>
+      <Project
+        title="CLTRPG.com"
+        url="https://cltrpg.com"
+        newTab
+        image="/img/CLTRPG.webp"
+        tags={['react', 'typescript', 'next-js', 'vercel', 'discord']}
+      >
+        Mostly just a Charlotte (CLT) based RPG & tabletop gaming discord community, plus a simple
+        accompanying site.
+      </Project>
     </div>
   </section>
 )
@@ -135,6 +212,7 @@ const Home: NextPage<Props> = ({ theBasics }) => (
     <Layout>
       <WhoAmI />
       <NameTitle />
+      <Socials />
       <JustTheBasics theBasics={theBasics} />
       <Projects />
     </Layout>

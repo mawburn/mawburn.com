@@ -11,7 +11,7 @@ export const Layout = ({ className, children }: LayoutProps) => (
   <div className="h-full w-full flex flex-col justify-between">
     <div>
       <PageHeader />
-      <main className={className}>{children}</main>
+      <main className={className ?? 'w-full'}>{children}</main>
     </div>
     <Footer />
   </div>

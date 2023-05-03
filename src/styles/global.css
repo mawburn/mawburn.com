@@ -21,6 +21,18 @@ body,
   @apply mt-8;
 }
 
+.sectionBreak p {
+  @apply mt-4;
+}
+
+.sectionBreak h3 + p {
+  @apply ml-8 mb-4 mt-2;
+}
+
+.resume h3 {
+  @apply font-sans font-bold;
+}
+
 .parBreak p:not(:first-child) {
   @apply mt-4 lg:mt-6;
 }

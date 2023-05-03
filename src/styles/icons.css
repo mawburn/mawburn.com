@@ -533,7 +533,7 @@
   content: "\ec95";
   color: #2c8ebb;
 }
-.icon-ycombinator:before {
+.icon-hackernews:before {
   content: "\e935";
   color: #f0652f;
 }
@@ -596,7 +596,7 @@
 .icon-truck:before {
   content: "\f0d1";
 }
-.icon-envelope:before {
+.icon-email:before {
   content: "\f0e0";
 }
 .icon-lightbulb:before {

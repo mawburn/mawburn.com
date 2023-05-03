@@ -1,5 +1,4 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document'
-
 import localConfig from 'src/lib/localConfig'
 
 const descr = 'Matt Burnett - Software Engineer' as const
@@ -9,7 +8,7 @@ const ogImg = 'https://mawburn.com/img/photo.jpg' as const
 class MyDocument extends Document {
   render() {
     return (
-      <Html>
+      <Html style={{ scrollBehavior: 'smooth' }}>
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content={descr} />
