@@ -15,7 +15,7 @@ const Resume: NextPage<Props> = ({ resume }) => (
       <title>{localConfig.title}</title>
     </Head>
     <Layout className="flex justify-center items-center gap-8 px-6 mt-12 max-w-myMax mx-auto">
-      <article className="sectionBreak resume">
+      <article className="sectionBreak resume mb-16">
         <Header.H1 className="text-2xl text-center lg:text-4xl lg:text-left">
           Matt Burnett’s Resumé
         </Header.H1>
