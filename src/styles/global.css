@@ -11,10 +11,15 @@ body,
   scroll-behavior: smooth;
 }
 
+p a:any-link {
+  @apply cursor-pointer text-[#00bfff];
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.90);
+}
+
 hr {
   height: 1px;
   margin: 2rem 0;
-  background: linear-gradient(left, rgba(0, 0, 0, 0), #161616, rgba(0, 0, 0, 0));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), #161616, rgba(0, 0, 0, 0));
   border: 0;
 }
 
@@ -22,7 +27,7 @@ hr:after {
   display: block;
   content: '';
   height: 30px;
-  background-image: radial-gradient(farthest-side at center top, #fdfdfd 0%, rgba(255, 255, 255, 0) 100%);
+  background-image: radial-gradient(at center top, #fdfdfd 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .hardTextShadow {
