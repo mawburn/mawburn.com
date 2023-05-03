@@ -138,7 +138,7 @@ const JustTheBasics = ({ theBasics }: Props) => (
 )
 
 const Projects = () => (
-  <section id="projects" className="flex flex-col justify-center items-center w-full mt-8 mx-4">
+  <section id="projects" className="flex flex-col justify-center items-center mt-8 px-4">
     <Header.H2 className="text-center">Noteworthy projects</Header.H2>
     <div className="flex flex-wrap justify-center items-center gap-8 mt-4 lg:mt-8">
       <Project
