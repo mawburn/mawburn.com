@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Layout, MDXLoader, MDXResult } from 'src/components'
+import { Header, Layout, MDXLoader, MDXResult } from 'src/components'
 import getPostData from 'src/lib/getPostData'
 import localConfig from 'src/lib/localConfig'
 
@@ -14,8 +14,11 @@ const Resume: NextPage<Props> = ({ resume }) => (
     <Head>
       <title>{localConfig.title}</title>
     </Head>
-    <Layout className="flex justify-center items-center gap-8 mt-12 max-w-myMax mx-auto">
-      <article className="sectionBreak">
+    <Layout className="flex justify-center items-center gap-8 px-6 mt-12 max-w-myMax mx-auto">
+      <article className="sectionBreak resume">
+        <Header.H1 className="text-2xl text-center lg:text-4xl lg:text-left">
+          Matt Burnett’s Resumé
+        </Header.H1>
         <MDXLoader source={resume} />
       </article>
     </Layout>

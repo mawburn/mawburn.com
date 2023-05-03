@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Header } from '../Header'
 
@@ -15,6 +15,19 @@ const linkStyles =
 
 export const PageHeader = () => {
   const [currentPage, setCurrentPage] = useState('')
+
+  const scrollTo = useCallback(
+    (evt: any) => {
+      const elm = document.getElementById('projects')
+
+      if (currentPage === '/' && elm) {
+        evt.preventDefault()
+        evt.stopPropagation()
+        elm.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    },
+    [currentPage]
+  )
 
   useEffect(() => {
     if (window?.location?.pathname) {
@@ -42,13 +55,8 @@ export const PageHeader = () => {
             </Link>
           </li>
           <li>
-            <Link href="/#projects" className={linkStyles}>
+            <Link href="/#projects" onClick={scrollTo} className={linkStyles}>
               Projects
-            </Link>
-          </li>
-          <li>
-            <Link href="socials" className={linkStyles}>
-              socials
             </Link>
           </li>
         </ul>

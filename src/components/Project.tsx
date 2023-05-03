@@ -1,19 +1,21 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { PropsWithChildren } from 'react'
 
 import { Icon } from './Icon'
-import { PropsWithChildren } from 'react'
 
 interface ProjectProps extends PropsWithChildren {
   url: string
   title: string
   image: string
   tags: string[]
+  newTab?: boolean
 }
 
-export const Project = ({ url, title, image, tags, children }: ProjectProps) => (
+export const Project = ({ url, title, image, tags, newTab, children }: ProjectProps) => (
   <Link
     href={url}
+    target={newTab ? '_blank' : '_self'}
     className="flex flex-col w-60 h-72 border-4 border-neutral-50 bg-neutral-900/90 pt-2 text-base justify-between"
   >
     <div>
