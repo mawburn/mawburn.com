@@ -39,7 +39,7 @@ export const PageHeader = () => {
     currentPage === '/' ? (
       <Header.H1 size="text-3xl">Matt Burnett</Header.H1>
     ) : (
-      <Link href="/" className="text-3xl font-header">
+      <Link href="/" className="text-3xl tracking-widest font-header">
         Matt Burnett
       </Link>
     )
