@@ -9,6 +9,11 @@ import { NoBreak } from './NoBreak'
 
 export type MDXResult = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>
 
+const ImageLoader = (props: any) => {
+  const { alt, ...rest } = props
+  return <Image alt={alt} {...rest} />
+}
+
 const Anchor = ({ children, ...props }: PropsWithChildren<any>) => {
   const { href, target, rel, ...rest } = props
 
@@ -39,11 +44,9 @@ const components = {
   h2: Header.H2,
   h3: Header.H3,
   a: Anchor,
-  Image: Image,
+  Image: ImageLoader,
   Icon: Icon,
   NoBreak: NoBreak,
 }
 
-export const MDXLoader = ({ source }: PropsWithChildren<Props>) => (
-  <MDXRemote {...source} components={components} />
-)
+export const MDXLoader = ({ source }: Props) => <MDXRemote {...source} components={components} />
