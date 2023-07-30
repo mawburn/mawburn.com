@@ -100,7 +100,7 @@ const Socials = () => (
       </li>
       <li>
         <a href="https://twitter.com/_mawburn" rel="noopener noreferrer" target="_blank">
-          <Icon name="twitter" />
+          <Image src="/img/Twitter.svg" width={34} height={26} alt="Twitter" loading="lazy" />
         </a>
       </li>
       <li>
