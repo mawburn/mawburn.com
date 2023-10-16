@@ -147,8 +147,8 @@ const Projects = () => (
         image="/img/TTLand.webp"
         tags={['shopify', 'react', 'next-js', 'vercel']}
       >
-        An online store by my wife & me, targeting tabletop gamers. Features our products & various
-        vendors selling their unique gaming goods.
+        My wife and I present an online store tailored for tabletop gamers, showcasing our creations
+        alongside unique gaming treasures from various vendors.
       </Project>
       <Project
         title="Portaler"
@@ -168,8 +168,8 @@ const Projects = () => (
           'github',
         ]}
       >
-        An open source mapping tool for Albion Online, boasting 19k-21k monthly users and close to
-        500 server installations.
+        An open-source mapping tool for Albion Online with 19k-21k monthly users and nearly 500
+        server installations.
       </Project>
       <Project
         title="Logos & Graphics"
@@ -177,8 +177,8 @@ const Projects = () => (
         image="/img/Paint.webp"
         tags={['adobephotoshop', 'inkscape', 'paint-brush']}
       >
-        I’m not a pro designer, but I enjoy using my artistic flair to create logos for personal
-        projects and others.
+        I’m no professional designer, but I love crafting logos for personal endeavors and various
+        projects.
       </Project>
       <Project
         title="TheGame.Tools"
@@ -187,8 +187,8 @@ const Projects = () => (
         image="/img/TheGameTools.webp"
         tags={['react', 'typescript', 'next-js', 'vercel', 'github']}
       >
-        Building open-source gaming tools through community collaboration. Each toolset gets its own
-        subdomain, with a mix of tools & useful resources.
+        Developing open-source gaming tools through community collaboration; each toolset has its
+        own subdomain, combining tools and essential resources.
       </Project>
       <Project
         title="CLTRPG.com"
@@ -197,8 +197,18 @@ const Projects = () => (
         image="/img/CLTRPG.webp"
         tags={['react', 'typescript', 'next-js', 'vercel', 'discord']}
       >
-        Mostly just a Charlotte (CLT) based RPG & tabletop gaming discord community, plus a simple
-        accompanying site.
+        Primarily a Charlotte (CLT) RPG & tabletop gaming Discord community, complemented by a
+        straightforward website.
+      </Project>
+      <Project
+        title="Dicengineers"
+        url="https://dicengineers.com"
+        newTab
+        image="/img/de.webp"
+        tags={['react', 'typescript', 'next-js', 'vercel', 'discord']}
+      >
+        A community that unites tech enthusiasts, from software engineers to designers, all with a
+        shared passion for tabletop games.
       </Project>
     </div>
   </section>
