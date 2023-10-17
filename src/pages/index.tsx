@@ -205,7 +205,7 @@ const Projects = () => (
         url="https://dicengineers.com"
         newTab
         image="/img/de.webp"
-        tags={['react', 'typescript', 'next-js', 'vercel', 'discord']}
+        tags={['react', 'typescript', 'next-js', 'vercel', 'discord', 'reddit']}
       >
         A community that unites tech enthusiasts, from software engineers to designers, all with a
         shared passion for tabletop games.
