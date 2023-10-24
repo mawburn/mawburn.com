@@ -11,6 +11,9 @@ function generateSiteMap() {
     <url>
       <loc>${EXTERNAL_DATA_URL}/resume</loc>
     </url>
+    <url>
+      <loc>${EXTERNAL_DATA_URL}/domains</loc>
+    </url>
   </urlset>
  `
 }
