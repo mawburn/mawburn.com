@@ -59,3 +59,7 @@ hr:after {
 .parIndent p {
   @apply indent-3;
 }
+
+.domainList ul {
+  @apply list-decimal py-6 mx-4 text-sm;
+}

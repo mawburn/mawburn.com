@@ -59,6 +59,11 @@ export const PageHeader = () => {
               Projects
             </Link>
           </li>
+          <li>
+            <Link href="/domains" className={linkStyles}>
+              domains
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

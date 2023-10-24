@@ -6,6 +6,7 @@ import { PropsWithChildren } from 'react'
 import { Header } from './Header'
 import { Icon } from './Icon'
 import { NoBreak } from './NoBreak'
+import { Domain } from './Domain'
 
 export type MDXResult = MDXRemoteSerializeResult<Record<string, unknown>, Record<string, unknown>>
 
@@ -47,6 +48,7 @@ const components = {
   Image: ImageLoader,
   Icon: Icon,
   NoBreak: NoBreak,
+  Domain: Domain,
 }
 
 export const MDXLoader = ({ source }: Props) => <MDXRemote {...source} components={components} />
