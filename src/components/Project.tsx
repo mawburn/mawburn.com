@@ -16,19 +16,25 @@ export const Project = ({ url, title, image, tags, newTab, children }: ProjectPr
   <Link
     href={url}
     target={newTab ? '_blank' : '_self'}
-    className="flex flex-col w-60 h-72 border-4 border-neutral-50 bg-neutral-900/90 pt-2 text-base justify-between"
+    className="flex flex-col md:flex-row items-center w-72 md:w-full my-2 text-base justify-beginning md:justify-center"
   >
-    <div>
-      <h3 className="w-ful text-center text-xl font-bold py-1">{title}</h3>
-      <Image src={image} alt={title} width={270} height={152} loading="lazy" />
-    </div>
-    <p className="flex h-full items-center px-2 text-xs text-ellipsis overflow-hidden">
-      {children}
-    </p>
-    <div className="flex w-full items-center gap-1 border-t-2 border-neutral-50 px-1 py-2">
-      {tags.map(tag => (
-        <Icon name={tag} key={`profile${tag}`} />
-      ))}
+    <Image
+      className="border-2 border-neutral-50"
+      src={image}
+      alt={title}
+      width={270}
+      height={152}
+      loading="lazy"
+    />
+    <div className="flex flex-col justify-between pl-4 py-2 overflow-hidden">
+      <h3 className="text-xl font-bold text-center md:text-left my-2 md:my-0">{title}</h3>
+      <p className="text-sm text-ellipsis overflow-hidden">{children}</p>
+      <div className="flex items-center gap-2 mt-2 py-2">
+        <strong>Tech:</strong>
+        {tags.map(tag => (
+          <Icon name={tag} key={`profile${tag}`} />
+        ))}
+      </div>
     </div>
   </Link>
 )

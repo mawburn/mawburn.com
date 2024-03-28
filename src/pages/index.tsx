@@ -131,16 +131,19 @@ const JustTheBasics = ({ theBasics }: Props) => (
     <Header.H3 className="inline-block text-center text-3xl mb-4 lg:text-right">
       Just the basics
     </Header.H3>
-    <div className="parBreak parIndent text-xl lg:text-lg">
+    <div className="parBreak text-xl lg:text-lg">
       <MDXLoader source={theBasics} />
     </div>
   </article>
 )
 
 const Projects = () => (
-  <section id="projects" className="flex flex-col justify-center items-center mt-8 px-4">
-    <Header.H2 className="text-center">Noteworthy projects</Header.H2>
-    <div className="flex flex-wrap justify-center items-center gap-8 mt-4 lg:mt-8">
+  <section
+    id="projects"
+    className="flex flex-col justify-center items-center mt-8 mx-auto px-4 max-w-prose"
+  >
+    <Header.H2 className="text-center">Random projects</Header.H2>
+    <div className="flex flex-col justify-center items-center gap-4 mt-4 lg:mt-8 w-full">
       <Project
         title="Tabletop.Land"
         url="https://tabletop.land"
@@ -172,25 +175,6 @@ const Projects = () => (
         server installations.
       </Project>
       <Project
-        title="Logos & Graphics"
-        url="/projects/logos"
-        image="/img/Paint.webp"
-        tags={['adobephotoshop', 'inkscape', 'paint-brush']}
-      >
-        I’m no professional designer, but I love crafting logos for personal endeavors and various
-        projects.
-      </Project>
-      <Project
-        title="TheGame.Tools"
-        url="https://thegame.tools"
-        newTab
-        image="/img/TheGameTools.webp"
-        tags={['react', 'typescript', 'next-js', 'vercel', 'github']}
-      >
-        Developing open-source gaming tools through community collaboration; each toolset has its
-        own subdomain, combining tools and essential resources.
-      </Project>
-      <Project
         title="CLTRPG.com"
         url="https://cltrpg.com"
         newTab
@@ -204,11 +188,20 @@ const Projects = () => (
         title="Dicengineers"
         url="https://dicengineers.com"
         newTab
-        image="/img/de.webp"
+        image="/img/de.webp?v=2"
         tags={['react', 'typescript', 'next-js', 'vercel', 'discord', 'reddit']}
       >
         A community that unites tech enthusiasts, from software engineers to designers, all with a
         shared passion for tabletop games.
+      </Project>
+      <Project
+        title="Logos & Graphics"
+        url="/projects/logos"
+        image="/img/Paint.webp"
+        tags={['adobephotoshop', 'inkscape', 'paint-brush']}
+      >
+        I’m no professional designer, but I love crafting logos for personal endeavors and various
+        projects.
       </Project>
     </div>
   </section>

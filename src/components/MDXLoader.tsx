@@ -2,6 +2,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PropsWithChildren } from 'react'
+import { YouTube } from './YouTube'
 
 import { Header } from './Header'
 import { Icon } from './Icon'
@@ -49,6 +50,7 @@ const components = {
   Icon: Icon,
   NoBreak: NoBreak,
   Domain: Domain,
+  YouTube,
 }
 
 export const MDXLoader = ({ source }: Props) => <MDXRemote {...source} components={components} />
