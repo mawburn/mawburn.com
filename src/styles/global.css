@@ -9,6 +9,7 @@ body,
   @apply h-full font-sans antialiased text-neutral-50 bg-neutral-900 text-lg;
   background: url("/img/bg.webp");
   scroll-behavior: smooth;
+  overscroll-behavior: none;
 }
 
 p a:any-link {

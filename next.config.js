@@ -9,6 +9,15 @@ const withMDX = require('@next/mdx')({
 const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'md', 'mdx'],
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
+        port: '',
+      },
+    ],
+  },
 }
 
 module.exports = withMDX(nextConfig)
