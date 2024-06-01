@@ -98,7 +98,7 @@ const Socials = () => (
           <Icon name="reddit" />
         </a>
       </li>
-      <li>
+      {/* <li>
         <a href="https://twitter.com/_mawburn" rel="noopener noreferrer" target="_blank">
           <Image src="/img/Twitter.svg" width={34} height={26} alt="Twitter" loading="lazy" />
         </a>
@@ -111,7 +111,7 @@ const Socials = () => (
         >
           <Icon name="hackernews" />
         </a>
-      </li>
+      </li> */}
       <li>
         <a href="https://open.spotify.com/user/mawburn" rel="noopener noreferrer" target="_blank">
           <Icon name="spotify" />
