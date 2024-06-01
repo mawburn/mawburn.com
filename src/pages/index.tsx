@@ -185,16 +185,6 @@ const Projects = () => (
         straightforward website.
       </Project>
       <Project
-        title="Dicengineers"
-        url="https://dicengineers.com"
-        newTab
-        image="/img/de.webp?v=2"
-        tags={['react', 'typescript', 'next-js', 'vercel', 'discord', 'reddit']}
-      >
-        A community that unites tech enthusiasts, from software engineers to designers, all with a
-        shared passion for tabletop games.
-      </Project>
-      <Project
         title="Logos & Graphics"
         url="/projects/logos"
         image="/img/Paint.webp"
