@@ -27,13 +27,7 @@ const WhoAmI = () => {
       <Header.H2 className="text-center lg:text-left">Who am I?</Header.H2>
       <div className="flex flex-col justify-center items-center">
         <div className="flex items-center w-[150px] h-[150px] rounded-full overflow-hidden">
-          <Image
-            src="/img/MeGame.webp"
-            width={150}
-            height={150}
-            alt="Matt Burnett"
-            loading="lazy"
-          />
+          <Image src="/img/Me.webp" width={150} height={150} alt="Matt Burnett" loading="lazy" />
           <Image
             className={clsx(
               { 'opacity-100': hovering, 'opacity-0': !hovering },
