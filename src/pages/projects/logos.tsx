@@ -18,7 +18,7 @@ interface LogoProps {
 }
 
 const LogoBlock = ({ name, img, size, desc }: LogoProps) => (
-  <div className="flex flex-col items-center w-60 h-96">
+  <div className="flex flex-col items-center w-60 h-80 sm:h-96">
     <div className="h-52 rounded-lg overflow-hidden">
       <Image src={img} width={size[0]} height={size[1]} alt={name} loading="lazy" />
     </div>
@@ -32,12 +32,12 @@ const Logos: NextPage<Props> = ({ logos }) => (
     <Head>
       <title>{localConfig.title}</title>
     </Head>
-    <Layout className="flex justify-center items-center gap-8 mt-12 max-w-myMax mx-auto">
+    <Layout className="flex justify-center items-center gap-8 sm:mt-12 max-w-myMax mx-auto">
       <article className="flex flex-col items-center sectionBreak mb-4">
-        <section className="max-w-prose">
+        <section className="max-w-prose mx-6">
           <MDXLoader source={logos} />
         </section>
-        <section className="flex mt-16 gap-8">
+        <section className="flex flex-col sm:flex-row mt-16 gap-0 sm:gap-8">
           <Link href="https://tabletop.land">
             <LogoBlock
               name="Tabletop.Land"
