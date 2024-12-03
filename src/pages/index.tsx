@@ -74,41 +74,34 @@ const Socials = () => (
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Icon name="linkedin" />
+          <Image
+            src="/img/LinkedIn.svg"
+            width={34}
+            height={34}
+            alt="LinkedIn Logo"
+            loading="lazy"
+          />
         </a>
       </li>
       <li>
         <a href="https://github.com/mawburn" rel="noopener noreferrer" target="_blank">
-          <Icon name="github" />
+          <Image src="/img/Github.svg" width={34} height={34} alt="Github Logo" loading="lazy" />
         </a>
       </li>
       <li>
         <a href="https://www.instagram.com/_mawburn/" rel="noopener noreferrer" target="_blank">
-          <Icon name="instagram" />
+          <Image
+            src="/img/Instagram.svg"
+            width={34}
+            height={34}
+            alt="Instagram Logo"
+            loading="lazy"
+          />
         </a>
       </li>
       <li>
-        <a href="https://reddit.com/u/mawburn" rel="noopener noreferrer" target="_blank">
-          <Icon name="reddit" />
-        </a>
-      </li>
-      {/* <li>
-        <a href="https://twitter.com/_mawburn" rel="noopener noreferrer" target="_blank">
-          <Image src="/img/Twitter.svg" width={34} height={26} alt="Twitter" loading="lazy" />
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://news.ycombinator.com/user?id=mawburn"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Icon name="hackernews" />
-        </a>
-      </li> */}
-      <li>
-        <a href="https://open.spotify.com/user/mawburn" rel="noopener noreferrer" target="_blank">
-          <Icon name="spotify" />
+        <a href="https://bsky.app/profile/mawburn.com" rel="noopener noreferrer" target="_blank">
+          <Image src="/img/Bluesky.svg" width={34} height={26} alt="Bluesky Logo" loading="lazy" />
         </a>
       </li>
       <li>
