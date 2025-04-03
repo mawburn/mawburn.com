@@ -1,20 +1,16 @@
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
+import { lazy, Suspense } from 'react'
 
 import type { Route } from './+types/root'
-import { SynthwaveBackground } from './components/SynthwaveBackground'
 import './app.css'
 
-export const links: Route.LinksFunction = () => [
+const SynthwaveBackground = lazy(() => import('./components/SynthwaveBackground'))
+
+export const links: Route.LinksFunction = () => []
+
+const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Sacramento&display=swap',
-  },
+  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -32,14 +28,58 @@ export function Layout({ children }: { children: React.ReactNode }) {
           content="Software Engineer - Building high-performance web applications with modern tech."
         />
         <meta property="og:site_name" content="Matt Burnett" />
+        {fontPreloadLinks.map(link => (
+          <link key={link.href} {...link} />
+        ))}
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+          @font-face {
+            font-family: 'Lexend';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Lexend Regular'), local('Lexend-Regular'), url(https://fonts.gstatic.com/s/lexend/v7/wlpwgwvFAVdoq2_v-6QU.woff2) format('woff2');
+          }
+          @font-face {
+            font-family: 'Lexend';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: local('Lexend Bold'), local('Lexend-Bold'), url(https://fonts.gstatic.com/s/lexend/v7/wlpzgwvFAVdoq2_v9KQU4Hn2.woff2) format('woff2');
+          }
+          @font-face {
+            font-family: 'Sacramento';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: local('Sacramento'), local('Sacramento-Regular'), url(https://fonts.gstatic.com/s/sacramento/v13/buEzpo6gcdjy0EiZMBUG4C0f_Q.woff2) format('woff2');
+          }
+          body {
+            font-family: 'Lexend', ui-sans-serif, system-ui, -apple-system, sans-serif;
+          }
+        `,
+          }}
+        />
         <Meta />
         <Links />
       </head>
-      <body>
-        <SynthwaveBackground />
+      <body style={{ backgroundColor: '#00001a' }}>
+        <Suspense fallback={null}>
+          <SynthwaveBackground />
+        </Suspense>
         {children}
         <ScrollRestoration />
         <Scripts />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap"
+          media="print"
+          onLoad={e => {
+            const target = e.currentTarget
+            target.media = 'all'
+          }}
+        />
       </body>
     </html>
   )
