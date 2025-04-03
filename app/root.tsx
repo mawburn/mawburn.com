@@ -13,7 +13,7 @@ export const links: Route.LinksFunction = () => [
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Sacramento&display=swap',
   },
 ]
 
@@ -23,6 +23,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="author" content="Matt Burnett" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Matt Burnett | Software Engineer" />
+        <meta
+          property="og:description"
+          content="Software Engineer - Building high-performance web applications with modern tech."
+        />
+        <meta property="og:site_name" content="Matt Burnett" />
         <Meta />
         <Links />
       </head>
