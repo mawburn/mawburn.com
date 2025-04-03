@@ -1,51 +1,41 @@
 {
   "name": "mawburn.com",
-  "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=18"
-  },
+  "type": "module",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "typecheck": "tsc --noEmit",
-    "nuke": "rm -rf node_modules & rm -rf .next",
-    "lint": "next lint",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx,.json --ignore-pattern '/node_modules/' ."
+    "build": "react-router build",
+    "deploy": "npm run build && wrangler deploy",
+    "dev": "react-router dev",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "preview": "vite preview",
+    "start": "wrangler dev",
+    "typecheck": "wrangler types && react-router typegen && tsc -b",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@mdx-js/loader": "^2.3.0",
-    "@mdx-js/react": "^2.3.0",
-    "@next/mdx": "^13.4.4",
-    "clsx": "^1.1.1",
-    "dotenv": "^16.1.4",
-    "lodash": "^4.17.21",
-    "next": "13.4.4",
-    "next-mdx-remote": "^4.4.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "@types/three": "^0.175.0",
+    "isbot": "^5.1.17",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router": "^7.3.0",
+    "three": "^0.175.0"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
-    "@types/btoa": "^1.2.3",
-    "@types/lodash": "^4.14.195",
-    "@types/react": "^18.2.8",
-    "@typescript-eslint/eslint-plugin": "^5.59.9",
-    "@typescript-eslint/parser": "^5.59.9",
-    "autoprefixer": "^10.4.14",
-    "eslint": "8.42.0",
-    "eslint-config-next": "13.4.4",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-json": "^3.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.27.1",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "postcss": "^8.4.24",
-    "prettier": "^2.8.8",
-    "tailwindcss": "^3.3.2",
-    "typescript": "5.1.3"
-  },
-  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+    "@cloudflare/vite-plugin": "^0.1.11",
+    "@cloudflare/workers-types": "^4.20250303.0",
+    "@react-router/dev": "^7.3.0",
+    "@tailwindcss/vite": "^4.1.2",
+    "@types/node": "^20",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.1",
+    "oxlint": "^0.16.4",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4.1.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.2.1",
+    "vite-tsconfig-paths": "^5.1.4",
+    "wrangler": "^4.7.0"
+  }
 }
