@@ -7,7 +7,7 @@ type SynthwaveBackgroundProps = {
   className?: string
 }
 
-export function SynthwaveBackground({ className = '' }: SynthwaveBackgroundProps) {
+export default function SynthwaveBackground({ className = '' }: SynthwaveBackgroundProps) {
   const { containerRef, scene, camera, renderer, animationFrameRef, prefersReducedMotion } = useThreeScene()
   const objectsRef = useRef<{
     wireframeObjects?: THREE.Group
