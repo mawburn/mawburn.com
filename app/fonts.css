@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'OutrunFuture';
+  src: url('/fonts/OutrunFuture.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.outrun {
+  font-family: 'OutrunFuture', cursive;
+  letter-spacing: 0.05em;
+}
+
+

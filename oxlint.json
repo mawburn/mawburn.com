@@ -1,0 +1,14 @@
+{
+  "deny": [
+    "eqeqeq",
+    "no-console",
+    "no-unexpected-multiline",
+    "no-unused-vars",
+    "no-var",
+    "prefer-const"
+  ],
+  "warn": ["suspicious"],
+  "jsx": true,
+  "sourceType": "module",
+  "project": "./tsconfig.json"
+}
