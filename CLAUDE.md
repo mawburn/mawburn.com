@@ -11,7 +11,7 @@
 ## Code Style Guidelines
 - Adhere to .prettierrc & oxlint.json configurations
 - Omit single unused parameters instead of using `(_) => null` syntax
-- Avoid comments except for complex code requiring explanation
+- Avoid useless comments. ONLY comment complex code requiring explanation
 - Use `npm` as the package manager
 
 ## Troubleshooting
