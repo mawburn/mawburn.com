@@ -1,29 +1,33 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useThreeScene, animateScene } from './utils'
-import { createGrid, createMountains, createFloatingObjects } from './objects'
+import { createWireframeObjects } from './objects'
 
 type SynthwaveBackgroundProps = {
   className?: string
 }
 
 export function SynthwaveBackground({ className = '' }: SynthwaveBackgroundProps) {
-  const { containerRef, scene, camera, renderer, animationFrameRef } = useThreeScene()
+  const { containerRef, scene, camera, renderer, animationFrameRef, prefersReducedMotion } = useThreeScene()
   const objectsRef = useRef<{
-    grid?: THREE.GridHelper
-    mountains?: THREE.Group
-    floatingObjects?: THREE.Group
+    wireframeObjects?: THREE.Group
   }>({})
 
   useEffect(() => {
     if (!scene || !camera || !renderer) return
 
-    objectsRef.current.grid = createGrid(scene)
-    objectsRef.current.mountains = createMountains(scene)
-    objectsRef.current.floatingObjects = createFloatingObjects(scene)
+    if (!objectsRef.current.wireframeObjects) {
+      objectsRef.current.wireframeObjects = createWireframeObjects(scene)
+    }
 
-    animateScene(renderer, scene, camera, objectsRef.current, animationFrameRef)
-  }, [scene, camera, renderer, animationFrameRef])
+    animateScene(renderer, scene, camera, objectsRef.current, animationFrameRef, prefersReducedMotion)
+
+    return () => {
+      if (objectsRef.current.wireframeObjects) {
+        scene.remove(objectsRef.current.wireframeObjects)
+      }
+    }
+  }, [scene, camera, renderer, animationFrameRef, prefersReducedMotion])
 
   return (
     <div

@@ -3,8 +3,17 @@ import { Welcome } from '../welcome/welcome'
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'New React Router App' },
-    { name: 'description', content: 'Welcome to React Router!' },
+    { title: 'Matt Burnett | Software Engineer' },
+    {
+      name: 'description',
+      content:
+        'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
+    },
+    {
+      name: 'keywords',
+      content:
+        'Software Engineer, Frontend Developer, React Developer, Full Stack Developer, TypeScript, JavaScript, Web Development, React.js, Node.js, TailwindCSS, Web Applications, UI/UX, SPA, Progressive Web Apps, Modern Web Development, API Integration, Responsive Design',
+    },
   ]
 }
 

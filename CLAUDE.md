@@ -3,16 +3,17 @@
 - TailwindCSS v4
 - **Important**: You will not have context on these libraries. You must follow existing patterns in the folder structure and examine the libraries in node_modules to understand how they work.
 
-### Research Approach
+
+## Do's
+- Follow existing patterns in the folder structure
 - Examine node_modules packages to understand library functionality
 - Start with README.md files in each package
-- Follow established patterns in the existing codebase
-
-## Code Style Guidelines
 - Adhere to .prettierrc & oxlint.json configurations
-- Omit single unused parameters instead of using `(_) => null` syntax
-- Avoid useless comments. ONLY comment complex code requiring explanation
 - Use `npm` as the package manager
+- Only comment complex code requiring extra explanation
 
-## Troubleshooting
-- Avoid using `npm run dev` for error testing (inefficient)
+## Don'ts
+- DON'T USE COMMENTS unless there is a very unique piece of code that requires extra information
+- Don't use `(_) => null` syntax for unused parameters; omit them instead
+- Don't use `npm run dev` for error testing (inefficient)
+- Don't assume knowledge of React Router v7 or TailwindCSS v4 functionality
