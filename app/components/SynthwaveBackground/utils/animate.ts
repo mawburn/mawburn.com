@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import type { MutableRefObject } from 'react'
-import { ANIMATION_CONFIG, COLORS } from '../config'
+import { COLORS } from '../config'
 
 export function animateScene(
   renderer: THREE.WebGLRenderer,
