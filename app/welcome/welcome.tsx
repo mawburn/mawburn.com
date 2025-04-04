@@ -1,4 +1,4 @@
-export function Welcome({ message }: { message: string }) {
+export function Welcome({ message: _message }: { message: string }) {
   return (
     <main className="flex flex-col min-h-screen">
       <div className="flex-1"></div>
@@ -9,7 +9,7 @@ export function Welcome({ message }: { message: string }) {
         <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
         <p className="text-sm text-gray-400">(he/him)</p>
       </div>
-      <section className="mx-auto mt-32 py-16 px-4 max-w-[80ch] gap-8 flex flex-col">
+      <section className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
         <p className="text-lg">
           I'm a software engineer with a passion for building high-performance web applications with

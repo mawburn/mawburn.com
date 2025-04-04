@@ -11,6 +11,7 @@
 - Adhere to .prettierrc & oxlint.json configurations
 - Use `pnpm` as the package manager
 - Only comment complex code requiring extra explanation
+- Always run a typecheck `pnpm typecheck` after creating or updating code
 
 ## Don'ts
 - DON'T USE COMMENTS unless there is a very unique piece of code that requires extra information
