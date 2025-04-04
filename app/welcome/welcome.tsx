@@ -9,7 +9,7 @@ export function Welcome({ message }: { message: string }) {
         <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
         <p className="text-sm text-gray-400">(he/him)</p>
       </div>
-      <section className="mx-auto mt-32 py-16 max-w-[80ch] gap-8 flex flex-col">
+      <section className="mx-auto mt-32 py-16 px-4 max-w-[80ch] gap-8 flex flex-col">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
         <p className="text-lg">
           I'm a software engineer with a passion for building high-performance web applications with
@@ -28,7 +28,7 @@ export function Welcome({ message }: { message: string }) {
           Before Shopify, I’ve worked at a variety of companies doing cool things since 2012.
         </p>
       </section>
-      <section className="mx-auto mt-16 py-16 max-w-[80ch] gap-8 flex flex-col">
+      <section className="mx-auto my-16 py-16 max-w-[80ch] gap-8 flex flex-col">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">Get in touch</h2>
         <div className="flex gap-8 justify-center">
           {resources.map(resource => (
