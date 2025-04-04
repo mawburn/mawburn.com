@@ -31,40 +31,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {fontPreloadLinks.map(link => (
           <link key={link.href} {...link} />
         ))}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          @font-face {
-            font-family: 'Lexend';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: local('Lexend Regular'), local('Lexend-Regular'), url(https://fonts.gstatic.com/s/lexend/v7/wlpwgwvFAVdoq2_v-6QU.woff2) format('woff2');
-          }
-          @font-face {
-            font-family: 'Lexend';
-            font-style: normal;
-            font-weight: 700;
-            font-display: swap;
-            src: local('Lexend Bold'), local('Lexend-Bold'), url(https://fonts.gstatic.com/s/lexend/v7/wlpzgwvFAVdoq2_v9KQU4Hn2.woff2) format('woff2');
-          }
-          @font-face {
-            font-family: 'Sacramento';
-            font-style: normal;
-            font-weight: 400;
-            font-display: swap;
-            src: local('Sacramento'), local('Sacramento-Regular'), url(https://fonts.gstatic.com/s/sacramento/v13/buEzpo6gcdjy0EiZMBUG4C0f_Q.woff2) format('woff2');
-          }
-          body {
-            font-family: 'Lexend', ui-sans-serif, system-ui, -apple-system, sans-serif;
-          }
-        `,
-          }}
-        />
         <Meta />
         <Links />
       </head>
-      <body style={{ backgroundColor: '#00001a' }}>
+      <body>
         <Suspense fallback={null}>
           <SynthwaveBackground />
         </Suspense>
