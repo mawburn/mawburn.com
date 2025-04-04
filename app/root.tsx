@@ -4,13 +4,31 @@ import { lazy, Suspense } from 'react'
 import type { Route } from './+types/root'
 import './app.css'
 
-const SynthwaveBackground = lazy(() => import('./components/SynthwaveBackground'))
+const SynthwaveBackground = lazy(() =>
+  import('./components/SynthwaveBackground').then(module => {
+    return { default: module.default }
+  })
+)
 
 export const links: Route.LinksFunction = () => []
 
 const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
+  {
+    rel: 'preload',
+    href: '/fonts/OutrunFuture.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+    fetchPriority: 'high',
+  },
+  {
+    rel: 'preload',
+    href: 'https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap',
+    as: 'style',
+    fetchPriority: 'high',
+  },
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -35,21 +53,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Suspense fallback={null}>
-          <SynthwaveBackground />
-        </Suspense>
         {children}
         <ScrollRestoration />
         <Scripts />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap"
-          media="print"
-          onLoad={e => {
-            const target = e.currentTarget
-            target.media = 'all'
-          }}
-        />
+        <Suspense fallback={null}>
+          <SynthwaveBackground />
+        </Suspense>
       </body>
     </html>
   )

@@ -3,11 +3,13 @@ export function Welcome({ message: _message }: { message: string }) {
     <main className="flex flex-col min-h-screen">
       <div className="flex-1"></div>
       <div className="flex flex-col items-center justify-center gap-4 min-h-screen">
-        <h1 className="outrun tracking-widest text-center text-6xl neon-gradient p-2">
-          Matt Burnett
-        </h1>
-        <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
-        <p className="text-sm text-gray-400">(he/him)</p>
+        <div className="contents">
+          <h1 className="outrun tracking-widest text-center text-6xl neon-gradient p-2 will-change-transform">
+            Matt Burnett
+          </h1>
+          <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
+          <p className="text-sm text-gray-400">(he/him)</p>
+        </div>
       </div>
       <section className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
