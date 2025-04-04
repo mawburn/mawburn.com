@@ -12,7 +12,11 @@
     "start": "wrangler dev",
     "typecheck": "wrangler types && react-router typegen && tsc -b",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "test": "vitest",
+    "test:watch": "vitest watch",
+    "test:coverage": "vitest run --coverage",
+    "test:ci": "vitest run"
   },
   "dependencies": {
     "@types/three": "^0.175.0",
@@ -27,15 +31,21 @@
     "@cloudflare/workers-types": "^4.20250303.0",
     "@react-router/dev": "^7.3.0",
     "@tailwindcss/vite": "^4.1.2",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^26.0.0",
     "oxlint": "^0.16.4",
     "prettier": "^3.5.3",
     "tailwindcss": "^4.1.2",
     "typescript": "^5.7.2",
     "vite": "^6.2.1",
     "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.1.1",
     "wrangler": "^4.7.0"
   }
 }
