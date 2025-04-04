@@ -33,5 +33,9 @@
 .outrun {
   font-family: 'OutrunFuture', cursive;
   letter-spacing: 0.05em;
+  text-rendering: optimizeLegibility;
+  contain: paint;
+  will-change: opacity;
+  backface-visibility: hidden;
 }
 

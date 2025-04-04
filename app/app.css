@@ -42,6 +42,9 @@ body {
   filter: drop-shadow(0 10px 5px rgba(191, 0, 255, 0.5));
   -webkit-text-stroke: 2px #1a0933;
   text-stroke: 2px #1a0933;
+  will-change: transform;
+  contain: content;
+  content-visibility: auto;
 }
 
 @media (forced-colors: active) {
