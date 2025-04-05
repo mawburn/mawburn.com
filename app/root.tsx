@@ -34,7 +34,6 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
-    fetchPriority: 'high',
   },
   {
     rel: 'preload',
@@ -42,7 +41,6 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
-    fetchPriority: 'low',
   },
   {
     rel: 'preload',
@@ -50,7 +48,6 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
-    fetchPriority: 'high',
   },
 ]
 
