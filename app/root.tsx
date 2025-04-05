@@ -60,7 +60,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap"
         />
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
           /* Base styles that ensure text is visible */
           body {
             opacity: 1;
@@ -76,7 +78,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             display: block;
             min-height: 70px;
           }
-        `}} />
+        `,
+          }}
+        />
         <Meta />
         <Links />
       </head>

@@ -11,19 +11,19 @@ export function useResize(ref: RefObject<HTMLDivElement | null>) {
 
   useEffect(() => {
     if (!ref.current) return
-    
+
     const updateSize = () => {
       if (ref.current) {
         const { width, height } = ref.current.getBoundingClientRect()
         setSize({ width, height })
       }
     }
-    
+
     updateSize()
-    
+
     const observer = new ResizeObserver(updateSize)
     observer.observe(ref.current)
-    
+
     return () => {
       if (ref.current) observer.unobserve(ref.current)
     }
