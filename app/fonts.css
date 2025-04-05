@@ -14,7 +14,7 @@
   src:
     local('Lexend Regular'),
     local('Lexend-Regular'),
-    url(https://fonts.gstatic.com/s/lexend/v7/wlpwgwvFAVdoq2_v-6QU.woff2) format('woff2');
+    url('/fonts/Lexend-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -25,7 +25,7 @@
   src:
     local('Lexend Bold'),
     local('Lexend-Bold'),
-    url(https://fonts.gstatic.com/s/lexend/v7/wlpzgwvFAVdoq2_v9KQU4Hn2.woff2) format('woff2');
+    url('/fonts/Lexend-Bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -36,7 +36,7 @@
   src:
     local('Sacramento'),
     local('Sacramento-Regular'),
-    url(https://fonts.gstatic.com/s/sacramento/v13/buEzpo6gcdjy0EiZMBUG4C0f_Q.woff2) format('woff2');
+    url('/fonts/Sacramento-Regular.woff2') format('woff2');
 }
 
 .outrun {
