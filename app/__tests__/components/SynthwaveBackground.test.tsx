@@ -48,7 +48,7 @@ vi.mock('three', () => ({
   })),
 }))
 
-vi.mock('~/components/SynthwaveBackground/utils', () => ({
+vi.mock('~/components/SynthwaveBackground/utils/useThreeScene', () => ({
   useThreeScene: vi.fn(() => ({
     containerRef: { current: document.createElement('div') },
     scene: {
@@ -65,10 +65,13 @@ vi.mock('~/components/SynthwaveBackground/utils', () => ({
     animationFrameRef: { current: null },
     prefersReducedMotion: false,
   })),
+}))
+
+vi.mock('~/components/SynthwaveBackground/utils/animate', () => ({
   animateScene: vi.fn(),
 }))
 
-vi.mock('~/components/SynthwaveBackground/objects', () => ({
+vi.mock('~/components/SynthwaveBackground/objects/WireframeObjects', () => ({
   createWireframeObjects: vi.fn(() => ({})),
 }))
 
@@ -82,7 +85,7 @@ describe('SynthwaveBackground', () => {
   it('renders with correct attributes', () => {
     const { container } = render(<SynthwaveBackground />)
     const backgroundDiv = container.firstChild as HTMLElement
-    
+
     expect(backgroundDiv).toBeDefined()
     expect(backgroundDiv).toHaveAttribute('aria-hidden', 'true')
     expect(backgroundDiv.style.position).toBe('fixed')
@@ -92,7 +95,7 @@ describe('SynthwaveBackground', () => {
   it('applies custom className', () => {
     const { container } = render(<SynthwaveBackground className="custom-class" />)
     const backgroundDiv = container.firstChild as HTMLElement
-    
+
     expect(backgroundDiv.className).toContain('custom-class')
   })
 })
