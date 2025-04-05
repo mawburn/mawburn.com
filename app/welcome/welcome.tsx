@@ -4,7 +4,7 @@ export function Welcome({ message: _message }: { message: string }) {
       <div className="flex-1"></div>
       <div className="flex flex-col items-center justify-center gap-4 min-h-screen">
         <div className="contents">
-          <h1 className="outrun tracking-widest text-center text-6xl neon-gradient p-2 will-change-transform">
+          <h1 className="outrun tracking-widest text-center text-6xl neon-gradient p-2 will-change-transform main-heading">
             Matt Burnett
           </h1>
           <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
