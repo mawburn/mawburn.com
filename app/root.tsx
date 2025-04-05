@@ -20,8 +20,6 @@ const SynthwaveBackground = lazy(() =>
 export const links: Route.LinksFunction = () => []
 
 const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-  { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
   {
     rel: 'preload',
     href: '/fonts/OutrunFuture.woff2',
@@ -32,8 +30,26 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   },
   {
     rel: 'preload',
-    href: 'https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap',
-    as: 'style',
+    href: '/fonts/Lexend-Regular.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+    fetchPriority: 'high',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Lexend-Bold.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+    fetchPriority: 'low',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Sacramento-Regular.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
     fetchPriority: 'high',
   },
 ]
@@ -56,10 +72,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {fontPreloadLinks.map(link => (
           <link key={link.href} {...link} />
         ))}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&family=Sacramento&display=swap"
-        />
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -72,7 +84,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             0% { opacity: 0; }
             100% { opacity: 1; }
           }
-          
+
           /* Ensure main heading is always visible */
           .main-heading {
             display: block;
