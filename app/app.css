@@ -3,8 +3,7 @@
 
 @theme {
   --font-sans:
-    'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
-    'Noto Color Emoji';
+    'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
 }
 
 html,
@@ -56,13 +55,19 @@ body {
     filter: none;
     -webkit-text-stroke: initial;
     text-stroke: initial;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
   }
 
   .fancyText {
     color: CanvasText;
     text-shadow: none;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
     letter-spacing: normal;
   }
 }
