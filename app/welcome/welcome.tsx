@@ -1,4 +1,4 @@
-export function Welcome({ message: _message }: { message: string }) {
+export function Welcome() {
   return (
     <main className="flex flex-col min-h-screen">
       <div className="flex-1"></div>

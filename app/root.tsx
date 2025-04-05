@@ -4,7 +4,6 @@ import { lazy, Suspense } from 'react'
 import type { Route } from './+types/root'
 import './app.css'
 
-// Preload the background component during idle time
 if (import.meta.env.PROD && typeof window !== 'undefined' && 'requestIdleCallback' in window) {
   window.requestIdleCallback(() => {
     import('./components/SynthwaveBackground')
@@ -69,27 +68,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {fontPreloadLinks.map(link => (
           <link key={link.href} {...link} />
         ))}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
-          /* Base styles that ensure text is visible */
-          body {
-            opacity: 1;
-            animation: fadeIn 0.5s ease-in-out;
-          }
-          @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-          }
-
-          /* Ensure main heading is always visible */
-          .main-heading {
-            display: block;
-            min-height: 70px;
-          }
-        `,
-          }}
-        />
         <Meta />
         <Links />
       </head>
