@@ -11,7 +11,10 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Lexend Regular'), local('Lexend-Regular'), url(https://fonts.gstatic.com/s/lexend/v7/wlpwgwvFAVdoq2_v-6QU.woff2) format('woff2');
+  src:
+    local('Lexend Regular'),
+    local('Lexend-Regular'),
+    url(https://fonts.gstatic.com/s/lexend/v7/wlpwgwvFAVdoq2_v-6QU.woff2) format('woff2');
 }
 
 @font-face {
@@ -19,7 +22,10 @@
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Lexend Bold'), local('Lexend-Bold'), url(https://fonts.gstatic.com/s/lexend/v7/wlpzgwvFAVdoq2_v9KQU4Hn2.woff2) format('woff2');
+  src:
+    local('Lexend Bold'),
+    local('Lexend-Bold'),
+    url(https://fonts.gstatic.com/s/lexend/v7/wlpzgwvFAVdoq2_v9KQU4Hn2.woff2) format('woff2');
 }
 
 @font-face {
@@ -27,7 +33,10 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Sacramento'), local('Sacramento-Regular'), url(https://fonts.gstatic.com/s/sacramento/v13/buEzpo6gcdjy0EiZMBUG4C0f_Q.woff2) format('woff2');
+  src:
+    local('Sacramento'),
+    local('Sacramento-Regular'),
+    url(https://fonts.gstatic.com/s/sacramento/v13/buEzpo6gcdjy0EiZMBUG4C0f_Q.woff2) format('woff2');
 }
 
 .outrun {
@@ -38,4 +47,3 @@
   will-change: opacity;
   backface-visibility: hidden;
 }
-
