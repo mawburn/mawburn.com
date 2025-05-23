@@ -49,9 +49,14 @@ export function useThreeScene() {
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
       }
 
-      if (containerRef.current && renderer.domElement) {
+      if (
+        containerRef.current &&
+        renderer.domElement &&
+        containerRef.current.contains(renderer.domElement)
+      ) {
         containerRef.current.removeChild(renderer.domElement)
       }
 

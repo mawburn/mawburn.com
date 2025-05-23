@@ -3,14 +3,32 @@ import { getAllPostsMetadata } from '~/utils/blog'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
 import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
+import { BlogFooter } from '~/components/BlogFooter'
 
 export function meta(_args: Route.MetaArgs) {
+  const url = 'https://mawburn.com/blog'
+  const description =
+    'Tech stack by day, game stack by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.'
+
   return [
     { title: 'Blog | Matt Burnett' },
+    { name: 'description', content: description },
     {
-      name: 'description',
-      content: 'Thoughts and insights on software engineering, web development, and modern tech.',
+      name: 'keywords',
+      content:
+        'Software Engineering, Web Development, React, TypeScript, JavaScript, Frontend Development, Full Stack, Tabletop Gaming, Programming Blog, Tech Blog',
     },
+    { name: 'author', content: 'Matt Burnett' },
+    { name: 'robots', content: 'index, follow' },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:title', content: 'Blog | Matt Burnett' },
+    { property: 'og:description', content: description },
+    { property: 'og:url', content: url },
+    { property: 'og:site_name', content: 'Matt Burnett' },
+    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:title', content: 'Blog | Matt Burnett' },
+    { name: 'twitter:description', content: description },
+    { name: 'canonical', content: url },
   ]
 }
 
@@ -30,9 +48,14 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
   const { posts } = loaderData as { posts: BlogPostMetadata[] }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
+    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
       <div className="container mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Blog</h1>
+        <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <span className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-400 bg-clip-text text-transparent">
+            Blog
+          </span>
+        </h1>
+        <div className="w-16 h-1 bg-gradient-to-r from-fuchsia-500 to-transparent mb-6"></div>
         <div className="text-gray-700 dark:text-gray-300">
           <p className="text-lg mb-4">
             <strong>Tech stack by day, game stack by night.</strong> Deep dives into software
@@ -52,7 +75,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
                   to={`/blog/${post.slug}`}
                   className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
                 >
-                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
                     {post.title}
                   </h2>
                   <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3 space-x-4">
@@ -83,6 +106,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
       </div>
+      <BlogFooter />
     </div>
   )
 }
