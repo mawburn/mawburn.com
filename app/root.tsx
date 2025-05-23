@@ -68,6 +68,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
           content="Software Engineer - Building high-performance web applications with modern tech."
         />
         <meta property="og:site_name" content="Matt Burnett" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+                if (shouldUseDark) {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
         {fontsToLoad.map(link => (
           <link key={link.href} {...link} />
         ))}

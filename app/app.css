@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import './fonts.css';
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans:
     'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
