@@ -10,7 +10,7 @@ export const getAllPostsMetadata = (): BlogPostMetadata[] => {
 
   for (const [slug, content] of Object.entries(blogPostsData)) {
     const { data, content: markdownContent } = parseFrontmatter(content)
-    
+
     // Only include published posts (or all posts in development)
     if (isInDevelopment() || isPostPublished(data.date)) {
       posts.push({
@@ -32,7 +32,7 @@ export const getPostBySlug = (slug: string): BlogPost | null => {
   if (!content) return null
 
   const { data, content: markdownContent } = parseFrontmatter(content)
-  
+
   // Check if post should be published (allow access in development)
   if (!isInDevelopment() && !isPostPublished(data.date)) {
     return null

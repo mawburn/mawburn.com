@@ -1,9 +1,19 @@
 ---
-title: "The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat"
-date: "2025-05-26 16:00"
-excerpt: "What started as a personal quest to find a better open source AI chat interface after losing all my data became an unexpected journey into an AI subject matter expert Shopify. From evaluating tons of interfaces, to pushing commits upstream on weekends, here’s how I accidentally became the go-to person for our AI chat platform and learned that sometimes the best career moves are the ones you never planned."
-tags: ["Shopify", "AI tools", "ChatGPT alternatives", "internal tools", "engineering stories", "AI adoption", "developer experience"]
+title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat'
+date: '2025-05-26 16:00'
+excerpt: 'What started as a personal quest to find a better open source AI chat interface after losing all my data became an unexpected journey into an AI subject matter expert Shopify. From evaluating tons of interfaces, to pushing commits upstream on weekends, here’s how I accidentally became the go-to person for our AI chat platform and learned that sometimes the best career moves are the ones you never planned.'
+tags:
+  [
+    'Shopify',
+    'AI tools',
+    'ChatGPT alternatives',
+    'internal tools',
+    'engineering stories',
+    'AI adoption',
+    'developer experience',
+  ]
 ---
+
 # The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat
 
 In the beginning, we were quick to move into AI tooling and soon after GPT-4 was launched, an open-source project called ChatBot UI v1 was launched internally. At the time, this project worked great. It was fast, had no backend, and you could do things like save System Prompts and create custom saved prompts that you could reuse. I quickly became a power user, both here at work and in my personal life using the official UI.

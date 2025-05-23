@@ -3,9 +3,9 @@ export const isPostPublished = (dateString: string): boolean => {
   // - "YYYY-MM-DD" (date only, defaults to 00:00 UTC)
   // - "YYYY-MM-DDTHH:mm:ssZ" (full datetime in UTC)
   // - "YYYY-MM-DD HH:mm" (date and time, treated as UTC)
-  
+
   let postDate: Date
-  
+
   if (dateString.includes('T') || dateString.includes(' ')) {
     // Has time component
     if (dateString.includes(' ') && !dateString.includes('T')) {
@@ -19,9 +19,9 @@ export const isPostPublished = (dateString: string): boolean => {
     // Date only - treat as midnight UTC
     postDate = new Date(dateString + 'T00:00:00.000Z')
   }
-  
+
   const now = new Date()
-  
+
   return postDate <= now
 }
 
@@ -31,7 +31,7 @@ export const formatPublishDate = (dateString: string): string => {
   return new Date(dateOnly + 'T00:00:00.000Z').toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
