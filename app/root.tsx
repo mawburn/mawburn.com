@@ -1,20 +1,16 @@
-import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
-import { lazy, Suspense } from 'react'
+import {
+  isRouteErrorResponse,
+  Links,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLocation,
+} from 'react-router'
 
 import type { Route } from './+types/root'
+import { Navigation } from './components/Navigation'
 import './app.css'
-
-if (import.meta.env.PROD && typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-  window.requestIdleCallback(() => {
-    import('./components/SynthwaveBackground')
-  })
-}
-
-const SynthwaveBackground = lazy(() =>
-  import('./components/SynthwaveBackground').then(module => {
-    return { default: module.default }
-  })
-)
 
 export const links: Route.LinksFunction = () => []
 
@@ -51,6 +47,13 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+  const isBlogRoute = location.pathname.startsWith('/blog')
+  
+  const fontsToLoad = isBlogRoute 
+    ? fontPreloadLinks.filter(link => link.href?.includes('Lexend'))
+    : fontPreloadLinks
+
   return (
     <html lang="en">
       <head>
@@ -65,19 +68,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
           content="Software Engineer - Building high-performance web applications with modern tech."
         />
         <meta property="og:site_name" content="Matt Burnett" />
-        {fontPreloadLinks.map(link => (
+        {fontsToLoad.map(link => (
           <link key={link.href} {...link} />
         ))}
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <Navigation />
+        <div className="pt-16">{children}</div>
         <ScrollRestoration />
         <Scripts />
-        <Suspense fallback={null}>
-          <SynthwaveBackground />
-        </Suspense>
       </body>
     </html>
   )
