@@ -3,6 +3,7 @@ import { getPostBySlug } from '~/utils/blog'
 import type { BlogPost } from '~/utils/blogTypes'
 import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
+import { BlogFooter } from '~/components/BlogFooter'
 
 export function meta({ params }: Route.MetaArgs) {
   const post = getPostBySlug(params.slug)
@@ -17,6 +18,7 @@ export function meta({ params }: Route.MetaArgs) {
     { name: 'description', content: post.excerpt },
     { name: 'keywords', content: post.tags.join(', ') },
     { name: 'author', content: 'Matt Burnett' },
+    { name: 'robots', content: 'index, follow' },
     { name: 'article:author', content: 'Matt Burnett' },
     { name: 'article:published_time', content: new Date(post.date).toISOString() },
     { name: 'article:tag', content: post.tags.join(', ') },
@@ -54,7 +56,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   const { post } = loaderData as { post: BlogPost }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors">
+    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <Link
           to="/blog"
@@ -95,6 +97,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           />
         </article>
       </div>
+      <BlogFooter maxWidth="max-w-3xl" />
     </div>
   )
 }
