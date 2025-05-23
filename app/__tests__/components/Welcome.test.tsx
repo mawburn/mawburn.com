@@ -3,8 +3,8 @@ import { Welcome } from '~/welcome/welcome'
 import { describe, expect, it } from 'vitest'
 
 describe('Welcome component', () => {
-  it('renders correctly with a message', () => {
-    render(<Welcome message="Test message" />)
+  it('renders correctly', () => {
+    render(<Welcome />)
 
     expect(screen.getByText('Matt Burnett')).toBeInTheDocument()
     expect(screen.getByText('Software Engineer')).toBeInTheDocument()
@@ -20,7 +20,7 @@ describe('Welcome component', () => {
   })
 
   it('has correct links to social media', () => {
-    render(<Welcome message="Test message" />)
+    render(<Welcome />)
 
     const linkedInLink = screen.getByText('LinkedIn').closest('a')
     expect(linkedInLink).toHaveAttribute('href', 'https://www.linkedin.com/in/burnettmatt/')

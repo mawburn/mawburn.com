@@ -1,5 +1,13 @@
 import type { Route } from './+types/home'
 import { Welcome } from '~/welcome/welcome'
+import { lazy, Suspense } from 'react'
+
+const SynthwaveBackground = lazy(() => import('~/components/SynthwaveBackground'))
+
+// Preload the component immediately
+if (typeof window !== 'undefined') {
+  import('~/components/SynthwaveBackground')
+}
 
 export function meta(_args: Route.MetaArgs) {
   return [
@@ -22,5 +30,12 @@ export function loader({ context }: Route.LoaderArgs) {
 }
 
 export default function Home() {
-  return <Welcome />
+  return (
+    <>
+      <Welcome />
+      <Suspense fallback={null}>
+        <SynthwaveBackground />
+      </Suspense>
+    </>
+  )
 }
