@@ -1,5 +1,3 @@
-// Cloudflare-specific caching utilities for Workers
-
 export const getCacheKey = (request: Request): string => {
   const url = new URL(request.url)
   return `${url.pathname}${url.search}`
