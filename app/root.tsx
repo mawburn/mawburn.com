@@ -49,8 +49,8 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   const isBlogRoute = location.pathname.startsWith('/blog')
-  
-  const fontsToLoad = isBlogRoute 
+
+  const fontsToLoad = isBlogRoute
     ? fontPreloadLinks.filter(link => link.href?.includes('Lexend'))
     : fontPreloadLinks
 
