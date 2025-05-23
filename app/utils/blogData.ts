@@ -1,8 +1,7 @@
-// Use Vite's import.meta.glob to import markdown files at build time
-const modules = import.meta.glob('/content/blog/*.md', { 
+const modules = import.meta.glob('/content/blog/*.md', {
   query: '?raw',
   import: 'default',
-  eager: true 
+  eager: true,
 }) as Record<string, string>
 
 function getSlugFromPath(path: string): string {
