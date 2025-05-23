@@ -50,9 +50,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
   const isBlogRoute = location.pathname.startsWith('/blog')
 
+  const isHomeRoute = location.pathname === '/'
+
   const fontsToLoad = isBlogRoute
     ? fontPreloadLinks.filter(link => link.href?.includes('Lexend'))
-    : fontPreloadLinks
+    : isHomeRoute
+      ? fontPreloadLinks.filter(
+          link => link.href?.includes('OutrunFuture') || link.href?.includes('Sacramento')
+        )
+      : fontPreloadLinks
 
   return (
     <html lang="en">

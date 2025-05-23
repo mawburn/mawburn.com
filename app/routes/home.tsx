@@ -1,13 +1,14 @@
 import type { Route } from './+types/home'
 import { Welcome } from '~/welcome/welcome'
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, startTransition } from 'react'
 
-const SynthwaveBackground = lazy(() => import('~/components/SynthwaveBackground'))
-
-// Preload the component immediately
-if (typeof window !== 'undefined') {
-  import('~/components/SynthwaveBackground')
-}
+const SynthwaveBackground = lazy(() =>
+  import('~/components/SynthwaveBackground').then(module => {
+    // Preload in a lower priority after initial render
+    startTransition(() => {})
+    return module
+  })
+)
 
 export function meta(_args: Route.MetaArgs) {
   return [
@@ -33,7 +34,7 @@ export default function Home() {
   return (
     <>
       <Welcome />
-      <Suspense fallback={null}>
+      <Suspense fallback={<div className="fixed inset-0 -z-50 bg-black" />}>
         <SynthwaveBackground />
       </Suspense>
     </>
