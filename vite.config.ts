@@ -23,9 +23,23 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          three: ['three'],
+        manualChunks: id => {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor'
+            }
+            if (id.includes('three')) {
+              return 'three'
+            }
+            if (id.includes('markdown-it')) {
+              return 'markdown'
+            }
+            return 'vendor'
+          }
+          // Separate Three.js background into its own chunk
+          if (id.includes('SynthwaveBackground')) {
+            return 'synthwave'
+          }
         },
       },
     },
