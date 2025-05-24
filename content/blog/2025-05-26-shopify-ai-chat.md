@@ -16,7 +16,7 @@ tags:
 
 # The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat
 
-In the beginning, we were quick to move into AI tooling and soon after GPT-4 was launched, an open-source project called ChatBot UI v1 was launched internally. At the time, this project worked great. It was fast, had no backend, and you could do things like save System Prompts and create custom saved prompts that you could reuse. I quickly became a power user, both here at work and in my personal life using the official UI.
+In the beginning, Shopify was quick to move into AI tooling and soon after GPT-4 was launched, an open-source project called ChatBot UI v1 was launched internally. At the time, this project worked great. It was fast, had no backend, and you could do things like save System Prompts and create custom saved prompts that you could reuse. I quickly became a power user, both here at work and in my personal life using the official UI.
 But the open-source project had issues and development was “flakey” at best. The maintainer started working on a v2 and claimed it was no longer going to be open-source in favor of his SaaS option.
 
 For me, personally, I thought v1 was still going great all the way until I had an issue with a corrupted Minerva cert. The fix for that was clearing my entire browser cache, which should have been fine... but as it turned out, ChatBot UI was storing EVERYTHING in localStorage. So in one fell swoop, I lost months of chat history and dozens of carefully crafted prompts that I had saved.
