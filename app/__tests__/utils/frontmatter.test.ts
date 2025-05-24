@@ -153,4 +153,197 @@ Content here.`
 
     expect(result.data.tags).toEqual(['double', 'single', 'unquoted'])
   })
+
+  describe('Edge Cases', () => {
+    it('should handle null input', () => {
+      expect(() => parseFrontmatter(null as any)).toThrow()
+    })
+
+    it('should handle undefined input', () => {
+      expect(() => parseFrontmatter(undefined as any)).toThrow()
+    })
+
+    it('should handle empty string', () => {
+      const result = parseFrontmatter('')
+
+      expect(result.data.title).toBe('')
+      expect(result.data.date).toBe('')
+      expect(result.data.excerpt).toBe('')
+      expect(result.data.tags).toEqual([])
+      expect(result.content).toBe('')
+    })
+
+    it('should handle numeric input', () => {
+      expect(() => parseFrontmatter(123 as any)).toThrow()
+    })
+
+    it('should handle only frontmatter delimiters', () => {
+      const content = `---
+---`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('')
+      expect(result.data.date).toBe('')
+      expect(result.data.excerpt).toBe('')
+      expect(result.data.tags).toEqual([])
+      expect(result.content).toBe('')
+    })
+
+    it('should handle frontmatter with only spaces', () => {
+      const content = `---
+   
+     
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('')
+      expect(result.data.date).toBe('')
+      expect(result.data.excerpt).toBe('')
+      expect(result.data.tags).toEqual([])
+      expect(result.content).toBe('\nContent')
+    })
+
+    it('should handle malformed arrays (missing brackets)', () => {
+      const content = `---
+title: Test
+tags: javascript, testing
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.tags).toEqual([])
+    })
+
+    it('should handle arrays with only commas', () => {
+      const content = `---
+title: Test
+tags: [,,,]
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.tags).toEqual([])
+    })
+
+    it('should handle arrays with nested brackets', () => {
+      const content = `---
+title: Test
+tags: ["tag[1]", "tag]2[", "[tag3]"]
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.tags).toEqual(['tag[1]', 'tag]2[', '[tag3]'])
+    })
+
+    it('should handle extremely long values', () => {
+      const longValue = 'a'.repeat(10000)
+      const content = `---
+title: ${longValue}
+date: 2024-01-15
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe(longValue)
+      expect(result.data.date).toBe('2024-01-15')
+    })
+
+    it('should handle special characters in values', () => {
+      const content = `---
+title: "Title with 🚀 emojis and símböls & çhârs"
+date: 2024-01-15
+excerpt: "Special chars: !@#$%^&*()_+-=[]{}|;':",./<>?"
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Title with 🚀 emojis and símböls & çhârs')
+      expect(result.data.excerpt).toBe('Special chars: !@#$%^&*()_+-=[]{}|;\':",./<>?')
+    })
+
+    it('should handle values with line breaks (should be ignored)', () => {
+      const content = `---
+title: Title with
+line break
+date: 2024-01-15
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Title with')
+      expect(result.data.date).toBe('2024-01-15')
+    })
+
+    it('should handle multiple --- in content', () => {
+      const content = `---
+title: Test
+---
+
+Content with --- dashes --- in it`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Test')
+      expect(result.content).toBe('\nContent with --- dashes --- in it')
+    })
+
+    it('should handle frontmatter with no content after', () => {
+      const content = `---
+title: Test
+date: 2024-01-15
+---`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Test')
+      expect(result.data.date).toBe('2024-01-15')
+      expect(result.content).toBe('')
+    })
+
+    it('should handle duplicate keys (last one wins)', () => {
+      const content = `---
+title: First Title
+date: 2024-01-15
+title: Second Title
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Second Title')
+      expect(result.data.date).toBe('2024-01-15')
+    })
+
+    it('should handle arrays with unmatched quotes', () => {
+      const content = `---
+title: Test
+tags: ["unclosed, 'quote", "normal"]
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.tags).toEqual(['unclosed', 'quote', 'normal'])
+    })
+
+    it('should handle values with escaped quotes', () => {
+      const content = `---
+title: "Title with \\"escaped\\" quotes"
+excerpt: 'Single with \\'escaped\\' quotes'
+---
+
+Content`
+      const result = parseFrontmatter(content)
+
+      expect(result.data.title).toBe('Title with \\"escaped\\" quotes')
+      expect(result.data.excerpt).toBe("Single with \\'escaped\\' quotes")
+    })
+  })
 })

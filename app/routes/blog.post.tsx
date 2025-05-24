@@ -96,6 +96,9 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
+          All posts are written by me, though AI helps with proofreading and editing.
+        </p>
       </div>
       <BlogFooter maxWidth="max-w-3xl" />
     </div>

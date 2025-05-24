@@ -8,7 +8,7 @@ import { BlogFooter } from '~/components/BlogFooter'
 export function meta(_args: Route.MetaArgs) {
   const url = 'https://mawburn.com/blog'
   const description =
-    'Tech stack by day, game stack by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.'
+    'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.'
 
   return [
     { title: 'Blog | Matt Burnett' },
@@ -51,16 +51,10 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-          <span className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-400 bg-clip-text text-transparent">
-            Blog
-          </span>
+          <span className="text-gray-900 dark:text-white">Blog</span>
         </h1>
-        <div className="w-16 h-1 bg-gradient-to-r from-fuchsia-500 to-transparent mb-6"></div>
+        <div className="w-16 h-1 bg-gradient-to-r from-black dark:from-white to-transparent mb-6"></div>
         <div className="text-gray-700 dark:text-gray-300">
-          <p className="text-lg mb-4">
-            <strong>Tech stack by day, game stack by night.</strong> Deep dives into software
-            engineering, web development frameworks, and tabletop.
-          </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-12">
             All posts are written by me, though AI helps with proofreading and editing.
           </p>

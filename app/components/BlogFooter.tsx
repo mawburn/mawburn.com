@@ -7,7 +7,7 @@ export function BlogFooter({ maxWidth = 'max-w-4xl' }: BlogFooterProps) {
     <footer className="mt-auto">
       <div className={`container mx-auto ${maxWidth} px-4 py-6`}>
         <div className="text-center text-sm">
-          <p className="bg-gradient-to-r from-fuchsia-500 via-purple-500 to-fuchsia-400 bg-clip-text text-transparent">
+          <p className="text-black dark:text-white">
             &copy; {new Date().getFullYear()} Matt Burnett. All rights reserved.
           </p>
         </div>
