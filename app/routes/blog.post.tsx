@@ -22,7 +22,6 @@ export function meta({ params }: Route.MetaArgs) {
     { name: 'robots', content: 'index, follow' },
     { name: 'article:author', content: 'Matt Burnett' },
     { name: 'article:published_time', content: new Date(post.date).toISOString() },
-    { name: 'article:tag', content: post.tags.join(', ') },
     { property: 'og:type', content: 'article' },
     { property: 'og:title', content: post.title },
     { property: 'og:description', content: post.excerpt },
@@ -30,12 +29,15 @@ export function meta({ params }: Route.MetaArgs) {
     { property: 'og:site_name', content: 'Matt Burnett' },
     { property: 'og:article:author', content: 'Matt Burnett' },
     { property: 'og:article:published_time', content: new Date(post.date).toISOString() },
-    { property: 'og:article:tag', content: post.tags.join(', ') },
     { name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
     { name: 'twitter:title', content: post.title },
     { name: 'twitter:description', content: post.excerpt },
     { name: 'reading_time', content: `${post.readTime} min read` },
   ]
+
+  post.tags.forEach(tag => {
+    metaTags.push({ property: 'og:article:tag', content: tag })
+  })
 
   if (imageUrl) {
     metaTags.push(

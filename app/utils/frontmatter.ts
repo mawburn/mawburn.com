@@ -42,8 +42,11 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
   let excerpt = ''
   let tags: string[] = []
 
-  for (const line of frontmatterLines) {
+  let i = 0
+  while (i < frontmatterLines.length) {
+    const line = frontmatterLines[i]
     const colonIndex = line.indexOf(':')
+
     if (colonIndex > 0) {
       const key = line.slice(0, colonIndex).trim()
       let value = line.slice(colonIndex + 1).trim()
@@ -56,7 +59,58 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
         value = value.slice(1, -1)
       }
 
-      // Parse arrays
+      // Handle multi-line arrays (YAML style)
+      if (key === 'tags') {
+        if (value.startsWith('[')) {
+          let arrayContent = value
+          i++
+          while (i < frontmatterLines.length && !arrayContent.includes(']')) {
+            arrayContent += frontmatterLines[i]
+            i++
+          }
+          
+          if (arrayContent.startsWith('[') && arrayContent.includes(']')) {
+            const content = arrayContent.slice(
+              arrayContent.indexOf('[') + 1,
+              arrayContent.lastIndexOf(']')
+            )
+            tags = content
+              .split(',')
+              .map(item => item.trim().replace(/['"]/g, ''))
+              .filter(item => item.length > 0)
+          }
+          continue
+        } else if (value === '' || value === '[]') {
+          i++
+          while (i < frontmatterLines.length) {
+            const nextLine = frontmatterLines[i].trim()
+            if (nextLine.startsWith('[')) {
+              let arrayContent = nextLine
+              i++
+              while (i < frontmatterLines.length && !arrayContent.includes(']')) {
+                arrayContent += frontmatterLines[i]
+                i++
+              }
+              
+              if (arrayContent.startsWith('[') && arrayContent.includes(']')) {
+                const content = arrayContent.slice(
+                  arrayContent.indexOf('[') + 1,
+                  arrayContent.lastIndexOf(']')
+                )
+                tags = content
+                  .split(',')
+                  .map(item => item.trim().replace(/['"]/g, ''))
+                  .filter(item => item.length > 0)
+              }
+              break
+            }
+            i++
+          }
+          continue
+        }
+      }
+
+      // Parse single-line arrays
       if (value.startsWith('[') && value.endsWith(']')) {
         const arrayContent = value.slice(1, -1)
         const parsedArray = arrayContent
@@ -81,6 +135,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
         }
       }
     }
+    i++
   }
 
   return {
