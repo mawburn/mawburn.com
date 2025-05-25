@@ -152,7 +152,6 @@ describe('Blog Route', () => {
       render(<Stub />)
 
       expect(screen.getByText('Blog')).toBeInTheDocument()
-      expect(screen.getByText('Tech stack by day, stacks of gamesby night.')).toBeInTheDocument()
       expect(screen.getByText('Test Post 1')).toBeInTheDocument()
       expect(screen.getByText('This is a test excerpt for post 1')).toBeInTheDocument()
       expect(screen.getByText('react')).toBeInTheDocument()

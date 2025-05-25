@@ -21,7 +21,7 @@ vi.mock('~/utils/dateUtils', () => ({
   formatPublishDate: vi.fn(() => 'January 1, 2023'),
 }))
 
-const { getAllPostsMetadata, getPostBySlug } = await import('~/utils/blog')
+const { getAllPostsMetadata, getPostBySlug, findPostImage } = await import('~/utils/blog')
 
 describe('getAllPostsMetadata', () => {
   it('returns array of post metadata', () => {
@@ -63,6 +63,27 @@ describe('getPostBySlug', () => {
       expect(post).toHaveProperty('tags')
       expect(post).toHaveProperty('content')
       expect(post).toHaveProperty('readTime')
+      expect(post).toHaveProperty('image')
     }
+  })
+
+  it('includes image path for post', () => {
+    const post = getPostBySlug('past-post')
+    
+    if (post) {
+      expect(post.image).toBe('/images/past-post.jpg')
+    }
+  })
+})
+
+describe('findPostImage', () => {
+  it('returns jpg image path for given slug', () => {
+    const imagePath = findPostImage('test-post')
+    expect(imagePath).toBe('/images/test-post.jpg')
+  })
+
+  it('returns jpg image path for slug with special characters', () => {
+    const imagePath = findPostImage('2025-05-26-shopify-ai-chat')
+    expect(imagePath).toBe('/images/2025-05-26-shopify-ai-chat.jpg')
   })
 })
