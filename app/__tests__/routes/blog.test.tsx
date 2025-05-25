@@ -79,7 +79,7 @@ describe('Blog Route', () => {
           content:
             'Software Engineering, Web Development, React, TypeScript, JavaScript, Frontend Development, Full Stack, Tabletop Gaming, Programming Blog, Tech Blog',
         },
-        { name: 'author', content: 'Matt Burnett' },
+        { name: 'author', content: 'mawburn' },
         { name: 'robots', content: 'index, follow' },
         { property: 'og:type', content: 'website' },
         { property: 'og:title', content: 'Blog | Matt Burnett' },
@@ -89,7 +89,7 @@ describe('Blog Route', () => {
             'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.',
         },
         { property: 'og:url', content: 'https://mawburn.com/blog' },
-        { property: 'og:site_name', content: 'Matt Burnett' },
+        { property: 'og:site_name', content: 'mawburn.com' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: 'Blog | Matt Burnett' },
         {
