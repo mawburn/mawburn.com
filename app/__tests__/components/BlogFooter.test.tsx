@@ -15,7 +15,7 @@ describe('BlogFooter Component', () => {
   it('should render copyright text', () => {
     render(<BlogFooter />)
 
-    expect(screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)).toBeInTheDocument()
+    expect(screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)).toBeInTheDocument()
   })
 
   it('should use default max-width when none provided', () => {
@@ -38,7 +38,7 @@ describe('BlogFooter Component', () => {
     const footer = screen.getByRole('contentinfo')
     expect(footer).toHaveClass('mt-auto')
 
-    const textElement = screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)
+    const textElement = screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)
     expect(textElement).toHaveClass('text-black', 'dark:text-white')
   })
 
