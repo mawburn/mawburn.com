@@ -5,6 +5,11 @@ import { markdownToHtml } from './markdown'
 import { calculateReadTime } from './readTime'
 import { isPostPublished, isInDevelopment } from './dateUtils'
 
+export const findPostImage = (slug: string): string | undefined => {
+  // All blog post images should be JPGs with the same name as the slug
+  return `/images/${slug}.jpg`
+}
+
 export const getAllPostsMetadata = (): BlogPostMetadata[] => {
   const posts: BlogPostMetadata[] = []
 
@@ -46,5 +51,6 @@ export const getPostBySlug = (slug: string): BlogPost | null => {
     tags: data.tags || [],
     content: markdownToHtml(markdownContent),
     readTime: calculateReadTime(markdownContent),
+    image: findPostImage(slug),
   }
 }

@@ -39,14 +39,7 @@ describe('BlogFooter Component', () => {
     expect(footer).toHaveClass('mt-auto')
 
     const textElement = screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)
-    expect(textElement).toHaveClass(
-      'bg-gradient-to-r',
-      'from-fuchsia-500',
-      'via-purple-500',
-      'to-fuchsia-400',
-      'bg-clip-text',
-      'text-transparent'
-    )
+    expect(textElement).toHaveClass('text-black', 'dark:text-white')
   })
 
   it('should be centered and have proper container structure', () => {

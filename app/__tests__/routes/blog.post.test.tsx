@@ -120,7 +120,7 @@ describe('BlogPost Route', () => {
 
       render(<Stub />)
 
-      expect(screen.getByText('← Back to Blog')).toBeInTheDocument()
+      expect(screen.getByText('Back to Blog')).toBeInTheDocument()
       expect(screen.getByText('Test Blog Post')).toBeInTheDocument()
       expect(screen.getByText('This is the blog post content')).toBeInTheDocument()
       expect(screen.getByText('react')).toBeInTheDocument()
@@ -156,7 +156,7 @@ describe('BlogPost Route', () => {
 
       render(<Stub />)
 
-      const backLink = screen.getByText('← Back to Blog')
+      const backLink = screen.getByText('Back to Blog')
       expect(backLink.closest('a')).toHaveAttribute('href', '/blog')
     })
   })

@@ -6,6 +6,7 @@ export interface BlogPost {
   tags: string[]
   content: string
   readTime: number
+  image?: string
 }
 
 export interface BlogPostMetadata {
