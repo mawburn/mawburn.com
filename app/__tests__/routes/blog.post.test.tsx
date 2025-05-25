@@ -73,7 +73,6 @@ describe('BlogPost Route', () => {
         { name: 'robots', content: 'index, follow' },
         { name: 'article:author', content: 'Matt Burnett' },
         { name: 'article:published_time', content: new Date('2025-01-01').toISOString() },
-        { name: 'article:tag', content: 'react, testing' },
         { property: 'og:type', content: 'article' },
         { property: 'og:title', content: 'Test Blog Post' },
         { property: 'og:description', content: 'This is a test post excerpt' },
@@ -81,11 +80,12 @@ describe('BlogPost Route', () => {
         { property: 'og:site_name', content: 'Matt Burnett' },
         { property: 'og:article:author', content: 'Matt Burnett' },
         { property: 'og:article:published_time', content: new Date('2025-01-01').toISOString() },
-        { property: 'og:article:tag', content: 'react, testing' },
         { name: 'twitter:card', content: 'summary' },
         { name: 'twitter:title', content: 'Test Blog Post' },
         { name: 'twitter:description', content: 'This is a test post excerpt' },
         { name: 'reading_time', content: '5 min read' },
+        { property: 'og:article:tag', content: 'react' },
+        { property: 'og:article:tag', content: 'testing' },
       ])
     })
 
