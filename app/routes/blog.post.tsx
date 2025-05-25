@@ -12,8 +12,9 @@ export function meta({ params }: Route.MetaArgs) {
   }
 
   const url = `https://mawburn.com/blog/${params.slug}`
+  const imageUrl = post.image ? `https://mawburn.com${post.image}` : undefined
 
-  return [
+  const metaTags = [
     { title: `${post.title} | Matt Burnett` },
     { name: 'description', content: post.excerpt },
     { name: 'keywords', content: post.tags.join(', ') },
@@ -30,11 +31,22 @@ export function meta({ params }: Route.MetaArgs) {
     { property: 'og:article:author', content: 'Matt Burnett' },
     { property: 'og:article:published_time', content: new Date(post.date).toISOString() },
     { property: 'og:article:tag', content: post.tags.join(', ') },
-    { name: 'twitter:card', content: 'summary' },
+    { name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
     { name: 'twitter:title', content: post.title },
     { name: 'twitter:description', content: post.excerpt },
     { name: 'reading_time', content: `${post.readTime} min read` },
   ]
+
+  if (imageUrl) {
+    metaTags.push(
+      { property: 'og:image', content: imageUrl },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { name: 'twitter:image', content: imageUrl }
+    )
+  }
+
+  return metaTags
 }
 
 export function loader({ params }: Route.LoaderArgs) {
@@ -62,7 +74,10 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           to="/blog"
           className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 mb-8 transition-colors"
         >
-          ← Back to Blog
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          Back to Blog
         </Link>
 
         <article className="prose prose-gray dark:prose-invert max-w-none">
@@ -92,7 +107,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           </header>
 
           <div
-            className="text-gray-800 dark:text-gray-200 leading-relaxed [&_p]:mb-6 mb-12"
+            className="text-gray-800 dark:text-gray-200 leading-relaxed [&_p]:mb-6 [&_a]:text-blue-600 [&_a]:dark:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-1 [&_a]:hover:text-blue-800 [&_a]:hover:dark:text-blue-300 [&_a]:transition-colors mb-12"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </article>

@@ -29,9 +29,7 @@ describe('HouseIcon Component', () => {
     render(<HouseIcon />)
 
     const svg = document.querySelector('svg')
-    expect(svg).toHaveAttribute('viewBox', '0 0 336.6 272.9')
-    expect(svg).toHaveAttribute('width', '336.6')
-    expect(svg).toHaveAttribute('height', '272.9')
+    expect(svg).toHaveAttribute('viewBox', '0 0 16 16')
     expect(svg).toHaveAttribute('xmlns', 'http://www.w3.org/2000/svg')
   })
 
@@ -40,7 +38,7 @@ describe('HouseIcon Component', () => {
 
     const svg = document.querySelector('svg')
     const paths = svg?.querySelectorAll('path')
-    expect(paths).toHaveLength(3)
+    expect(paths).toHaveLength(1)
 
     paths?.forEach(path => {
       expect(path).toHaveAttribute('fill', 'currentColor')
