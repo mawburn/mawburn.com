@@ -18,16 +18,16 @@ export function meta({ params }: Route.MetaArgs) {
     { title: `${post.title} | Matt Burnett` },
     { name: 'description', content: post.excerpt },
     { name: 'keywords', content: post.tags.join(', ') },
-    { name: 'author', content: 'Matt Burnett' },
+    { name: 'author', content: 'mawburn' },
     { name: 'robots', content: 'index, follow' },
-    { name: 'article:author', content: 'Matt Burnett' },
+    { name: 'article:author', content: 'mawburn' },
     { name: 'article:published_time', content: new Date(post.date).toISOString() },
     { property: 'og:type', content: 'article' },
     { property: 'og:title', content: post.title },
     { property: 'og:description', content: post.excerpt },
     { property: 'og:url', content: url },
-    { property: 'og:site_name', content: 'Matt Burnett' },
-    { property: 'og:article:author', content: 'Matt Burnett' },
+    { property: 'og:site_name', content: 'mawburn.com' },
+    { property: 'og:article:author', content: 'mawburn' },
     { property: 'og:article:published_time', content: new Date(post.date).toISOString() },
     { name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
     { name: 'twitter:title', content: post.title },
@@ -77,7 +77,12 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 mb-8 transition-colors"
         >
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
           </svg>
           Back to Blog
         </Link>
