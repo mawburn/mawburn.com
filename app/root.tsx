@@ -67,13 +67,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Matt Burnett" />
         <meta name="robots" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Matt Burnett | Software Engineer" />
-        <meta
-          property="og:description"
-          content="Software Engineer - Building high-performance web applications with modern tech."
-        />
-        <meta property="og:site_name" content="Matt Burnett" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
