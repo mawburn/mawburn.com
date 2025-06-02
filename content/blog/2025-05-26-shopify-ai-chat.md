@@ -1,6 +1,6 @@
 ---
 title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat'
-date: '2025-05-26 16:00'
+date: '2030-05-26 16:00'
 excerpt: 'What started as a personal quest to find a better open source AI chat interface after losing all my data became an unexpected journey into an AI subject matter expert Shopify. From evaluating tons of interfaces, to pushing commits upstream on weekends, here’s how I accidentally became the go-to person for our AI chat platform and learned that sometimes the best career moves are the ones you never planned.'
 tags:
   [
