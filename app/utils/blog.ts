@@ -5,9 +5,36 @@ import { markdownToHtml } from './markdown'
 import { calculateReadTime } from './readTime'
 import { isPostPublished, isInDevelopment } from './dateUtils'
 
-export const findPostImage = (slug: string): string | undefined => {
-  // All blog post images should be JPGs with the same name as the slug
-  return `/images/${slug}.jpg`
+export interface PostImages {
+  default?: string
+  og?: string // 1200x630 - Open Graph standard
+  twitter?: string // 1200x600 - Twitter large card
+  small?: string // 600x315 - smaller OG size
+}
+
+export const findPostImages = (slug: string, frontmatterImage?: string): PostImages => {
+  const images: PostImages = {}
+  
+  if (frontmatterImage) {
+    const imagePath = frontmatterImage.startsWith('/') ? frontmatterImage : `/images/${frontmatterImage}`
+    images.default = imagePath
+    images.og = imagePath
+    images.twitter = imagePath
+    images.small = imagePath
+  } else {
+    images.default = `/images/${slug}.webp`
+    images.og = `/images/${slug}-og.webp`
+    images.twitter = `/images/${slug}-twitter.webp`
+    images.small = `/images/${slug}-small.webp`
+  }
+  
+  return images
+}
+
+// Keep the old function for backward compatibility
+export const findPostImage = (slug: string, frontmatterImage?: string): string | undefined => {
+  const images = findPostImages(slug, frontmatterImage)
+  return images.default
 }
 
 export const getAllPostsMetadata = (): BlogPostMetadata[] => {
@@ -51,6 +78,7 @@ export const getPostBySlug = (slug: string): BlogPost | null => {
     tags: data.tags || [],
     content: markdownToHtml(markdownContent),
     readTime: calculateReadTime(markdownContent),
-    image: findPostImage(slug),
+    image: findPostImage(slug, data.image),
+    images: findPostImages(slug, data.image),
   }
 }

@@ -33,9 +33,10 @@ app/
 │   ├── blog.tsx        # Blog listing
 │   └── blog.post.tsx   # Individual blog posts
 ├── utils/              # Utility functions
-│   ├── blog.ts         # Blog content processing
+│   ├── blog.ts         # Blog content processing & image handling
 │   ├── cache.ts        # Response caching
 │   └── ...
 └── __tests__/          # Comprehensive test suite
-content/blog/           # Markdown blog posts
+content/blog/           # Markdown blog posts with frontmatter
+public/images/          # Blog post images (WebP format)
 ```

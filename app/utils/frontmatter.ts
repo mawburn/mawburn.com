@@ -3,6 +3,7 @@ interface FrontmatterData {
   date: string // Can be "YYYY-MM-DD" or "YYYY-MM-DD HH:mm" or "YYYY-MM-DDTHH:mm:ssZ"
   excerpt: string
   tags: string[]
+  image?: string
 }
 
 interface ParsedFrontmatter {
@@ -14,7 +15,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
   const lines = content.split('\n')
   if (lines[0] !== '---') {
     return {
-      data: { title: '', date: '', excerpt: '', tags: [] },
+      data: { title: '', date: '', excerpt: '', tags: [], image: undefined },
       content,
     }
   }
@@ -41,6 +42,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
   let date = ''
   let excerpt = ''
   let tags: string[] = []
+  let image: string | undefined
 
   let i = 0
   while (i < frontmatterLines.length) {
@@ -68,7 +70,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
             arrayContent += frontmatterLines[i]
             i++
           }
-          
+
           if (arrayContent.startsWith('[') && arrayContent.includes(']')) {
             const content = arrayContent.slice(
               arrayContent.indexOf('[') + 1,
@@ -91,7 +93,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
                 arrayContent += frontmatterLines[i]
                 i++
               }
-              
+
               if (arrayContent.startsWith('[') && arrayContent.includes(']')) {
                 const content = arrayContent.slice(
                   arrayContent.indexOf('[') + 1,
@@ -132,6 +134,9 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
           case 'excerpt':
             excerpt = value
             break
+          case 'image':
+            image = value
+            break
         }
       }
     }
@@ -144,6 +149,7 @@ export const parseFrontmatter = (content: string): ParsedFrontmatter => {
       date,
       excerpt,
       tags,
+      image,
     },
     content: contentLines.join('\n'),
   }

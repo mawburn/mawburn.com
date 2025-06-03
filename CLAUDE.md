@@ -19,7 +19,16 @@ This is a personal portfolio site with a blog built using modern web technologie
   - `SynthwaveBackground/` - Three.js animated background (home page only)
   - `Navigation.tsx` - Site navigation
 - `app/utils/` - Utility functions for blog content processing
-- `content/blog/` - Markdown blog posts with front matter
+  - `blog.ts` - Handles blog posts and multi-size image support
+  - `frontmatter.ts` - Parses markdown frontmatter including image field
+- `content/blog/` - Markdown blog posts with frontmatter
+- `public/images/` - Blog post images in WebP format with size variants
+
+### Blog Images
+
+- Images use WebP format for better compression
+- Support for multiple sizes: `{slug}.webp`, `{slug}-twitter.webp`, `{slug}-small.webp`
+- Images can be specified in frontmatter or auto-detected by slug naming
 
 ### Performance Optimizations
 
