@@ -42,7 +42,7 @@ describe('blogPostsData', () => {
     const slugs = Object.keys(blogPostsData)
 
     // Test that we have the expected blog post
-    expect(slugs).toContain('2025-05-26-shopify-ai-chat')
+    expect(slugs).toContain('2025-06-03-shopify-ai-chat')
   })
 
   it('loads content that can be parsed', () => {

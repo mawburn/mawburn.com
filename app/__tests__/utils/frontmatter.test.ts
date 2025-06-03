@@ -18,6 +18,7 @@ This is the content of the post.`
     expect(result.data.date).toBe('2024-01-15')
     expect(result.data.excerpt).toBe('This is a test post')
     expect(result.data.tags).toEqual(['javascript', 'testing'])
+    expect(result.data.image).toBeUndefined()
     expect(result.content).toBe('\nThis is the content of the post.')
   })
 
@@ -57,6 +58,57 @@ Content here.`
     expect(result.data.tags).toEqual(['javascript', 'testing'])
   })
 
+  it('parses image field correctly', () => {
+    const content = `---
+title: "Test Post with Image"
+date: "2024-01-15"
+excerpt: "This post has an image"
+image: "test-image.jpg"
+tags: ["javascript"]
+---
+
+Content here.`
+
+    const result = parseFrontmatter(content)
+
+    expect(result.data.title).toBe('Test Post with Image')
+    expect(result.data.date).toBe('2024-01-15')
+    expect(result.data.excerpt).toBe('This post has an image')
+    expect(result.data.image).toBe('test-image.jpg')
+    expect(result.data.tags).toEqual(['javascript'])
+  })
+
+  it('handles image field with full path', () => {
+    const content = `---
+title: "Test Post"
+date: "2024-01-15"
+excerpt: "Test"
+image: "/images/custom/test-image.png"
+tags: []
+---
+
+Content here.`
+
+    const result = parseFrontmatter(content)
+
+    expect(result.data.image).toBe('/images/custom/test-image.png')
+  })
+
+  it('handles missing image field', () => {
+    const content = `---
+title: "Test Post"
+date: "2024-01-15"
+excerpt: "Test"
+tags: []
+---
+
+Content here.`
+
+    const result = parseFrontmatter(content)
+
+    expect(result.data.image).toBeUndefined()
+  })
+
   it('handles empty arrays', () => {
     const content = `---
 title: Test Post
@@ -81,6 +133,7 @@ Content here.`
     expect(result.data.date).toBe('')
     expect(result.data.excerpt).toBe('')
     expect(result.data.tags).toEqual([])
+    expect(result.data.image).toBeUndefined()
     expect(result.content).toBe(content)
   })
 
@@ -97,6 +150,7 @@ This content has no closing frontmatter delimiter.`
     expect(result.data.date).toBe('')
     expect(result.data.excerpt).toBe('')
     expect(result.data.tags).toEqual([])
+    expect(result.data.image).toBeUndefined()
     expect(result.content).toBe(content)
   })
 
@@ -170,6 +224,7 @@ Content here.`
       expect(result.data.date).toBe('')
       expect(result.data.excerpt).toBe('')
       expect(result.data.tags).toEqual([])
+      expect(result.data.image).toBeUndefined()
       expect(result.content).toBe('')
     })
 
@@ -186,6 +241,7 @@ Content here.`
       expect(result.data.date).toBe('')
       expect(result.data.excerpt).toBe('')
       expect(result.data.tags).toEqual([])
+      expect(result.data.image).toBeUndefined()
       expect(result.content).toBe('')
     })
 
@@ -202,6 +258,7 @@ Content`
       expect(result.data.date).toBe('')
       expect(result.data.excerpt).toBe('')
       expect(result.data.tags).toEqual([])
+      expect(result.data.image).toBeUndefined()
       expect(result.content).toBe('\nContent')
     })
 
