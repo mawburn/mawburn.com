@@ -1,3 +1,5 @@
+import type { PostImages } from './blog'
+
 export interface BlogPost {
   slug: string
   title: string
@@ -7,6 +9,7 @@ export interface BlogPost {
   content: string
   readTime: number
   image?: string
+  images?: PostImages
 }
 
 export interface BlogPostMetadata {

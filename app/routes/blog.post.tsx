@@ -12,7 +12,14 @@ export function meta({ params }: Route.MetaArgs) {
   }
 
   const url = `https://mawburn.com/blog/${params.slug}`
-  const imageUrl = post.image ? `https://mawburn.com${post.image}` : undefined
+  const hasImages = post.images && post.images.default
+  
+  // For OG, prefer default image since it's the right size (1200x630)
+  const ogImageUrl = post.images?.default ? `https://mawburn.com${post.images.default}` : undefined
+  
+  // Use twitter-specific image if available
+  const twitterImageUrl = post.images?.twitter ? `https://mawburn.com${post.images.twitter}` : 
+                          ogImageUrl
 
   const metaTags = [
     { title: `${post.title} | Matt Burnett` },
@@ -29,7 +36,7 @@ export function meta({ params }: Route.MetaArgs) {
     { property: 'og:site_name', content: 'mawburn.com' },
     { property: 'og:article:author', content: 'mawburn' },
     { property: 'og:article:published_time', content: new Date(post.date).toISOString() },
-    { name: 'twitter:card', content: imageUrl ? 'summary_large_image' : 'summary' },
+    { name: 'twitter:card', content: hasImages ? 'summary_large_image' : 'summary' },
     { name: 'twitter:title', content: post.title },
     { name: 'twitter:description', content: post.excerpt },
     { name: 'reading_time', content: `${post.readTime} min read` },
@@ -39,12 +46,19 @@ export function meta({ params }: Route.MetaArgs) {
     metaTags.push({ property: 'og:article:tag', content: tag })
   })
 
-  if (imageUrl) {
+  if (ogImageUrl) {
     metaTags.push(
-      { property: 'og:image', content: imageUrl },
+      { property: 'og:image', content: ogImageUrl },
       { property: 'og:image:width', content: '1200' },
       { property: 'og:image:height', content: '630' },
-      { name: 'twitter:image', content: imageUrl }
+      { property: 'og:image:alt', content: post.title }
+    )
+  }
+  
+  if (twitterImageUrl) {
+    metaTags.push(
+      { name: 'twitter:image', content: twitterImageUrl },
+      { name: 'twitter:image:alt', content: post.title }
     )
   }
 
