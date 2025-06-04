@@ -1,5 +1,5 @@
 ---
-title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s AI Chat'
+title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s Internal AI Chat'
 date: '2025-06-03 16:00'
 image: '2025-06-03-shopify-ai-chat.webp'
 excerpt: 'What started as a personal quest to find a better open source AI chat interface after losing all my data became an unexpected journey into an AI subject matter expert Shopify. From evaluating tons of interfaces, to pushing commits upstream on weekends, here’s how I accidentally became the go-to person for our AI chat platform and learned that sometimes the best career moves are the ones you never planned.'
@@ -19,7 +19,7 @@ In the beginning, Shopify was quick to move into AI tooling and soon after GPT-4
 
 But the open-source project had issues and development was “flaky” at best. The maintainer started working on a v2 and claimed it was no longer going to be open-source in favor of his SaaS option.
 
-For me, personally, I thought v1 was still going great all the way until I had an issue with a corrupted Minerva cert. The fix for that was clearing my entire browser cache, which should have been fine... but as it turned out, ChatBot UI was storing EVERYTHING in localStorage. So in one fell swoop, I lost months of chat history and dozens of carefully crafted prompts that I had saved.
+For me, personally, I thought v1 was still going great all the way until I had an issue with a corrupted proxy cert. The fix for that was clearing my entire browser cache, which should have been fine... but as it turned out, ChatBot UI was storing EVERYTHING in localStorage. So in one fell swoop, I lost months of chat history and dozens of carefully crafted prompts that I had saved.
 
 Since I was interested in this anyway, I started experimenting with every 3rd party UI I could get my hands on. As it turned out, even as a power user using the API was significantly cheaper than using the official UI. I went through quite a few open-source projects and even started experimenting with creating my own. But, then I found [LibreChat](https://www.librechat.ai/).
 
@@ -36,7 +36,7 @@ After that, it was stable for a few months. In the beginning of the project bein
 
 A small cohort was formed to determine if LibreChat was the right way to go or if we should use other solutions. Realistically, the only contenders were LibreChat, ChatBot UI v2 (which had flaky development), and Open WebUI. I had already gone through almost everything else in my free time and none were on par with any of these. Open WebUI wasn’t widely released to a lot of people internally, but there were a few people using it and it was a VERY solid contender. But, since it was plugin based (called pipelines in their architecture), it would have quickly grown out of hand since everything was treated as a “model.” That included customizations, custom system prompts (similar to agents without MCPs), and the models themselves. Looking at the code, it became clear it was too far from being something that we could customize or something that could have been fixed in a reasonable amount of time upstream. So, I made the call to ditch it.
 
-So from that point on, we were left with LibreChat and ChatBot UI v2 as a backup for when it had hiccups. For those who were internal users of it during that time and felt like it was a scrappy project deployed in a couple days, with two people (another developer and myself) working on it outside of our project work in their free time, that’s because that’s exactly what it was.
+So from that point on, we were left with LibreChat and ChatBot UI v2 as a backup for when it had hiccups. For those who were internal users of it during that time it probably felt like it was a scrappy project deployed in a couple days, with two people (another developer and myself) working on it outside of our project work in their free time, that’s because that’s exactly what it was.
 
 I had to go back to project work where I was working on the Checkout migration and didn’t have as much time to keep things up. But, LibreChat was stable.
 
