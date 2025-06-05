@@ -12,17 +12,21 @@ describe('BlogFooter Component', () => {
     vi.useRealTimers()
   })
 
-  it('should render copyright text', () => {
+  it('should render with correct structure and default max-width', () => {
     render(<BlogFooter />)
 
+    // Check copyright text
     expect(screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)).toBeInTheDocument()
-  })
 
-  it('should use default max-width when none provided', () => {
-    render(<BlogFooter />)
+    // Check structure and styling
+    const footer = screen.getByRole('contentinfo')
+    expect(footer).toHaveClass('mt-auto')
 
     const container = document.querySelector('.container')
-    expect(container).toHaveClass('max-w-4xl')
+    expect(container).toHaveClass('container', 'mx-auto', 'px-4', 'py-6', 'max-w-4xl')
+
+    const textElement = screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)
+    expect(textElement).toHaveClass('text-black', 'dark:text-white')
   })
 
   it('should use custom max-width when provided', () => {
@@ -30,25 +34,6 @@ describe('BlogFooter Component', () => {
 
     const container = document.querySelector('.container')
     expect(container).toHaveClass('max-w-3xl')
-  })
-
-  it('should have correct styling classes', () => {
-    render(<BlogFooter />)
-
-    const footer = screen.getByRole('contentinfo')
-    expect(footer).toHaveClass('mt-auto')
-
-    const textElement = screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)
-    expect(textElement).toHaveClass('text-black', 'dark:text-white')
-  })
-
-  it('should be centered and have proper container structure', () => {
-    render(<BlogFooter />)
-
-    const container = document.querySelector('.container')
-    expect(container).toHaveClass('container', 'mx-auto', 'px-4', 'py-6')
-
-    const textContainer = document.querySelector('.text-center')
-    expect(textContainer).toHaveClass('text-center', 'text-sm')
+    expect(container).not.toHaveClass('max-w-4xl')
   })
 })

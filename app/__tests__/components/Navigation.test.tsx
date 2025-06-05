@@ -26,52 +26,35 @@ vi.mock('~/components/ThemeToggle', () => ({
 const { useLocation } = await import('react-router')
 
 describe('Navigation Component', () => {
-  it('should render navigation links correctly', () => {
+  it('should render navigation with correct structure and styling', () => {
+    vi.mocked(useLocation).mockReturnValue({ pathname: '/blog' } as any)
     render(<Navigation />)
 
-    expect(screen.getByTestId('house-icon')).toBeInTheDocument()
-    expect(screen.getByText('Blog')).toBeInTheDocument()
+    // Navigation structure
+    const nav = screen.getByRole('navigation')
+    expect(nav).toHaveClass('fixed', 'top-0', 'left-0', 'right-0', 'z-50')
 
+    // Links
     const homeLink = screen.getByLabelText('Home')
     expect(homeLink).toHaveAttribute('href', '/')
+    expect(homeLink).toHaveClass('text-white', 'hover:text-cyan-300')
 
     const blogLink = screen.getByText('Blog').closest('a')
     expect(blogLink).toHaveAttribute('href', '/blog')
-  })
+    expect(blogLink).toHaveClass('text-white', 'hover:text-cyan-300')
 
-  it('should show theme toggle on non-home pages', () => {
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/blog' } as any)
+    // House icon
+    const houseIcon = screen.getByTestId('house-icon')
+    expect(houseIcon).toBeInTheDocument()
+    expect(houseIcon).toHaveClass('w-8', 'h-8')
 
-    render(<Navigation />)
-
+    // Theme toggle on non-home page
     expect(screen.getByTestId('theme-toggle')).toBeInTheDocument()
   })
 
   it('should hide theme toggle on home page', () => {
     vi.mocked(useLocation).mockReturnValue({ pathname: '/' } as any)
-
     render(<Navigation />)
-
     expect(screen.queryByTestId('theme-toggle')).not.toBeInTheDocument()
-  })
-
-  it('should have correct CSS classes for styling', () => {
-    render(<Navigation />)
-
-    const nav = screen.getByRole('navigation')
-    expect(nav).toHaveClass('fixed', 'top-0', 'left-0', 'right-0', 'z-50')
-
-    const homeLink = screen.getByLabelText('Home')
-    expect(homeLink).toHaveClass('text-white', 'hover:text-cyan-300')
-
-    const blogLink = screen.getByText('Blog').closest('a')
-    expect(blogLink).toHaveClass('text-white', 'hover:text-cyan-300')
-  })
-
-  it('should render house icon with correct size', () => {
-    render(<Navigation />)
-
-    const houseIcon = screen.getByTestId('house-icon')
-    expect(houseIcon).toHaveClass('w-8', 'h-8')
   })
 })

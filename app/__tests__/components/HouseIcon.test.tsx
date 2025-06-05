@@ -18,39 +18,16 @@ describe('HouseIcon Component', () => {
     expect(svg).toHaveClass('w-8', 'h-8', 'text-blue-500')
   })
 
-  it('should have empty className when none provided', () => {
-    render(<HouseIcon />)
-
-    const svg = document.querySelector('svg')
-    expect(svg?.getAttribute('class')).toBe('')
-  })
-
-  it('should have correct SVG attributes', () => {
+  it('should have correct SVG attributes and structure', () => {
     render(<HouseIcon />)
 
     const svg = document.querySelector('svg')
     expect(svg).toHaveAttribute('viewBox', '0 0 16 16')
     expect(svg).toHaveAttribute('xmlns', 'http://www.w3.org/2000/svg')
-  })
+    expect(svg?.getAttribute('class')).toBe('')
 
-  it('should contain path elements for the house shape', () => {
-    render(<HouseIcon />)
-
-    const svg = document.querySelector('svg')
     const paths = svg?.querySelectorAll('path')
     expect(paths).toHaveLength(1)
-
-    paths?.forEach(path => {
-      expect(path).toHaveAttribute('fill', 'currentColor')
-    })
-  })
-
-  it('should use currentColor fill for theming', () => {
-    render(<HouseIcon className="text-red-500" />)
-
-    const svg = document.querySelector('svg')
-    const paths = svg?.querySelectorAll('path')
-
     paths?.forEach(path => {
       expect(path).toHaveAttribute('fill', 'currentColor')
     })

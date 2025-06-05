@@ -2,99 +2,64 @@ import { markdownToHtml } from '~/utils/markdown'
 import { describe, expect, it } from 'vitest'
 
 describe('markdownToHtml', () => {
-  it('converts basic markdown to HTML', () => {
-    const markdown = '# Hello World\n\nThis is a paragraph.'
-    const html = markdownToHtml(markdown)
+  it('converts basic markdown elements', () => {
+    // Basic elements
+    const basicHtml = markdownToHtml('# Hello World\n\nThis is a paragraph.')
+    expect(basicHtml).toContain('<h1>Hello World</h1>')
+    expect(basicHtml).toContain('<p>This is a paragraph.</p>')
 
-    expect(html).toContain('<h1>Hello World</h1>')
-    expect(html).toContain('<p>This is a paragraph.</p>')
+    // Text formatting
+    const formattedHtml = markdownToHtml('**Bold text** and *italic text*')
+    expect(formattedHtml).toContain('<strong>Bold text</strong>')
+    expect(formattedHtml).toContain('<em>italic text</em>')
+
+    // Links
+    expect(markdownToHtml('[GitHub](https://github.com)')).toContain(
+      '<a href="https://github.com">GitHub</a>'
+    )
+    expect(markdownToHtml('Visit https://example.com for more info')).toContain(
+      '<a href="https://example.com">https://example.com</a>'
+    )
+
+    // Code
+    const codeBlock = markdownToHtml('```javascript\nconsole.log("Hello");\n```')
+    expect(codeBlock).toContain('<pre><code')
+    expect(codeBlock).toContain('console.log')
+    expect(markdownToHtml('Use the `console.log()` function')).toContain(
+      '<code>console.log()</code>'
+    )
   })
 
-  it('converts bold and italic text', () => {
-    const markdown = '**Bold text** and *italic text*'
-    const html = markdownToHtml(markdown)
+  it('converts lists, blockquotes, and headings', () => {
+    // Unordered list
+    const ulHtml = markdownToHtml(`- Item 1\n- Item 2\n- Item 3`)
+    expect(ulHtml).toContain('<ul>')
+    expect(ulHtml).toContain('<li>Item 1</li>')
+    expect(ulHtml).toContain('<li>Item 2</li>')
+    expect(ulHtml).toContain('<li>Item 3</li>')
 
-    expect(html).toContain('<strong>Bold text</strong>')
-    expect(html).toContain('<em>italic text</em>')
-  })
+    // Ordered list
+    const olHtml = markdownToHtml(`1. First item\n2. Second item\n3. Third item`)
+    expect(olHtml).toContain('<ol>')
+    expect(olHtml).toContain('<li>First item</li>')
+    expect(olHtml).toContain('<li>Second item</li>')
+    expect(olHtml).toContain('<li>Third item</li>')
 
-  it('converts links correctly', () => {
-    const markdown = '[GitHub](https://github.com)'
-    const html = markdownToHtml(markdown)
+    // Blockquote
+    const blockquoteHtml = markdownToHtml('> This is a blockquote')
+    expect(blockquoteHtml).toContain('<blockquote>')
+    expect(blockquoteHtml).toContain('This is a blockquote')
 
-    expect(html).toContain('<a href="https://github.com">GitHub</a>')
-  })
+    // HTML passthrough
+    expect(markdownToHtml('Regular text with <strong>HTML</strong> tags')).toContain(
+      '<strong>HTML</strong>'
+    )
 
-  it('auto-links URLs', () => {
-    const markdown = 'Visit https://example.com for more info'
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<a href="https://example.com">https://example.com</a>')
-  })
-
-  it('converts code blocks', () => {
-    const markdown = '```javascript\nconsole.log("Hello");\n```'
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<pre><code')
-    expect(html).toContain('console.log')
-  })
-
-  it('converts inline code', () => {
-    const markdown = 'Use the `console.log()` function'
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<code>console.log()</code>')
-  })
-
-  it('converts lists', () => {
-    const markdown = `- Item 1
-- Item 2
-- Item 3`
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<ul>')
-    expect(html).toContain('<li>Item 1</li>')
-    expect(html).toContain('<li>Item 2</li>')
-    expect(html).toContain('<li>Item 3</li>')
-  })
-
-  it('converts numbered lists', () => {
-    const markdown = `1. First item
-2. Second item
-3. Third item`
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<ol>')
-    expect(html).toContain('<li>First item</li>')
-    expect(html).toContain('<li>Second item</li>')
-    expect(html).toContain('<li>Third item</li>')
-  })
-
-  it('converts blockquotes', () => {
-    const markdown = '> This is a blockquote'
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<blockquote>')
-    expect(html).toContain('This is a blockquote')
-  })
-
-  it('handles HTML in markdown (when html option is enabled)', () => {
-    const markdown = 'Regular text with <strong>HTML</strong> tags'
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<strong>HTML</strong>')
-  })
-
-  it('converts multiple headings', () => {
-    const markdown = `# H1 Heading
-## H2 Heading
-### H3 Heading`
-    const html = markdownToHtml(markdown)
-
-    expect(html).toContain('<h1>H1 Heading</h1>')
-    expect(html).toContain('<h2>H2 Heading</h2>')
-    expect(html).toContain('<h3>H3 Heading</h3>')
+    // Multiple headings
+    const headingsHtml = markdownToHtml(`# H1 Heading\n## H2 Heading\n### H3 Heading`)
+    expect(headingsHtml).toContain('<h1>H1 Heading</h1>')
+    expect(headingsHtml).toContain('<h2>H2 Heading</h2>')
+    expect(headingsHtml).toContain('<h3>H3 Heading</h3>')
   })
 
   it('handles empty input', () => {

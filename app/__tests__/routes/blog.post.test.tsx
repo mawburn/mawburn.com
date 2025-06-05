@@ -130,7 +130,7 @@ describe('BlogPost Route', () => {
       expect(screen.getByTestId('blog-footer')).toHaveAttribute('data-max-width', 'max-w-3xl')
     })
 
-    it('should display formatted date', () => {
+    it('should display formatted date and navigation', () => {
       const Stub = createRoutesStub([
         {
           path: '/blog/:slug',
@@ -141,21 +141,10 @@ describe('BlogPost Route', () => {
 
       render(<Stub />)
 
-      // Just check that some date format is displayed, not the exact format
+      // Check date format
       expect(screen.getByText(/\w+ \d{1,2}, \d{4}/)).toBeInTheDocument()
-    })
 
-    it('should render back to blog link', () => {
-      const Stub = createRoutesStub([
-        {
-          path: '/blog/:slug',
-          Component: BlogPost as any,
-          loader: () => ({ post: mockPost }),
-        },
-      ])
-
-      render(<Stub />)
-
+      // Check back link
       const backLink = screen.getByText('Back to Blog')
       expect(backLink.closest('a')).toHaveAttribute('href', '/blog')
     })

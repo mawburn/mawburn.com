@@ -27,27 +27,27 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
       href: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
       icon: (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
         </svg>
-      )
+      ),
     },
     {
       name: 'LinkedIn',
       href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-      icon: <LinkedIn size={20} />
+      icon: <LinkedIn size={20} />,
     },
     {
       name: 'Bluesky',
       href: `https://bsky.app/intent/compose?text=${encodedTitle}%20${encodedUrl}`,
-      icon: <Bluesky size={20} />
-    }
+      icon: <Bluesky size={20} />,
+    },
   ]
 
   return (
     <div className="flex items-center gap-4 py-6">
       <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">Share:</span>
       <div className="flex gap-3">
-        {shareLinks.map((link) => (
+        {shareLinks.map(link => (
           <a
             key={link.name}
             href={link.href}
@@ -65,7 +65,14 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
           aria-label="Copy link"
         >
           {copied ? (
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
               <polyline points="20 6 9 17 4 12" />
             </svg>
           ) : (
