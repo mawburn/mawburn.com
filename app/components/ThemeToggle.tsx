@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { useDarkMode } from '~/hooks/useDarkMode'
 
 function SunIcon() {
@@ -27,7 +28,23 @@ function MoonIcon() {
 }
 
 export function ThemeToggle() {
+  const [mounted, setMounted] = useState(false)
   const { isDarkMode, toggleDarkMode } = useDarkMode()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <button
+        className="inline-flex items-center justify-center h-9 px-2.5 min-w-9 rounded-md text-sm font-medium text-white hover:text-cyan-300 transition-colors bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        aria-label="Toggle theme"
+      >
+        <div className="h-4 w-4" />
+      </button>
+    )
+  }
 
   return (
     <button
