@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 import { BlogFooter } from '~/components/BlogFooter'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
+import { RSSIcon } from '~/components/icons'
 
 export function meta({ params }: Route.MetaArgs) {
   const post = getPostBySlug(params.slug)
@@ -89,20 +90,30 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
       <div className="container mx-auto max-w-3xl px-4 py-8">
-        <Link
-          to="/blog"
-          className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 mb-8 transition-colors"
-        >
-          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          Back to Blog
-        </Link>
+        <div className="flex justify-between items-center mb-8">
+          <Link
+            to="/blog"
+            className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 transition-colors"
+          >
+            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            Back to Blog
+          </Link>
+          <a
+            href="/rss.xml"
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
+            title="RSS Feed"
+          >
+            <RSSIcon size={20} />
+            <span className="text-sm font-medium">RSS</span>
+          </a>
+        </div>
 
         <article className="prose prose-gray dark:prose-invert max-w-none">
           <header className="mb-8">
