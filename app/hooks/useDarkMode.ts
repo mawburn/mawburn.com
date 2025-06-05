@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 
 export function useDarkMode() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window === 'undefined') return false
+    return document.documentElement.classList.contains('dark')
+  })
 
   const toggleDarkMode = () => {
     const newMode = !isDarkMode
@@ -11,12 +14,11 @@ export function useDarkMode() {
   }
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark)
-
-    setIsDarkMode(shouldUseDark)
-    document.documentElement.classList.toggle('dark', shouldUseDark)
+    // Sync state with current dark mode on mount
+    const currentlyDark = document.documentElement.classList.contains('dark')
+    if (currentlyDark !== isDarkMode) {
+      setIsDarkMode(currentlyDark)
+    }
   }, [])
 
   return { isDarkMode, toggleDarkMode }
