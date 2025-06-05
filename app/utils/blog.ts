@@ -14,9 +14,11 @@ export interface PostImages {
 
 export const findPostImages = (slug: string, frontmatterImage?: string): PostImages => {
   const images: PostImages = {}
-  
+
   if (frontmatterImage) {
-    const imagePath = frontmatterImage.startsWith('/') ? frontmatterImage : `/images/${frontmatterImage}`
+    const imagePath = frontmatterImage.startsWith('/')
+      ? frontmatterImage
+      : `/images/${frontmatterImage}`
     images.default = imagePath
     images.og = imagePath
     images.twitter = imagePath
@@ -27,7 +29,7 @@ export const findPostImages = (slug: string, frontmatterImage?: string): PostIma
     images.twitter = `/images/${slug}-twitter.webp`
     images.small = `/images/${slug}-small.webp`
   }
-  
+
   return images
 }
 

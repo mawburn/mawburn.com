@@ -31,28 +31,15 @@ describe('ThemeToggle', () => {
     document.documentElement.className = ''
   })
 
-  it('renders toggle button', () => {
+  it('renders accessible toggle button and toggles theme', () => {
+    localStorageMock.getItem.mockReturnValue(null)
     render(<ThemeToggle />)
 
     const button = screen.getByRole('button')
     expect(button).toBeInTheDocument()
-  })
-
-  it('has accessible label', () => {
-    render(<ThemeToggle />)
-
-    const button = screen.getByRole('button')
     expect(button).toHaveAttribute('aria-label')
-  })
 
-  it('toggles theme when clicked', () => {
-    localStorageMock.getItem.mockReturnValue(null)
-
-    render(<ThemeToggle />)
-
-    const toggle = screen.getByRole('button')
-    fireEvent.click(toggle)
-
+    fireEvent.click(button)
     expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark')
   })
 })

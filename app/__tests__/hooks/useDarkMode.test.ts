@@ -31,28 +31,25 @@ describe('useDarkMode', () => {
     document.documentElement.className = ''
   })
 
-  it('returns isDarkMode and toggleDarkMode function', () => {
+  it('provides dark mode state and toggle functionality', () => {
+    // Initial state without saved theme
+    localStorageMock.getItem.mockReturnValue(null)
     const { result } = renderHook(() => useDarkMode())
 
     expect(typeof result.current.isDarkMode).toBe('boolean')
     expect(typeof result.current.toggleDarkMode).toBe('function')
-  })
 
-  it('toggles dark mode', () => {
-    localStorageMock.getItem.mockReturnValue(null)
-
-    const { result } = renderHook(() => useDarkMode())
-
+    // Toggle dark mode
     act(() => {
       result.current.toggleDarkMode()
     })
-
     expect(result.current.isDarkMode).toBe(true)
     expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark')
   })
 
   it('reads saved theme from localStorage', () => {
     localStorageMock.getItem.mockReturnValue('dark')
+    document.documentElement.classList.add('dark')
 
     const { result } = renderHook(() => useDarkMode())
 

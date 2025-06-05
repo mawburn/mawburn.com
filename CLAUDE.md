@@ -13,11 +13,16 @@ This is a personal portfolio site with a blog built using modern web technologie
 
 - `app/routes/` - File-based routing
   - `home.tsx` - Landing page with 3D synthwave background
-  - `blog.tsx` - Blog listing page
-  - `blog.post.tsx` - Individual blog post pages
+  - `blog.tsx` - Blog listing page with RSS feed link
+  - `blog.post.tsx` - Individual blog post pages with social sharing
+  - `rss[.]xml.tsx` - RSS 2.0 feed generation
+  - `sitemap[.]xml.tsx` - XML sitemap for SEO
 - `app/components/` - Reusable React components
   - `SynthwaveBackground/` - Three.js animated background (home page only)
   - `Navigation.tsx` - Site navigation
+  - `ShareButtons/` - Social media sharing (Twitter, LinkedIn, Bluesky, copy link)
+  - `MarkdownContent.tsx` - Centralized markdown styling with dark mode support
+  - `ThemeToggle.tsx` - Dark/light theme switcher with hydration safety
 - `app/utils/` - Utility functions for blog content processing
   - `blog.ts` - Handles blog posts and multi-size image support
   - `frontmatter.ts` - Parses markdown frontmatter including image field
@@ -30,11 +35,21 @@ This is a personal portfolio site with a blog built using modern web technologie
 - Support for multiple sizes: `{slug}.webp`, `{slug}-twitter.webp`, `{slug}-small.webp`
 - Images can be specified in frontmatter or auto-detected by slug naming
 
+### Features
+
+- **RSS Feed**: Auto-generated RSS 2.0 feed at `/rss.xml` for blog syndication
+- **SEO Sitemap**: XML sitemap at `/sitemap.xml` with proper priorities and change frequencies
+- **Social Sharing**: Share buttons for Twitter, LinkedIn, Bluesky, and copy-to-clipboard
+- **Dark Mode**: System-aware theme switching with persistence
+- **Responsive Design**: Mobile-first approach with adaptive layouts
+
 ### Performance Optimizations
 
 - SynthwaveBackground is lazy-loaded and only renders on home page
 - Font preloading is conditional (blog pages only load Lexend fonts)
 - Blog content is processed server-side with caching
+- RSS and sitemap responses are cached for 1 hour
+- Theme toggle includes hydration safety to prevent flashing
 
 ### Styling Conventions
 

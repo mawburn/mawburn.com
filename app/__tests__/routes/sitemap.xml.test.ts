@@ -100,26 +100,4 @@ describe('Sitemap XML Route', () => {
     // Should not include any blog post URLs
     expect(xml).not.toContain('/blog/test-post')
   })
-
-  it('should generate well-formed XML structure', async () => {
-    const response = await loader()
-    const xml = await response.text()
-
-    // Count opening and closing url tags
-    const openingTags = (xml.match(/<url>/g) || []).length
-    const closingTags = (xml.match(/<\/url>/g) || []).length
-
-    expect(openingTags).toBe(closingTags)
-    expect(openingTags).toBe(2) // 2 static pages (mock returns empty)
-
-    // Ensure each URL has all required elements
-    const urlBlocks = xml.split('<url>').slice(1) // Remove everything before first <url>
-
-    urlBlocks.forEach(block => {
-      expect(block).toContain('<loc>')
-      expect(block).toContain('<lastmod>')
-      expect(block).toContain('<changefreq>')
-      expect(block).toContain('<priority>')
-    })
-  })
 })

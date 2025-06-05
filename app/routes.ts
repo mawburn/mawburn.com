@@ -6,5 +6,8 @@ export default [
   route('blog/:slug', 'routes/blog.post.tsx'),
   route('sitemap.xml', 'routes/sitemap[.]xml.tsx'),
   route('rss.xml', 'routes/rss[.]xml.tsx'),
-  route('.well-known/appspecific/com.chrome.devtools.json', 'routes/[.well-known].appspecific[.]com.chrome.devtools.json.tsx'),
+  route(
+    '.well-known/appspecific/com.chrome.devtools.json',
+    'routes/[.well-known].appspecific[.]com.chrome.devtools.json.tsx'
+  ),
 ] satisfies RouteConfig

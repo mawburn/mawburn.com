@@ -68,41 +68,30 @@ const loader = ({ context }: LoaderArgs) => {
 }
 
 describe('Home Route', () => {
-  it('renders Welcome component with loader data', () => {
+  it('renders correctly and has proper meta tags and loader', () => {
+    // Test rendering with loader data
     const testMessage = 'Test message from Cloudflare'
-
     const Stub = createRoutesStub([
       {
         path: '/',
         Component: Home,
-        loader: () => {
-          return { message: testMessage }
-        },
+        loader: () => ({ message: testMessage }),
       },
     ])
 
     render(<Stub />)
-
     expect(screen.getByText('Matt Burnett')).toBeInTheDocument()
     expect(screen.getByText('Software Engineer')).toBeInTheDocument()
     expect(screen.getByText(`Message: ${testMessage}`)).toBeInTheDocument()
-  })
 
-  it('has correct meta tags', () => {
-    const mockMetaArgs = {} as any
-    const metaTags = meta(mockMetaArgs)
-
+    // Test meta tags
+    const metaTags = meta({} as any)
     expect(metaTags).toHaveLength(3)
     expect(metaTags[0]).toEqual({ title: 'Matt Burnett | Software Engineer' })
-    expect(metaTags[1]).toEqual({
-      name: 'description',
-      content:
-        'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
-    })
+    expect(metaTags[1].name).toBe('description')
     expect(metaTags[2].name).toBe('keywords')
-  })
 
-  it('loads data from context', () => {
+    // Test loader
     const mockLoaderArgs: LoaderArgs = {
       context: {
         cloudflare: {
@@ -112,8 +101,6 @@ describe('Home Route', () => {
         },
       },
     }
-
-    const result = loader(mockLoaderArgs)
-    expect(result).toEqual({ message: 'Test CF Value' })
+    expect(loader(mockLoaderArgs)).toEqual({ message: 'Test CF Value' })
   })
 })

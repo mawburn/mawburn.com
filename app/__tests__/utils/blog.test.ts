@@ -30,18 +30,16 @@ vi.mock('~/utils/dateUtils', () => ({
   formatPublishDate: vi.fn(() => 'January 1, 2023'),
 }))
 
-const { getAllPostsMetadata, getPostBySlug, findPostImage, findPostImages } = await import('~/utils/blog')
+const { getAllPostsMetadata, getPostBySlug, findPostImage, findPostImages } = await import(
+  '~/utils/blog'
+)
 
 describe('getAllPostsMetadata', () => {
-  it('returns array of post metadata', () => {
+  it('returns array of posts with required metadata fields', () => {
     const posts = getAllPostsMetadata()
 
     expect(Array.isArray(posts)).toBe(true)
     expect(posts.length).toBeGreaterThanOrEqual(0)
-  })
-
-  it('includes required metadata fields', () => {
-    const posts = getAllPostsMetadata()
 
     if (posts.length > 0) {
       const post = posts[0]
@@ -61,79 +59,60 @@ describe('getPostBySlug', () => {
     expect(post).toBeNull()
   })
 
-  it('returns post object with required fields when found', () => {
-    const post = getPostBySlug('past-post')
-
-    if (post) {
-      expect(post).toHaveProperty('slug')
-      expect(post).toHaveProperty('title')
-      expect(post).toHaveProperty('date')
-      expect(post).toHaveProperty('excerpt')
-      expect(post).toHaveProperty('tags')
-      expect(post).toHaveProperty('content')
-      expect(post).toHaveProperty('readTime')
-      expect(post).toHaveProperty('image')
-      expect(post).toHaveProperty('images')
+  it('returns post with all required fields and handles images correctly', () => {
+    // Post without frontmatter image
+    const postNoImage = getPostBySlug('past-post')
+    if (postNoImage) {
+      expect(postNoImage).toHaveProperty('slug')
+      expect(postNoImage).toHaveProperty('title')
+      expect(postNoImage).toHaveProperty('date')
+      expect(postNoImage).toHaveProperty('excerpt')
+      expect(postNoImage).toHaveProperty('tags')
+      expect(postNoImage).toHaveProperty('content')
+      expect(postNoImage).toHaveProperty('readTime')
+      expect(postNoImage).toHaveProperty('image')
+      expect(postNoImage).toHaveProperty('images')
+      expect(postNoImage.image).toMatch(/^\/images\/past-post\.(jpg|jpeg|png|webp)$/)
     }
-  })
 
-  it('includes default image path for post without frontmatter image', () => {
-    const post = getPostBySlug('past-post')
-
-    if (post) {
-      expect(post.image).toBeTruthy()
-      expect(post.image).toMatch(/^\/images\/past-post\.(jpg|jpeg|png|webp)$/)
-    }
-  })
-
-  it('includes custom image path from frontmatter', () => {
-    const post = getPostBySlug('post-with-image')
-
-    if (post) {
-      expect(post.image).toBe('/images/custom-post-image.jpg')
+    // Post with custom frontmatter image
+    const postWithImage = getPostBySlug('post-with-image')
+    if (postWithImage) {
+      expect(postWithImage.image).toBe('/images/custom-post-image.jpg')
     }
   })
 })
 
 describe('findPostImage', () => {
-  it('returns image path for given slug when no frontmatter image', () => {
-    const imagePath = findPostImage('test-post')
-    expect(imagePath).toBeTruthy()
-    expect(imagePath).toMatch(/^\/images\/test-post\.(jpg|jpeg|png|webp)$/)
-  })
+  it('returns correct image path based on slug and frontmatter', () => {
+    // Default image path when no frontmatter
+    expect(findPostImage('test-post')).toMatch(/^\/images\/test-post\.(jpg|jpeg|png|webp)$/)
+    expect(findPostImage('test-post', undefined)).toMatch(
+      /^\/images\/test-post\.(jpg|jpeg|png|webp)$/
+    )
 
-  it('returns image path for slug with special characters', () => {
-    const imagePath = findPostImage('2025-05-26-shopify-ai-chat')
-    expect(imagePath).toBeTruthy()
-    expect(imagePath).toMatch(/^\/images\/2025-05-26-shopify-ai-chat\.(jpg|jpeg|png|webp)$/)
-  })
+    // Special characters in slug
+    expect(findPostImage('2025-05-26-shopify-ai-chat')).toMatch(
+      /^\/images\/2025-05-26-shopify-ai-chat\.(jpg|jpeg|png|webp)$/
+    )
 
-  it('returns frontmatter image when provided', () => {
-    const imagePath = findPostImage('test-post', 'custom-image.png')
-    expect(imagePath).toBe('/images/custom-image.png')
-  })
+    // Frontmatter image (relative path)
+    expect(findPostImage('test-post', 'custom-image.png')).toBe('/images/custom-image.png')
 
-  it('returns frontmatter image with full path as-is', () => {
-    const imagePath = findPostImage('test-post', '/custom/path/image.webp')
-    expect(imagePath).toBe('/custom/path/image.webp')
-  })
-
-  it('handles undefined frontmatter image', () => {
-    const imagePath = findPostImage('test-post', undefined)
-    expect(imagePath).toBeTruthy()
-    expect(imagePath).toMatch(/^\/images\/test-post\.(jpg|jpeg|png|webp)$/)
+    // Frontmatter image (absolute path)
+    expect(findPostImage('test-post', '/custom/path/image.webp')).toBe('/custom/path/image.webp')
   })
 })
 
 describe('findPostImages', () => {
   it('returns all image sizes for a slug', () => {
     const images = findPostImages('test-post')
-    
+
     expect(images.default).toBeTruthy()
     expect(images.og).toBeTruthy()
     expect(images.twitter).toBeTruthy()
     expect(images.small).toBeTruthy()
-    
+
     // Should follow the naming convention
     expect(images.default).toMatch(/^\/images\/test-post\.(jpg|jpeg|png|webp)$/)
     expect(images.og).toMatch(/^\/images\/test-post-og\.(jpg|jpeg|png|webp)$/)
@@ -143,7 +122,7 @@ describe('findPostImages', () => {
 
   it('uses frontmatter image for all sizes when provided', () => {
     const images = findPostImages('test-post', 'custom-image.png')
-    
+
     expect(images.default).toBe('/images/custom-image.png')
     expect(images.og).toBe('/images/custom-image.png')
     expect(images.twitter).toBe('/images/custom-image.png')
@@ -152,7 +131,7 @@ describe('findPostImages', () => {
 
   it('preserves full path for frontmatter images', () => {
     const images = findPostImages('test-post', '/custom/path/image.webp')
-    
+
     expect(images.default).toBe('/custom/path/image.webp')
     expect(images.og).toBe('/custom/path/image.webp')
     expect(images.twitter).toBe('/custom/path/image.webp')
