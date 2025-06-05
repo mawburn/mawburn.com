@@ -192,31 +192,9 @@ describe('Blog Route', () => {
 
       expect(screen.getByText('Test Post 1')).toBeInTheDocument()
       expect(screen.getByText('Test Post 2')).toBeInTheDocument()
-    })
-
-    it('should format dates correctly', () => {
-      const Stub = createRoutesStub([
-        {
-          path: '/blog',
-          Component: Blog as any,
-          loader: () => ({
-            posts: [
-              {
-                slug: 'test-post-1',
-                title: 'Test Post 1',
-                date: '2025-01-13',
-                excerpt: 'Test excerpt',
-                tags: ['test'],
-                readTime: 5,
-              },
-            ],
-          }),
-        },
-      ])
-
-      render(<Stub />)
-
-      expect(screen.getByText(/\w+ \d{1,2}, \d{4}/)).toBeInTheDocument()
+      // Multiple dates should be present
+      const dates = screen.getAllByText(/\w+ \d{1,2}, \d{4}/)
+      expect(dates).toHaveLength(2)
     })
   })
 })

@@ -139,7 +139,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                 </span>
               ))}
             </div>
-            
+
             <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
           </header>
 

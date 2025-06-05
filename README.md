@@ -26,12 +26,17 @@ pnpm dev
 app/
 ├── components/          # Reusable React components
 │   ├── SynthwaveBackground/  # Three.js animated background
-│   ├── Navigation.tsx   # Site navigation
+│   ├── ShareButtons/   # Social media sharing buttons
+│   ├── MarkdownContent.tsx  # Markdown styling component
+│   ├── Navigation.tsx  # Site navigation
+│   ├── ThemeToggle.tsx # Dark/light mode switcher
 │   └── ...
 ├── routes/             # File-based routing
 │   ├── home.tsx        # Landing page
-│   ├── blog.tsx        # Blog listing
-│   └── blog.post.tsx   # Individual blog posts
+│   ├── blog.tsx        # Blog listing with RSS link
+│   ├── blog.post.tsx   # Individual blog posts with sharing
+│   ├── rss[.]xml.tsx   # RSS feed generation
+│   └── sitemap[.]xml.tsx  # SEO sitemap
 ├── utils/              # Utility functions
 │   ├── blog.ts         # Blog content processing & image handling
 │   ├── cache.ts        # Response caching
