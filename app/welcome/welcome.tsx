@@ -1,3 +1,5 @@
+import { LinkedIn, Bluesky } from '~/components/icons'
+
 export function Welcome() {
   return (
     <main className="flex flex-col min-h-screen">
@@ -37,7 +39,7 @@ export function Welcome() {
             <a
               href={resource.href}
               key={resource.text}
-              className="flex flex-col items-center gap-2"
+              className="flex flex-col items-center gap-2 text-white"
             >
               {resource.icon}
               <span className="text-xs">{resource.text}</span>
@@ -53,24 +55,7 @@ const resources = [
   {
     href: 'https://www.linkedin.com/in/burnettmatt/',
     text: 'LinkedIn',
-    icon: (
-      <svg
-        width="34"
-        height="34"
-        xmlns="http://www.w3.org/2000/svg"
-        shapeRendering="geometricPrecision"
-        textRendering="geometricPrecision"
-        imageRendering="optimizeQuality"
-        fillRule="evenodd"
-        clipRule="evenodd"
-        viewBox="0 0 512 512"
-      >
-        <path
-          fill="#fff"
-          d="M474.919 0H38.592C17.72 0 0 16.504 0 36.841V475.14C0 495.496 11.629 512 32.492 512h436.327C489.718 512 512 495.496 512 475.14V36.841C512 16.504 495.809 0 474.919 0zM195.043 195.043h68.928v35.136h.755c10.505-18.945 41.541-38.177 79.921-38.177 73.655 0 94.214 39.108 94.214 111.538v135.321h-73.148V316.883c0-32.427-12.947-60.883-43.227-60.883-36.768 0-54.295 24.889-54.295 65.758v117.103h-73.148V195.043zM73.139 438.861h73.148V195.043H73.139v243.818zm82.289-329.148c0 25.258-20.457 45.715-45.715 45.715-25.258 0-45.715-20.457-45.715-45.715 0-25.258 20.457-45.715 45.715-45.715 25.258 0 45.715 20.457 45.715 45.715z"
-        />
-      </svg>
-    ),
+    icon: <LinkedIn />,
   },
   {
     href: 'https://github.com/mawburn',
@@ -109,20 +94,7 @@ const resources = [
   {
     href: 'https://bsky.app/profile/mawburn.com',
     text: 'Bluesky',
-    icon: (
-      <svg
-        width="34"
-        height="34"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 568 501"
-      >
-        <path
-          fill="currentColor"
-          d="M123.121 33.664C188.241 82.553 258.281 181.68 284 234.873c25.719-53.192 95.759-152.32 160.879-201.21C491.866-1.611 568-28.906 568 57.947c0 17.346-9.945 145.713-15.778 166.555-20.275 72.453-94.155 90.933-159.875 79.748C507.222 323.8 536.444 388.56 473.333 453.32c-119.86 122.992-172.272-30.859-185.702-70.281-2.462-7.227-3.614-10.608-3.631-7.733-.017-2.875-1.169.506-3.631 7.733-13.43 39.422-65.842 193.273-185.702 70.281-63.111-64.76-33.89-129.52 80.986-149.071-65.72 11.185-139.6-7.295-159.875-79.748C9.945 203.659 0 75.291 0 57.946 0-28.906 76.135-1.612 123.121 33.664Z"
-        ></path>
-      </svg>
-    ),
+    icon: <Bluesky />,
   },
   {
     href: 'mailto:mawburn7@gmail.com',

@@ -5,6 +5,7 @@ import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
 import { BlogFooter } from '~/components/BlogFooter'
 import { MarkdownContent } from '~/components/MarkdownContent'
+import { ShareButtons } from '~/components/ShareButtons'
 
 export function meta({ params }: Route.MetaArgs) {
   const post = getPostBySlug(params.slug)
@@ -14,13 +15,14 @@ export function meta({ params }: Route.MetaArgs) {
 
   const url = `https://mawburn.com/blog/${params.slug}`
   const hasImages = post.images && post.images.default
-  
+
   // For OG, prefer default image since it's the right size (1200x630)
   const ogImageUrl = post.images?.default ? `https://mawburn.com${post.images.default}` : undefined
-  
+
   // Use twitter-specific image if available
-  const twitterImageUrl = post.images?.twitter ? `https://mawburn.com${post.images.twitter}` : 
-                          ogImageUrl
+  const twitterImageUrl = post.images?.twitter
+    ? `https://mawburn.com${post.images.twitter}`
+    : ogImageUrl
 
   const metaTags = [
     { title: `${post.title} | Matt Burnett` },
@@ -55,7 +57,7 @@ export function meta({ params }: Route.MetaArgs) {
       { property: 'og:image:alt', content: post.title }
     )
   }
-  
+
   if (twitterImageUrl) {
     metaTags.push(
       { name: 'twitter:image', content: twitterImageUrl },
@@ -126,10 +128,13 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
                 </span>
               ))}
             </div>
+            
+            <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
           </header>
 
           <MarkdownContent html={post.content} />
         </article>
+
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
           All posts are written by me, though AI helps with proofreading and editing.
         </p>
