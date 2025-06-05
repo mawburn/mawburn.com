@@ -4,6 +4,7 @@ import type { BlogPost } from '~/utils/blogTypes'
 import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
 import { BlogFooter } from '~/components/BlogFooter'
+import { MarkdownContent } from '~/components/MarkdownContent'
 
 export function meta({ params }: Route.MetaArgs) {
   const post = getPostBySlug(params.slug)
@@ -127,10 +128,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
             </div>
           </header>
 
-          <div
-            className="text-gray-800 dark:text-gray-200 leading-relaxed [&_p]:mb-6 [&_a]:text-blue-600 [&_a]:dark:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-1 [&_a]:hover:text-blue-800 [&_a]:hover:dark:text-blue-300 [&_a]:transition-colors mb-12"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+          <MarkdownContent html={post.content} />
         </article>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
           All posts are written by me, though AI helps with proofreading and editing.
