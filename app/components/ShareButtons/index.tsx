@@ -50,47 +50,47 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
     <div className="flex flex-wrap gap-2">
       <button
         onClick={() => handleShare('reddit')}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
         aria-label="Share on Reddit"
       >
         <RedditIcon className="w-5 h-5" />
-        <span className="hidden sm:inline">Reddit</span>
       </button>
 
       <button
         onClick={() => handleShare('linkedin')}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
         aria-label="Share on LinkedIn"
       >
         <LinkedInIcon className="w-5 h-5" />
-        <span className="hidden sm:inline">LinkedIn</span>
       </button>
 
       <button
         onClick={() => handleShare('bluesky')}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
         aria-label="Share on Bluesky"
       >
         <BlueskyIcon className="w-5 h-5" />
-        <span className="hidden sm:inline">Bluesky</span>
       </button>
 
       <button
         onClick={() => handleShare('twitter')}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
         aria-label="Share on Twitter"
       >
         <TwitterIcon className="w-5 h-5" />
-        <span className="hidden sm:inline">Twitter</span>
       </button>
 
       <button
         onClick={handleCopy}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors relative"
         aria-label="Copy link to clipboard"
       >
         <CopyIcon className="w-5 h-5" />
-        <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy link'}</span>
+        {copied && (
+          <span className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-800 text-xs px-2 py-1 rounded">
+            Copied!
+          </span>
+        )}
       </button>
     </div>
   )

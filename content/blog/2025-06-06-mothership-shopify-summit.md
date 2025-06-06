@@ -1,8 +1,8 @@
 ---
 title: 'Nine Brains, One Giant Rat, and a Million Credits: A Mothership 1e Mission Report'
-date: '2025-06-10 16:00'
-image: '2025-06-10-mothership-shopify-summit.webp'
-excerpt: 'When the crew of the SS Shopify accepted a simple salvage mission from Flysafe Insurance Company, they thought they’d just grab a black box from a derelict casino ship and pocket whatever loot they could find. What they discovered aboard The Year of the Rat was anything but simple. This is the unclassified mission report, where nine players learned that sometimes the house always wins... unless you bring flamethrowers, harmonicas, and one surprisingly heroic xenobiologist. Spoilers ahead for the Year of the Rat module!'
+date: '2025-06-06 09:00'
+image: '2025-06-06-mothership-shopify-summit.webp'
+excerpt: 'A simple salvage mission to retrieve a black box from a derelict casino ship turned into chaos when nine players faced swarms of rats and a giant mutant mascot. Flamethrowers, harmonicas, and one unexpectedly badass scientist saved the day.'
 tags:
   [
     'Mothership RPG',
@@ -19,7 +19,7 @@ _**NOTE:** Spoilers for the [Mothership 1e](https://www.tuesdayknightgames.com/c
 
 The following game took place during our annual Shopify meetup in Toronto on May 29, 2025. Eight crew members in nine brains were involved, and I hereby certify the accounts of this mission are unclassified and accurate to the best of my knowledge.
 
-![SS Shopify Crew](/images/2025-06-10-mothership-shopify-summit.webp)
+![SS Shopify Crew](/images/2025-06-06-mothership-shopify-summit-small.webp)
 
 ## The Mission
 
@@ -48,5 +48,5 @@ After killing Shu Di, the crew looted the rest of the ship, finding the black bo
 
 ### Resources
 
-- The brochure style module **The Year of the Rat** can be found on itch\.io: [here](https://am-i-cool-yet.itch.io/year-of-the-rat-a-mothership-adventure?ac=3R1JYiMaVvG)
-- Mothership 1e can be found: [here](https://www.tuesdayknightgames.com/collections/mothership).
+- The brochure style module **[The Year of the Rat](https://am-i-cool-yet.itch.io/year-of-the-rat-a-mothership-adventure?ac=3R1JYiMaVvG)** can be found on itch\.io.
+- [Mothership 1e](https://www.tuesdayknightgames.com/collections/mothership)
