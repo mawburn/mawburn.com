@@ -2,7 +2,7 @@
 title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s Internal AI Chat'
 date: '2025-06-03 16:00'
 image: '2025-06-03-shopify-ai-chat.webp'
-excerpt: 'What started as a personal quest to find a better open source AI chat interface after losing all my data became an unexpected journey into an AI subject matter expert Shopify. From evaluating tons of interfaces, to pushing commits upstream on weekends, here’s how I accidentally became the go-to person for our AI chat platform and learned that sometimes the best career moves are the ones you never planned.'
+excerpt: 'After losing months of AI chat data, I searched for a better solution and championed LibreChat at Shopify. What started as a side project turned into leading our internal AI platform adoption.'
 tags:
   [
     'Shopify',
