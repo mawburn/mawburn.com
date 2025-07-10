@@ -9,7 +9,7 @@ import {
   LineBasicMaterial,
   Line,
   LineLoop,
-  Scene
+  Scene,
 } from '~/utils/three-lite'
 import { COLORS } from '../config'
 
@@ -182,11 +182,19 @@ export function createWireframeObjects(scene: Scene) {
 
   const objectCount = 15
 
-  for (let i = 0; i < objectCount; i++) {
+  for (let i = 0; i < 5; i++) {
     const lineObject = createLineObject(i)
     objectGroup.add(lineObject)
   }
 
   scene.add(objectGroup)
+
+  setTimeout(() => {
+    for (let i = 5; i < objectCount; i++) {
+      const lineObject = createLineObject(i)
+      objectGroup.add(lineObject)
+    }
+  }, 0)
+
   return objectGroup
 }

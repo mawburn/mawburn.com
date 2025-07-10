@@ -7,10 +7,12 @@ import {
   Line,
   LineLoop,
   LineBasicMaterial,
-  Color
+  Color,
 } from '~/utils/three-lite'
-import type { MutableRefObject } from 'react'
 import { COLORS } from '../config'
+
+const PI_2 = Math.PI * 2
+const DELTA_TIME = 0.016
 
 export function animateScene(
   renderer: WebGLRenderer,
@@ -19,14 +21,29 @@ export function animateScene(
   objects: {
     wireframeObjects?: Group
   },
-  animationFrameRef: MutableRefObject<number | null>,
+  animationFrameRef: { current: number | null },
   reducedMotion = false
 ) {
+  // Cache frequently accessed values
+  let frameCount = 0
+
   const animate = () => {
     animationFrameRef.current = requestAnimationFrame(animate)
+    frameCount++
 
-    if (objects.wireframeObjects) {
+    if (objects.wireframeObjects && objects.wireframeObjects.children.length > 0) {
+      const shouldUpdateColors = frameCount % 2 === 0
+
+      const maxDistance = 200
+
       objects.wireframeObjects.children.forEach((object: Object3D) => {
+        const distance = Math.sqrt(
+          object.position.x ** 2 + object.position.y ** 2 + object.position.z ** 2
+        )
+
+        if (distance > maxDistance) {
+          return
+        }
         const { rotationSpeed, scale, movement, color } = object.userData
 
         if (!reducedMotion) {
@@ -43,7 +60,7 @@ export function animateScene(
             Math.abs(object.position.y) > movement.bounds.y ||
             Math.abs(object.position.z) > movement.bounds.z
           ) {
-            const visibleAngle = Math.random() * Math.PI * 2
+            const visibleAngle = Math.random() * PI_2
             const distanceFromCenter = 90 + Math.random() * 40
 
             object.position.x =
@@ -82,11 +99,9 @@ export function animateScene(
           object.scale.set(scale.current, scale.current, scale.current)
         }
 
-        const deltaTime = 0.016
-        const lineObject = object as Line | LineLoop
-
-        if (!reducedMotion) {
-          color.timeElapsed += deltaTime
+        if (!reducedMotion && shouldUpdateColors) {
+          const lineObject = object as Line | LineLoop
+          color.timeElapsed += DELTA_TIME
 
           if (!color.inTransition) {
             if (color.timeElapsed >= color.nextChangeDelay) {
