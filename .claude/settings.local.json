@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm lint)",
+      "Bash(pnpm test:ci:*)",
+      "Bash(pnpm typecheck)",
+      "Bash(pnpm test:*)",
+      "Bash(rm:*)",
+      "Bash(touch:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(git stash:*)"
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": false
+}
