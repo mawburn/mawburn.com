@@ -1,13 +1,23 @@
-import * as THREE from 'three'
+import {
+  WebGLRenderer,
+  Scene,
+  PerspectiveCamera,
+  Group,
+  Object3D,
+  Line,
+  LineLoop,
+  LineBasicMaterial,
+  Color
+} from '~/utils/three-lite'
 import type { MutableRefObject } from 'react'
 import { COLORS } from '../config'
 
 export function animateScene(
-  renderer: THREE.WebGLRenderer,
-  scene: THREE.Scene,
-  camera: THREE.PerspectiveCamera,
+  renderer: WebGLRenderer,
+  scene: Scene,
+  camera: PerspectiveCamera,
   objects: {
-    wireframeObjects?: THREE.Group
+    wireframeObjects?: Group
   },
   animationFrameRef: MutableRefObject<number | null>,
   reducedMotion = false
@@ -16,7 +26,7 @@ export function animateScene(
     animationFrameRef.current = requestAnimationFrame(animate)
 
     if (objects.wireframeObjects) {
-      objects.wireframeObjects.children.forEach((object: THREE.Object3D) => {
+      objects.wireframeObjects.children.forEach((object: Object3D) => {
         const { rotationSpeed, scale, movement, color } = object.userData
 
         if (!reducedMotion) {
@@ -73,7 +83,7 @@ export function animateScene(
         }
 
         const deltaTime = 0.016
-        const lineObject = object as THREE.Line | THREE.LineLoop
+        const lineObject = object as Line | LineLoop
 
         if (!reducedMotion) {
           color.timeElapsed += deltaTime
@@ -105,16 +115,16 @@ export function animateScene(
               color.timeElapsed = 0
               color.nextChangeDelay = 5 + Math.random() * 15
 
-              if (lineObject.material instanceof THREE.LineBasicMaterial) {
+              if (lineObject.material instanceof LineBasicMaterial) {
                 lineObject.material.color.set(color.target)
                 lineObject.material.opacity = 0.9
               }
             } else {
-              const startColor = new THREE.Color(color.current)
-              const endColor = new THREE.Color(color.target)
+              const startColor = new Color(color.current)
+              const endColor = new Color(color.target)
               const interpolatedColor = startColor.lerp(endColor, color.progress)
 
-              if (lineObject.material instanceof THREE.LineBasicMaterial) {
+              if (lineObject.material instanceof LineBasicMaterial) {
                 lineObject.material.color.copy(interpolatedColor)
                 lineObject.material.opacity = 0.9
               }

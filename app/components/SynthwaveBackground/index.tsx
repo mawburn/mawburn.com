@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import * as THREE from 'three'
+import { Group } from '~/utils/three-lite'
 import { useThreeScene } from './utils/useThreeScene'
 import { animateScene } from './utils/animate'
 import { createWireframeObjects } from './objects/WireframeObjects'
@@ -12,7 +12,7 @@ export default function SynthwaveBackground({ className = '' }: SynthwaveBackgro
   const { containerRef, scene, camera, renderer, animationFrameRef, prefersReducedMotion } =
     useThreeScene()
   const objectsRef = useRef<{
-    wireframeObjects?: THREE.Group
+    wireframeObjects?: Group
   }>({})
 
   useEffect(() => {

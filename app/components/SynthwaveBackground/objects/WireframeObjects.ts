@@ -1,8 +1,20 @@
-import * as THREE from 'three'
+import {
+  Group,
+  Vector3,
+  BufferGeometry,
+  EllipseCurve,
+  Shape,
+  ShapeGeometry,
+  EdgesGeometry,
+  LineBasicMaterial,
+  Line,
+  LineLoop,
+  Scene
+} from '~/utils/three-lite'
 import { COLORS } from '../config'
 
-export function createWireframeObjects(scene: THREE.Scene) {
-  const objectGroup = new THREE.Group()
+export function createWireframeObjects(scene: Scene) {
+  const objectGroup = new Group()
 
   const createLineObject = (index: number) => {
     const type = Math.floor(Math.random() * 4)
@@ -17,14 +29,14 @@ export function createWireframeObjects(scene: THREE.Scene) {
           const x = (Math.random() - 0.5) * 100
           const y = (Math.random() - 0.5) * 80
           const z = (Math.random() - 0.5) * 60
-          points.push(new THREE.Vector3(x, y, z))
+          points.push(new Vector3(x, y, z))
         }
 
-        geometry = new THREE.BufferGeometry().setFromPoints(points)
+        geometry = new BufferGeometry().setFromPoints(points)
         break
       }
       case 1: {
-        const curve = new THREE.EllipseCurve(
+        const curve = new EllipseCurve(
           0,
           0,
           8 + Math.random() * 20,
@@ -36,11 +48,11 @@ export function createWireframeObjects(scene: THREE.Scene) {
         )
 
         const points = curve.getPoints(50)
-        geometry = new THREE.BufferGeometry().setFromPoints(points)
+        geometry = new BufferGeometry().setFromPoints(points)
         break
       }
       case 2: {
-        const shape = new THREE.Shape()
+        const shape = new Shape()
         const size = 5 + Math.random() * 15
 
         if (Math.random() > 0.5) {
@@ -56,8 +68,8 @@ export function createWireframeObjects(scene: THREE.Scene) {
           shape.lineTo(-size, -size)
         }
 
-        geometry = new THREE.ShapeGeometry(shape)
-        geometry = new THREE.EdgesGeometry(geometry)
+        geometry = new ShapeGeometry(shape)
+        geometry = new EdgesGeometry(geometry)
         break
       }
       default: {
@@ -69,10 +81,10 @@ export function createWireframeObjects(scene: THREE.Scene) {
         for (let i = 0; i < segments; i++) {
           const x = (i / (segments - 1)) * length - length / 2
           const y = Math.sin(i * 0.5) * amplitude
-          points.push(new THREE.Vector3(x, y, 0))
+          points.push(new Vector3(x, y, 0))
         }
 
-        geometry = new THREE.BufferGeometry().setFromPoints(points)
+        geometry = new BufferGeometry().setFromPoints(points)
         break
       }
     }
@@ -89,7 +101,7 @@ export function createWireframeObjects(scene: THREE.Scene) {
     ]
     const colorIndex = Math.floor(Math.random() * colors.length)
 
-    const material = new THREE.LineBasicMaterial({
+    const material = new LineBasicMaterial({
       color: colors[colorIndex],
       transparent: true,
       opacity: 0.9,
@@ -99,9 +111,9 @@ export function createWireframeObjects(scene: THREE.Scene) {
     let object
 
     if (type === 0 || type === 3) {
-      object = new THREE.Line(geometry, material)
+      object = new Line(geometry, material)
     } else {
-      object = new THREE.LineLoop(geometry, material)
+      object = new LineLoop(geometry, material)
     }
 
     let x, y, z
