@@ -7,7 +7,18 @@ export function Navigation() {
   const isHomePage = location.pathname === '/'
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-cyan-500/30">
+    <nav
+      className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 border-b border-cyan-500 border-opacity-30"
+      style={{
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        borderBottom: '1px solid rgba(6, 182, 212, 0.3)',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 50,
+      }}
+    >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link

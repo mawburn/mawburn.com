@@ -19,6 +19,12 @@ body {
   background-color: #00001a;
 }
 
+/* Wayback Machine compatibility styles */
+nav {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-color: #000000cc; /* Hex fallback */
+}
+
 .fancyText {
   font-family: 'Sacramento', cursive;
   color: #ffffff;
