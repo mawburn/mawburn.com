@@ -13,8 +13,8 @@
     "typecheck": "wrangler types && react-router typegen && tsc -b",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "vitest",
-    "test:watch": "vitest watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ci": "vitest run"
   },

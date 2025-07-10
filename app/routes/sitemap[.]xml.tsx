@@ -48,8 +48,8 @@ ${allPages
       'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
       'CDN-Cache-Control': 'max-age=604800',
       'Cloudflare-CDN-Cache-Control': 'max-age=604800',
-      'ETag': `"sitemap-${allPages.length}"`,
-      'Vary': 'Accept-Encoding',
+      ETag: `"sitemap-${allPages.length}"`,
+      Vary: 'Accept-Encoding',
     },
   })
 }

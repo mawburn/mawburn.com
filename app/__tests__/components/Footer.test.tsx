@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
-import { BlogFooter } from '~/components/BlogFooter'
+import { Footer } from '~/components/Footer'
 
-describe('BlogFooter Component', () => {
+describe('Footer Component', () => {
   beforeEach(() => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2022-01-01'))
@@ -13,7 +13,7 @@ describe('BlogFooter Component', () => {
   })
 
   it('should render with correct structure and default max-width', () => {
-    render(<BlogFooter />)
+    render(<Footer />)
 
     // Check copyright text
     expect(screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)).toBeInTheDocument()
@@ -30,7 +30,7 @@ describe('BlogFooter Component', () => {
   })
 
   it('should use custom max-width when provided', () => {
-    render(<BlogFooter maxWidth="max-w-3xl" />)
+    render(<Footer maxWidth="max-w-3xl" />)
 
     const container = document.querySelector('.container')
     expect(container).toHaveClass('max-w-3xl')
