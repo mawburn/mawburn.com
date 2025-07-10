@@ -81,6 +81,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
             `,
           }}
         />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* Critical CSS for initial render */
+              body { margin: 0; font-family: sans-serif; }
+              .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+              .dark { color-scheme: dark; }
+              .dark body { background-color: #0f172a; color: #fdfdfd; }
+              nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; background-color: rgba(0, 0, 0, 0.8); }
+              .pt-16 { padding-top: 4rem; }
+            `,
+          }}
+        />
         {fontsToLoad.map(link => (
           <link key={link.href} {...link} />
         ))}

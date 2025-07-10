@@ -1,0 +1,33 @@
+# Cache static assets for 1 year
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS and JS assets for 1 year (with content hash)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache favicon for 1 week
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+# Cache HTML pages for 1 hour
+/*
+  Cache-Control: public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400
+
+# Cache RSS feed for 1 hour
+/rss.xml
+  Cache-Control: public, max-age=3600, s-maxage=3600
+
+# Cache sitemap for 1 day
+/sitemap.xml
+  Cache-Control: public, max-age=86400, s-maxage=86400
+
+# Security headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: accelerometer=(), ambient-light-sensor=(), autoplay=(), battery=(), camera=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), layout-animations=(), legacy-image-formats=(), magnetometer=(), microphone=(), midi=(), oversized-images=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), vr=(), wake-lock=(), screen-wake-lock=(), web-share=(), xr-spatial-tracking=()

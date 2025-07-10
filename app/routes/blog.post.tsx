@@ -1,7 +1,6 @@
 import type { Route } from './+types/blog.post'
 import { getPostBySlug } from '~/utils/blog'
 import type { BlogPost } from '~/utils/blogTypes'
-import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
 import { BlogFooter } from '~/components/BlogFooter'
 import { MarkdownContent } from '~/components/MarkdownContent'
@@ -75,13 +74,16 @@ export function loader({ params }: Route.LoaderArgs) {
     throw new Response('Not Found', { status: 404 })
   }
 
-  return createCachedResponse(
-    { post },
-    {
-      ...cacheConfigs.blogPost,
-      etag: `"blog-post-${params.slug}-${post.date}"`,
-    }
-  )
+  return new Response(JSON.stringify({ post }), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'max-age=604800',
+      'Cloudflare-CDN-Cache-Control': 'max-age=604800',
+      'ETag': `"blog-post-${params.slug}-${post.date}"`,
+      'Vary': 'Accept-Encoding',
+    },
+  })
 }
 
 export default function BlogPost({ loaderData }: Route.ComponentProps) {
