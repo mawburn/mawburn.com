@@ -40,7 +40,9 @@ describe('RSS Feed Route', () => {
 
     // Headers
     expect(response.headers.get('Content-Type')).toBe('application/rss+xml; charset=utf-8')
-    expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600')
+    expect(response.headers.get('Cache-Control')).toBe(
+      'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400'
+    )
 
     // XML structure
     expect(text).toContain('<?xml version="1.0" encoding="UTF-8"?>')

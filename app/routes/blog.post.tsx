@@ -2,7 +2,7 @@ import type { Route } from './+types/blog.post'
 import { getPostBySlug } from '~/utils/blog'
 import type { BlogPost } from '~/utils/blogTypes'
 import { Link } from 'react-router'
-import { BlogFooter } from '~/components/BlogFooter'
+import { Footer } from '~/components/Footer'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
 import { RSSIcon } from '~/components/icons'
@@ -80,8 +80,8 @@ export function loader({ params }: Route.LoaderArgs) {
       'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
       'CDN-Cache-Control': 'max-age=604800',
       'Cloudflare-CDN-Cache-Control': 'max-age=604800',
-      'ETag': `"blog-post-${params.slug}-${post.date}"`,
-      'Vary': 'Accept-Encoding',
+      ETag: `"blog-post-${params.slug}-${post.date}"`,
+      Vary: 'Accept-Encoding',
     },
   })
 }
@@ -142,7 +142,10 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
               ))}
             </div>
 
-            <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
+            <div className="flex items-center gap-3">
+              <span className="text-gray-600 dark:text-gray-400 font-medium">Share:</span>
+              <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
+            </div>
           </header>
 
           <MarkdownContent html={post.content} />
@@ -152,7 +155,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           All posts are written by me, though AI helps with proofreading and editing.
         </p>
       </div>
-      <BlogFooter maxWidth="max-w-3xl" />
+      <Footer maxWidth="max-w-3xl" />
     </div>
   )
 }

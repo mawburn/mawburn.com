@@ -2,7 +2,7 @@ import type { Route } from './+types/blog'
 import { getAllPostsMetadata } from '~/utils/blog'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
 import { Link } from 'react-router'
-import { BlogFooter } from '~/components/BlogFooter'
+import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { memo } from 'react'
 
@@ -42,8 +42,8 @@ export function loader() {
       'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
       'CDN-Cache-Control': 'max-age=86400',
       'Cloudflare-CDN-Cache-Control': 'max-age=86400',
-      'ETag': `"blog-list-${posts.length}"`,
-      'Vary': 'Accept-Encoding',
+      ETag: `"blog-list-${posts.length}"`,
+      Vary: 'Accept-Encoding',
     },
   })
 }
@@ -58,7 +58,7 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
   return (
     <article
       key={post.slug}
-      className="border-b border-gray-200 dark:border-gray-700 pb-6"
+      className="border-b border-gray-200 dark:border-gray-700 pb-8 mb-8 last:mb-0"
     >
       <Link
         to={`/blog/${post.slug}`}
@@ -69,9 +69,7 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
           {post.title}
         </h2>
         <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3 space-x-4">
-          <time dateTime={post.date}>
-            {formattedDate}
-          </time>
+          <time dateTime={post.date}>{formattedDate}</time>
           <span>•</span>
           <span>{post.readTime} min read</span>
         </div>
@@ -80,7 +78,7 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
           {post.tags.map((tag: string) => (
             <span
               key={tag}
-              className="px-2 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-xs rounded-full"
+              className="inline-block px-2 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-xs rounded-full whitespace-nowrap"
             >
               {tag}
             </span>
@@ -127,7 +125,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
           </div>
         </div>
       </div>
-      <BlogFooter />
+      <Footer />
     </div>
   )
 }

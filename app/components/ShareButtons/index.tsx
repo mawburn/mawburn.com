@@ -50,7 +50,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
     <div className="flex flex-wrap gap-2">
       <button
         onClick={() => handleShare('reddit')}
-        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
         aria-label="Share on Reddit"
       >
         <RedditIcon className="w-5 h-5" />
@@ -58,7 +58,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 
       <button
         onClick={() => handleShare('linkedin')}
-        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
         aria-label="Share on LinkedIn"
       >
         <LinkedInIcon className="w-5 h-5" />
@@ -66,7 +66,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 
       <button
         onClick={() => handleShare('bluesky')}
-        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
         aria-label="Share on Bluesky"
       >
         <BlueskyIcon className="w-5 h-5" />
@@ -74,7 +74,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 
       <button
         onClick={() => handleShare('twitter')}
-        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors"
         aria-label="Share on Twitter"
       >
         <TwitterIcon className="w-5 h-5" />
@@ -82,7 +82,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
 
       <button
         onClick={handleCopy}
-        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 transition-colors relative"
+        className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 transition-colors relative"
         aria-label="Copy link to clipboard"
       >
         <CopyIcon className="w-5 h-5" />

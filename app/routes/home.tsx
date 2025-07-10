@@ -1,6 +1,7 @@
 import type { Route } from './+types/home'
 import { Welcome } from '~/welcome/welcome'
 import { lazy, Suspense, startTransition } from 'react'
+import { Footer } from '~/components/Footer'
 
 const SynthwaveBackground = lazy(() =>
   import('~/components/SynthwaveBackground').then(module => {
@@ -32,11 +33,12 @@ export function loader({ context }: Route.LoaderArgs) {
 
 export default function Home() {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <Welcome />
+      <Footer />
       <Suspense fallback={<div className="fixed inset-0 -z-50 bg-black" />}>
         <SynthwaveBackground />
       </Suspense>
-    </>
+    </div>
   )
 }
