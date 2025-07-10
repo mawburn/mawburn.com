@@ -45,7 +45,11 @@ ${allPages
   return new Response(sitemap, {
     headers: {
       'Content-Type': 'application/xml',
-      'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
+      'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'max-age=604800',
+      'Cloudflare-CDN-Cache-Control': 'max-age=604800',
+      'ETag': `"sitemap-${allPages.length}"`,
+      'Vary': 'Accept-Encoding',
     },
   })
 }

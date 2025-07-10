@@ -1,10 +1,10 @@
 import type { Route } from './+types/blog'
 import { getAllPostsMetadata } from '~/utils/blog'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
-import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { Link } from 'react-router'
 import { BlogFooter } from '~/components/BlogFooter'
 import { RSSIcon } from '~/components/icons'
+import { memo } from 'react'
 
 export function meta(_args: Route.MetaArgs) {
   const url = 'https://mawburn.com/blog'
@@ -36,14 +36,62 @@ export function meta(_args: Route.MetaArgs) {
 export function loader() {
   const posts = getAllPostsMetadata()
 
-  return createCachedResponse(
-    { posts },
-    {
-      ...cacheConfigs.blogList,
-      etag: `"blog-list-${posts.length}"`,
-    }
-  )
+  return new Response(JSON.stringify({ posts }), {
+    headers: {
+      'Content-Type': 'application/json',
+      'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'max-age=86400',
+      'Cloudflare-CDN-Cache-Control': 'max-age=86400',
+      'ETag': `"blog-list-${posts.length}"`,
+      'Vary': 'Accept-Encoding',
+    },
+  })
 }
+
+const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
+  const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+
+  return (
+    <article
+      key={post.slug}
+      className="border-b border-gray-200 dark:border-gray-700 pb-6"
+    >
+      <Link
+        to={`/blog/${post.slug}`}
+        className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
+        prefetch="intent"
+      >
+        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
+          {post.title}
+        </h2>
+        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3 space-x-4">
+          <time dateTime={post.date}>
+            {formattedDate}
+          </time>
+          <span>•</span>
+          <span>{post.readTime} min read</span>
+        </div>
+        <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
+        <div className="flex flex-wrap gap-2">
+          {post.tags.map((tag: string) => (
+            <span
+              key={tag}
+              className="px-2 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-xs rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </Link>
+    </article>
+  )
+})
+
+BlogPostCard.displayName = 'BlogPostCard'
 
 export default function Blog({ loaderData }: Route.ComponentProps) {
   const { posts } = loaderData as { posts: BlogPostMetadata[] }
@@ -74,41 +122,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
 
           <div className="space-y-6">
             {posts.map(post => (
-              <article
-                key={post.slug}
-                className="border-b border-gray-200 dark:border-gray-700 pb-6"
-              >
-                <Link
-                  to={`/blog/${post.slug}`}
-                  className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
-                >
-                  <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
-                    {post.title}
-                  </h2>
-                  <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3 space-x-4">
-                    <span>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </span>
-                    <span>•</span>
-                    <span>{post.readTime} min read</span>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag: string) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-xs rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </Link>
-              </article>
+              <BlogPostCard key={post.slug} post={post} />
             ))}
           </div>
         </div>
