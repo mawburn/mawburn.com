@@ -2,7 +2,7 @@ import { LinkedIn, Bluesky } from '~/components/icons'
 
 export function Welcome() {
   return (
-    <main className="flex flex-col min-h-screen">
+    <main className="flex flex-col flex-1">
       <div className="flex-1"></div>
       <div className="flex flex-col items-center justify-center gap-4 min-h-screen">
         <div className="contents">

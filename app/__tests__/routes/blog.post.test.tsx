@@ -28,8 +28,8 @@ vi.mock('~/utils/cache', () => ({
   },
 }))
 
-vi.mock('~/components/BlogFooter', () => ({
-  BlogFooter: ({ maxWidth }: { maxWidth?: string }) => (
+vi.mock('~/components/Footer', () => ({
+  Footer: ({ maxWidth }: { maxWidth?: string }) => (
     <footer data-testid="blog-footer" data-max-width={maxWidth}>
       Blog Footer
     </footer>
@@ -96,9 +96,11 @@ describe('BlogPost Route', () => {
   })
 
   describe('loader function', () => {
-    it('should return post data for existing post', () => {
+    it('should return post data for existing post', async () => {
       const result = loader({ params: { slug: 'test-post' } } as any)
-      expect(result).toEqual({ post: mockPost })
+      expect(result).toBeInstanceOf(Response)
+      const data = await result.json()
+      expect(data).toEqual({ post: mockPost })
     })
 
     it('should throw 404 for non-existing post', () => {

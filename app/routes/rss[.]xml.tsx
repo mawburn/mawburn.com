@@ -37,8 +37,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
       'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
       'CDN-Cache-Control': 'max-age=86400',
       'Cloudflare-CDN-Cache-Control': 'max-age=86400',
-      'ETag': `"rss-${posts.length}"`,
-      'Vary': 'Accept-Encoding',
+      ETag: `"rss-${posts.length}"`,
+      Vary: 'Accept-Encoding',
     },
   })
 }

@@ -77,7 +77,9 @@ describe('Sitemap XML Route', () => {
     const response = await loader()
 
     expect(response.headers.get('Content-Type')).toBe('application/xml')
-    expect(response.headers.get('Cache-Control')).toBe('public, max-age=3600')
+    expect(response.headers.get('Cache-Control')).toBe(
+      'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400'
+    )
   })
 
   it('should use current date for static pages lastmod', async () => {

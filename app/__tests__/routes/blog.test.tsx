@@ -35,8 +35,8 @@ vi.mock('~/utils/cache', () => ({
   },
 }))
 
-vi.mock('~/components/BlogFooter', () => ({
-  BlogFooter: () => <footer data-testid="blog-footer">Blog Footer</footer>,
+vi.mock('~/components/Footer', () => ({
+  Footer: () => <footer data-testid="blog-footer">Blog Footer</footer>,
 }))
 
 vi.mock('react-router', () => ({
@@ -103,9 +103,11 @@ describe('Blog Route', () => {
   })
 
   describe('loader function', () => {
-    it('should return posts data with cache config', () => {
+    it('should return posts data with cache config', async () => {
       const result = loader()
-      expect(result).toEqual({
+      expect(result).toBeInstanceOf(Response)
+      const data = await result.json()
+      expect(data).toEqual({
         posts: [
           {
             slug: 'test-post-1',
