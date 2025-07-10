@@ -16,7 +16,7 @@ describe('Footer Component', () => {
     render(<Footer />)
 
     // Check copyright text
-    expect(screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)).toBeInTheDocument()
+    expect(screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)).toBeInTheDocument()
 
     // Check structure and styling
     const footer = screen.getByRole('contentinfo')
@@ -25,7 +25,7 @@ describe('Footer Component', () => {
     const container = document.querySelector('.container')
     expect(container).toHaveClass('container', 'mx-auto', 'px-4', 'py-6', 'max-w-4xl')
 
-    const textElement = screen.getByText(/© \d{4} mawburn\.com All rights reserved\./)
+    const textElement = screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)
     expect(textElement).toHaveClass('text-black', 'dark:text-white')
   })
 
