@@ -14,6 +14,10 @@ import './app.css'
 
 export const links: Route.LinksFunction = () => [
   {
+    rel: 'preconnect',
+    href: 'https://static.cloudflareinsights.com',
+  },
+  {
     rel: 'dns-prefetch',
     href: 'https://static.cloudflareinsights.com',
   },
@@ -24,9 +28,11 @@ export function headers() {
     Link: [
       '</fonts/Lexend-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
       '</fonts/Lexend-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
+      '<https://static.cloudflareinsights.com>; rel=preconnect',
     ].join(', '),
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'DENY',
+    'Cache-Control': 'public, max-age=3600',
   }
 }
 
@@ -94,6 +100,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
                   document.documentElement.classList.add('dark');
                 }
               })();
+            `,
+          }}
+        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              /* Critical CSS for initial render */
+              *, ::before, ::after { box-sizing: border-box; }
+              html { -webkit-text-size-adjust: 100%; line-height: 1.5; }
+              body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
+              .dark { color-scheme: dark; }
+              .pt-16 { padding-top: 4rem; }
+              .flex { display: flex; }
+              .flex-col { flex-direction: column; }
+              .min-h-screen { min-height: 100vh; }
+              .fixed { position: fixed; }
+              .inset-0 { inset: 0; }
+              .-z-50 { z-index: -50; }
+              .bg-black { background-color: #000; }
+              /* Navigation critical styles */
+              nav { position: fixed; top: 0; width: 100%; z-index: 50; }
             `,
           }}
         />

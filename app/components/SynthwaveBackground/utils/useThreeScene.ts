@@ -1,11 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import {
-  Scene,
-  Color,
-  Fog,
-  PerspectiveCamera,
-  WebGLRenderer
-} from '~/utils/three-lite'
+import { Scene, Color, Fog, PerspectiveCamera, WebGLRenderer } from '~/utils/three-lite'
 import { COLORS, SCENE_CONFIG } from '../config'
 import { useResize } from './useResize'
 
@@ -28,12 +22,7 @@ export function useThreeScene() {
 
     scene.fog = new Fog(COLORS.DARK_NAVY, SCENE_CONFIG.FOG_NEAR, SCENE_CONFIG.FOG_FAR)
 
-    const camera = new PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    )
+    const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
     cameraRef.current = camera
     camera.position.set(
       SCENE_CONFIG.CAMERA_POSITION.x,
@@ -42,9 +31,10 @@ export function useThreeScene() {
     )
 
     const renderer = new WebGLRenderer({
-      antialias: true,
+      antialias: false,
       alpha: true,
       powerPreference: 'high-performance',
+      stencil: false,
     })
     rendererRef.current = renderer
     renderer.setSize(window.innerWidth, window.innerHeight)

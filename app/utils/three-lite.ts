@@ -14,5 +14,5 @@ export {
   Fog,
   PerspectiveCamera,
   WebGLRenderer,
-  Object3D
+  Object3D,
 } from 'three'
