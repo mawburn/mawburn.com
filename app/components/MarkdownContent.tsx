@@ -6,19 +6,22 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-const markdownContentVariants = cva('text-gray-800 dark:text-gray-200 leading-relaxed', {
-  variants: {
-    variant: {
-      default: '',
+const markdownContentVariants = cva(
+  'text-gray-800 dark:text-gray-200 leading-loose font-inter text-lg',
+  {
+    variants: {
+      variant: {
+        default: '',
+      },
     },
-  },
-  defaultVariants: {
-    variant: 'default',
-  },
-})
+    defaultVariants: {
+      variant: 'default',
+    },
+  }
+)
 
 const markdownStyles = {
-  paragraphs: '[&_p]:mb-6',
+  paragraphs: '[&_p]:mb-8',
   links:
     '[&_a]:text-blue-600 [&_a]:dark:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-1 [&_a]:hover:text-blue-800 [&_a]:hover:dark:text-blue-300 [&_a]:transition-colors',
   headings: {

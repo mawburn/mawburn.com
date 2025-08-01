@@ -6,6 +6,8 @@
 @theme {
   --font-sans:
     'Lexend', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
+  --font-inter:
+    'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
 }
 
 html,
