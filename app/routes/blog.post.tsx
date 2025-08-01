@@ -90,7 +90,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
   const { post } = loaderData as { post: BlogPost }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <div className="flex justify-between items-center mb-8">
           <Link
@@ -109,10 +109,10 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
           </Link>
           <a
             href="/rss.xml"
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
+            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
             title="RSS Feed"
           >
-            <RSSIcon size={20} />
+            <RSSIcon size={24} />
             <span className="text-sm font-medium">RSS</span>
           </a>
         </div>
@@ -120,7 +120,7 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
         <article className="prose prose-gray dark:prose-invert max-w-none">
           <header className="mb-8">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.title}</h1>
-            <div className="flex items-center text-gray-500 dark:text-gray-400 mb-4 space-x-4">
+            <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
               <span>
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -132,18 +132,16 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
               <span>{post.readTime} min read</span>
             </div>
             <div className="flex flex-wrap gap-2 mb-6">
-              {post.tags.map((tag: string) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-sm rounded-full"
-                >
-                  {tag}
-                </span>
-              ))}
+              <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
+                Tags:
+              </span>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-xs">
+                {post.tags.join(', ')}
+              </span>
             </div>
 
             <div className="flex items-center gap-3">
-              <span className="text-gray-600 dark:text-gray-400 font-medium">Share:</span>
+              <span className="text-gray-700 dark:text-gray-200 font-medium">Share:</span>
               <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
             </div>
           </header>

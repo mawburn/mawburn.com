@@ -26,8 +26,8 @@ export const links: Route.LinksFunction = () => [
 export function headers() {
   return {
     Link: [
-      '</fonts/Lexend-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
-      '</fonts/Lexend-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
+      '</fonts/Inter_18pt-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
+      '</fonts/Inter_18pt-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
       '<https://static.cloudflareinsights.com>; rel=preconnect',
     ].join(', '),
     'X-Content-Type-Options': 'nosniff',
@@ -47,14 +47,28 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   },
   {
     rel: 'preload',
-    href: '/fonts/Lexend-Regular.woff2',
+    href: '/fonts/Inter_18pt-Regular.woff2',
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
   },
   {
     rel: 'preload',
-    href: '/fonts/Lexend-Bold.woff2',
+    href: '/fonts/Inter_18pt-Italic.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-Bold.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-BoldItalic.woff2',
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
@@ -75,7 +89,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const isHomeRoute = location.pathname === '/'
 
   const fontsToLoad = isBlogRoute
-    ? fontPreloadLinks.filter(link => link.href?.includes('Lexend'))
+    ? fontPreloadLinks.filter(link => link.href?.includes('Inter'))
     : isHomeRoute
       ? fontPreloadLinks.filter(
           link => link.href?.includes('OutrunFuture') || link.href?.includes('Sacramento')
