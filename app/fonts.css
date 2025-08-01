@@ -29,6 +29,50 @@
 }
 
 @font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local('Inter Regular'),
+    local('Inter-Regular'),
+    url('/fonts/Inter_18pt-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local('Inter Italic'),
+    local('Inter-Italic'),
+    url('/fonts/Inter_18pt-Italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local('Inter Bold'),
+    local('Inter-Bold'),
+    url('/fonts/Inter_18pt-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local('Inter Bold Italic'),
+    local('Inter-BoldItalic'),
+    url('/fonts/Inter_18pt-BoldItalic.woff2') format('woff2');
+}
+
+@font-face {
   font-family: 'Sacramento';
   font-style: normal;
   font-weight: 400;

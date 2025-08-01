@@ -1,4 +1,5 @@
 # CLAUDE.md - Project Instructions
+
 Last updated: 2025-07-31
 
 Personal portfolio and blog site built with modern web technologies.

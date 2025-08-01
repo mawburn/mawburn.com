@@ -68,21 +68,19 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
         <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
           {post.title}
         </h2>
-        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3 space-x-4">
+        <div className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-3 space-x-2">
           <time dateTime={post.date}>{formattedDate}</time>
           <span>•</span>
           <span>{post.readTime} min read</span>
         </div>
         <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
         <div className="flex flex-wrap gap-2">
-          {post.tags.map((tag: string) => (
-            <span
-              key={tag}
-              className="inline-block px-2 py-1 bg-gray-100 dark:bg-slate-300 text-gray-700 dark:text-slate-800 text-xs rounded-full whitespace-nowrap"
-            >
-              {tag}
-            </span>
-          ))}
+          <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs whitespace-nowrap">
+            Tags:
+          </span>{' '}
+          <span className="inline-block text-gray-700 dark:text-gray-400 text-xs whitespace-nowrap">
+            {post.tags.join(', ')}
+          </span>
         </div>
       </Link>
     </article>
@@ -95,7 +93,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
   const { posts } = loaderData as { posts: BlogPostMetadata[] }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
       <div className="container mx-auto max-w-4xl px-4 py-8">
         <div className="flex justify-between items-start mb-6">
           <div>
@@ -106,10 +104,10 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
           </div>
           <a
             href="/rss.xml"
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
+            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
             title="RSS Feed"
           >
-            <RSSIcon size={20} />
+            <RSSIcon size={26} />
             <span className="text-sm font-medium">RSS</span>
           </a>
         </div>
