@@ -37,6 +37,8 @@ const markdownStyles = {
     ol: '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6',
     li: '[&_li]:mb-2',
   },
+  blockquotes:
+    '[&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:dark:border-gray-600 [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote]:font-inter [&_blockquote]:text-gray-700/75 [&_blockquote]:dark:text-gray-200/75',
 }
 
 interface MarkdownContentProps
@@ -54,6 +56,7 @@ export function MarkdownContent({ html, className, variant, ...props }: Markdown
         markdownStyles.links,
         Object.values(markdownStyles.headings).join(' '),
         Object.values(markdownStyles.lists).join(' '),
+        markdownStyles.blockquotes,
         'mb-12',
         className
       )}
