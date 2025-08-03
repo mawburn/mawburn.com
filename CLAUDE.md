@@ -47,7 +47,7 @@ Personal portfolio and blog site built with modern web technologies.
 - `pnpm dev` - Start development server
 - `pnpm build` - Build for production
 - `pnpm typecheck` - Run TypeScript type checking
-- `pnpm lint` - Run linting with oxlint
+- `pnpm lint` - Run linting with eslint
 
 ## Code Style
 
