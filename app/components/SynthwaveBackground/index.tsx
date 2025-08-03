@@ -22,18 +22,13 @@ export default function SynthwaveBackground({ className = '' }: SynthwaveBackgro
       objectsRef.current.wireframeObjects = createWireframeObjects(scene)
     }
 
-    animateScene(
-      renderer,
-      scene,
-      camera,
-      objectsRef.current,
-      animationFrameRef,
-      prefersReducedMotion
-    )
+    const objects = objectsRef.current
+
+    animateScene(renderer, scene, camera, objects, animationFrameRef, prefersReducedMotion)
 
     return () => {
-      if (objectsRef.current.wireframeObjects) {
-        scene.remove(objectsRef.current.wireframeObjects)
+      if (objects.wireframeObjects) {
+        scene.remove(objects.wireframeObjects)
       }
     }
   }, [scene, camera, renderer, animationFrameRef, prefersReducedMotion])

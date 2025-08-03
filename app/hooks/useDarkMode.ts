@@ -19,7 +19,7 @@ export function useDarkMode() {
     if (currentlyDark !== isDarkMode) {
       setIsDarkMode(currentlyDark)
     }
-  }, [])
+  }, [isDarkMode])
 
   return { isDarkMode, toggleDarkMode }
 }

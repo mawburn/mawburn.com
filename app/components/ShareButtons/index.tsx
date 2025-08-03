@@ -18,8 +18,8 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       await navigator.clipboard.writeText(url)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy:', err)
+    } catch {
+      // Silently fail - clipboard access may be restricted
     }
   }
 

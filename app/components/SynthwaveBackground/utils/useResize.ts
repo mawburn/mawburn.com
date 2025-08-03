@@ -21,11 +21,14 @@ export function useResize(ref: RefObject<HTMLDivElement | null>) {
 
     updateSize()
 
+    const element = ref.current
     const observer = new ResizeObserver(updateSize)
-    observer.observe(ref.current)
+    if (element) {
+      observer.observe(element)
+    }
 
     return () => {
-      if (ref.current) observer.unobserve(ref.current)
+      if (element) observer.unobserve(element)
     }
   }, [ref])
 

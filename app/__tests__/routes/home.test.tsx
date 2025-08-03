@@ -49,7 +49,7 @@ const Home: React.ComponentType<any> = ({ loaderData }) => (
   </div>
 )
 
-const meta = (_args: any) => [
+const meta = () => [
   { title: 'Matt Burnett | Software Engineer' },
   {
     name: 'description',
@@ -85,7 +85,7 @@ describe('Home Route', () => {
     expect(screen.getByText(`Message: ${testMessage}`)).toBeInTheDocument()
 
     // Test meta tags
-    const metaTags = meta({} as any)
+    const metaTags = meta()
     expect(metaTags).toHaveLength(3)
     expect(metaTags[0]).toEqual({ title: 'Matt Burnett | Software Engineer' })
     expect(metaTags[1].name).toBe('description')

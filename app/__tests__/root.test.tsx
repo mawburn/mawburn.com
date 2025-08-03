@@ -77,7 +77,7 @@ describe('Root Layout', () => {
 
     let links = document.head.querySelectorAll('link[rel="preload"]')
     let fontLinks = Array.from(links).filter(link => link.getAttribute('href')?.includes('fonts/'))
-    let fontNames = fontLinks.map(link => link.getAttribute('href'))
+    const fontNames = fontLinks.map(link => link.getAttribute('href'))
     expect(fontNames.some(href => href?.includes('OutrunFuture'))).toBe(true)
     expect(fontNames.some(href => href?.includes('Sacramento'))).toBe(true)
     expect(fontNames.some(href => href?.includes('Lexend'))).toBe(false)

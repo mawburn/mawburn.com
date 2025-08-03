@@ -92,7 +92,7 @@ describe('setCachedResponse', () => {
     // Default max age
     await setCachedResponse(request, response)
     expect(mockCache.put).toHaveBeenCalledWith('/test', expect.any(Response))
-    let [, cachedResponse] = mockCache.put.mock.calls[0]
+    const [, cachedResponse] = mockCache.put.mock.calls[0]
     expect(cachedResponse.headers.get('Cache-Control')).toBe('public, max-age=86400')
     expect(cachedResponse.headers.get('CF-Cache-Status')).toBe('MISS')
 

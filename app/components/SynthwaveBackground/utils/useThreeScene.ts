@@ -40,7 +40,10 @@ export function useThreeScene() {
     renderer.setSize(window.innerWidth, window.innerHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-    containerRef.current.appendChild(renderer.domElement)
+    const container = containerRef.current
+    if (container) {
+      container.appendChild(renderer.domElement)
+    }
 
     return () => {
       if (animationFrameRef.current) {
@@ -48,12 +51,8 @@ export function useThreeScene() {
         animationFrameRef.current = null
       }
 
-      if (
-        containerRef.current &&
-        renderer.domElement &&
-        containerRef.current.contains(renderer.domElement)
-      ) {
-        containerRef.current.removeChild(renderer.domElement)
+      if (container && renderer.domElement && container.contains(renderer.domElement)) {
+        container.removeChild(renderer.domElement)
       }
 
       renderer.dispose()

@@ -23,7 +23,7 @@ export const links: Route.LinksFunction = () => [
   },
 ]
 
-export function meta(_args: Route.MetaArgs) {
+export function meta() {
   const url = 'https://mawburn.com/blog'
   const description =
     'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.'

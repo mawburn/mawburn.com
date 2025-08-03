@@ -11,7 +11,7 @@ const SynthwaveBackground = lazy(() =>
   })
 )
 
-export function meta(_args: Route.MetaArgs) {
+export function meta() {
   return [
     { title: 'Matt Burnett | Software Engineer' },
     {
