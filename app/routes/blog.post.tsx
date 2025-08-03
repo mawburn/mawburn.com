@@ -7,6 +7,23 @@ import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
 import { RSSIcon } from '~/components/icons'
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-Regular.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-Bold.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+]
+
 export function meta({ params }: Route.MetaArgs) {
   const post = getPostBySlug(params.slug)
   if (!post) {
@@ -74,16 +91,18 @@ export function loader({ params }: Route.LoaderArgs) {
     throw new Response('Not Found', { status: 404 })
   }
 
-  return new Response(JSON.stringify({ post }), {
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
-      'CDN-Cache-Control': 'max-age=604800',
-      'Cloudflare-CDN-Cache-Control': 'max-age=604800',
-      ETag: `"blog-post-${params.slug}-${post.date}"`,
-      Vary: 'Accept-Encoding',
-    },
-  })
+  return {
+    post,
+  }
+}
+
+export function headers() {
+  return {
+    'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
+    'CDN-Cache-Control': 'max-age=604800',
+    'Cloudflare-CDN-Cache-Control': 'max-age=604800',
+    Vary: 'Accept-Encoding',
+  }
 }
 
 export default function BlogPost({ loaderData }: Route.ComponentProps) {
@@ -119,7 +138,12 @@ export default function BlogPost({ loaderData }: Route.ComponentProps) {
 
         <article className="prose prose-gray dark:prose-invert max-w-none">
           <header className="mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">{post.title}</h1>
+            <h1
+              className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
+              style={{ fontSize: '2.25rem' }}
+            >
+              {post.title}
+            </h1>
             <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
               <span>
                 {new Date(post.date).toLocaleDateString('en-US', {
