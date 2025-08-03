@@ -96,11 +96,9 @@ describe('BlogPost Route', () => {
   })
 
   describe('loader function', () => {
-    it('should return post data for existing post', async () => {
+    it('should return post data for existing post', () => {
       const result = loader({ params: { slug: 'test-post' } } as any)
-      expect(result).toBeInstanceOf(Response)
-      const data = await result.json()
-      expect(data).toEqual({ post: mockPost })
+      expect(result).toEqual({ post: mockPost })
     })
 
     it('should throw 404 for non-existing post', () => {

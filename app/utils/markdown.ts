@@ -8,7 +8,7 @@ const md = new MarkdownIt({
 
 const defaultRender =
   md.renderer.rules.link_open ||
-  function (tokens, idx, options, env, renderer) {
+  function (tokens, idx, options, _env, renderer) {
     return renderer.renderToken(tokens, idx, options)
   }
 

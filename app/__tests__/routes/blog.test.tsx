@@ -103,11 +103,9 @@ describe('Blog Route', () => {
   })
 
   describe('loader function', () => {
-    it('should return posts data with cache config', async () => {
+    it('should return posts data', () => {
       const result = loader()
-      expect(result).toBeInstanceOf(Response)
-      const data = await result.json()
-      expect(data).toEqual({
+      expect(result).toEqual({
         posts: [
           {
             slug: 'test-post-1',

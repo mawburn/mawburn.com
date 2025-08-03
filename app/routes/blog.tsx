@@ -6,6 +6,23 @@ import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { memo } from 'react'
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-Regular.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Inter_18pt-Bold.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+]
+
 export function meta(_args: Route.MetaArgs) {
   const url = 'https://mawburn.com/blog'
   const description =
@@ -36,56 +53,53 @@ export function meta(_args: Route.MetaArgs) {
 export function loader() {
   const posts = getAllPostsMetadata()
 
-  return new Response(JSON.stringify({ posts }), {
-    headers: {
-      'Content-Type': 'application/json',
-      'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
-      'CDN-Cache-Control': 'max-age=86400',
-      'Cloudflare-CDN-Cache-Control': 'max-age=86400',
-      ETag: `"blog-list-${posts.length}"`,
-      Vary: 'Accept-Encoding',
-    },
-  })
+  return {
+    posts,
+  }
 }
 
-const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => {
-  const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+export function headers() {
+  return {
+    'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
+    'CDN-Cache-Control': 'max-age=86400',
+    'Cloudflare-CDN-Cache-Control': 'max-age=86400',
+    Vary: 'Accept-Encoding',
+  }
+}
 
-  return (
-    <article
-      key={post.slug}
-      className="border-b border-gray-200 dark:border-gray-700 pb-8 mb-8 last:mb-0"
+const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (
+  <article className="border-b border-gray-200 dark:border-gray-700 pb-8 mb-8 last:mb-0">
+    <Link
+      to={`/blog/${post.slug}`}
+      className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
+      prefetch="intent"
     >
-      <Link
-        to={`/blog/${post.slug}`}
-        className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
-        prefetch="intent"
-      >
-        <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
-          {post.title}
-        </h2>
-        <div className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-3 space-x-2">
-          <time dateTime={post.date}>{formattedDate}</time>
-          <span>•</span>
-          <span>{post.readTime} min read</span>
-        </div>
-        <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
-        <div className="flex flex-wrap gap-2">
-          <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs whitespace-nowrap">
-            Tags:
-          </span>{' '}
-          <span className="inline-block text-gray-700 dark:text-gray-400 text-xs whitespace-nowrap">
-            {post.tags.join(', ')}
-          </span>
-        </div>
-      </Link>
-    </article>
-  )
-})
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
+        {post.title}
+      </h2>
+      <div className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-3 space-x-2">
+        <time dateTime={post.date}>
+          {new Date(post.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+        <span>•</span>
+        <span>{post.readTime} min read</span>
+      </div>
+      <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
+      <div className="flex flex-wrap gap-2">
+        <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs whitespace-nowrap">
+          Tags:
+        </span>{' '}
+        <span className="inline-block text-gray-700 dark:text-gray-400 text-xs whitespace-nowrap">
+          {post.tags.join(', ')}
+        </span>
+      </div>
+    </Link>
+  </article>
+))
 
 BlogPostCard.displayName = 'BlogPostCard'
 
