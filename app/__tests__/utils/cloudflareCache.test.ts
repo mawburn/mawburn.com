@@ -1,10 +1,11 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
 import {
-  getCacheKey,
-  getCachedResponse,
-  setCachedResponse,
   createCacheableResponse,
+  getCachedResponse,
+  getCacheKey,
+  setCachedResponse,
 } from '~/utils/cloudflareCache'
-import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest'
 
 // Mock the global caches API
 const mockCache = {

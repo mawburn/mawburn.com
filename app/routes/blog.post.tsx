@@ -1,11 +1,13 @@
-import type { Route } from './+types/blog.post'
-import { getPostBySlug } from '~/utils/blog'
-import type { BlogPost } from '~/utils/blogTypes'
 import { Link } from 'react-router'
+
 import { Footer } from '~/components/Footer'
+import { RSSIcon } from '~/components/icons'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
-import { RSSIcon } from '~/components/icons'
+import { getPostBySlug } from '~/utils/blog'
+import type { BlogPost } from '~/utils/blogTypes'
+
+import type { Route } from './+types/blog.post'
 
 export const links: Route.LinksFunction = () => [
   {

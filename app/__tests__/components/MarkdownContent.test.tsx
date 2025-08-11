@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+
 import { MarkdownContent } from '~/components/MarkdownContent'
-import { describe, it, expect } from 'vitest'
 
 describe('MarkdownContent', () => {
   it('renders HTML content with default styling and accepts props', () => {

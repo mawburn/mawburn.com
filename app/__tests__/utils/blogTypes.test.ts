@@ -1,5 +1,6 @@
-import type { BlogPost, BlogPostMetadata } from '~/utils/blogTypes'
 import { describe, expect, it } from 'vitest'
+
+import type { BlogPost, BlogPostMetadata } from '~/utils/blogTypes'
 
 describe('BlogPost type', () => {
   it('accepts valid BlogPost objects with all required fields', () => {

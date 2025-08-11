@@ -1,4 +1,5 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { loader } from '~/routes/sitemap[.]xml'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
 

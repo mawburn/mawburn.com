@@ -1,3 +1,5 @@
+import './app.css'
+
 import {
   isRouteErrorResponse,
   Links,
@@ -10,7 +12,6 @@ import {
 
 import type { Route } from './+types/root'
 import { Navigation } from './components/Navigation'
-import './app.css'
 
 export const links: Route.LinksFunction = () => [
   {

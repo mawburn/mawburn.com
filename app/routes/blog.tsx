@@ -1,10 +1,12 @@
-import type { Route } from './+types/blog'
-import { getAllPostsMetadata } from '~/utils/blog'
-import type { BlogPostMetadata } from '~/utils/blogTypes'
+import { memo } from 'react'
 import { Link } from 'react-router'
+
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
-import { memo } from 'react'
+import { getAllPostsMetadata } from '~/utils/blog'
+import type { BlogPostMetadata } from '~/utils/blogTypes'
+
+import type { Route } from './+types/blog'
 
 export const links: Route.LinksFunction = () => [
   {

@@ -1,5 +1,6 @@
-import { createCachedResponse, cacheConfigs } from '~/utils/cache'
 import { describe, expect, it } from 'vitest'
+
+import { cacheConfigs, createCachedResponse } from '~/utils/cache'
 
 describe('createCachedResponse', () => {
   it('creates a response with default cache settings', async () => {

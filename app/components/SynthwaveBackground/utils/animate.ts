@@ -1,14 +1,15 @@
 import {
-  WebGLRenderer,
-  Scene,
-  PerspectiveCamera,
-  Group,
-  Object3D,
-  Line,
-  LineLoop,
-  LineBasicMaterial,
   Color,
+  Group,
+  Line,
+  LineBasicMaterial,
+  LineLoop,
+  Object3D,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
 } from '~/utils/three-lite'
+
 import { COLORS } from '../config'
 
 const PI_2 = Math.PI * 2

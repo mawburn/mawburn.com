@@ -1,5 +1,6 @@
-import { blogPostsData } from '~/utils/blogData'
 import { describe, expect, it } from 'vitest'
+
+import { blogPostsData } from '~/utils/blogData'
 
 describe('blogPostsData', () => {
   it('exports valid blog post data with correct structure', () => {
