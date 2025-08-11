@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { Layout, ErrorBoundary } from '~/root'
+
+import { ErrorBoundary, Layout } from '~/root'
 
 vi.mock('react-router', () => ({
   Links: () => <div data-testid="links" />,

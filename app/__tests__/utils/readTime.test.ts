@@ -1,5 +1,6 @@
-import { calculateReadTime } from '~/utils/readTime'
 import { describe, expect, it } from 'vitest'
+
+import { calculateReadTime } from '~/utils/readTime'
 
 describe('calculateReadTime', () => {
   it('calculates read time for normal text', () => {

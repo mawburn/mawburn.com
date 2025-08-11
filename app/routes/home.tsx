@@ -1,7 +1,9 @@
-import type { Route } from './+types/home'
-import { Welcome } from '~/welcome/welcome'
-import { lazy, Suspense, startTransition } from 'react'
+import { lazy, startTransition, Suspense } from 'react'
+
 import { Footer } from '~/components/Footer'
+import { Welcome } from '~/welcome/welcome'
+
+import type { Route } from './+types/home'
 
 const SynthwaveBackground = lazy(() =>
   import('~/components/SynthwaveBackground').then(module => {

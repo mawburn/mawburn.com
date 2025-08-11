@@ -1,4 +1,5 @@
 import type { LoaderFunctionArgs } from 'react-router'
+
 import { getAllPostsMetadata } from '~/utils/blog'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
 

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
 import React from 'react'
+import { describe, expect, it, vi } from 'vitest'
+
 import Blog, { loader, meta } from '~/routes/blog'
 import type { BlogPostMetadata } from '~/utils/blogTypes'
 
@@ -66,7 +67,7 @@ import { createRoutesStub } from 'react-router'
 describe('Blog Route', () => {
   describe('meta function', () => {
     it('should return correct meta tags', () => {
-      const result = meta({} as any)
+      const result = meta()
       expect(result).toEqual([
         { title: 'Blog | Matt Burnett' },
         {

@@ -1,5 +1,6 @@
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+
 import { loader } from '~/routes/rss[.]xml'
-import { describe, it, expect, vi, beforeEach } from 'vitest'
 import * as blogUtils from '~/utils/blog'
 
 vi.mock('~/utils/blog')

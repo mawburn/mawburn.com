@@ -1,10 +1,11 @@
 import { render } from '@testing-library/react'
-import { TwitterIcon } from '~/components/ShareButtons/icons/TwitterIcon'
-import { LinkedInIcon } from '~/components/ShareButtons/icons/LinkedInIcon'
+import { describe, expect, it } from 'vitest'
+
 import { BlueskyIcon } from '~/components/ShareButtons/icons/BlueskyIcon'
 import { CopyIcon } from '~/components/ShareButtons/icons/CopyIcon'
+import { LinkedInIcon } from '~/components/ShareButtons/icons/LinkedInIcon'
 import { RedditIcon } from '~/components/ShareButtons/icons/RedditIcon'
-import { describe, it, expect } from 'vitest'
+import { TwitterIcon } from '~/components/ShareButtons/icons/TwitterIcon'
 
 describe('ShareButton Icons', () => {
   it('renders TwitterIcon correctly', () => {

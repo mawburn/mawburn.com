@@ -1,16 +1,17 @@
 import {
-  Group,
-  Vector3,
   BufferGeometry,
-  EllipseCurve,
-  Shape,
-  ShapeGeometry,
   EdgesGeometry,
-  LineBasicMaterial,
+  EllipseCurve,
+  Group,
   Line,
+  LineBasicMaterial,
   LineLoop,
   Scene,
+  Shape,
+  ShapeGeometry,
+  Vector3,
 } from '~/utils/three-lite'
+
 import { COLORS } from '../config'
 
 export function createWireframeObjects(scene: Scene) {

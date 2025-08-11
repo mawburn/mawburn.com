@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Scene, Color, Fog, PerspectiveCamera, WebGLRenderer } from '~/utils/three-lite'
+
+import { Color, Fog, PerspectiveCamera, Scene, WebGLRenderer } from '~/utils/three-lite'
+
 import { COLORS, SCENE_CONFIG } from '../config'
 import { useResize } from './useResize'
 

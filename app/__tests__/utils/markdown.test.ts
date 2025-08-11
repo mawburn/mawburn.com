@@ -1,5 +1,6 @@
-import { markdownToHtml } from '~/utils/markdown'
 import { describe, expect, it } from 'vitest'
+
+import { markdownToHtml } from '~/utils/markdown'
 
 describe('markdownToHtml', () => {
   it('converts basic markdown elements', () => {

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { describe, expect, it, vi } from 'vitest'
 import React from 'react'
+import { describe, expect, it, vi } from 'vitest'
+
 import BlogPost, { loader, meta } from '~/routes/blog.post'
 import type { BlogPost as BlogPostType } from '~/utils/blogTypes'
 

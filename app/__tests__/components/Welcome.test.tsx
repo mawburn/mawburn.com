@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import { Welcome } from '~/welcome/welcome'
 import { describe, expect, it } from 'vitest'
+
+import { Welcome } from '~/welcome/welcome'
 
 describe('Welcome component', () => {
   it('renders correctly with all content and social links', () => {

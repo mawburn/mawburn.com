@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react'
+
 import { Group } from '~/utils/three-lite'
-import { useThreeScene } from './utils/useThreeScene'
-import { animateScene } from './utils/animate'
+
 import { createWireframeObjects } from './objects/WireframeObjects'
+import { animateScene } from './utils/animate'
+import { useThreeScene } from './utils/useThreeScene'
 
 type SynthwaveBackgroundProps = {
   className?: string

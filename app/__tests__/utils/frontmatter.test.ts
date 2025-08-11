@@ -1,5 +1,6 @@
-import { parseFrontmatter } from '~/utils/frontmatter'
 import { describe, expect, it } from 'vitest'
+
+import { parseFrontmatter } from '~/utils/frontmatter'
 
 describe('parseFrontmatter', () => {
   it('parses valid frontmatter correctly', () => {
