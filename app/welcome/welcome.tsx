@@ -1,4 +1,11 @@
-import { Bluesky, EmailIcon, GitHubIcon, InstagramIcon, LinkedIn, XIcon } from '~/components/icons'
+import {
+  AnimatedXTwitterIcon,
+  Bluesky,
+  EmailIcon,
+  GitHubIcon,
+  InstagramIcon,
+  LinkedIn,
+} from '~/components/icons'
 
 export function Welcome() {
   return (
@@ -75,7 +82,7 @@ const resources = [
   {
     href: 'https://x.com/_mawburn',
     text: 'Twitter/X',
-    icon: <XIcon />,
+    icon: <AnimatedXTwitterIcon />,
   },
   {
     href: 'mailto:mawburn7@gmail.com',
