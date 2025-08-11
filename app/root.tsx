@@ -12,6 +12,7 @@ import {
 
 import type { Route } from './+types/root'
 import { Navigation } from './components/Navigation'
+import { generatePersonStructuredData, generateWebSiteStructuredData } from './utils/structuredData'
 
 export const links: Route.LinksFunction = () => [
   {
@@ -97,6 +98,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         )
       : fontPreloadLinks
 
+  const websiteStructuredData = generateWebSiteStructuredData()
+  const personStructuredData = generatePersonStructuredData()
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -142,6 +146,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {fontsToLoad.map(link => (
           <link key={link.href} {...link} />
         ))}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData) }}
+        />
         <Meta />
         <Links />
       </head>

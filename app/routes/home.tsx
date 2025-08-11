@@ -5,6 +5,13 @@ import { Welcome } from '~/welcome/welcome'
 
 import type { Route } from './+types/home'
 
+export const links: Route.LinksFunction = () => [
+  {
+    rel: 'canonical',
+    href: 'https://mawburn.com',
+  },
+]
+
 const SynthwaveBackground = lazy(() =>
   import('~/components/SynthwaveBackground').then(module => {
     // Preload in a lower priority after initial render
