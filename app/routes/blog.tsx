@@ -10,6 +10,10 @@ import type { Route } from './+types/blog'
 
 export const links: Route.LinksFunction = () => [
   {
+    rel: 'canonical',
+    href: 'https://mawburn.com/blog',
+  },
+  {
     rel: 'preload',
     href: '/fonts/Inter_18pt-Regular.woff2',
     as: 'font',

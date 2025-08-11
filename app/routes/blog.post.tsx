@@ -6,6 +6,10 @@ import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
 import { getPostBySlug } from '~/utils/blog'
 import type { BlogPost } from '~/utils/blogTypes'
+import {
+  generateArticleStructuredData,
+  generateBreadcrumbStructuredData,
+} from '~/utils/structuredData'
 
 import type { Route } from './+types/blog.post'
 
@@ -43,7 +47,7 @@ export function meta({ params }: Route.MetaArgs) {
     ? `https://mawburn.com${post.images.twitter}`
     : ogImageUrl
 
-  const metaTags = [
+  const metaTags: Array<{ [key: string]: string }> = [
     { title: `${post.title} | Matt Burnett` },
     { name: 'description', content: post.excerpt },
     { name: 'keywords', content: post.tags.join(', ') },
@@ -107,79 +111,98 @@ export function headers() {
   }
 }
 
-export default function BlogPost({ loaderData }: Route.ComponentProps) {
+export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
   const { post } = loaderData as { post: BlogPost }
+  const url = `https://mawburn.com/blog/${params.slug}`
+
+  const articleStructuredData = generateArticleStructuredData(post, url)
+  const breadcrumbStructuredData = generateBreadcrumbStructuredData([
+    { name: 'Home', url: 'https://mawburn.com' },
+    { name: 'Blog', url: 'https://mawburn.com/blog' },
+    { name: post.title },
+  ])
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <Link
-            to="/blog"
-            className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 transition-colors"
-          >
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Back to Blog
-          </Link>
-          <a
-            href="/rss.xml"
-            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
-            title="RSS Feed"
-          >
-            <RSSIcon size={24} />
-            <span className="text-sm font-medium">RSS</span>
-          </a>
-        </div>
-
-        <article className="prose prose-gray dark:prose-invert max-w-none">
-          <header className="mb-8">
-            <h1
-              className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
-              style={{ fontSize: '2.25rem' }}
+    <>
+      <link rel="canonical" href={url} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
+      />
+      <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
+        <div className="container mx-auto max-w-3xl px-4 py-8">
+          <div className="flex justify-between items-center mb-8">
+            <Link
+              to="/blog"
+              className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 transition-colors"
             >
-              {post.title}
-            </h1>
-            <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
-              <span>
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
-                })}
-              </span>
-              <span>•</span>
-              <span>{post.readTime} min read</span>
-            </div>
-            <div className="flex flex-wrap gap-2 mb-6">
-              <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
-                Tags:
-              </span>{' '}
-              <span className="text-gray-600 dark:text-gray-400 text-xs">
-                {post.tags.join(', ')}
-              </span>
-            </div>
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Back to Blog
+            </Link>
+            <a
+              href="/rss.xml"
+              className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
+              title="RSS Feed"
+            >
+              <RSSIcon size={24} />
+              <span className="text-sm font-medium">RSS</span>
+            </a>
+          </div>
 
-            <div className="flex items-center gap-3">
-              <span className="text-gray-700 dark:text-gray-200 font-medium">Share:</span>
-              <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
-            </div>
-          </header>
+          <article className="prose prose-gray dark:prose-invert max-w-none">
+            <header className="mb-8">
+              <h1
+                className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
+                style={{ fontSize: '2.25rem' }}
+              >
+                {post.title}
+              </h1>
+              <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
+                <span>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </span>
+                <span>•</span>
+                <span>{post.readTime} min read</span>
+              </div>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
+                  Tags:
+                </span>{' '}
+                <span className="text-gray-600 dark:text-gray-400 text-xs">
+                  {post.tags.join(', ')}
+                </span>
+              </div>
 
-          <MarkdownContent html={post.content} />
-        </article>
+              <div className="flex items-center gap-3">
+                <span className="text-gray-700 dark:text-gray-200 font-medium">Share:</span>
+                <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
+              </div>
+            </header>
 
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
-          All posts are written by me, though AI helps with proofreading and editing.
-        </p>
+            <MarkdownContent html={post.content} />
+          </article>
+
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
+            All posts are written by me, though AI helps with proofreading and editing.
+          </p>
+        </div>
+        <Footer maxWidth="max-w-3xl" />
       </div>
-      <Footer maxWidth="max-w-3xl" />
-    </div>
+    </>
   )
 }

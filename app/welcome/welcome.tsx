@@ -41,7 +41,7 @@ export function Welcome() {
       </section>
       <section className="mx-auto my-16 py-16 max-w-[80ch] gap-8 flex flex-col">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">Get in touch</h2>
-        <div className="flex gap-8 justify-center">
+        <div className="flex flex-wrap gap-8 justify-center">
           {resources.map(resource => (
             <a
               href={resource.href}
