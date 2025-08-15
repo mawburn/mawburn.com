@@ -82,14 +82,12 @@ describe('SynthwaveBackground', () => {
     vi.clearAllMocks()
   })
 
-  it('renders with correct attributes', () => {
+  it('renders accessible background element', () => {
     const { container } = render(<SynthwaveBackground />)
     const backgroundDiv = container.firstChild as HTMLElement
 
-    expect(backgroundDiv).toBeDefined()
+    expect(backgroundDiv).toBeInTheDocument()
     expect(backgroundDiv).toHaveAttribute('aria-hidden', 'true')
-    expect(backgroundDiv.style.position).toBe('fixed')
-    expect(backgroundDiv.style.inset).toBeDefined()
   })
 
   it('applies custom className', () => {

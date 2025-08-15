@@ -3,7 +3,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { ThemeToggle } from '~/components/ThemeToggle'
 
-// Mock localStorage
 const localStorageMock = {
   getItem: vi.fn(),
   setItem: vi.fn(),
@@ -11,7 +10,6 @@ const localStorageMock = {
 }
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })
 
-// Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation(query => ({
@@ -32,15 +30,59 @@ describe('ThemeToggle', () => {
     document.documentElement.className = ''
   })
 
-  it('renders accessible toggle button and toggles theme', () => {
-    localStorageMock.getItem.mockReturnValue(null)
-    render(<ThemeToggle />)
+  describe('Theme switching functionality', () => {
+    it('provides accessible theme toggle button', () => {
+      localStorageMock.getItem.mockReturnValue(null)
+      render(<ThemeToggle />)
 
-    const button = screen.getByRole('button')
-    expect(button).toBeInTheDocument()
-    expect(button).toHaveAttribute('aria-label')
+      const button = screen.getByRole('button')
+      expect(button).toBeInTheDocument()
+      expect(button).toHaveAttribute('aria-label')
+      expect(button).toBeVisible()
+    })
 
-    fireEvent.click(button)
-    expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark')
+    it('toggles theme when button is clicked', () => {
+      localStorageMock.getItem.mockReturnValue(null)
+      render(<ThemeToggle />)
+
+      const button = screen.getByRole('button')
+
+      fireEvent.click(button)
+
+      expect(document.documentElement).toHaveClass('dark')
+    })
+
+    it('respects saved theme preference', () => {
+      localStorageMock.getItem.mockReturnValue('dark')
+
+      expect(() => render(<ThemeToggle />)).not.toThrow()
+
+      const button = screen.getByRole('button')
+      expect(button).toBeInTheDocument()
+    })
+
+    describe('Edge cases', () => {
+      it('handles multiple toggle clicks correctly', () => {
+        localStorageMock.getItem.mockReturnValue(null)
+        render(<ThemeToggle />)
+
+        const button = screen.getByRole('button')
+
+        fireEvent.click(button)
+        expect(document.documentElement).toHaveClass('dark')
+
+        fireEvent.click(button)
+        expect(document.documentElement).not.toHaveClass('dark')
+      })
+
+      it('handles invalid localStorage values gracefully', () => {
+        localStorageMock.getItem.mockReturnValue('invalid-theme-value')
+
+        expect(() => render(<ThemeToggle />)).not.toThrow()
+
+        const button = screen.getByRole('button')
+        expect(button).toBeInTheDocument()
+      })
+    })
   })
 })

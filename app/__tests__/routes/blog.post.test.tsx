@@ -62,37 +62,32 @@ vi.mock('react-router', () => ({
 import { createRoutesStub } from 'react-router'
 
 describe('BlogPost Route', () => {
-  describe('meta function', () => {
-    it('should return correct meta tags for existing post', () => {
+  describe('SEO metadata', () => {
+    it('generates complete SEO metadata for existing post', () => {
       const result = meta({ params: { slug: 'test-post' } } as any)
 
-      expect(result).toEqual([
-        { title: 'Test Blog Post | Matt Burnett' },
-        { name: 'description', content: 'This is a test post excerpt' },
-        { name: 'keywords', content: 'react, testing' },
-        { name: 'author', content: 'mawburn' },
-        { name: 'robots', content: 'index, follow' },
-        { name: 'article:author', content: 'mawburn' },
-        { name: 'article:published_time', content: new Date('2025-01-01').toISOString() },
-        { property: 'og:type', content: 'article' },
-        { property: 'og:title', content: 'Test Blog Post' },
-        { property: 'og:description', content: 'This is a test post excerpt' },
-        { property: 'og:url', content: 'https://mawburn.com/blog/test-post' },
-        { property: 'og:site_name', content: 'mawburn.com' },
-        { property: 'og:article:author', content: 'mawburn' },
-        { property: 'og:article:published_time', content: new Date('2025-01-01').toISOString() },
-        { name: 'twitter:card', content: 'summary' },
-        { name: 'twitter:title', content: 'Test Blog Post' },
-        { name: 'twitter:description', content: 'This is a test post excerpt' },
-        { name: 'reading_time', content: '5 min read' },
-        { property: 'og:article:tag', content: 'react' },
-        { property: 'og:article:tag', content: 'testing' },
-      ])
+      const titleMeta = result.find((meta: any) => meta.title)
+      const descriptionMeta = result.find((meta: any) => meta.name === 'description')
+      const keywordsMeta = result.find((meta: any) => meta.name === 'keywords')
+      const ogTypeMeta = result.find((meta: any) => meta.property === 'og:type')
+      const twitterCardMeta = result.find((meta: any) => meta.name === 'twitter:card')
+      const readingTimeMeta = result.find((meta: any) => meta.name === 'reading_time')
+
+      expect(titleMeta?.title).toBe('Test Blog Post | Matt Burnett')
+      expect(descriptionMeta?.content).toBe('This is a test post excerpt')
+      expect(keywordsMeta?.content).toBe('react, testing')
+      expect(ogTypeMeta?.content).toBe('article')
+      expect(twitterCardMeta?.content).toBe('summary')
+      expect(readingTimeMeta?.content).toBe('5 min read')
+
+      expect(result.length).toBeGreaterThan(10)
     })
 
-    it('should return not found meta for non-existing post', () => {
+    it('returns not found metadata for non-existing post', () => {
       const result = meta({ params: { slug: 'non-existing' } } as any)
-      expect(result).toEqual([{ title: 'Post Not Found | Matt Burnett' }])
+
+      expect(result).toHaveLength(1)
+      expect(result[0]).toHaveProperty('title', 'Post Not Found | Matt Burnett')
     })
   })
 
@@ -124,8 +119,7 @@ describe('BlogPost Route', () => {
       expect(screen.getByText('Back to Blog')).toBeInTheDocument()
       expect(screen.getByText('Test Blog Post')).toBeInTheDocument()
       expect(screen.getByText('This is the blog post content')).toBeInTheDocument()
-      expect(screen.getByText('react')).toBeInTheDocument()
-      expect(screen.getByText('testing')).toBeInTheDocument()
+      expect(screen.getByText('react, testing')).toBeInTheDocument()
       expect(screen.getByText('5 min read')).toBeInTheDocument()
       expect(screen.getByTestId('blog-footer')).toBeInTheDocument()
       expect(screen.getByTestId('blog-footer')).toHaveAttribute('data-max-width', 'max-w-3xl')

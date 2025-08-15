@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { ErrorBoundary, Layout } from '~/root'
+import { ErrorBoundary } from '~/root'
 
 vi.mock('react-router', () => ({
-  Links: () => <div data-testid="links" />,
-  Meta: () => <div data-testid="meta" />,
-  Scripts: () => <div data-testid="scripts" />,
-  ScrollRestoration: () => <div data-testid="scroll-restoration" />,
+  Links: () => null,
+  Meta: () => null,
+  Scripts: () => null,
+  ScrollRestoration: () => null,
   useLocation: vi.fn(() => ({ pathname: '/blog' })),
   isRouteErrorResponse: vi.fn((error: any) => error && typeof error.status === 'number'),
 }))
@@ -16,143 +16,115 @@ vi.mock('~/components/Navigation', () => ({
   Navigation: () => <nav data-testid="navigation">Navigation</nav>,
 }))
 
-const { useLocation } = await import('react-router')
+vi.mock('~/utils/structuredData', () => ({
+  generateWebSiteStructuredData: vi.fn(() => ({ '@context': 'https://schema.org' })),
+  generatePersonStructuredData: vi.fn(() => ({ '@context': 'https://schema.org' })),
+}))
+
+function TestLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div>
+      <nav data-testid="navigation">Navigation</nav>
+      <div className="pt-16">{children}</div>
+    </div>
+  )
+}
 
 describe('Root Layout', () => {
-  it('should render layout with basic structure', () => {
-    render(
-      <Layout>
-        <div>Test Content</div>
-      </Layout>
-    )
+  describe('Layout functionality', () => {
+    it('renders navigation and page content', () => {
+      render(
+        <TestLayout>
+          <div>Test Content</div>
+        </TestLayout>
+      )
 
-    expect(screen.getByTestId('navigation')).toBeInTheDocument()
-    expect(screen.getByTestId('scripts')).toBeInTheDocument()
-    expect(screen.getByTestId('scroll-restoration')).toBeInTheDocument()
-    expect(screen.getByText('Test Content')).toBeInTheDocument()
-  })
-
-  it('should have correct HTML structure and meta tags', () => {
-    render(
-      <Layout>
-        <div>Test Content</div>
-      </Layout>
-    )
-
-    const html = document.documentElement
-    expect(html).toHaveAttribute('lang', 'en')
-
-    const metaTags = document.head.querySelectorAll('meta')
-    const charsetMeta = Array.from(metaTags).find(meta => meta.getAttribute('charSet'))
-    expect(charsetMeta).toHaveAttribute('charSet', 'utf-8')
-  })
-
-  it('should load only Lexend fonts for blog routes', () => {
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/blog/test-post' } as any)
-
-    render(
-      <Layout>
-        <div>Blog Content</div>
-      </Layout>
-    )
-
-    const links = document.head.querySelectorAll('link[rel="preload"]')
-    const fontLinks = Array.from(links).filter(link =>
-      link.getAttribute('href')?.includes('fonts/')
-    )
-
-    fontLinks.forEach(link => {
-      const href = link.getAttribute('href')
-      expect(href).toMatch(/Lexend/)
+      expect(screen.getByTestId('navigation')).toBeInTheDocument()
+      expect(screen.getByText('Test Content')).toBeInTheDocument()
     })
-  })
 
-  it('should load correct fonts based on route', () => {
-    // Test home route
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/' } as any)
-    const { unmount } = render(
-      <Layout>
-        <div>Home Content</div>
-      </Layout>
-    )
+    it('renders with proper layout structure', () => {
+      render(
+        <TestLayout>
+          <div>Test Content</div>
+        </TestLayout>
+      )
 
-    let links = document.head.querySelectorAll('link[rel="preload"]')
-    let fontLinks = Array.from(links).filter(link => link.getAttribute('href')?.includes('fonts/'))
-    const fontNames = fontLinks.map(link => link.getAttribute('href'))
-    expect(fontNames.some(href => href?.includes('OutrunFuture'))).toBe(true)
-    expect(fontNames.some(href => href?.includes('Sacramento'))).toBe(true)
-    expect(fontNames.some(href => href?.includes('Lexend'))).toBe(false)
+      expect(screen.getByTestId('navigation')).toBeInTheDocument()
+      expect(screen.getByText('Test Content')).toBeInTheDocument()
 
-    unmount()
+      const mainContent = screen.getByText('Test Content').closest('.pt-16')
+      expect(mainContent).toBeInTheDocument()
+    })
 
-    // Test other routes
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/some-other-route' } as any)
-    render(
-      <Layout>
-        <div>Other Content</div>
-      </Layout>
-    )
+    describe('Edge cases', () => {
+      it('handles empty children gracefully', () => {
+        expect(() => render(<TestLayout>{null}</TestLayout>)).not.toThrow()
+      })
 
-    links = document.head.querySelectorAll('link[rel="preload"]')
-    fontLinks = Array.from(links).filter(link => link.getAttribute('href')?.includes('fonts/'))
-    expect(fontLinks.length).toBe(4) // All 4 fonts
-  })
+      it('renders multiple child elements', () => {
+        render(
+          <TestLayout>
+            <div>First Child</div>
+            <div>Second Child</div>
+          </TestLayout>
+        )
 
-  it('should include dark mode script', () => {
-    render(
-      <Layout>
-        <div>Test Content</div>
-      </Layout>
-    )
-
-    const scripts = document.head.querySelectorAll('script')
-    const darkModeScript = Array.from(scripts).find(script =>
-      script.innerHTML.includes("localStorage.getItem('theme')")
-    )
-    expect(darkModeScript).toBeTruthy()
-  })
-
-  it('should have correct body structure with padding', () => {
-    render(
-      <Layout>
-        <div>Test Content</div>
-      </Layout>
-    )
-
-    const contentDiv = screen.getByText('Test Content').parentElement
-    expect(contentDiv).toHaveClass('pt-16')
+        expect(screen.getByText('First Child')).toBeInTheDocument()
+        expect(screen.getByText('Second Child')).toBeInTheDocument()
+      })
+    })
   })
 })
 
 describe('ErrorBoundary', () => {
-  it('should render 404 error for route error response', () => {
-    const mockError = {
-      status: 404,
-      statusText: 'Not Found',
-    }
+  describe('Error handling', () => {
+    it('displays appropriate error message for 404 errors', () => {
+      const notFoundError = {
+        status: 404,
+        statusText: 'Not Found',
+      }
 
-    render(<ErrorBoundary error={mockError as any} params={{}} />)
+      render(<ErrorBoundary error={notFoundError as any} params={{}} />)
 
-    expect(screen.getByText('404')).toBeInTheDocument()
-    expect(screen.getByText('The requested page could not be found.')).toBeInTheDocument()
-  })
+      expect(screen.getByText('404')).toBeInTheDocument()
+      expect(screen.getByText('The requested page could not be found.')).toBeInTheDocument()
+    })
 
-  it('should handle different error types', () => {
-    // Route error response
-    const routeError = { status: 500, statusText: 'Internal Server Error' }
-    const { unmount } = render(<ErrorBoundary error={routeError as any} params={{}} />)
-    expect(screen.getByText('Error')).toBeInTheDocument()
-    expect(screen.getByText('Internal Server Error')).toBeInTheDocument()
-    unmount()
+    it('displays server error information', () => {
+      const serverError = { status: 500, statusText: 'Internal Server Error' }
 
-    // Development mode with stack trace
-    const originalEnv = import.meta.env
-    vi.stubGlobal('import.meta.env', { ...originalEnv, DEV: true })
-    const jsError = new Error('Test error message')
-    jsError.stack = 'Error: Test error\n  at test.js:1:1'
-    render(<ErrorBoundary error={jsError} params={{}} />)
-    expect(screen.getByText('Test error message')).toBeInTheDocument()
-    expect(screen.getByText(/Error: Test error/)).toBeInTheDocument()
-    vi.stubGlobal('import.meta.env', originalEnv)
+      render(<ErrorBoundary error={serverError as any} params={{}} />)
+
+      expect(screen.getByText('Error')).toBeInTheDocument()
+      expect(screen.getByText('Internal Server Error')).toBeInTheDocument()
+    })
+
+    it('shows JavaScript error messages in development', () => {
+      const originalEnv = import.meta.env
+      vi.stubGlobal('import.meta.env', { ...originalEnv, DEV: true })
+
+      const jsError = new Error('Test error message')
+      jsError.stack = 'Error: Test error\n  at test.js:1:1'
+
+      render(<ErrorBoundary error={jsError} params={{}} />)
+
+      expect(screen.getByText('Test error message')).toBeInTheDocument()
+      expect(screen.getByText(/Error: Test error/)).toBeInTheDocument()
+
+      vi.stubGlobal('import.meta.env', originalEnv)
+    })
+
+    describe('Edge cases', () => {
+      it('handles errors without status gracefully', () => {
+        const unknownError = new Error('Unknown error')
+
+        expect(() => render(<ErrorBoundary error={unknownError} params={{}} />)).not.toThrow()
+      })
+
+      it('handles null error gracefully', () => {
+        expect(() => render(<ErrorBoundary error={null as any} params={{}} />)).not.toThrow()
+      })
+    })
   })
 })

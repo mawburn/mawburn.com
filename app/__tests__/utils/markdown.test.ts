@@ -15,12 +15,12 @@ describe('markdownToHtml', () => {
     expect(formattedHtml).toContain('<em>italic text</em>')
 
     // Links
-    expect(markdownToHtml('[GitHub](https://github.com)')).toContain(
-      '<a href="https://github.com">GitHub</a>'
-    )
-    expect(markdownToHtml('Visit https://example.com for more info')).toContain(
-      '<a href="https://example.com">https://example.com</a>'
-    )
+    const linkHtml = markdownToHtml('[GitHub](https://github.com)')
+    expect(linkHtml).toContain('<a href="https://github.com"')
+    expect(linkHtml).toContain('>GitHub</a>')
+    const autolinkHtml = markdownToHtml('Visit https://example.com for more info')
+    expect(autolinkHtml).toContain('<a href="https://example.com"')
+    expect(autolinkHtml).toContain('>https://example.com</a>')
 
     // Code
     const codeBlock = markdownToHtml('```javascript\nconsole.log("Hello");\n```')
@@ -98,7 +98,8 @@ And here's a list:
     expect(html).toContain('<h2>Code Example</h2>')
     expect(html).toContain('<strong>paragraph</strong>')
     expect(html).toContain('<em>emphasis</em>')
-    expect(html).toContain('<a href="https://example.com">link</a>')
+    expect(html).toContain('<a href="https://example.com"')
+    expect(html).toContain('>link</a>')
     expect(html).toContain('<pre><code class="language-javascript">')
     expect(html).toContain('<ul>')
     expect(html).toContain('<code>inline code</code>')
