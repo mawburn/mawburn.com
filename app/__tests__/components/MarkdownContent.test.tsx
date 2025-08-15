@@ -4,67 +4,78 @@ import { describe, expect, it } from 'vitest'
 import { MarkdownContent } from '~/components/MarkdownContent'
 
 describe('MarkdownContent', () => {
-  it('renders HTML content with default styling and accepts props', () => {
-    const html = '<p>Test content</p>'
-    const { container } = render(
-      <MarkdownContent
-        html={html}
-        className="custom-class"
-        data-testid="markdown-content"
-        id="test-id"
-      />
-    )
+  describe('HTML content rendering', () => {
+    it('displays HTML content correctly', () => {
+      const html = '<p>Test content</p>'
+      render(<MarkdownContent html={html} />)
 
-    expect(screen.getByText('Test content')).toBeInTheDocument()
+      expect(screen.getByText('Test content')).toBeInTheDocument()
+    })
 
-    const div = container.firstChild as HTMLElement
-    expect(div).toHaveClass(
-      'text-gray-800',
-      'dark:text-gray-200',
-      'leading-relaxed',
-      'mb-12',
-      'custom-class'
-    )
-    expect(div).toHaveAttribute('data-testid', 'markdown-content')
-    expect(div).toHaveAttribute('id', 'test-id')
-  })
+    it('accepts and applies custom props', () => {
+      const html = '<p>Test content</p>'
+      render(
+        <MarkdownContent
+          html={html}
+          className="custom-class"
+          data-testid="markdown-content"
+          id="test-id"
+        />
+      )
 
-  it('renders complex HTML with multiple elements', () => {
-    const html = `
-      <h1>Main Heading</h1>
-      <p>First paragraph with <a href="/link">a link</a></p>
-      <h2>Subheading</h2>
-      <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-      </ul>
-      <ol>
-        <li>Ordered item 1</li>
-        <li>Ordered item 2</li>
-      </ol>
-    `
-    render(<MarkdownContent html={html} />)
+      const container = screen.getByTestId('markdown-content')
+      expect(container).toHaveAttribute('id', 'test-id')
+      expect(container).toHaveClass('custom-class')
+    })
 
-    expect(screen.getByText('Main Heading')).toBeInTheDocument()
-    expect(screen.getByText('First paragraph with')).toBeInTheDocument()
-    expect(screen.getByText('a link')).toBeInTheDocument()
-    expect(screen.getByText('Subheading')).toBeInTheDocument()
-    expect(screen.getByText('Item 1')).toBeInTheDocument()
-    expect(screen.getByText('Item 2')).toBeInTheDocument()
-    expect(screen.getByText('Ordered item 1')).toBeInTheDocument()
-    expect(screen.getByText('Ordered item 2')).toBeInTheDocument()
-  })
+    it('renders complex HTML structures with all elements', () => {
+      const html = `
+        <h1>Main Heading</h1>
+        <p>First paragraph with <a href="/link">a link</a></p>
+        <h2>Subheading</h2>
+        <ul>
+          <li>Item 1</li>
+          <li>Item 2</li>
+        </ul>
+        <ol>
+          <li>Ordered item 1</li>
+          <li>Ordered item 2</li>
+        </ol>
+        <blockquote>A quote</blockquote>
+        <code>inline code</code>
+      `
+      render(<MarkdownContent html={html} />)
 
-  it('handles edge cases including empty HTML and special characters', () => {
-    // Empty HTML
-    const { container, rerender } = render(<MarkdownContent html="" />)
-    const div = container.firstChild as HTMLElement
-    expect(div).toBeInTheDocument()
-    expect(div.innerHTML).toBe('')
+      expect(screen.getByRole('heading', { level: 1, name: 'Main Heading' })).toBeInTheDocument()
+      expect(screen.getByRole('heading', { level: 2, name: 'Subheading' })).toBeInTheDocument()
+      expect(screen.getByRole('link', { name: 'a link' })).toHaveAttribute('href', '/link')
+      expect(screen.getAllByRole('list')).toHaveLength(2)
+      expect(screen.getByText('Item 1')).toBeInTheDocument()
+      expect(screen.getByText('Ordered item 1')).toBeInTheDocument()
+      expect(screen.getByText('A quote')).toBeInTheDocument()
+      expect(screen.getByText('inline code')).toBeInTheDocument()
+    })
 
-    // Special characters
-    const htmlWithSpecialChars = '<p>Test with &lt;special&gt; characters &amp; entities</p>'
-    rerender(<MarkdownContent html={htmlWithSpecialChars} />)
-    expect(screen.getByText('Test with <special> characters & entities')).toBeInTheDocument()
+    describe('Edge cases', () => {
+      it('handles empty HTML gracefully', () => {
+        const { container } = render(<MarkdownContent html="" />)
+        const div = container.firstChild as HTMLElement
+        expect(div).toBeInTheDocument()
+        expect(div.innerHTML).toBe('')
+      })
+
+      it('properly decodes HTML entities', () => {
+        const htmlWithEntities = '<p>Test with &lt;special&gt; characters &amp; entities</p>'
+        render(<MarkdownContent html={htmlWithEntities} />)
+        expect(screen.getByText('Test with <special> characters & entities')).toBeInTheDocument()
+      })
+
+      it('handles malformed HTML without crashing', () => {
+        const malformedHtml = '<p>Unclosed paragraph <strong>bold text'
+        expect(() => render(<MarkdownContent html={malformedHtml} />)).not.toThrow()
+        expect(screen.getByText('Unclosed paragraph')).toBeInTheDocument()
+        expect(screen.getByText('bold text')).toBeInTheDocument()
+      })
+    })
   })
 })

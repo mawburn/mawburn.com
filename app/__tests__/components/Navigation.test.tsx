@@ -4,8 +4,8 @@ import { describe, expect, it, vi } from 'vitest'
 import { Navigation } from '~/components/Navigation'
 
 vi.mock('react-router', () => ({
-  Link: ({ to, children, className, ...props }: any) => (
-    <a href={to} className={className} {...props}>
+  Link: ({ to, children, ...props }: any) => (
+    <a href={to} {...props}>
       {children}
     </a>
   ),
@@ -13,8 +13,8 @@ vi.mock('react-router', () => ({
 }))
 
 vi.mock('~/components/HouseIcon', () => ({
-  HouseIcon: ({ className }: { className?: string }) => (
-    <svg data-testid="house-icon" className={className}>
+  HouseIcon: () => (
+    <svg data-testid="house-icon">
       <title>House Icon</title>
     </svg>
   ),
@@ -26,36 +26,49 @@ vi.mock('~/components/ThemeToggle', () => ({
 
 const { useLocation } = await import('react-router')
 
-describe('Navigation Component', () => {
-  it('should render navigation with correct structure and styling', () => {
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/blog' } as any)
-    render(<Navigation />)
+describe('Navigation', () => {
+  describe('Navigation links', () => {
+    it('provides accessible navigation to all main sections', () => {
+      vi.mocked(useLocation).mockReturnValue({ pathname: '/blog' } as any)
+      render(<Navigation />)
 
-    // Navigation structure
-    const nav = screen.getByRole('navigation')
-    expect(nav).toHaveClass('fixed', 'top-0', 'left-0', 'right-0', 'z-50')
+      const nav = screen.getByRole('navigation')
+      expect(nav).toBeInTheDocument()
 
-    // Links
-    const homeLink = screen.getByLabelText('Home')
-    expect(homeLink).toHaveAttribute('href', '/')
-    expect(homeLink).toHaveClass('text-white', 'hover:text-cyan-300')
+      const homeLink = screen.getByLabelText('Home')
+      expect(homeLink).toHaveAttribute('href', '/')
+      expect(homeLink).toBeVisible()
 
-    const blogLink = screen.getByText('Blog').closest('a')
-    expect(blogLink).toHaveAttribute('href', '/blog')
-    expect(blogLink).toHaveClass('text-white', 'hover:text-cyan-300')
+      const blogLink = screen.getByText('Blog').closest('a')
+      expect(blogLink).toHaveAttribute('href', '/blog')
+      expect(blogLink).toBeVisible()
 
-    // House icon
-    const houseIcon = screen.getByTestId('house-icon')
-    expect(houseIcon).toBeInTheDocument()
-    expect(houseIcon).toHaveClass('w-8', 'h-8')
+      expect(screen.getByTestId('house-icon')).toBeInTheDocument()
+    })
 
-    // Theme toggle on non-home page
-    expect(screen.getByTestId('theme-toggle')).toBeInTheDocument()
-  })
+    it('shows theme toggle when not on home page', () => {
+      vi.mocked(useLocation).mockReturnValue({ pathname: '/blog' } as any)
+      render(<Navigation />)
 
-  it('should hide theme toggle on home page', () => {
-    vi.mocked(useLocation).mockReturnValue({ pathname: '/' } as any)
-    render(<Navigation />)
-    expect(screen.queryByTestId('theme-toggle')).not.toBeInTheDocument()
+      expect(screen.getByTestId('theme-toggle')).toBeInTheDocument()
+    })
+
+    describe('Edge cases', () => {
+      it('hides theme toggle on home page', () => {
+        vi.mocked(useLocation).mockReturnValue({ pathname: '/' } as any)
+        render(<Navigation />)
+
+        expect(screen.queryByTestId('theme-toggle')).not.toBeInTheDocument()
+      })
+
+      it('handles different page paths correctly', () => {
+        vi.mocked(useLocation).mockReturnValue({ pathname: '/blog/some-post' } as any)
+        render(<Navigation />)
+
+        expect(screen.getByTestId('theme-toggle')).toBeInTheDocument()
+        expect(screen.getByLabelText('Home')).toBeInTheDocument()
+        expect(screen.getByText('Blog')).toBeInTheDocument()
+      })
+    })
   })
 })

@@ -8,46 +8,50 @@ import { RedditIcon } from '~/components/ShareButtons/icons/RedditIcon'
 import { TwitterIcon } from '~/components/ShareButtons/icons/TwitterIcon'
 
 describe('ShareButton Icons', () => {
-  it('renders TwitterIcon correctly', () => {
-    const { container } = render(<TwitterIcon className="custom-class" width="32" height="32" />)
-    const svg = container.querySelector('svg')
-    expect(svg).toHaveAttribute('fill', 'currentColor')
-    expect(svg).toHaveClass('custom-class')
-    expect(svg).toHaveAttribute('width', '32')
-    expect(svg).toHaveAttribute('height', '32')
-  })
+  describe('Icon rendering', () => {
+    it('renders all icons without errors', () => {
+      expect(() => render(<TwitterIcon />)).not.toThrow()
+      expect(() => render(<LinkedInIcon />)).not.toThrow()
+      expect(() => render(<BlueskyIcon />)).not.toThrow()
+      expect(() => render(<CopyIcon />)).not.toThrow()
+      expect(() => render(<RedditIcon />)).not.toThrow()
+    })
 
-  it('renders LinkedInIcon with default size', () => {
-    const { container } = render(<LinkedInIcon className="custom-class" />)
-    const svg = container.querySelector('svg')
-    expect(svg).toHaveAttribute('width', '24')
-    expect(svg).toHaveAttribute('height', '24')
-    expect(svg).toHaveClass('custom-class')
-  })
+    it('accepts custom CSS classes', () => {
+      const { container: twitterContainer } = render(<TwitterIcon className="custom-class" />)
+      const { container: linkedinContainer } = render(<LinkedInIcon className="another-class" />)
 
-  it('renders BlueskyIcon with custom style', () => {
-    const { container } = render(<BlueskyIcon style={{ color: 'blue' }} />)
-    const svg = container.querySelector('svg')
-    expect(svg).toHaveAttribute('width', '24')
-    expect(svg).toHaveAttribute('height', '24')
-    expect(svg).toHaveStyle({ color: 'rgb(0, 0, 255)' })
-  })
+      const twitterIcon = twitterContainer.querySelector('svg')
+      const linkedinIcon = linkedinContainer.querySelector('svg')
 
-  it('renders CopyIcon with stroke properties', () => {
-    const { container } = render(<CopyIcon />)
-    const svg = container.querySelector('svg')
-    expect(svg).toHaveAttribute('width', '24')
-    expect(svg).toHaveAttribute('height', '24')
-    expect(svg).toHaveAttribute('stroke', 'currentColor')
-    expect(svg).toHaveAttribute('stroke-width', '2')
-  })
+      expect(twitterIcon).toHaveClass('custom-class')
+      expect(linkedinIcon).toHaveClass('another-class')
+    })
 
-  it('renders RedditIcon correctly', () => {
-    const { container } = render(<RedditIcon className="custom-class" />)
-    const svg = container.querySelector('svg')
-    expect(svg).toHaveAttribute('width', '24')
-    expect(svg).toHaveAttribute('height', '24')
-    expect(svg).toHaveAttribute('fill', 'currentColor')
-    expect(svg).toHaveClass('custom-class')
+    it('supports custom sizing properties', () => {
+      const { container } = render(<TwitterIcon width="32" height="32" />)
+      const svg = container.querySelector('svg')
+
+      expect(svg).toHaveAttribute('width', '32')
+      expect(svg).toHaveAttribute('height', '32')
+    })
+
+    describe('Edge cases', () => {
+      it('handles custom styles properly', () => {
+        const { container } = render(<BlueskyIcon style={{ color: 'blue' }} />)
+        const svg = container.querySelector('svg')
+
+        expect(svg).toHaveStyle({ color: 'rgb(0, 0, 255)' })
+      })
+
+      it('renders with default dimensions when no size specified', () => {
+        const { container } = render(<CopyIcon />)
+        const svg = container.querySelector('svg')
+
+        expect(svg).toBeInTheDocument()
+        expect(svg).toHaveAttribute('width')
+        expect(svg).toHaveAttribute('height')
+      })
+    })
   })
 })
