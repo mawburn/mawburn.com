@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import type { BlogPost as BlogPostType } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import BlogPost, { loader, meta } from '~/routes/blog.post'
-import type { BlogPost as BlogPostType } from '~/utils/blogTypes'
 
 const mockPost: BlogPostType = {
   slug: 'test-post',
@@ -13,13 +13,17 @@ const mockPost: BlogPostType = {
   tags: ['react', 'testing'],
   readTime: 5,
   content: '<p>This is the blog post content</p>',
+  image: undefined,
+  images: undefined,
 }
 
-vi.mock('~/utils/blog', () => ({
-  getPostBySlug: vi.fn((slug: string) => {
-    if (slug === 'test-post') return mockPost
-    return null
-  }),
+vi.mock('~/utils/blog-config', () => ({
+  blog: {
+    getPostBySlug: vi.fn(async (slug: string) => {
+      if (slug === 'test-post') return mockPost
+      return null
+    }),
+  },
 }))
 
 vi.mock('~/utils/cache', () => ({
@@ -64,7 +68,7 @@ import { createRoutesStub } from 'react-router'
 describe('BlogPost Route', () => {
   describe('SEO metadata', () => {
     it('generates complete SEO metadata for existing post', () => {
-      const result = meta({ params: { slug: 'test-post' } } as any)
+      const result = meta({ params: { slug: 'test-post' }, data: { post: mockPost } } as any)
 
       const titleMeta = result.find((meta: any) => meta.title)
       const descriptionMeta = result.find((meta: any) => meta.name === 'description')
@@ -84,7 +88,7 @@ describe('BlogPost Route', () => {
     })
 
     it('returns not found metadata for non-existing post', () => {
-      const result = meta({ params: { slug: 'non-existing' } } as any)
+      const result = meta({ params: { slug: 'non-existing' }, data: { post: null } } as any)
 
       expect(result).toHaveLength(1)
       expect(result[0]).toHaveProperty('title', 'Post Not Found | Matt Burnett')
@@ -92,15 +96,13 @@ describe('BlogPost Route', () => {
   })
 
   describe('loader function', () => {
-    it('should return post data for existing post', () => {
-      const result = loader({ params: { slug: 'test-post' } } as any)
+    it('should return post data for existing post', async () => {
+      const result = await loader({ params: { slug: 'test-post' } } as any)
       expect(result).toEqual({ post: mockPost })
     })
 
-    it('should throw 404 for non-existing post', () => {
-      expect(() => {
-        loader({ params: { slug: 'non-existing' } } as any)
-      }).toThrow()
+    it('should throw 404 for non-existing post', async () => {
+      await expect(loader({ params: { slug: 'non-existing' } } as any)).rejects.toThrow()
     })
   })
 

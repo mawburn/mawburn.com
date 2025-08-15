@@ -1,7 +1,7 @@
+import type { BlogPostMetadata } from 'postflow'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { loader } from '~/routes/sitemap[.]xml'
-import type { BlogPostMetadata } from '~/utils/blogTypes'
 
 const mockPosts: BlogPostMetadata[] = [
   {
@@ -22,14 +22,65 @@ const mockPosts: BlogPostMetadata[] = [
   },
 ]
 
-vi.mock('~/utils/blog', () => ({
-  getAllPostsMetadata: vi.fn(() => mockPosts),
+const mockGenerateSitemapResponse = vi.fn()
+
+vi.mock('postflow', () => ({
+  SitemapGenerator: vi.fn(() => ({
+    generateSitemapResponse: mockGenerateSitemapResponse,
+  })),
+}))
+
+vi.mock('~/utils/blog-config', () => ({
+  blog: {
+    getAllPostsMetadata: vi.fn(async () => mockPosts),
+    getSiteConfig: vi.fn(() => ({
+      title: 'Matt Burnett - Developer & Creator',
+      description: 'A blog about web development, technology, and creativity',
+      baseUrl: 'https://mawburn.com',
+      language: 'en-us',
+    })),
+  },
 }))
 
 describe('Sitemap XML Route', () => {
   beforeEach(() => {
     vi.useFakeTimers()
     vi.setSystemTime(new Date('2025-01-15T10:00:00Z'))
+
+    const mockXML = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://mawburn.com</loc>
+<lastmod>2025-01-15T10:00:00.000Z</lastmod>
+<priority>1.0</priority>
+<changefreq>weekly</changefreq>
+</url>
+<url>
+<loc>https://mawburn.com/blog</loc>
+<lastmod>2025-01-15T10:00:00.000Z</lastmod>
+<priority>0.8</priority>
+<changefreq>weekly</changefreq>
+</url>
+${mockPosts
+  .map(
+    post => `<url>
+<loc>https://mawburn.com/blog/${post.slug}</loc>
+<lastmod>${new Date(post.date).toISOString()}</lastmod>
+<priority>0.7</priority>
+<changefreq>monthly</changefreq>
+</url>`
+  )
+  .join('\n')}
+</urlset>`
+
+    const mockResponse = new Response(mockXML, {
+      headers: {
+        'Content-Type': 'application/xml',
+        'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+      },
+    })
+
+    mockGenerateSitemapResponse.mockReturnValue(mockResponse)
   })
 
   afterEach(() => {
@@ -91,7 +142,33 @@ describe('Sitemap XML Route', () => {
   })
 
   it('should handle empty blog posts', async () => {
-    vi.mocked(await import('~/utils/blog')).getAllPostsMetadata.mockReturnValue([])
+    const { blog } = await import('~/utils/blog-config')
+    vi.mocked(blog.getAllPostsMetadata).mockResolvedValue([])
+
+    const emptyXML = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://mawburn.com</loc>
+<lastmod>2025-01-15T10:00:00.000Z</lastmod>
+<priority>1.0</priority>
+<changefreq>weekly</changefreq>
+</url>
+<url>
+<loc>https://mawburn.com/blog</loc>
+<lastmod>2025-01-15T10:00:00.000Z</lastmod>
+<priority>0.8</priority>
+<changefreq>weekly</changefreq>
+</url>
+</urlset>`
+
+    const emptyResponse = new Response(emptyXML, {
+      headers: {
+        'Content-Type': 'application/xml',
+        'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+      },
+    })
+
+    mockGenerateSitemapResponse.mockReturnValue(emptyResponse)
 
     const response = await loader()
     const xml = await response.text()

@@ -1,11 +1,11 @@
+import type { BlogPost } from 'postflow'
 import { Link } from 'react-router'
 
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
-import { getPostBySlug } from '~/utils/blog'
-import type { BlogPost } from '~/utils/blogTypes'
+import { blog } from '~/utils/blog-config'
 import {
   generateArticleStructuredData,
   generateBreadcrumbStructuredData,
@@ -30,8 +30,8 @@ export const links: Route.LinksFunction = () => [
   },
 ]
 
-export function meta({ params }: Route.MetaArgs) {
-  const post = getPostBySlug(params.slug)
+export function meta({ params, data }: Route.MetaArgs) {
+  const post = data?.post
   if (!post) {
     return [{ title: 'Post Not Found | Matt Burnett' }]
   }
@@ -91,8 +91,8 @@ export function meta({ params }: Route.MetaArgs) {
   return metaTags
 }
 
-export function loader({ params }: Route.LoaderArgs) {
-  const post = getPostBySlug(params.slug)
+export async function loader({ params }: Route.LoaderArgs) {
+  const post = await blog.getPostBySlug(params.slug)
   if (!post) {
     throw new Response('Not Found', { status: 404 })
   }

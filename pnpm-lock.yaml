@@ -23,6 +23,9 @@ importers:
       markdown-it:
         specifier: ^14.1.0
         version: 14.1.0
+      postflow:
+        specifier: ^0.0.3
+        version: 0.0.3
       react:
         specifier: ^19.0.0
         version: 19.1.0
@@ -2512,6 +2515,10 @@ packages:
   postcss@8.5.3:
     resolution: {integrity: sha512-dle9A3yYxlBSrt8Fu+IpjGT8SY8hN0mlaA6GY8t0P5PjIOZemULz/E2Bnm/2dcUOena75OTNkHI76uZBNUUq3A==}
     engines: {node: ^10 || ^12 || >=14}
+
+  postflow@0.0.3:
+    resolution: {integrity: sha512-FwweFyZsJFF7lTAWazV92Ridhd//Ks+wRIXzYn43uB8cghIOFcPWgearmtsI/9ijv2884iQx4zMgBXG86P0CtA==}
+    engines: {node: '>=18'}
 
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -5662,6 +5669,8 @@ snapshots:
       nanoid: 3.3.11
       picocolors: 1.1.1
       source-map-js: 1.2.1
+
+  postflow@0.0.3: {}
 
   prelude-ls@1.2.1: {}
 

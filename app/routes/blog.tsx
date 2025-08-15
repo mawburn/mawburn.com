@@ -1,10 +1,10 @@
+import { type BlogPostMetadata, formatPublishDate } from 'postflow'
 import { memo } from 'react'
 import { Link } from 'react-router'
 
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
-import { getAllPostsMetadata } from '~/utils/blog'
-import type { BlogPostMetadata } from '~/utils/blogTypes'
+import { blog } from '~/utils/blog-config'
 
 import type { Route } from './+types/blog'
 
@@ -56,8 +56,8 @@ export function meta() {
   ]
 }
 
-export function loader() {
-  const posts = getAllPostsMetadata()
+export async function loader() {
+  const posts = await blog.getAllPostsMetadata()
 
   return {
     posts,
@@ -84,13 +84,7 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (
         {post.title}
       </h2>
       <div className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-3 space-x-2">
-        <time dateTime={post.date}>
-          {new Date(post.date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
+        <time dateTime={post.date}>{formatPublishDate(post.date)}</time>
         <span>•</span>
         <span>{post.readTime} min read</span>
       </div>
