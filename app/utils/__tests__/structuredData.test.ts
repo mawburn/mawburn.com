@@ -1,6 +1,6 @@
+import type { BlogPost } from 'postflow'
 import { describe, expect, it } from 'vitest'
 
-import type { BlogPost } from '../blogTypes'
 import {
   generateArticleStructuredData,
   generateBreadcrumbStructuredData,

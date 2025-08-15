@@ -1,4 +1,4 @@
-import type { BlogPost } from './blogTypes'
+import type { BlogPost } from 'postflow'
 
 export interface ArticleStructuredData {
   '@context': string

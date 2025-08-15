@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
+import type { BlogPostMetadata } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import Blog, { loader, meta } from '~/routes/blog'
-import type { BlogPostMetadata } from '~/utils/blogTypes'
 
 const mockPosts: BlogPostMetadata[] = [
   {
@@ -24,8 +24,10 @@ const mockPosts: BlogPostMetadata[] = [
   },
 ]
 
-vi.mock('~/utils/blog', () => ({
-  getAllPostsMetadata: vi.fn(() => mockPosts),
+vi.mock('~/utils/blog-config', () => ({
+  blog: {
+    getAllPostsMetadata: vi.fn(async () => mockPosts),
+  },
 }))
 
 vi.mock('~/utils/cache', () => ({
@@ -85,8 +87,8 @@ describe('Blog Route', () => {
   })
 
   describe('Blog post loading', () => {
-    it('loads and provides blog post data', () => {
-      const result = loader()
+    it('loads and provides blog post data', async () => {
+      const result = await loader()
 
       expect(result).toHaveProperty('posts')
       expect(Array.isArray(result.posts)).toBe(true)
