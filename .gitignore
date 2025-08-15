@@ -10,4 +10,6 @@
 .mf
 .wrangler
 .dev.vars*
-!.claude/settings.local.json
+
+# Claude settings
+.claude/settings.local.json
