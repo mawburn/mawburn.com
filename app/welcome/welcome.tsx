@@ -6,6 +6,7 @@ import {
   InstagramIcon,
   LinkedIn,
 } from '~/components/icons'
+import { ScrollArrow } from '~/components/ScrollArrow'
 
 export function Welcome() {
   return (
@@ -20,7 +21,7 @@ export function Welcome() {
           <p className="text-sm text-gray-400">(he/him)</p>
         </div>
       </div>
-      <section className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col">
+      <section id="what-i-do" className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col scroll-mt-12">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
         <p className="text-lg">
           I'm a software engineer with a passion for building high-performance web applications with
@@ -54,6 +55,7 @@ export function Welcome() {
           ))}
         </div>
       </section>
+      <ScrollArrow targetId="what-i-do" />
     </main>
   )
 }

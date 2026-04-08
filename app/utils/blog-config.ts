@@ -16,6 +16,8 @@ for (const [path, content] of Object.entries(blogFiles)) {
   }
 }
 
+export const blogRawContent = blogContent
+
 export const blog = new BlogEngine({
   contentLoader: new ContentLoader({
     type: 'memory',

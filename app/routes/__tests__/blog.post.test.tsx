@@ -24,6 +24,9 @@ vi.mock('~/utils/blog-config', () => ({
       return null
     }),
   },
+  blogRawContent: {
+    'test-post': '---\ntitle: Test Blog Post\n---\nThis is the blog post content',
+  },
 }))
 
 vi.mock('~/utils/cache', () => ({

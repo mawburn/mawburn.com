@@ -5,7 +5,8 @@ import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
-import { blog } from '~/utils/blog-config'
+import { blog, blogRawContent } from '~/utils/blog-config'
+import { markdownToHtml } from '~/utils/markdown'
 import {
   generateArticleStructuredData,
   generateBreadcrumbStructuredData,
@@ -95,6 +96,13 @@ export async function loader({ params }: Route.LoaderArgs) {
   const post = await blog.getPostBySlug(params.slug)
   if (!post) {
     throw new Response('Not Found', { status: 404 })
+  }
+
+  const rawMarkdown = blogRawContent[params.slug]
+  if (rawMarkdown) {
+    const frontmatterEnd = rawMarkdown.indexOf('---', 3)
+    const markdownBody = frontmatterEnd >= 0 ? rawMarkdown.slice(frontmatterEnd + 3).trim() : rawMarkdown
+    post.content = markdownToHtml(markdownBody)
   }
 
   return {
