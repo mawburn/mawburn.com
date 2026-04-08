@@ -14,6 +14,21 @@ import { COLORS } from '../config'
 
 const PI_2 = Math.PI * 2
 const DELTA_TIME = 0.016
+const MAX_DISTANCE_SQ = 200 * 200
+
+const NEON_COLORS = [
+  COLORS.NEON_PINK,
+  COLORS.NEON_BLUE,
+  COLORS.NEON_PURPLE,
+  COLORS.NEON_YELLOW,
+  COLORS.NEON_GREEN,
+  COLORS.NEON_ORANGE,
+  COLORS.NEON_TEAL,
+  COLORS.NEON_RED,
+]
+
+const tmpStartColor = new Color()
+const tmpEndColor = new Color()
 
 export function animateScene(
   renderer: WebGLRenderer,
@@ -35,14 +50,11 @@ export function animateScene(
     if (objects.wireframeObjects && objects.wireframeObjects.children.length > 0) {
       const shouldUpdateColors = frameCount % 2 === 0
 
-      const maxDistance = 200
-
       objects.wireframeObjects.children.forEach((object: Object3D) => {
-        const distance = Math.sqrt(
+        const distSq =
           object.position.x ** 2 + object.position.y ** 2 + object.position.z ** 2
-        )
 
-        if (distance > maxDistance) {
+        if (distSq > MAX_DISTANCE_SQ) {
           return
         }
         const { rotationSpeed, scale, movement, color } = object.userData
@@ -106,17 +118,7 @@ export function animateScene(
 
           if (!color.inTransition) {
             if (color.timeElapsed >= color.nextChangeDelay) {
-              const neonColors = [
-                COLORS.NEON_PINK,
-                COLORS.NEON_BLUE,
-                COLORS.NEON_PURPLE,
-                COLORS.NEON_YELLOW,
-                COLORS.NEON_GREEN,
-                COLORS.NEON_ORANGE,
-                COLORS.NEON_TEAL,
-                COLORS.NEON_RED,
-              ]
-              color.target = neonColors[Math.floor(Math.random() * neonColors.length)]
+              color.target = NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)]
 
               color.inTransition = true
               color.progress = 0
@@ -136,12 +138,12 @@ export function animateScene(
                 lineObject.material.opacity = 0.9
               }
             } else {
-              const startColor = new Color(color.current)
-              const endColor = new Color(color.target)
-              const interpolatedColor = startColor.lerp(endColor, color.progress)
+              tmpStartColor.set(color.current)
+              tmpEndColor.set(color.target)
+              tmpStartColor.lerp(tmpEndColor, color.progress)
 
               if (lineObject.material instanceof LineBasicMaterial) {
-                lineObject.material.color.copy(interpolatedColor)
+                lineObject.material.color.copy(tmpStartColor)
                 lineObject.material.opacity = 0.9
               }
             }
