@@ -21,6 +21,14 @@ export function Navigation() {
           <ul className="flex items-center space-x-6">
             <li>
               <Link
+                to="/resume"
+                className="text-white hover:text-cyan-300 transition-colors text-lg font-bold tracking-wider"
+              >
+                Resume
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/blog"
                 className="text-white hover:text-cyan-300 transition-colors text-lg font-bold tracking-wider"
               >

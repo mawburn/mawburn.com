@@ -20,6 +20,12 @@ describe('routes', () => {
     expect(blogRoute?.file).toBe('routes/blog.tsx')
   })
 
+  it('includes resume route', () => {
+    const resumeRoute = routes.find(route => route.path === 'resume')
+    expect(resumeRoute).toBeDefined()
+    expect(resumeRoute?.file).toBe('routes/resume.tsx')
+  })
+
   it('includes blog post route with slug parameter', () => {
     const blogPostRoute = routes.find(route => route.path === 'blog/:slug')
     expect(blogPostRoute).toBeDefined()
@@ -48,8 +54,8 @@ describe('routes', () => {
     )
   })
 
-  it('has exactly 6 routes', () => {
-    expect(routes).toHaveLength(6)
+  it('has exactly 7 routes', () => {
+    expect(routes).toHaveLength(7)
   })
 
   describe('Edge cases', () => {
