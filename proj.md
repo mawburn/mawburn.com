@@ -1,6 +1,6 @@
-# CLAUDE.md - Project Instructions
+# proj.md- Project Instructions
 
-Last updated: 2025-07-31
+Last updated: 2026-09-01
 
 Personal portfolio and blog site built with modern web technologies.
 

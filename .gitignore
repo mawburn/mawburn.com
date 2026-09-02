@@ -11,5 +11,5 @@
 .wrangler
 .dev.vars*
 
-# Claude settings
-.claude/settings.local.json
+.claude
+.pi*
