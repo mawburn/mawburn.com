@@ -22,16 +22,16 @@ const SynthwaveBackground = lazy(() =>
 
 export function meta() {
   return [
-    { title: 'Matt Burnett | Software Engineer' },
+    { title: 'Matt Burnett | Senior / Staff Software Engineer' },
     {
       name: 'description',
       content:
-        'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
+        'Senior/Staff-level software engineer with nearly 15 years building full-stack products and high-scale systems with TypeScript, React, Node.js, Go, SQL, and cloud infrastructure.',
     },
     {
       name: 'keywords',
       content:
-        'Software Engineer, Frontend Developer, React Developer, Full Stack Developer, TypeScript, JavaScript, Web Development, React.js, Node.js, TailwindCSS, Web Applications, UI/UX, SPA, Progressive Web Apps, Modern Web Development, API Integration, Responsive Design',
+        'Senior Software Engineer, Staff Software Engineer, Full Stack Engineer, TypeScript, React, Node.js, Go, Java, SQL, Cloud Infrastructure, Software Architecture, Technical Leadership, Shopify',
     },
   ]
 }

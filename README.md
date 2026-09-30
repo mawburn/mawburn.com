@@ -1,6 +1,7 @@
 # mawburn.com
 
 [![Tests](https://github.com/mawburn/mawburn.com/actions/workflows/test.yml/badge.svg)](https://github.com/mawburn/mawburn.com/actions/workflows/test.yml)
+[![Cloudflare Deploy](https://img.shields.io/website?url=https%3A%2F%2Fmawburn.com&label=Cloudflare%20deploy&logo=cloudflare)](https://mawburn.com)
 
 A personal portfolio site with blog built using modern web technologies.
 

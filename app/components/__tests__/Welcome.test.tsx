@@ -9,7 +9,7 @@ describe('Welcome component', () => {
 
     // Main content
     expect(screen.getByText('Matt Burnett')).toBeInTheDocument()
-    expect(screen.getByText('Software Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Senior / Staff Software Engineer')).toBeInTheDocument()
     expect(screen.getByText('What I do...')).toBeInTheDocument()
     expect(screen.getByText('Get in touch')).toBeInTheDocument()
 

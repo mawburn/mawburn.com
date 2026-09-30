@@ -17,27 +17,25 @@ export function Welcome() {
           <h1 className="outrun tracking-widest text-center text-6xl neon-gradient p-2 will-change-transform main-heading">
             Matt Burnett
           </h1>
-          <h2 className="fancyText tracking-wide text-center text-4xl p-2">Software Engineer</h2>
+          <h2 className="fancyText tracking-wide text-center text-4xl p-2">
+            Senior / Staff Software Engineer
+          </h2>
           <p className="text-sm text-gray-400">(he/him)</p>
         </div>
       </div>
       <section id="what-i-do" className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col scroll-mt-12">
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
         <p className="text-lg">
-          I'm a software engineer with a passion for building high-performance web applications with
-          modern a variety of modern tech.
+          I'm a Senior/Staff-level software engineer with nearly 15 years of experience building
+          full-stack products and high-scale systems. I spent more than five years at Shopify working
+          on Checkout Extensibility and internal developer AI tooling.
         </p>
         <p className="text-lg">
-          I'm currently a Senior Software Engineer at Shopify on the “Augmented Engineering” team
-          helping improve DX internally. Previously at the company, I spent 4 years previous working
-          on Checkout and the Checkout Editor. One of the{' '}
-          <strong>
-            <u>most visible</u>
-          </strong>{' '}
-          pieces of the Shopify platform.
+          I work primarily with TypeScript, React, and Node.js, with additional experience across Go,
+          Java, SQL, cloud infrastructure, software architecture, and technical leadership.
         </p>
         <p className="text-lg">
-          Before Shopify, I’ve worked at a variety of companies doing cool things since 2012.
+          I'm currently exploring Senior and Staff individual-contributor software engineering roles.
         </p>
       </section>
       <section className="mx-auto my-16 py-16 max-w-[80ch] gap-8 flex flex-col">

@@ -16,7 +16,7 @@ vi.mock('~/welcome/welcome', () => ({
   Welcome: ({ message }: { message: string }) => (
     <div data-testid="welcome-component">
       <h1>Matt Burnett</h1>
-      <h2>Software Engineer</h2>
+      <h2>Senior / Staff Software Engineer</h2>
       <div>Message: {message}</div>
     </div>
   ),
@@ -44,22 +44,22 @@ import { createRoutesStub } from 'react-router'
 const Home: React.ComponentType<any> = ({ loaderData }) => (
   <div>
     <h1>Matt Burnett</h1>
-    <h2>Software Engineer</h2>
+    <h2>Senior / Staff Software Engineer</h2>
     <div>Message: {loaderData.message}</div>
   </div>
 )
 
 const meta = () => [
-  { title: 'Matt Burnett | Software Engineer' },
+  { title: 'Matt Burnett | Senior / Staff Software Engineer' },
   {
     name: 'description',
     content:
-      'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
+      'Senior/Staff-level software engineer with nearly 15 years building full-stack products and high-scale systems with TypeScript, React, Node.js, Go, SQL, and cloud infrastructure.',
   },
   {
     name: 'keywords',
     content:
-      'Software Engineer, Frontend Developer, React Developer, Full Stack Developer, TypeScript, JavaScript, Web Development, React.js, Node.js, TailwindCSS, Web Applications, UI/UX, SPA, Progressive Web Apps, Modern Web Development, API Integration, Responsive Design',
+      'Senior Software Engineer, Staff Software Engineer, Full Stack Engineer, TypeScript, React, Node.js, Go, Java, SQL, Cloud Infrastructure, Software Architecture, Technical Leadership, Shopify',
   },
 ]
 
@@ -81,13 +81,13 @@ describe('Home Route', () => {
 
     render(<Stub />)
     expect(screen.getByText('Matt Burnett')).toBeInTheDocument()
-    expect(screen.getByText('Software Engineer')).toBeInTheDocument()
+    expect(screen.getByText('Senior / Staff Software Engineer')).toBeInTheDocument()
     expect(screen.getByText(`Message: ${testMessage}`)).toBeInTheDocument()
 
     // Test meta tags
     const metaTags = meta()
     expect(metaTags).toHaveLength(3)
-    expect(metaTags[0]).toEqual({ title: 'Matt Burnett | Software Engineer' })
+    expect(metaTags[0]).toEqual({ title: 'Matt Burnett | Senior / Staff Software Engineer' })
     expect(metaTags[1].name).toBe('description')
     expect(metaTags[2].name).toBe('keywords')
 
