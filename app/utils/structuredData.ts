@@ -13,7 +13,7 @@ export interface ArticleStructuredData {
     name: string
     url?: string
   }
-  publisher: {
+  publisher?: {
     '@type': string
     name: string
     logo?: {
@@ -69,15 +69,10 @@ export function generateArticleStructuredData(post: BlogPost, url: string): Arti
     description: post.excerpt,
     image: images.length > 1 ? images : images[0],
     datePublished: new Date(post.date).toISOString(),
-    dateModified: new Date(post.date).toISOString(),
     author: {
       '@type': 'Person',
       name: 'Matt Burnett',
-      url: 'https://mawburn.com',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'Matt Burnett',
+      url: 'https://mawburn.com/resume',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
@@ -94,7 +89,7 @@ export function generateWebSiteStructuredData(): WebSiteStructuredData {
     name: 'Matt Burnett',
     url: 'https://mawburn.com',
     description:
-      'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
+      'Matt Burnett is a Senior/Staff-level software engineer and former Shopify engineer building full-stack products, high-scale systems, developer tooling, and software platforms.',
     author: {
       '@type': 'Person',
       name: 'Matt Burnett',
@@ -124,14 +119,60 @@ export function generatePersonStructuredData() {
     name: 'Matt Burnett',
     url: 'https://mawburn.com',
     sameAs: [
+      'https://www.linkedin.com/in/burnettmatt/',
       'https://github.com/mawburn',
-      'https://twitter.com/mawburn_',
-      'https://www.linkedin.com/in/mawburn',
+      'https://bsky.app/profile/mawburn.com',
+      'https://x.com/_mawburn',
     ],
-    jobTitle: 'Software Engineer',
-    worksFor: {
-      '@type': 'Organization',
-      name: 'Shopify',
+    jobTitle: 'Senior / Staff Software Engineer',
+    description:
+      'Senior/Staff-level software engineer with nearly 15 years of professional experience building full-stack products, high-scale systems, developer tooling, and software platforms.',
+  }
+}
+
+export function generateProfilePageStructuredData() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    url: 'https://mawburn.com/resume',
+    name: 'Matt Burnett | Senior / Staff Software Engineer',
+    description:
+      'Senior and Staff-level software engineer with nearly 15 years of experience building full-stack products and high-scale systems with TypeScript, React, Node.js, Go, SQL, and cloud infrastructure. Former Shopify engineer.',
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Matt Burnett',
+      url: 'https://mawburn.com/resume',
+      jobTitle: 'Senior / Staff Software Engineer',
+      description:
+        'Senior/Staff-level software engineer with nearly 15 years of professional experience building full-stack products, high-scale systems, developer tooling, and software platforms.',
+      sameAs: ['https://www.linkedin.com/in/burnettmatt/', 'https://github.com/mawburn'],
+      knowsAbout: [
+        'TypeScript',
+        'React',
+        'Node.js',
+        'JavaScript',
+        'GraphQL',
+        'REST APIs',
+        'SQL',
+        'PostgreSQL',
+        'Go',
+        'Java',
+        'AWS',
+        'GCP',
+        'Docker',
+        'Software Architecture',
+        'AI/LLM applications',
+      ],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Portland',
+        addressRegion: 'OR',
+        addressCountry: 'US',
+      },
+      alumniOf: {
+        '@type': 'CollegeOrUniversity',
+        name: 'Henderson State University',
+      },
     },
   }
 }

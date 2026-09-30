@@ -23,19 +23,23 @@ export function Welcome() {
           <p className="text-sm text-gray-400">(he/him)</p>
         </div>
       </div>
-      <section id="what-i-do" className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col scroll-mt-12">
+      <section
+        id="what-i-do"
+        className="mx-auto mt-32 py-16 px-6 md:px-0 max-w-[80ch] gap-8 flex flex-col scroll-mt-12"
+      >
         <h2 className="fancyText tracking-widest text-5xl font-bold text-center">What I do...</h2>
         <p className="text-lg">
           I'm a Senior/Staff-level software engineer with nearly 15 years of experience building
-          full-stack products and high-scale systems. I spent more than five years at Shopify working
-          on Checkout Extensibility and internal developer AI tooling.
+          full-stack products and high-scale systems. I spent more than five years at Shopify
+          working on Checkout Extensibility and internal developer AI tooling.
         </p>
         <p className="text-lg">
-          I work primarily with TypeScript, React, and Node.js, with additional experience across Go,
-          Java, SQL, cloud infrastructure, software architecture, and technical leadership.
+          I work primarily with TypeScript, React, and Node.js, with additional experience across
+          Go, Java, SQL, cloud infrastructure, software architecture, and technical leadership.
         </p>
         <p className="text-lg">
-          I'm currently exploring Senior and Staff individual-contributor software engineering roles.
+          I'm currently exploring Senior and Staff individual-contributor software engineering
+          roles.
         </p>
       </section>
       <section className="mx-auto my-16 py-16 max-w-[80ch] gap-8 flex flex-col">

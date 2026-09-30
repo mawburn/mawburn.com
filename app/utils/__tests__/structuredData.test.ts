@@ -5,6 +5,7 @@ import {
   generateArticleStructuredData,
   generateBreadcrumbStructuredData,
   generatePersonStructuredData,
+  generateProfilePageStructuredData,
   generateWebSiteStructuredData,
 } from '../structuredData'
 
@@ -43,16 +44,13 @@ describe('structuredData', () => {
         'https://mawburn.com/images/test-twitter.webp',
       ])
       expect(result.datePublished).toBe('2024-01-15T00:00:00.000Z')
-      expect(result.dateModified).toBe('2024-01-15T00:00:00.000Z')
+      expect(result.dateModified).toBeUndefined()
       expect(result.author).toEqual({
         '@type': 'Person',
         name: 'Matt Burnett',
-        url: 'https://mawburn.com',
+        url: 'https://mawburn.com/resume',
       })
-      expect(result.publisher).toEqual({
-        '@type': 'Person',
-        name: 'Matt Burnett',
-      })
+      expect(result.publisher).toBeUndefined()
       expect(result.mainEntityOfPage).toEqual({
         '@type': 'WebPage',
         '@id': url,
@@ -159,7 +157,7 @@ describe('structuredData', () => {
         name: 'Matt Burnett',
         url: 'https://mawburn.com',
         description:
-          'Matt Burnett - Software Engineer - Building high-performance web applications with modern tech.',
+          'Matt Burnett is a Senior/Staff-level software engineer and former Shopify engineer building full-stack products, high-scale systems, developer tooling, and software platforms.',
         author: {
           '@type': 'Person',
           name: 'Matt Burnett',
@@ -235,6 +233,30 @@ describe('structuredData', () => {
     })
   })
 
+  describe('generateProfilePageStructuredData', () => {
+    it('generates ProfilePage data with Person mainEntity', () => {
+      const result = generateProfilePageStructuredData()
+
+      expect(result['@type']).toBe('ProfilePage')
+      expect(result.url).toBe('https://mawburn.com/resume')
+      expect(result.mainEntity).toMatchObject({
+        '@type': 'Person',
+        name: 'Matt Burnett',
+        url: 'https://mawburn.com/resume',
+        jobTitle: 'Senior / Staff Software Engineer',
+        sameAs: ['https://www.linkedin.com/in/burnettmatt/', 'https://github.com/mawburn'],
+      })
+      expect(result.mainEntity.knowsAbout).toContain('TypeScript')
+      expect(result.mainEntity.address).toMatchObject({
+        addressLocality: 'Portland',
+        addressRegion: 'OR',
+      })
+      expect(result.mainEntity.alumniOf).toMatchObject({
+        name: 'Henderson State University',
+      })
+    })
+  })
+
   describe('generatePersonStructuredData', () => {
     it('generates correct person structured data', () => {
       const result = generatePersonStructuredData()
@@ -245,15 +267,14 @@ describe('structuredData', () => {
         name: 'Matt Burnett',
         url: 'https://mawburn.com',
         sameAs: [
+          'https://www.linkedin.com/in/burnettmatt/',
           'https://github.com/mawburn',
-          'https://twitter.com/mawburn_',
-          'https://www.linkedin.com/in/mawburn',
+          'https://bsky.app/profile/mawburn.com',
+          'https://x.com/_mawburn',
         ],
-        jobTitle: 'Software Engineer',
-        worksFor: {
-          '@type': 'Organization',
-          name: 'Shopify',
-        },
+        jobTitle: 'Senior / Staff Software Engineer',
+        description:
+          'Senior/Staff-level software engineer with nearly 15 years of professional experience building full-stack products, high-scale systems, developer tooling, and software platforms.',
       })
     })
   })

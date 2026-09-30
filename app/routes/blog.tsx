@@ -52,7 +52,6 @@ export function meta() {
     { name: 'twitter:card', content: 'summary' },
     { name: 'twitter:title', content: 'Blog | Matt Burnett' },
     { name: 'twitter:description', content: description },
-    { name: 'canonical', content: url },
   ]
 }
 

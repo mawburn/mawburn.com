@@ -14,6 +14,12 @@ describe('routes', () => {
     expect(homeRoute?.index).toBe(true)
   })
 
+  it('includes resume markdown route', () => {
+    const resumeMarkdownRoute = routes.find(route => route.path === 'resume.md')
+    expect(resumeMarkdownRoute).toBeDefined()
+    expect(resumeMarkdownRoute?.file).toBe('routes/resume[.]md.tsx')
+  })
+
   it('includes blog route', () => {
     const blogRoute = routes.find(route => route.path === 'blog')
     expect(blogRoute).toBeDefined()
@@ -44,6 +50,18 @@ describe('routes', () => {
     expect(rssRoute?.file).toBe('routes/rss[.]xml.tsx')
   })
 
+  it('includes robots.txt route', () => {
+    const robotsRoute = routes.find(route => route.path === 'robots.txt')
+    expect(robotsRoute).toBeDefined()
+    expect(robotsRoute?.file).toBe('routes/robots[.]txt.tsx')
+  })
+
+  it('includes llms.txt route', () => {
+    const llmsRoute = routes.find(route => route.path === 'llms.txt')
+    expect(llmsRoute).toBeDefined()
+    expect(llmsRoute?.file).toBe('routes/llms[.]txt.tsx')
+  })
+
   it('includes Chrome DevTools well-known route', () => {
     const devToolsRoute = routes.find(
       route => route.path === '.well-known/appspecific/com.chrome.devtools.json'
@@ -54,8 +72,8 @@ describe('routes', () => {
     )
   })
 
-  it('has exactly 7 routes', () => {
-    expect(routes).toHaveLength(7)
+  it('has exactly 10 routes', () => {
+    expect(routes).toHaveLength(10)
   })
 
   describe('Edge cases', () => {

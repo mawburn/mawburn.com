@@ -11,7 +11,7 @@ export function ScrollArrow({ targetId }: { targetId: string }) {
       ([entry]) => {
         setVisible(!entry.isIntersecting && entry.boundingClientRect.top > 0)
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     )
 
     observer.observe(section)

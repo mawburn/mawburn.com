@@ -101,7 +101,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   const rawMarkdown = blogRawContent[params.slug]
   if (rawMarkdown) {
     const frontmatterEnd = rawMarkdown.indexOf('---', 3)
-    const markdownBody = frontmatterEnd >= 0 ? rawMarkdown.slice(frontmatterEnd + 3).trim() : rawMarkdown
+    const markdownBody =
+      frontmatterEnd >= 0 ? rawMarkdown.slice(frontmatterEnd + 3).trim() : rawMarkdown
     post.content = markdownToHtml(markdownBody)
   }
 

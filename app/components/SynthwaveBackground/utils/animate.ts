@@ -51,8 +51,7 @@ export function animateScene(
       const shouldUpdateColors = frameCount % 2 === 0
 
       objects.wireframeObjects.children.forEach((object: Object3D) => {
-        const distSq =
-          object.position.x ** 2 + object.position.y ** 2 + object.position.z ** 2
+        const distSq = object.position.x ** 2 + object.position.y ** 2 + object.position.z ** 2
 
         if (distSq > MAX_DISTANCE_SQ) {
           return
