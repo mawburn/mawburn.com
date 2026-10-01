@@ -4,6 +4,9 @@
   "compatibility_date": "2025-02-24",
   "main": "./workers/app.ts",
   "assets": {},
+  "cache": {
+    "enabled": true,
+  },
   "vars": {
     "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare",
   },

@@ -1,5 +1,7 @@
 import { createRequestHandler } from 'react-router'
 
+import { preventErrorCaching } from '../app/utils/cache'
+
 declare global {
   interface CloudflareEnvironment extends Env {}
 }
@@ -20,8 +22,9 @@ const requestHandler = createRequestHandler(
 
 export default {
   async fetch(request, env, ctx) {
-    return requestHandler(request, {
+    const response = await requestHandler(request, {
       cloudflare: { env, ctx },
     })
+    return preventErrorCaching(response)
   },
 } satisfies ExportedHandler<CloudflareEnvironment>

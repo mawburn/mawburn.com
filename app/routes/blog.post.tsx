@@ -6,6 +6,7 @@ import { RSSIcon } from '~/components/icons'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
 import { blog, blogRawContent } from '~/utils/blog-config'
+import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
 import { markdownToHtml } from '~/utils/markdown'
 import {
   generateArticleStructuredData,
@@ -111,13 +112,8 @@ export async function loader({ params }: Route.LoaderArgs) {
   }
 }
 
-export function headers() {
-  return {
-    'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
-    'CDN-Cache-Control': 'max-age=604800',
-    'Cloudflare-CDN-Cache-Control': 'max-age=604800',
-    Vary: 'Accept-Encoding',
-  }
+export function headers({ parentHeaders }: Route.HeadersArgs) {
+  return routeCacheHeaders(parentHeaders, cachePolicies.blogPost)
 }
 
 export default function BlogPost({ loaderData, params }: Route.ComponentProps) {

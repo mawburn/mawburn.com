@@ -1,3 +1,5 @@
+import { cacheHeaders, cachePolicies } from '~/utils/cache'
+
 const llmsText = `# Matt Burnett
 
 > Senior / Staff software engineer with nearly 15 years of experience building full-stack products, high-scale systems, developer tooling, and software platforms.
@@ -28,7 +30,7 @@ export function loader() {
   return new Response(llmsText, {
     headers: {
       'Content-Type': 'text/markdown; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400',
+      ...cacheHeaders(cachePolicies.text),
     },
   })
 }

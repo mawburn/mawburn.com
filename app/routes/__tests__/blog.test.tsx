@@ -3,7 +3,7 @@ import type { BlogPostMetadata } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import Blog, { loader, meta } from '~/routes/blog'
+import Blog, { headers, loader, meta } from '~/routes/blog'
 
 const mockPosts: BlogPostMetadata[] = [
   {
@@ -27,13 +27,6 @@ const mockPosts: BlogPostMetadata[] = [
 vi.mock('~/utils/blog-config', () => ({
   blog: {
     getAllPostsMetadata: vi.fn(async () => mockPosts),
-  },
-}))
-
-vi.mock('~/utils/cache', () => ({
-  createCachedResponse: vi.fn(data => data),
-  cacheConfigs: {
-    blogList: { maxAge: 3600 },
   },
 }))
 
@@ -66,6 +59,20 @@ vi.mock('react-router', () => ({
 import { createRoutesStub } from 'react-router'
 
 describe('Blog Route', () => {
+  it('retains parent security headers while setting the blog cache policy', () => {
+    const responseHeaders = headers({
+      parentHeaders: new Headers({ 'X-Frame-Options': 'DENY' }),
+    } as Parameters<typeof headers>[0])
+
+    expect(responseHeaders.get('X-Frame-Options')).toBe('DENY')
+    expect(responseHeaders.get('Cache-Control')).toBe(
+      'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400'
+    )
+    expect(responseHeaders.get('Cloudflare-CDN-Cache-Control')).toBe(
+      'max-age=86400, stale-while-revalidate=86400'
+    )
+  })
+
   describe('SEO metadata', () => {
     it('provides complete SEO and social media metadata', () => {
       const result = meta()

@@ -1,4 +1,5 @@
 import { blog } from '~/utils/blog-config'
+import { cacheHeaders, cachePolicies } from '~/utils/cache'
 
 const ORIGIN = 'https://mawburn.com'
 
@@ -36,7 +37,7 @@ ${entries.join('\n')}
   return new Response(xml, {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
-      'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400',
+      ...cacheHeaders(cachePolicies.sitemap),
     },
   })
 }

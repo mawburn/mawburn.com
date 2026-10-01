@@ -3,7 +3,7 @@ import type { BlogPost as BlogPostType } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import BlogPost, { loader, meta } from '~/routes/blog.post'
+import BlogPost, { headers, loader, meta } from '~/routes/blog.post'
 
 const mockPost: BlogPostType = {
   slug: 'test-post',
@@ -26,13 +26,6 @@ vi.mock('~/utils/blog-config', () => ({
   },
   blogRawContent: {
     'test-post': '---\ntitle: Test Blog Post\n---\nThis is the blog post content',
-  },
-}))
-
-vi.mock('~/utils/cache', () => ({
-  createCachedResponse: vi.fn(data => data),
-  cacheConfigs: {
-    blogPost: { maxAge: 7200 },
   },
 }))
 
@@ -69,6 +62,17 @@ vi.mock('react-router', () => ({
 import { createRoutesStub } from 'react-router'
 
 describe('BlogPost Route', () => {
+  it('retains parent security headers while setting the post cache policy', () => {
+    const responseHeaders = headers({
+      parentHeaders: new Headers({ 'X-Content-Type-Options': 'nosniff' }),
+    } as Parameters<typeof headers>[0])
+
+    expect(responseHeaders.get('X-Content-Type-Options')).toBe('nosniff')
+    expect(responseHeaders.get('Cache-Control')).toBe(
+      'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400'
+    )
+  })
+
   describe('SEO metadata', () => {
     it('generates complete SEO metadata for existing post', () => {
       const result = meta({ params: { slug: 'test-post' }, data: { post: mockPost } } as any)

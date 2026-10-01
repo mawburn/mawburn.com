@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^0.1.11",
-    "@cloudflare/workers-types": "^4.20250303.0",
+    "@cloudflare/workers-types": "^4.20260702.1",
     "@eslint/js": "^9.32.0",
     "@react-router/dev": "^7.3.0",
     "@tailwindcss/vite": "^4.1.2",
@@ -61,6 +61,6 @@
     "vite": "^6.2.1",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.1.1",
-    "wrangler": "^4.7.0"
+    "wrangler": "4.69.0"
   }
 }

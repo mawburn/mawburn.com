@@ -1,126 +1,67 @@
 import { describe, expect, it } from 'vitest'
 
-import { cacheConfigs, createCachedResponse } from '~/utils/cache'
+import { cacheHeaders, cachePolicies, preventErrorCaching, routeCacheHeaders } from '~/utils/cache'
 
-describe('createCachedResponse', () => {
-  it('creates a response with default cache settings', async () => {
-    const data = { message: 'Hello, World!' }
-    const response = createCachedResponse(data)
-
-    expect(response).toBeInstanceOf(Response)
-
-    const json = await response.json()
-    expect(json).toEqual(data)
-
-    const cacheControl = response.headers.get('Cache-Control')
-    expect(cacheControl).toBe('public, max-age=3600, s-maxage=86400')
-
-    const cdnCacheControl = response.headers.get('CDN-Cache-Control')
-    expect(cdnCacheControl).toBe('max-age=86400')
-
-    const vary = response.headers.get('Vary')
-    expect(vary).toBe('Accept-Encoding')
+describe('cacheHeaders', () => {
+  it('sets separate browser and Cloudflare TTLs with stale revalidation', () => {
+    expect(cacheHeaders(cachePolicies.blogPost, 'Accept-Encoding')).toEqual({
+      'Cache-Control': 'public, max-age=7200, s-maxage=604800, stale-while-revalidate=86400',
+      'CDN-Cache-Control': 'max-age=604800',
+      'Cloudflare-CDN-Cache-Control': 'max-age=604800, stale-while-revalidate=86400',
+      Vary: 'Accept-Encoding',
+    })
   })
 
-  it('creates a response with custom cache settings', async () => {
-    const data = { posts: [] }
-    const options = {
-      browserMaxAge: 1800,
-      edgeMaxAge: 43200,
-      etag: '"test-etag"',
-      vary: 'Accept-Language',
-    }
-
-    const response = createCachedResponse(data, options)
-
-    const cacheControl = response.headers.get('Cache-Control')
-    expect(cacheControl).toBe('public, max-age=1800, s-maxage=43200')
-
-    const cdnCacheControl = response.headers.get('CDN-Cache-Control')
-    expect(cdnCacheControl).toBe('max-age=43200')
-
-    const etag = response.headers.get('ETag')
-    expect(etag).toBe('"test-etag"')
-
-    const vary = response.headers.get('Vary')
-    expect(vary).toBe('Accept-Language')
-  })
-
-  it('handles complex data and edge cases', async () => {
-    const complexData = {
-      posts: [
-        { id: 1, title: 'Post 1', tags: ['tag1', 'tag2'] },
-        { id: 2, title: 'Post 2', tags: ['tag3'] },
-      ],
-      metadata: {
-        total: 2,
-        page: 1,
-      },
-    }
-
-    const response = createCachedResponse(complexData)
-    const json = await response.json()
-
-    expect(json).toEqual(complexData)
-  })
-
-  it('handles invalid data gracefully', () => {
-    expect(() => createCachedResponse(undefined)).toThrow()
-
-    const circularData: any = { name: 'test' }
-    circularData.self = circularData
-    expect(() => createCachedResponse(circularData)).toThrow()
-  })
-
-  it('handles special JavaScript values in data', async () => {
-    const specialData = {
-      infinity: Infinity,
-      negativeInfinity: -Infinity,
-      nan: NaN,
-      date: new Date('2024-01-01'),
-      regex: /test/g,
-      func: () => 'test',
-    }
-
-    const response = createCachedResponse(specialData)
-    const json = (await response.json()) as any
-
-    expect(json.infinity).toBeNull()
-    expect(json.negativeInfinity).toBeNull()
-    expect(json.nan).toBeNull()
-    expect(typeof json.date).toBe('string')
-    expect(json.regex).toEqual({})
-    expect(json.func).toBeUndefined()
+  it('omits stale revalidation and Vary when not requested', () => {
+    expect(cacheHeaders(cachePolicies.page)).toEqual({
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+      'CDN-Cache-Control': 'max-age=3600',
+      'Cloudflare-CDN-Cache-Control': 'max-age=3600',
+    })
   })
 })
 
-describe('cacheConfigs', () => {
-  it('has correct blogList configuration', () => {
-    expect(cacheConfigs.blogList).toEqual({
-      browserMaxAge: 3600, // 1 hour
-      edgeMaxAge: 86400, // 24 hours
-    })
+describe('preventErrorCaching', () => {
+  it('prevents caching errors without dropping unrelated headers', async () => {
+    const response = preventErrorCaching(
+      new Response('Not found', {
+        status: 404,
+        headers: {
+          'Cache-Control': 'public, max-age=3600',
+          'CDN-Cache-Control': 'max-age=3600',
+          'Cloudflare-CDN-Cache-Control': 'max-age=3600',
+          'X-Frame-Options': 'DENY',
+        },
+      })
+    )
+
+    expect(response.status).toBe(404)
+    expect(await response.text()).toBe('Not found')
+    expect(response.headers.get('Cache-Control')).toBe('no-store')
+    expect(response.headers.has('CDN-Cache-Control')).toBe(false)
+    expect(response.headers.has('Cloudflare-CDN-Cache-Control')).toBe(false)
+    expect(response.headers.get('X-Frame-Options')).toBe('DENY')
   })
 
-  it('has correct blogPost configuration', () => {
-    expect(cacheConfigs.blogPost).toEqual({
-      browserMaxAge: 7200, // 2 hours
-      edgeMaxAge: 604800, // 1 week
-    })
+  it('leaves successful responses unchanged', () => {
+    const response = new Response('Public page')
+    expect(preventErrorCaching(response)).toBe(response)
   })
+})
 
-  it('has correct staticContent configuration', () => {
-    expect(cacheConfigs.staticContent).toEqual({
-      browserMaxAge: 31536000, // 1 year
-      edgeMaxAge: 31536000, // 1 year
+describe('routeCacheHeaders', () => {
+  it('overrides cache policy without losing headers from the root route', () => {
+    const parent = new Headers({
+      'X-Frame-Options': 'DENY',
+      'Cache-Control': 'public, max-age=3600',
     })
-  })
+    const headers = routeCacheHeaders(parent, cachePolicies.blogList)
 
-  it('can be used with createCachedResponse', async () => {
-    const data = { slug: 'test-post', content: 'Post content' }
-    const response = createCachedResponse(data, cacheConfigs.blogPost)
-
-    const cacheControl = response.headers.get('Cache-Control')
-    expect(cacheControl).toBe('public, max-age=7200, s-maxage=604800')
+    expect(headers.get('X-Frame-Options')).toBe('DENY')
+    expect(headers.get('Cache-Control')).toBe(
+      'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400'
+    )
+    expect(headers.get('Vary')).toBe('Accept-Encoding')
+    expect(parent.get('Cache-Control')).toBe('public, max-age=3600')
   })
 })

@@ -1,3 +1,5 @@
+import { cacheHeaders, cachePolicies } from '~/utils/cache'
+
 export function loader() {
   return new Response(
     `User-agent: *
@@ -11,7 +13,7 @@ Sitemap: https://mawburn.com/sitemap.xml
     {
       headers: {
         'Content-Type': 'text/plain; charset=utf-8',
-        'Cache-Control': 'public, max-age=86400',
+        ...cacheHeaders(cachePolicies.text),
       },
     }
   )

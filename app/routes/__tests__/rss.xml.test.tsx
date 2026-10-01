@@ -87,6 +87,18 @@ ${post.tags.map(tag => `<category>${tag}</category>`).join('\n')}
     mockGenerateRSSResponse.mockReturnValue(mockResponse)
   })
 
+  it('passes the shared cache policy to the RSS generator', async () => {
+    await loader()
+
+    expect(mockGenerateRSSResponse).toHaveBeenCalledWith(
+      mockPosts,
+      expect.objectContaining({
+        'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
+        'Cloudflare-CDN-Cache-Control': 'max-age=86400, stale-while-revalidate=86400',
+      })
+    )
+  })
+
   it('generates valid RSS XML with correct headers and structure', async () => {
     const response = await loader()
     const text = await response.text()

@@ -21,6 +21,19 @@ pnpm install
 pnpm dev
 ```
 
+## Caching
+
+Cloudflare Workers Caching is enabled in `wrangler.jsonc`. Cache hits can be served before the Worker runs. Public response TTLs live in `app/utils/cache.ts` and are applied by the React Router routes; error responses are marked `no-store` in `workers/app.ts`. The cache is separate from the manual Workers Cache API (`caches.default`).
+
+After deploying, request the same URL twice and inspect `Cf-Cache-Status` (`MISS` then `HIT` on a warm cache):
+
+```bash
+curl -sD - -o /dev/null https://mawburn.com/blog
+curl -sD - -o /dev/null https://mawburn.com/blog
+```
+
+Test against the deployed custom domain: local development does not prove edge cache hits. Caching is public-only; revisit the policies before adding authenticated or visitor-specific responses. Cloudflare bills cached requests at the standard Workers request rate, including static asset requests when Workers Caching is enabled.
+
 ## Project Structure
 
 ```
@@ -32,15 +45,15 @@ app/
 │   ├── Navigation.tsx  # Site navigation
 │   ├── ThemeToggle.tsx # Dark/light mode switcher
 │   └── ...
-├── routes/             # File-based routing
+├── routes/             # Route modules (declared in app/routes.ts)
 │   ├── home.tsx        # Landing page
 │   ├── blog.tsx        # Blog listing with RSS link
 │   ├── blog.post.tsx   # Individual blog posts with sharing
 │   ├── rss[.]xml.tsx   # RSS feed generation
 │   └── sitemap[.]xml.tsx  # SEO sitemap
 ├── utils/              # Utility functions
-│   ├── blog.ts         # Blog content processing & image handling
-│   ├── cache.ts        # Response caching
+│   ├── blog-config.ts  # Blog content configuration
+│   ├── cache.ts        # Public response cache policies
 │   └── ...
 └── __tests__/          # Comprehensive test suite
 content/blog/           # Markdown blog posts with frontmatter

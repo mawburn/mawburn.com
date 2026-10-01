@@ -5,6 +5,7 @@ import { Link } from 'react-router'
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { blog } from '~/utils/blog-config'
+import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
 
 import type { Route } from './+types/blog'
 
@@ -63,13 +64,8 @@ export async function loader() {
   }
 }
 
-export function headers() {
-  return {
-    'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
-    'CDN-Cache-Control': 'max-age=86400',
-    'Cloudflare-CDN-Cache-Control': 'max-age=86400',
-    Vary: 'Accept-Encoding',
-  }
+export function headers({ parentHeaders }: Route.HeadersArgs) {
+  return routeCacheHeaders(parentHeaders, cachePolicies.blogList)
 }
 
 const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (

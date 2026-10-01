@@ -12,6 +12,7 @@ import {
 
 import type { Route } from './+types/root'
 import { Navigation } from './components/Navigation'
+import { cacheHeaders, cachePolicies } from './utils/cache'
 import { generatePersonStructuredData, generateWebSiteStructuredData } from './utils/structuredData'
 
 export const links: Route.LinksFunction = () => [
@@ -34,7 +35,7 @@ export function headers() {
     ].join(', '),
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'DENY',
-    'Cache-Control': 'public, max-age=3600',
+    ...cacheHeaders(cachePolicies.page),
   }
 }
 
