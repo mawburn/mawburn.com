@@ -10,8 +10,11 @@
     'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Noto Color Emoji';
 }
 
-html,
-body {
+html {
+  color-scheme: light;
+}
+
+html.dark {
   color-scheme: dark;
 }
 

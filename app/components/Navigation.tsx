@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 
 import { HouseIcon } from './HouseIcon'
@@ -6,9 +7,25 @@ import { ThemeToggle } from './ThemeToggle'
 export function Navigation() {
   const location = useLocation()
   const isHomePage = location.pathname === '/'
+  const [isHidden, setIsHidden] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsHidden(window.scrollY > 8)
+    }
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-md border-b border-cyan-500 border-opacity-30">
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-md border-b border-cyan-500 border-opacity-30 transition-transform duration-300 ease-in-out ${
+        isHidden ? '-translate-y-full' : 'translate-y-0'
+      }`}
+    >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <Link

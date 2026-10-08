@@ -125,6 +125,9 @@ export function headers({ parentHeaders }: Route.HeadersArgs) {
   return routeCacheHeaders(parentHeaders, cachePolicies.blogPost)
 }
 
+const formatWordCount = (wordCount?: number) =>
+  wordCount ? `${wordCount.toLocaleString()} words` : undefined
+
 export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
   const { post } = loaderData as { post: BlogPostWithUpdated }
   const url = `https://mawburn.com/blog/${params.slug}`
@@ -187,7 +190,7 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
               >
                 {post.title}
               </h1>
-              <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4">
                 <time dateTime={publishedDate.toISOString()}>
                   {publishedDate.toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -197,7 +200,7 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                 </time>
                 {showUpdatedDate ? (
                   <>
-                    <span>•</span>
+                    <span aria-hidden="true">•</span>
                     <span>
                       Updated{' '}
                       <time dateTime={updatedDate.toISOString()}>
@@ -210,7 +213,13 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                     </span>
                   </>
                 ) : null}
-                <span>•</span>
+                {post.wordCount ? (
+                  <>
+                    <span aria-hidden="true">•</span>
+                    <span>{formatWordCount(post.wordCount)}</span>
+                  </>
+                ) : null}
+                <span aria-hidden="true">•</span>
                 <span>{post.readTime} min read</span>
               </div>
               <div className="flex flex-wrap gap-2 mb-6">

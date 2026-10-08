@@ -113,11 +113,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
-                const savedTheme = localStorage.getItem('theme');
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-                if (shouldUseDark) {
-                  document.documentElement.classList.add('dark');
+                try {
+                  const storedTheme = localStorage.getItem('theme');
+                  const savedTheme = storedTheme === 'dark' || storedTheme === 'light'
+                    ? storedTheme
+                    : null;
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+                  document.documentElement.classList.toggle('dark', theme === 'dark');
+                  document.documentElement.style.colorScheme = theme;
+                } catch (_error) {
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  document.documentElement.classList.toggle('dark', prefersDark);
+                  document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
                 }
               })();
             `,

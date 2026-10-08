@@ -49,15 +49,17 @@ describe('useDarkMode', () => {
 
       expect(result.current.isDarkMode).toBe(true)
       expect(document.documentElement).toHaveClass('dark')
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark')
     })
 
-    it('applies saved dark theme preference on initialization', () => {
+    it('restores a saved dark theme even when the DOM class is missing', () => {
       localStorageMock.getItem.mockReturnValue('dark')
-      document.documentElement.classList.add('dark')
 
       const { result } = renderHook(() => useDarkMode())
 
       expect(result.current.isDarkMode).toBe(true)
+      expect(document.documentElement).toHaveClass('dark')
+      expect(document.documentElement.style.colorScheme).toBe('dark')
     })
 
     describe('Edge cases', () => {

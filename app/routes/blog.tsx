@@ -1,10 +1,13 @@
-import { type BlogPostMetadata, formatPublishDate } from 'postflow'
+import { formatPublishDate } from 'postflow'
 import { memo } from 'react'
 import { Link } from 'react-router'
 
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
-import { blog } from '~/utils/blog-config'
+import {
+  type BlogPostMetadataWithUpdated,
+  getAllPostsMetadataWithUpdated,
+} from '~/utils/blog-config'
 import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
 
 import type { Route } from './+types/blog'
@@ -57,7 +60,7 @@ export function meta() {
 }
 
 export async function loader() {
-  const posts = await blog.getAllPostsMetadata()
+  const posts = await getAllPostsMetadataWithUpdated()
 
   return {
     posts,
@@ -68,7 +71,10 @@ export function headers({ parentHeaders }: Route.HeadersArgs) {
   return routeCacheHeaders(parentHeaders, cachePolicies.blogList)
 }
 
-const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (
+const formatWordCount = (wordCount?: number) =>
+  wordCount ? `${wordCount.toLocaleString()} words` : undefined
+
+const BlogPostCard = memo(({ post }: { post: BlogPostMetadataWithUpdated }) => (
   <article className="border-b border-gray-200 dark:border-gray-700 pb-8 mb-8 last:mb-0">
     <Link
       to={`/blog/${post.slug}`}
@@ -78,9 +84,15 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (
       <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
         {post.title}
       </h2>
-      <div className="flex items-center text-sm text-gray-700 dark:text-gray-200 mb-3 space-x-2">
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-gray-700 dark:text-gray-200 mb-3">
         <time dateTime={post.date}>{formatPublishDate(post.date)}</time>
-        <span>•</span>
+        {post.wordCount ? (
+          <>
+            <span aria-hidden="true">•</span>
+            <span>{formatWordCount(post.wordCount)}</span>
+          </>
+        ) : null}
+        <span aria-hidden="true">•</span>
         <span>{post.readTime} min read</span>
       </div>
       <p className="text-gray-600 dark:text-gray-300 mb-3">{post.excerpt}</p>
@@ -99,11 +111,11 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadata }) => (
 BlogPostCard.displayName = 'BlogPostCard'
 
 export default function Blog({ loaderData }: Route.ComponentProps) {
-  const { posts } = loaderData as { posts: BlogPostMetadata[] }
+  const { posts } = loaderData as { posts: BlogPostMetadataWithUpdated[] }
 
   return (
     <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
-      <div className="container mx-auto max-w-4xl px-4 py-8">
+      <div className="container mx-auto max-w-3xl px-4 py-8">
         <div className="flex justify-between items-start mb-6">
           <div>
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">

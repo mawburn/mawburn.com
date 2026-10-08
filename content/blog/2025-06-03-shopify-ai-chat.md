@@ -2,7 +2,6 @@
 title: 'The Inside Story of How I Accidentally Became Responsible for Shopify’s Internal AI Chat'
 date: '2025-06-03 16:00'
 updated: '2025-06-05 10:30'
-image: '2025-06-03-shopify-ai-chat.webp'
 excerpt: 'After losing months of AI chat data, I searched for a better solution and championed LibreChat at Shopify. What started as a side project turned into leading our internal AI platform adoption.'
 tags:
   [
