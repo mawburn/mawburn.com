@@ -23,9 +23,7 @@ const mockPosts: BlogPostMetadata[] = [
 ]
 
 vi.mock('~/utils/blog-config', () => ({
-  blog: {
-    getAllPostsMetadata: vi.fn(async () => mockPosts),
-  },
+  getAllPostsMetadataWithUpdated: vi.fn(async () => mockPosts),
 }))
 
 describe('Sitemap XML Route', () => {

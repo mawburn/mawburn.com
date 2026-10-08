@@ -18,12 +18,10 @@ const mockPost: BlogPostType = {
 }
 
 vi.mock('~/utils/blog-config', () => ({
-  blog: {
-    getPostBySlug: vi.fn(async (slug: string) => {
-      if (slug === 'test-post') return mockPost
-      return null
-    }),
-  },
+  getPostBySlugWithUpdated: vi.fn(async (slug: string) => {
+    if (slug === 'test-post') return mockPost
+    return null
+  }),
   blogRawContent: {
     'test-post': '---\ntitle: Test Blog Post\n---\nThis is the blog post content',
   },

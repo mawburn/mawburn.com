@@ -2,11 +2,13 @@ import type { BlogPost } from 'postflow'
 import { describe, expect, it } from 'vitest'
 
 import {
+  CANONICAL_PERSON_ID,
   generateArticleStructuredData,
   generateBreadcrumbStructuredData,
   generatePersonStructuredData,
   generateProfilePageStructuredData,
   generateWebSiteStructuredData,
+  WEBSITE_ID,
 } from '../structuredData'
 
 describe('structuredData', () => {
@@ -47,8 +49,7 @@ describe('structuredData', () => {
       expect(result.dateModified).toBeUndefined()
       expect(result.author).toEqual({
         '@type': 'Person',
-        name: 'Matt Burnett',
-        url: 'https://mawburn.com/resume',
+        '@id': CANONICAL_PERSON_ID,
       })
       expect(result.publisher).toBeUndefined()
       expect(result.mainEntityOfPage).toEqual({
@@ -154,13 +155,14 @@ describe('structuredData', () => {
       expect(result).toEqual({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
+        '@id': WEBSITE_ID,
         name: 'Matt Burnett',
         url: 'https://mawburn.com',
         description:
           'Matt Burnett is a Senior/Staff-level software engineer and former Shopify engineer building full-stack products, high-scale systems, developer tooling, and software platforms.',
         author: {
           '@type': 'Person',
-          name: 'Matt Burnett',
+          '@id': CANONICAL_PERSON_ID,
         },
       })
     })
@@ -241,10 +243,16 @@ describe('structuredData', () => {
       expect(result.url).toBe('https://mawburn.com/resume')
       expect(result.mainEntity).toMatchObject({
         '@type': 'Person',
+        '@id': CANONICAL_PERSON_ID,
         name: 'Matt Burnett',
-        url: 'https://mawburn.com/resume',
+        url: 'https://mawburn.com',
         jobTitle: 'Senior / Staff Software Engineer',
-        sameAs: ['https://www.linkedin.com/in/burnettmatt/', 'https://github.com/mawburn'],
+        sameAs: [
+          'https://www.linkedin.com/in/burnettmatt/',
+          'https://github.com/mawburn',
+          'https://bsky.app/profile/mawburn.com',
+          'https://x.com/_mawburn',
+        ],
       })
       expect(result.mainEntity.knowsAbout).toContain('TypeScript')
       expect(result.mainEntity.address).toMatchObject({
@@ -261,9 +269,10 @@ describe('structuredData', () => {
     it('generates correct person structured data', () => {
       const result = generatePersonStructuredData()
 
-      expect(result).toEqual({
+      expect(result).toMatchObject({
         '@context': 'https://schema.org',
         '@type': 'Person',
+        '@id': CANONICAL_PERSON_ID,
         name: 'Matt Burnett',
         url: 'https://mawburn.com',
         sameAs: [
@@ -276,6 +285,7 @@ describe('structuredData', () => {
         description:
           'Senior/Staff-level software engineer with nearly 15 years of professional experience building full-stack products, high-scale systems, developer tooling, and software platforms.',
       })
+      expect(result.knowsAbout).toContain('TypeScript')
     })
   })
 })

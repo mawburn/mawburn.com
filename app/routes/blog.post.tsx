@@ -1,11 +1,11 @@
-import type { BlogPost } from 'postflow'
 import { Link } from 'react-router'
 
 import { Footer } from '~/components/Footer'
 import { RSSIcon } from '~/components/icons'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
-import { blog, blogRawContent } from '~/utils/blog-config'
+import type { BlogPostWithUpdated } from '~/utils/blog-config'
+import { blogRawContent, getPostBySlugWithUpdated } from '~/utils/blog-config'
 import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
 import { markdownToHtml } from '~/utils/markdown'
 import {
@@ -70,6 +70,15 @@ export function meta({ params, data }: Route.MetaArgs) {
     { name: 'reading_time', content: `${post.readTime} min read` },
   ]
 
+  if (post.updated) {
+    const updatedIso = new Date(post.updated).toISOString()
+    metaTags.push(
+      { name: 'article:modified_time', content: updatedIso },
+      { property: 'article:modified_time', content: updatedIso },
+      { property: 'og:article:modified_time', content: updatedIso }
+    )
+  }
+
   post.tags.forEach(tag => {
     metaTags.push({ property: 'og:article:tag', content: tag })
   })
@@ -94,7 +103,7 @@ export function meta({ params, data }: Route.MetaArgs) {
 }
 
 export async function loader({ params }: Route.LoaderArgs) {
-  const post = await blog.getPostBySlug(params.slug)
+  const post = await getPostBySlugWithUpdated(params.slug)
   if (!post) {
     throw new Response('Not Found', { status: 404 })
   }
@@ -117,10 +126,15 @@ export function headers({ parentHeaders }: Route.HeadersArgs) {
 }
 
 export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
-  const { post } = loaderData as { post: BlogPost }
+  const { post } = loaderData as { post: BlogPostWithUpdated }
   const url = `https://mawburn.com/blog/${params.slug}`
 
   const articleStructuredData = generateArticleStructuredData(post, url)
+  const publishedDate = new Date(post.date)
+  const updatedDate = post.updated ? new Date(post.updated) : undefined
+  const showUpdatedDate =
+    updatedDate &&
+    publishedDate.toISOString().slice(0, 10) !== updatedDate.toISOString().slice(0, 10)
   const breadcrumbStructuredData = generateBreadcrumbStructuredData([
     { name: 'Home', url: 'https://mawburn.com' },
     { name: 'Blog', url: 'https://mawburn.com/blog' },
@@ -174,13 +188,28 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                 {post.title}
               </h1>
               <div className="flex items-center text-gray-700 dark:text-gray-200 mb-4 space-x-2">
-                <span>
-                  {new Date(post.date).toLocaleDateString('en-US', {
+                <time dateTime={publishedDate.toISOString()}>
+                  {publishedDate.toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
-                </span>
+                </time>
+                {showUpdatedDate ? (
+                  <>
+                    <span>•</span>
+                    <span>
+                      Updated{' '}
+                      <time dateTime={updatedDate.toISOString()}>
+                        {updatedDate.toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </time>
+                    </span>
+                  </>
+                ) : null}
                 <span>•</span>
                 <span>{post.readTime} min read</span>
               </div>

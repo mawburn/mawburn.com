@@ -1,4 +1,4 @@
-import { blog } from '~/utils/blog-config'
+import { getAllPostsMetadataWithUpdated } from '~/utils/blog-config'
 import { cacheHeaders, cachePolicies } from '~/utils/cache'
 
 const ORIGIN = 'https://mawburn.com'
@@ -20,12 +20,14 @@ function urlEntry({ loc, lastmod }: { loc: string; lastmod?: string }) {
 }
 
 export async function loader() {
-  const posts = await blog.getAllPostsMetadata()
+  const posts = await getAllPostsMetadataWithUpdated()
   const entries = [
     urlEntry({ loc: `${ORIGIN}/` }),
     urlEntry({ loc: `${ORIGIN}/resume` }),
     urlEntry({ loc: `${ORIGIN}/blog` }),
-    ...posts.map(post => urlEntry({ loc: `${ORIGIN}/blog/${post.slug}`, lastmod: post.date })),
+    ...posts.map(post =>
+      urlEntry({ loc: `${ORIGIN}/blog/${post.slug}`, lastmod: post.updated ?? post.date })
+    ),
   ]
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
