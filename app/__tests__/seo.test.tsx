@@ -147,7 +147,7 @@ describe('crawler-facing endpoints', () => {
 
   it('robots.txt, llms.txt, rss.xml, and resume.md expose expected content types and canonical URLs', async () => {
     const robots = robotsLoader()
-    const llms = llmsLoader()
+    const llms = await llmsLoader()
     const rss = await rssLoader()
     const resumeMarkdown = resumeMarkdownLoader()
 

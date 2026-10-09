@@ -9,7 +9,6 @@ tags:
     'Year of the Rat',
     'tabletop RPG',
     'sci-fi horror RPG',
-    'Tuesday Knight Games',
     'Shopify Summit 2025',
     'session report',
   ]

@@ -28,18 +28,31 @@ export const links: Route.LinksFunction = () => [
 
 export function headers() {
   return {
-    Link: [
-      '</fonts/Inter_18pt-Regular.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
-      '</fonts/Inter_18pt-Bold.woff2>; rel=preload; as=font; type=font/woff2; crossorigin=anonymous',
-      '<https://static.cloudflareinsights.com>; rel=preconnect',
-    ].join(', '),
+    Link: '<https://static.cloudflareinsights.com>; rel=preconnect',
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'DENY',
     ...cacheHeaders(cachePolicies.page),
   }
 }
 
-const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
+const baseFontPreloadLinks: Array<React.ComponentProps<'link'>> = [
+  {
+    rel: 'preload',
+    href: '/fonts/Lexend-Regular.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+  {
+    rel: 'preload',
+    href: '/fonts/Lexend-Bold.woff2',
+    as: 'font',
+    type: 'font/woff2',
+    crossOrigin: 'anonymous',
+  },
+]
+
+const homeFontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   {
     rel: 'preload',
     href: '/fonts/OutrunFuture.woff2',
@@ -47,34 +60,6 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
     type: 'font/woff2',
     crossOrigin: 'anonymous',
     fetchPriority: 'high',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Regular.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Italic.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Bold.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-BoldItalic.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
   },
   {
     rel: 'preload',
@@ -87,17 +72,11 @@ const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation()
-  const isBlogRoute = location.pathname.startsWith('/blog')
-
   const isHomeRoute = location.pathname === '/'
 
-  const fontsToLoad = isBlogRoute
-    ? fontPreloadLinks.filter(link => link.href?.includes('Inter'))
-    : isHomeRoute
-      ? fontPreloadLinks.filter(
-          link => link.href?.includes('OutrunFuture') || link.href?.includes('Sacramento')
-        )
-      : fontPreloadLinks
+  const fontsToLoad = isHomeRoute
+    ? [...baseFontPreloadLinks, ...homeFontPreloadLinks]
+    : baseFontPreloadLinks
 
   const websiteStructuredData = generateWebSiteStructuredData()
   const personStructuredData = generatePersonStructuredData()

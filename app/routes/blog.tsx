@@ -17,20 +17,6 @@ export const links: Route.LinksFunction = () => [
     rel: 'canonical',
     href: 'https://mawburn.com/blog',
   },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Regular.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Bold.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
 ]
 
 export function meta() {
@@ -114,7 +100,7 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
   const { posts } = loaderData as { posts: BlogPostMetadataWithUpdated[] }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
+    <main className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
       <div className="container mx-auto max-w-3xl px-4 py-8">
         <div className="flex justify-between items-start mb-6">
           <div>
@@ -145,6 +131,6 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
         </div>
       </div>
       <Footer />
-    </div>
+    </main>
   )
 }

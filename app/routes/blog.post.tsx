@@ -15,23 +15,6 @@ import {
 
 import type { Route } from './+types/blog.post'
 
-export const links: Route.LinksFunction = () => [
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Regular.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Inter_18pt-Bold.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-]
-
 export function meta({ params, data }: Route.MetaArgs) {
   const post = data?.post
   if (!post) {
@@ -155,7 +138,7 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
-      <div className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
+      <main className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
         <div className="container mx-auto max-w-3xl px-4 py-8">
           <div className="flex justify-between items-center mb-8">
             <Link
@@ -245,7 +228,7 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
           </p>
         </div>
         <Footer maxWidth="max-w-3xl" />
-      </div>
+      </main>
     </>
   )
 }
