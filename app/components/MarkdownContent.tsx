@@ -7,7 +7,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const markdownContentVariants = cva(
-  'text-gray-800 dark:text-gray-200 leading-loose font-inter text-lg',
+  'text-gray-800 dark:text-gray-200 leading-[1.7] max-w-[65ch] font-inter font-normal text-lg',
   {
     variants: {
       variant: {
@@ -21,7 +21,7 @@ const markdownContentVariants = cva(
 )
 
 const markdownStyles = {
-  paragraphs: '[&_p]:mb-8',
+  paragraphs: '[&_p]:mb-6 [&_p]:dark:text-[#d1d5db]',
   links:
     '[&_a]:text-blue-600 [&_a]:dark:text-blue-400 [&_a]:underline [&_a]:underline-offset-2 [&_a]:decoration-1 [&_a]:hover:text-blue-800 [&_a]:hover:dark:text-blue-300 [&_a]:transition-colors',
   headings: {
@@ -35,7 +35,7 @@ const markdownStyles = {
   lists: {
     ul: '[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-6',
     ol: '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-6',
-    li: '[&_li]:mb-2',
+    li: '[&_li]:mb-2 [&_li]:dark:text-[#d1d5db]',
   },
   blockquotes:
     '[&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:dark:border-gray-600 [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote]:font-inter [&_blockquote]:text-gray-700/75 [&_blockquote]:dark:text-gray-200/75',

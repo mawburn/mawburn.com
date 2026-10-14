@@ -1,19 +1,21 @@
 ---
-title: 'Looking back at more than 5 years at Shopify'
+title: 'What did I actually do at Shopify?'
 date: '2026-10-08 14:30'
+image: '2026-10-08-leaving-shopify.webp'
+updated: '2026-10-14'
 excerpt: "Looking back at nearly 5½ years at Shopify, from building the Checkout Editor to bringing LibreChat to thousands of employees, and the incredible engineers I worked alongside. It's made me realize just how much I accomplished, how much I'd forgotten, and why I wish I'd been writing it all down along the way."
 tags: ['Shopify', 'engineering career', 'personal journey', 'developer experience']
 ---
 
-After nearly 5½ years at Shopify, my time came to a close in August 2026. The longest I've ever spent at any company.
+Recently, I went back and watched some of the videos from [Shopify Editions: Winter ’23](https://www.youtube.com/watch?v=98QZKeeYz5M) and [Winter ’24](https://www.youtube.com/watch?v=pW1L3iKNpA0), and I kept finding things I'd spent months building that I'd almost completely forgotten about.
 
-Since August, I’ve taken some time to decompress, reflect on what I want to do next, and enjoy having a real break for the first time in a long while.
-
-One thing I didn't expect was just how much of my own work I'd forgotten. I'm talking about things I spent months building, things seen by hundreds of millions of people, that I'd almost completely forgotten I had anything to do with.
+Things seen by hundreds of millions of people. Things I personally helped design and build. And somehow, I'd forgotten some of them even existed.
 
 Which is just kind of insane to me. After all, I'm just a dude who went to a small school in Southern Arkansas at the same college my dad graduated from in 1985.
 
-And the more I look back, the more surreal the whole experience feels. There were plenty of "wow, that's cool!" moments while I was there, but I don't think I fully appreciated the scale of everything until I left.
+After nearly 5½ years at Shopify, my time came to a close in August 2026. The longest I've ever spent at any company. Since then, I've been taking some time to decompress, reflect on what I want to do next, and enjoy having a real break for the first time in a long while.
+
+And the more I look back, the more surreal the whole experience feels. There were plenty of "wow, that's cool!" moments while I was there, but I don't think I fully appreciated the scale of everything until I left. Not just the things I built, but the people I worked alongside and how I ended up there in the first place.
 
 I spent about 4 years on Checkout, watching it grow from a relatively small group into a full blown org with more than a hundred people, possibly even more by now. I worked specifically in Checkout Extensibility, where we built the systems developers use to customize and extend Shopify's "New Checkout Experience."
 
@@ -25,7 +27,7 @@ Then for nearly 3 of those years, I was one of three core members of the team bu
 
 I drove decisions around iframe sandboxing and communication, frontend state management and its later migration to a new approach standardized by the org, Shop Pay integration, and countless others.
 
-Recently, I went back and watched some of the videos from [Shopify Editions: Winter ’23](https://www.youtube.com/watch?v=98QZKeeYz5M) and [Winter ’24](https://www.youtube.com/watch?v=pW1L3iKNpA0) and it was absolutely wild. It's hard to remember all the things you did on a project that large and how much of an influence you personally had on it while surrounded by some of the best engineers in the world, until you see something like that. There are things in those videos that I spent months on, where I had to change the core underlying systems we built just to accommodate an odd quirk of a new requirement... and I had completely forgotten about it.
+It was absolutely wild seeing that work again. It's hard to remember all the things you did on a project that large and how much of an influence you personally had on it while surrounded by some of the best engineers in the world. Some of the features I recognized had taken months of work, including changes to the core underlying systems just to accommodate an odd quirk of a new requirement.
 
 Then when AI hit big and Shopify became one of the early adopters, I jumped into it quickly. After running into limitations with our internal chat tools, I tried nearly every open source alternative I could find and even started building my own before finding [LibreChat](https://www.librechat.ai). I made the case internally that Shopify should switch to it, then drove the deployment and largely kept it running in my free time while I was still on Checkout.
 

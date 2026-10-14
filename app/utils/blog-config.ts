@@ -1,6 +1,8 @@
 import type { BlogPost, BlogPostMetadata } from 'postflow'
 import { BlogEngine, ContentLoader } from 'postflow'
 
+import { calculateReadTimeFromWordCount } from './readTime'
+
 export type BlogPostMetadataWithUpdated = BlogPostMetadata & {
   updated?: string
   wordCount?: number
@@ -127,10 +129,12 @@ export function addFrontmatterToPost<T extends BlogPost | BlogPostMetadata>(
   const content = blogContent[post.slug] ?? ''
   const tags = parseTagsFrontmatter(content)
   const updated = parseUpdatedFrontmatter(content)
+  const wordCount = calculateWordCount(content)
   const result = {
     ...post,
     tags: tags.length > 0 ? tags : post.tags,
-    wordCount: calculateWordCount(content),
+    wordCount,
+    readTime: calculateReadTimeFromWordCount(wordCount),
   } as T & { updated?: string; wordCount?: number }
 
   if (updated) {

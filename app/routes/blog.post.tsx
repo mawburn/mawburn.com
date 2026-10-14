@@ -181,21 +181,6 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                     day: 'numeric',
                   })}
                 </time>
-                {showUpdatedDate ? (
-                  <>
-                    <span aria-hidden="true">•</span>
-                    <span>
-                      Updated{' '}
-                      <time dateTime={updatedDate.toISOString()}>
-                        {updatedDate.toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}
-                      </time>
-                    </span>
-                  </>
-                ) : null}
                 {post.wordCount ? (
                   <>
                     <span aria-hidden="true">•</span>
@@ -204,6 +189,18 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                 ) : null}
                 <span aria-hidden="true">•</span>
                 <span>{post.readTime} min read</span>
+                {showUpdatedDate ? (
+                  <span className="basis-full text-xs font-normal text-gray-500 dark:text-gray-400">
+                    Updated{' '}
+                    <time dateTime={updatedDate.toISOString()}>
+                      {updatedDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                  </span>
+                ) : null}
               </div>
               <div className="flex flex-wrap gap-2 mb-6">
                 <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">

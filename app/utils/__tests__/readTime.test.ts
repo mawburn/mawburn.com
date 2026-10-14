@@ -30,10 +30,10 @@ describe('calculateReadTime', () => {
     expect(calculateReadTime(text)).toBe(1)
   })
 
-  it('rounds up fractional minutes', () => {
-    // 250 words should be 1.25 minutes, rounded up to 2
+  it('rounds down fractional minutes', () => {
+    // 250 words should be 1.25 minutes, rounded down to 1
     const words = Array(250).fill('word').join(' ')
-    expect(calculateReadTime(words)).toBe(2)
+    expect(calculateReadTime(words)).toBe(1)
   })
 
   it('handles edge cases', () => {

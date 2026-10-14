@@ -1,6 +1,9 @@
+const wordsPerMinute = 200
+
+export const calculateReadTimeFromWordCount = (wordCount: number): number =>
+  Math.max(1, Math.floor(wordCount / wordsPerMinute))
+
 export const calculateReadTime = (text: string): number => {
-  const wordsPerMinute = 200 // Average reading speed
-  const words = text.trim().split(/\s+/).length
-  const readTime = Math.ceil(words / wordsPerMinute)
-  return Math.max(1, readTime) // Minimum 1 minute
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0
+  return calculateReadTimeFromWordCount(words)
 }
