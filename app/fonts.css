@@ -1,93 +1,33 @@
 @font-face {
-  font-family: 'OutrunFuture';
-  src: url('/fonts/OutrunFuture.woff2') format('woff2');
-  font-weight: normal;
+  font-family: 'Instrument Sans';
   font-style: normal;
+  font-weight: 400 700;
   font-display: swap;
+  src: url('/fonts/InstrumentSans-Variable.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Lexend';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local('Lexend Regular'),
-    local('Lexend-Regular'),
-    url('/fonts/Lexend-Regular.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Lexend';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local('Lexend Bold'),
-    local('Lexend-Bold'),
-    url('/fonts/Lexend-Bold.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
+  font-family: 'JetBrains Mono';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src:
-    local('Inter Regular'),
-    local('Inter-Regular'),
-    url('/fonts/Inter_18pt-Regular.woff2') format('woff2');
+  src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: 'Inter';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local('Inter Italic'),
-    local('Inter-Italic'),
-    url('/fonts/Inter_18pt-Italic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Inter';
+  font-family: 'JetBrains Mono';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 500;
   font-display: swap;
-  src:
-    local('Inter Bold'),
-    local('Inter-Bold'),
-    url('/fonts/Inter_18pt-Bold.woff2') format('woff2');
+  src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
 }
 
+/* Metric-adjusted system fallback so the swap to Instrument Sans causes no layout shift */
 @font-face {
-  font-family: 'Inter';
-  font-style: italic;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    local('Inter Bold Italic'),
-    local('Inter-BoldItalic'),
-    url('/fonts/Inter_18pt-BoldItalic.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Sacramento';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    local('Sacramento'),
-    local('Sacramento-Regular'),
-    url('/fonts/Sacramento-Regular.woff2') format('woff2');
-}
-
-.outrun {
-  font-family: 'OutrunFuture', cursive;
-  letter-spacing: 0.05em;
-  text-rendering: optimizeLegibility;
-  contain: paint;
-  will-change: opacity;
-  backface-visibility: hidden;
+  font-family: 'Instrument Sans Fallback';
+  src: local('Arial');
+  size-adjust: 100.5%;
+  ascent-override: 93%;
+  descent-override: 24%;
+  line-gap-override: 0%;
 }

@@ -28,10 +28,6 @@ vi.mock('~/utils/blog-config', () => ({
   getAllPostsMetadataWithUpdated: vi.fn(async () => mockPosts),
 }))
 
-vi.mock('~/components/Footer', () => ({
-  Footer: () => <footer data-testid="blog-footer">Blog Footer</footer>,
-}))
-
 vi.mock('react-router', () => ({
   Link: ({ to, children, ...props }: any) => (
     <a href={to} {...props}>
@@ -82,7 +78,6 @@ describe('Blog Route', () => {
           'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.',
       })
       expect(result).toContainEqual({ property: 'og:url', content: 'https://mawburn.com/blog' })
-      expect(result).toContainEqual({ name: 'robots', content: 'index, follow' })
 
       const hasTwitterCard = result.some(meta => meta.name === 'twitter:card')
       const hasOgTitle = result.some(meta => meta.property === 'og:title')
@@ -117,14 +112,16 @@ describe('Blog Route', () => {
 
       render(<Stub />)
 
-      expect(screen.getByText('Blog')).toBeInTheDocument()
+      expect(
+        screen.getByRole('heading', { level: 1, name: 'Engineering Essays & Notes' })
+      ).toBeInTheDocument()
       expect(screen.getByText('Test Post 1')).toBeInTheDocument()
       expect(screen.getByText('This is a test excerpt for post 1')).toBeInTheDocument()
       expect(screen.getByText('5 min read')).toBeInTheDocument()
 
       expect(screen.getByText('react, typescript')).toBeInTheDocument()
 
-      expect(screen.getByTestId('blog-footer')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: /Switch to/ })).toBeInTheDocument()
     })
 
     it('renders RSS feed access link', () => {
@@ -172,8 +169,9 @@ describe('Blog Route', () => {
 
         render(<Stub />)
 
-        expect(screen.getByText('Blog')).toBeInTheDocument()
-        expect(screen.getByTestId('blog-footer')).toBeInTheDocument()
+        expect(
+          screen.getByRole('heading', { level: 1, name: 'Engineering Essays & Notes' })
+        ).toBeInTheDocument()
       })
 
       it('displays multiple posts with correct date ordering', () => {

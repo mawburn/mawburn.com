@@ -54,6 +54,14 @@ describe('formatPublishDate', () => {
     expect(result.length).toBeGreaterThan(0)
   })
 
+  it('shows the authored calendar day regardless of time or timezone', () => {
+    expect(formatPublishDate('2026-10-08')).toBe('October 8, 2026')
+    expect(formatPublishDate('2026-10-08 14:30')).toBe('October 8, 2026')
+    expect(formatPublishDate('2026-10-08 23:59')).toBe('October 8, 2026')
+    expect(formatPublishDate('2026-10-08T01:00:00-07:00')).toBe('October 8, 2026')
+    expect(formatPublishDate('2026-10-08', 'short')).toBe('Oct 8, 2026')
+  })
+
   it('handles invalid date strings gracefully', () => {
     const result = formatPublishDate('not-a-date')
     expect(typeof result).toBe('string')

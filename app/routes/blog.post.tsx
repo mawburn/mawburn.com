@@ -1,12 +1,12 @@
 import { Link } from 'react-router'
 
-import { Footer } from '~/components/Footer'
-import { RSSIcon } from '~/components/icons'
+import { BlogShell, BlogToolbar } from '~/components/BlogShell'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
 import type { BlogPostWithUpdated } from '~/utils/blog-config'
 import { blogRawContent, getPostBySlugWithUpdated } from '~/utils/blog-config'
 import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
+import { datePart, formatPublishDate } from '~/utils/dateUtils'
 import { markdownToHtml } from '~/utils/markdown'
 import {
   generateArticleStructuredData,
@@ -116,11 +116,9 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
   const url = `https://mawburn.com/blog/${params.slug}`
 
   const articleStructuredData = generateArticleStructuredData(post, url)
-  const publishedDate = new Date(post.date)
-  const updatedDate = post.updated ? new Date(post.updated) : undefined
-  const showUpdatedDate =
-    updatedDate &&
-    publishedDate.toISOString().slice(0, 10) !== updatedDate.toISOString().slice(0, 10)
+  const publishedDay = datePart(post.date)
+  const updatedDay = post.updated ? datePart(post.updated) : undefined
+  const showUpdatedDate = updatedDay !== undefined && publishedDay !== updatedDay
   const breadcrumbStructuredData = generateBreadcrumbStructuredData([
     { name: 'Home', url: 'https://mawburn.com' },
     { name: 'Blog', url: 'https://mawburn.com/blog' },
@@ -138,14 +136,20 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
-      <main className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
-        <div className="container mx-auto max-w-3xl px-4 py-8">
-          <div className="flex justify-between items-center mb-8">
+      <BlogShell>
+        <BlogToolbar
+          left={
             <Link
               to="/blog"
-              className="inline-flex items-center text-blue-600 dark:text-blue-200 hover:text-blue-800 dark:hover:text-blue-100 transition-colors"
+              className="inline-flex items-center text-blue-600 transition-colors hover:text-blue-800 dark:text-blue-200 dark:hover:text-blue-100"
             >
-              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="mr-2 h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -155,77 +159,55 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
               </svg>
               Back to Blog
             </Link>
-            <a
-              href="/rss.xml"
-              className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
-              title="RSS Feed"
+          }
+        />
+
+        <article className="prose prose-gray dark:prose-invert max-w-none">
+          <header className="mb-8">
+            <h1
+              className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
+              style={{ fontSize: '2.25rem' }}
             >
-              <RSSIcon size={24} />
-              <span className="text-sm font-medium">RSS</span>
-            </a>
-          </div>
-
-          <article className="prose prose-gray dark:prose-invert max-w-none">
-            <header className="mb-8">
-              <h1
-                className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
-                style={{ fontSize: '2.25rem' }}
-              >
-                {post.title}
-              </h1>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4">
-                <time dateTime={publishedDate.toISOString()}>
-                  {publishedDate.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </time>
-                {post.wordCount ? (
-                  <>
-                    <span aria-hidden="true">•</span>
-                    <span>{formatWordCount(post.wordCount)}</span>
-                  </>
-                ) : null}
-                <span aria-hidden="true">•</span>
-                <span>{post.readTime} min read</span>
-                {showUpdatedDate ? (
-                  <span className="basis-full text-xs font-normal text-gray-500 dark:text-gray-400">
-                    Updated{' '}
-                    <time dateTime={updatedDate.toISOString()}>
-                      {updatedDate.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                  </span>
-                ) : null}
-              </div>
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
-                  Tags:
-                </span>{' '}
-                <span className="text-gray-600 dark:text-gray-400 text-xs">
-                  {post.tags.join(', ')}
+              {post.title}
+            </h1>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm sm:text-base text-gray-700 dark:text-gray-200 mb-4">
+              <time dateTime={publishedDay}>{formatPublishDate(post.date)}</time>
+              {post.wordCount ? (
+                <>
+                  <span aria-hidden="true">•</span>
+                  <span>{formatWordCount(post.wordCount)}</span>
+                </>
+              ) : null}
+              <span aria-hidden="true">•</span>
+              <span>{post.readTime} min read</span>
+              {showUpdatedDate ? (
+                <span className="basis-full text-xs font-normal text-gray-500 dark:text-gray-400">
+                  Updated <time dateTime={updatedDay}>{formatPublishDate(post.updated!)}</time>
                 </span>
-              </div>
+              ) : null}
+            </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
+                Tags:
+              </span>{' '}
+              <span className="text-gray-600 dark:text-gray-400 text-xs">
+                {post.tags.join(', ')}
+              </span>
+            </div>
 
-              <div className="flex items-center gap-3">
-                <span className="text-gray-700 dark:text-gray-200 font-medium">Share:</span>
-                <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
-              </div>
-            </header>
+            <div className="flex items-center gap-3">
+              <span className="text-gray-700 dark:text-gray-200 font-medium">Share:</span>
+              <ShareButtons title={post.title} url={`https://mawburn.com/blog/${post.slug}`} />
+            </div>
+          </header>
 
-            <MarkdownContent html={post.content} />
-          </article>
+          <MarkdownContent html={post.content} />
+        </article>
 
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
-            All posts are written by me, though AI helps with proofreading and editing.
-          </p>
-        </div>
-        <Footer maxWidth="max-w-3xl" />
-      </main>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-12">
+          All posts are written by me, though AI helps with proofreading and editing.
+        </p>
+      </BlogShell>
     </>
   )
 }

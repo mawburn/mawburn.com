@@ -39,6 +39,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate blog posts
+        run: pnpm validate-posts
+
       - name: Run tests
         run: pnpm test -- --run
 

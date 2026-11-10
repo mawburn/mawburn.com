@@ -24,10 +24,12 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+const blogWrapper = () => document.querySelector<HTMLElement>('[data-blog-theme]')!
+
 describe('ThemeToggle', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    document.documentElement.className = ''
+    document.body.innerHTML = '<div data-blog-theme class="dark"></div>'
   })
 
   describe('Theme switching functionality', () => {
@@ -49,7 +51,7 @@ describe('ThemeToggle', () => {
 
       fireEvent.click(button)
 
-      expect(document.documentElement).toHaveClass('dark')
+      expect(blogWrapper()).not.toHaveClass('dark')
     })
 
     it('respects saved theme preference', () => {
@@ -69,10 +71,10 @@ describe('ThemeToggle', () => {
         const button = screen.getByRole('button')
 
         fireEvent.click(button)
-        expect(document.documentElement).toHaveClass('dark')
+        expect(blogWrapper()).not.toHaveClass('dark')
 
         fireEvent.click(button)
-        expect(document.documentElement).not.toHaveClass('dark')
+        expect(blogWrapper()).toHaveClass('dark')
       })
 
       it('handles invalid localStorage values gracefully', () => {

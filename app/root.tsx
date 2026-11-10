@@ -1,21 +1,14 @@
 import './app.css'
 
-import {
-  isRouteErrorResponse,
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useLocation,
-} from 'react-router'
+import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
 import type { Route } from './+types/root'
-import { Navigation } from './components/Navigation'
 import { cacheHeaders, cachePolicies } from './utils/cache'
 import { generatePersonStructuredData, generateWebSiteStructuredData } from './utils/structuredData'
 
 export const links: Route.LinksFunction = () => [
+  { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+  { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
   {
     rel: 'preconnect',
     href: 'https://static.cloudflareinsights.com',
@@ -35,35 +28,19 @@ export function headers() {
   }
 }
 
-const baseFontPreloadLinks: Array<React.ComponentProps<'link'>> = [
+const fontPreloadLinks: Array<React.ComponentProps<'link'>> = [
   {
     rel: 'preload',
-    href: '/fonts/Lexend-Regular.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-  {
-    rel: 'preload',
-    href: '/fonts/Lexend-Bold.woff2',
-    as: 'font',
-    type: 'font/woff2',
-    crossOrigin: 'anonymous',
-  },
-]
-
-const homeFontPreloadLinks: Array<React.ComponentProps<'link'>> = [
-  {
-    rel: 'preload',
-    href: '/fonts/OutrunFuture.woff2',
+    href: '/fonts/InstrumentSans-Variable.woff2',
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
     fetchPriority: 'high',
   },
   {
+    // Used by the header wordmark on every page; otherwise only discovered after the CSS loads.
     rel: 'preload',
-    href: '/fonts/Sacramento-Regular.woff2',
+    href: '/fonts/JetBrainsMono-Regular.woff2',
     as: 'font',
     type: 'font/woff2',
     crossOrigin: 'anonymous',
@@ -71,13 +48,6 @@ const homeFontPreloadLinks: Array<React.ComponentProps<'link'>> = [
 ]
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const location = useLocation()
-  const isHomeRoute = location.pathname === '/'
-
-  const fontsToLoad = isHomeRoute
-    ? [...baseFontPreloadLinks, ...homeFontPreloadLinks]
-    : baseFontPreloadLinks
-
   const websiteStructuredData = generateWebSiteStructuredData()
   const personStructuredData = generatePersonStructuredData()
 
@@ -88,50 +58,18 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="author" content="Matt Burnett" />
         <meta name="robots" content="index, follow" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const storedTheme = localStorage.getItem('theme');
-                  const savedTheme = storedTheme === 'dark' || storedTheme === 'light'
-                    ? storedTheme
-                    : null;
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  const theme = savedTheme || (prefersDark ? 'dark' : 'light');
-                  document.documentElement.classList.toggle('dark', theme === 'dark');
-                  document.documentElement.style.colorScheme = theme;
-                } catch (_error) {
-                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  document.documentElement.classList.toggle('dark', prefersDark);
-                  document.documentElement.style.colorScheme = prefersDark ? 'dark' : 'light';
-                }
-              })();
-            `,
-          }}
-        />
+        <meta name="theme-color" content="#111a22" />
         <style
           dangerouslySetInnerHTML={{
             __html: `
               /* Critical CSS for initial render */
               *, ::before, ::after { box-sizing: border-box; }
-              html { -webkit-text-size-adjust: 100%; line-height: 1.5; }
-              body { margin: 0; font-family: system-ui, -apple-system, sans-serif; }
-              .dark { color-scheme: dark; }
-              .pt-16 { padding-top: 4rem; }
-              .flex { display: flex; }
-              .flex-col { flex-direction: column; }
-              .min-h-screen { min-height: 100vh; }
-              .fixed { position: fixed; }
-              .inset-0 { inset: 0; }
-              .-z-50 { z-index: -50; }
-              .bg-black { background-color: #000; }
-              /* Navigation critical styles */
-              nav { position: fixed; top: 0; width: 100%; z-index: 50; }
+              html { -webkit-text-size-adjust: 100%; line-height: 1.5; color-scheme: dark; background: #111a22; }
+              body { margin: 0; background: #111a22; color: #e8f2f6; font-family: 'Instrument Sans', 'Instrument Sans Fallback', system-ui, -apple-system, sans-serif; }
             `,
           }}
         />
-        {fontsToLoad.map(link => (
+        {fontPreloadLinks.map(link => (
           <link key={link.href} {...link} />
         ))}
         <script
@@ -146,8 +84,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navigation />
-        <div className="pt-16">{children}</div>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -174,7 +111,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
+    <main className="container mx-auto max-w-[880px] p-6">
       <h1>{message}</h1>
       <p>{details}</p>
       {stack && (

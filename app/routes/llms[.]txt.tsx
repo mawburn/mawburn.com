@@ -9,6 +9,8 @@ const staticLlmsTextStart = `# Matt Burnett
 
 ## Professional profile
 
+- [About](${baseUrl}/about): Background, career summary, education, and military service.
+- [Contact](${baseUrl}/contact): Email, LinkedIn, GitHub, Instagram, Bluesky, and Reddit.
 - [Resume](${baseUrl}/resume): Professional experience, technical skills, selected projects, and career background.
 - [Resume — Markdown](${baseUrl}/resume.md): Machine-readable version of the professional resume.
 - [LinkedIn](https://www.linkedin.com/in/burnettmatt/)

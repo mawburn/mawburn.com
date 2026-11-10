@@ -13,3 +13,11 @@
 
 .claude
 .pi*
+
+# Stitch design export (reference only)
+stitch_mawburn_pnw_forest_portfolio/
+
+# Playwright
+.playwright-mcp/
+/playwright-report/
+/test-results/

@@ -1,65 +1,49 @@
-import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router'
+import { Link, NavLink } from 'react-router'
 
-import { HouseIcon } from './HouseIcon'
-import { ThemeToggle } from './ThemeToggle'
+export const navItems = [
+  { to: '/', label: 'Home', end: true },
+  { to: '/about', label: 'About' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/resume', label: 'Résumé' },
+  { to: '/contact', label: 'Contact' },
+] as const
+
+const linkBase = 'rounded px-3 py-1.5 text-sm transition-colors'
 
 export function Navigation() {
-  const location = useLocation()
-  const isHomePage = location.pathname === '/'
-  const [isHidden, setIsHidden] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsHidden(window.scrollY > 8)
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-80 backdrop-blur-md border-b border-cyan-500 border-opacity-30 transition-transform duration-300 ease-in-out ${
-        isHidden ? '-translate-y-full' : 'translate-y-0'
-      }`}
-    >
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
-          <Link
-            to="/"
-            className="text-white hover:text-cyan-300 transition-colors p-1"
-            aria-label="Home"
-          >
-            <HouseIcon className="w-8 h-8" />
-          </Link>
-          <ul className="flex items-center space-x-6">
-            <li>
-              <Link
-                to="/resume"
-                className="text-white hover:text-cyan-300 transition-colors text-lg font-bold tracking-wider"
-              >
-                Resume
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/blog"
-                className="text-white hover:text-cyan-300 transition-colors text-lg font-bold tracking-wider"
-              >
-                Blog
-              </Link>
-            </li>
-            {!isHomePage && (
-              <li>
-                <ThemeToggle />
+    <header className="sticky top-0 z-50 border-b border-border-subtle bg-forest-bg/90 backdrop-blur-md">
+      <div className="mx-auto flex min-h-16 max-w-[880px] flex-wrap items-center justify-between gap-x-4 gap-y-1 px-6 py-2">
+        <Link to="/" className="group flex items-baseline gap-2.5">
+          <span className="text-lg font-bold text-text-primary transition-colors group-hover:text-mist-light">
+            mawburn
+          </span>
+          <span className="font-mono text-xs text-text-muted">/ Matt Burnett</span>
+        </Link>
+
+        <nav aria-label="Primary navigation">
+          <ul className="flex flex-wrap items-center gap-0.5">
+            {navItems.map(item => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={'end' in item ? item.end : false}
+                  prefetch="intent"
+                  className={({ isActive }) =>
+                    `${linkBase} ${
+                      isActive
+                        ? 'border border-moss-accent/40 bg-surface-dark font-semibold text-moss-bright'
+                        : 'border border-transparent text-text-muted hover:text-text-primary'
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
               </li>
-            )}
+            ))}
           </ul>
-        </div>
+        </nav>
       </div>
-    </nav>
+    </header>
   )
 }

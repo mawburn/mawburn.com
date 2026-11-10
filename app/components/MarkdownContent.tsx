@@ -7,7 +7,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 const markdownContentVariants = cva(
-  'text-gray-800 dark:text-gray-200 leading-[1.7] max-w-[65ch] font-inter font-normal text-lg',
+  'text-gray-800 dark:text-gray-200 leading-[1.7] max-w-[65ch] font-sans font-normal text-lg',
   {
     variants: {
       variant: {
@@ -38,7 +38,7 @@ const markdownStyles = {
     li: '[&_li]:mb-2 [&_li]:dark:text-[#d1d5db]',
   },
   blockquotes:
-    '[&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:dark:border-gray-600 [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote]:font-inter [&_blockquote]:text-gray-700/75 [&_blockquote]:dark:text-gray-200/75',
+    '[&_blockquote]:border-l-4 [&_blockquote]:border-gray-300 [&_blockquote]:dark:border-gray-600 [&_blockquote]:pl-4 [&_blockquote]:mb-4 [&_blockquote]:italic [&_blockquote]:font-sans [&_blockquote]:text-gray-700/75 [&_blockquote]:dark:text-gray-200/75',
 }
 
 interface MarkdownContentProps

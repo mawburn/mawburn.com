@@ -24,10 +24,12 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+const blogWrapper = () => document.querySelector<HTMLElement>('[data-blog-theme]')!
+
 describe('useDarkMode', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    document.documentElement.className = ''
+    document.body.innerHTML = '<div data-blog-theme class="dark"></div>'
   })
 
   describe('Dark mode state management', () => {
@@ -39,17 +41,26 @@ describe('useDarkMode', () => {
       expect(typeof result.current.toggleDarkMode).toBe('function')
     })
 
-    it('toggles dark mode when requested', () => {
+    it('defaults to dark and toggles to light when requested', () => {
       localStorageMock.getItem.mockReturnValue(null)
       const { result } = renderHook(() => useDarkMode())
+      expect(result.current.isDarkMode).toBe(true)
 
       act(() => {
         result.current.toggleDarkMode()
       })
 
-      expect(result.current.isDarkMode).toBe(true)
-      expect(document.documentElement).toHaveClass('dark')
-      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'dark')
+      expect(result.current.isDarkMode).toBe(false)
+      expect(blogWrapper()).not.toHaveClass('dark')
+      expect(localStorageMock.setItem).toHaveBeenCalledWith('theme', 'light')
+    })
+
+    it('never touches the <html> element (theme is blog-scoped)', () => {
+      localStorageMock.getItem.mockReturnValue('light')
+      renderHook(() => useDarkMode())
+
+      expect(document.documentElement).not.toHaveClass('dark')
+      expect(blogWrapper()).not.toHaveClass('dark')
     })
 
     it('restores a saved dark theme even when the DOM class is missing', () => {
@@ -58,8 +69,8 @@ describe('useDarkMode', () => {
       const { result } = renderHook(() => useDarkMode())
 
       expect(result.current.isDarkMode).toBe(true)
-      expect(document.documentElement).toHaveClass('dark')
-      expect(document.documentElement.style.colorScheme).toBe('dark')
+      expect(blogWrapper()).toHaveClass('dark')
+      expect(blogWrapper().style.colorScheme).toBe('dark')
     })
 
     describe('Edge cases', () => {
@@ -70,14 +81,14 @@ describe('useDarkMode', () => {
         act(() => {
           result.current.toggleDarkMode()
         })
-        expect(result.current.isDarkMode).toBe(true)
-        expect(document.documentElement).toHaveClass('dark')
+        expect(result.current.isDarkMode).toBe(false)
+        expect(blogWrapper()).not.toHaveClass('dark')
 
         act(() => {
           result.current.toggleDarkMode()
         })
-        expect(result.current.isDarkMode).toBe(false)
-        expect(document.documentElement).not.toHaveClass('dark')
+        expect(result.current.isDarkMode).toBe(true)
+        expect(blogWrapper()).toHaveClass('dark')
       })
 
       it('handles corrupted localStorage values gracefully', () => {

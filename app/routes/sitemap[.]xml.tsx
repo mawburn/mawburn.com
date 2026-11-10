@@ -1,7 +1,6 @@
 import { getAllPostsMetadataWithUpdated } from '~/utils/blog-config'
 import { cacheHeaders, cachePolicies } from '~/utils/cache'
-
-const ORIGIN = 'https://mawburn.com'
+import { ORIGIN } from '~/utils/structuredData'
 
 function escapeXml(value: string) {
   return value
@@ -23,7 +22,9 @@ export async function loader() {
   const posts = await getAllPostsMetadataWithUpdated()
   const entries = [
     urlEntry({ loc: `${ORIGIN}/` }),
+    urlEntry({ loc: `${ORIGIN}/about` }),
     urlEntry({ loc: `${ORIGIN}/resume` }),
+    urlEntry({ loc: `${ORIGIN}/contact` }),
     urlEntry({ loc: `${ORIGIN}/blog` }),
     ...posts.map(post =>
       urlEntry({ loc: `${ORIGIN}/blog/${post.slug}`, lastmod: post.updated ?? post.date })
