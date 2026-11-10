@@ -48,40 +48,50 @@ export function Welcome({ recentPosts }: { recentPosts: RecentPost[] }) {
         </div>
 
         <div className="relative z-10 mx-auto -mt-24 max-w-[880px] px-6 pb-12 md:-mt-28">
-          <div className="surface-enter max-w-2xl">
-            <h1 className="mb-3 text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
-              Matt Burnett
-            </h1>
-            <p className="mb-4 text-xl font-semibold text-moss-bright">
-              Senior Software Engineer · Portland, Oregon
-            </p>
-            <p className="mb-6 text-base leading-relaxed text-text-muted md:text-lg">
-              I&rsquo;m a full-stack engineer with nearly 15 years of experience building software
-              and platform systems. I spent more than five years at Shopify working on Checkout
-              Extensibility and internal developer AI tooling.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              <Link
-                to="/about"
-                prefetch="intent"
-                className="inline-flex items-center gap-2 rounded bg-moss-bright px-4 py-2 text-sm font-bold text-forest-bg transition-colors hover:bg-white"
-              >
-                About me <span aria-hidden="true">→</span>
-              </Link>
-              <Link
-                to="/blog"
-                prefetch="intent"
-                className="inline-flex items-center rounded border border-border-light bg-surface-dark px-4 py-2 text-sm font-medium text-text-primary transition-colors hover:border-mist-light"
-              >
-                Read Blog
-              </Link>
-              <Link
-                to="/resume"
-                prefetch="intent"
-                className="inline-flex items-center px-3.5 py-2 text-sm text-text-muted transition-colors hover:text-text-primary"
-              >
-                Résumé
-              </Link>
+          <div className="surface-enter flex flex-col items-start gap-6 md:flex-row-reverse md:items-end md:justify-between md:gap-10">
+            <img
+              src="/images/matt-burnett.webp"
+              alt="Portrait of Matt Burnett"
+              width={160}
+              height={160}
+              fetchPriority="high"
+              className="size-24 shrink-0 rounded-full border-2 border-border-light object-cover shadow-lg shadow-black/40 ring-4 ring-forest-bg md:size-40"
+            />
+            <div className="max-w-2xl">
+              <h1 className="mb-3 text-4xl font-bold tracking-tight text-text-primary md:text-5xl">
+                Matt Burnett
+              </h1>
+              <p className="mb-4 text-xl font-semibold text-moss-bright">
+                Senior Software Engineer · Portland, Oregon
+              </p>
+              <p className="mb-6 text-base leading-relaxed text-text-muted md:text-lg">
+                I&rsquo;m a full-stack engineer with nearly 15 years of experience building software
+                and platform systems. I spent more than five years at Shopify working on Checkout
+                Extensibility and internal developer AI tooling.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  to="/about"
+                  prefetch="intent"
+                  className="inline-flex items-center gap-2 rounded bg-moss-bright px-4 py-2 text-sm font-bold text-forest-bg transition-colors hover:bg-white"
+                >
+                  About me <span aria-hidden="true">→</span>
+                </Link>
+                <Link
+                  to="/blog"
+                  prefetch="intent"
+                  className="inline-flex items-center rounded border border-border-light bg-surface-dark px-4 py-2 text-sm font-medium text-text-primary transition-colors hover:border-mist-light"
+                >
+                  Read Blog
+                </Link>
+                <Link
+                  to="/resume"
+                  prefetch="intent"
+                  className="inline-flex items-center px-3.5 py-2 text-sm text-text-muted transition-colors hover:text-text-primary"
+                >
+                  Résumé
+                </Link>
+              </div>
             </div>
           </div>
         </div>

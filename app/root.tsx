@@ -7,6 +7,8 @@ import { cacheHeaders, cachePolicies } from './utils/cache'
 import { generatePersonStructuredData, generateWebSiteStructuredData } from './utils/structuredData'
 
 export const links: Route.LinksFunction = () => [
+  { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+  { rel: 'icon', href: '/favicon.ico', sizes: '32x32' },
   {
     rel: 'preconnect',
     href: 'https://static.cloudflareinsights.com',
