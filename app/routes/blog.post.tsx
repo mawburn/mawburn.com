@@ -128,6 +128,7 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
   return (
     <>
       <link rel="canonical" href={url} />
+      <link rel="alternate" type="text/markdown" href={`${url}.md`} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}

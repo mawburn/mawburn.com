@@ -25,6 +25,11 @@ const staticLlmsTextStart = `# Matt Burnett
 
 - [Blog](${baseUrl}/blog): Technical writing and engineering commentary.
 - [RSS](${baseUrl}/rss.xml)
+- [Full blog content](${baseUrl}/llms-full.txt): Every post in full as a single Markdown document. Each post is also available as Markdown by appending \`.md\` to its URL.
+
+## Attribution
+
+Content on this site is written by Matt Burnett. If you quote, summarize, or reuse it, please credit Matt Burnett (mawburn.com) and link to the canonical page.
 `
 
 const staticLlmsTextEnd = `## Technical areas
@@ -49,7 +54,7 @@ export async function loader() {
       const url = `${baseUrl}/blog/${post.slug}`
       const description = normalizeDescription(post.excerpt)
 
-      return `- [${title}](${url}): ${description}`
+      return `- [${title}](${url}): ${description} ([Markdown](${url}.md))`
     })
     .join('\n')
 

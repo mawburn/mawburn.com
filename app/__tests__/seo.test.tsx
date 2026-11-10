@@ -152,7 +152,17 @@ describe('crawler-facing endpoints', () => {
     const resumeMarkdown = resumeMarkdownLoader()
 
     expect(robots.headers.get('Content-Type')).toContain('text/plain')
-    expect(await robots.text()).toContain('User-agent: OAI-SearchBot\nAllow: /')
+    const robotsText = await robots.text()
+    for (const bot of [
+      'OAI-SearchBot',
+      'GPTBot',
+      'ClaudeBot',
+      'Claude-SearchBot',
+      'PerplexityBot',
+    ]) {
+      expect(robotsText).toContain(`User-agent: ${bot}`)
+    }
+    expect(robotsText).not.toContain('Disallow')
 
     expect(llms.headers.get('Content-Type')).toContain('text/markdown')
     expect(await llms.text()).toContain('https://mawburn.com/resume')

@@ -47,7 +47,7 @@ function parseUpdatedFrontmatter(content: string) {
   return parseFrontmatterValue(content, 'updated')
 }
 
-function getMarkdownBody(content: string) {
+export function getMarkdownBody(content: string) {
   const lines = content.split('\n')
   if (lines[0] !== '---') return content
 

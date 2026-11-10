@@ -9,11 +9,13 @@ export default [
     route('blog', 'routes/blog.tsx'),
     route('blog/:slug', 'routes/blog.post.tsx'),
   ]),
+  route('blog/:slug.md', 'routes/blog.post[.]md.tsx'),
   route('resume.md', 'routes/resume[.]md.tsx'),
   route('sitemap.xml', 'routes/sitemap[.]xml.tsx'),
   route('rss.xml', 'routes/rss[.]xml.tsx'),
   route('robots.txt', 'routes/robots[.]txt.tsx'),
   route('llms.txt', 'routes/llms[.]txt.tsx'),
+  route('llms-full.txt', 'routes/llms-full[.]txt.tsx'),
   route(
     '.well-known/appspecific/com.chrome.devtools.json',
     'routes/[.well-known].appspecific[.]com.chrome.devtools.json.tsx'

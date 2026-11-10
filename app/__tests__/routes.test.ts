@@ -96,8 +96,8 @@ describe('routes', () => {
     )
   })
 
-  it('has exactly 12 routes', () => {
-    expect(routes).toHaveLength(12)
+  it('has exactly 14 routes', () => {
+    expect(routes).toHaveLength(14)
   })
 
   describe('Edge cases', () => {
