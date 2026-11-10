@@ -9,7 +9,7 @@ A personal portfolio site with blog built using modern web technologies.
 
 - **React Router v7** (renamed from Remix) - Full-stack React framework
 - **TailwindCSS v4** - Utility-first CSS framework
-- **Three.js** - 3D graphics library for synthwave background
+- **Cascadia Mist design system** - dark Pacific Northwest theme, self-hosted Instrument Sans + JetBrains Mono
 - **TypeScript** - Type-safe JavaScript
 - **Vitest** - Fast unit testing framework
 - **Cloudflare Workers** - Edge deployment platform
@@ -34,28 +34,36 @@ curl -sD - -o /dev/null https://mawburn.com/blog
 
 Test against the deployed custom domain: local development does not prove edge cache hits. Caching is public-only; revisit the policies before adding authenticated or visitor-specific responses. Cloudflare bills cached requests at the standard Workers request rate, including static asset requests when Workers Caching is enabled.
 
+## Writing a blog post
+
+```bash
+pnpm new-post "My post title" --tags "react,typescript"   # scaffolds content/blog/YYYY-MM-DD-slug.md + OG images
+# write the post, replace the TODO excerpt/tags
+pnpm dev                                                 # preview at /blog/<slug>
+pnpm validate-posts                                      # frontmatter, filename, image checks (also run by CI and `pnpm build`)
+```
+
+Frontmatter: `title`, `date` (`'YYYY-MM-DD HH:mm'`, must match the filename), `excerpt` (becomes the meta description, 50–160 chars ideal), `tags`, optional `image` and `updated`. Other commands:
+
+- `pnpm og-image [slug]` generates branded `{slug}.webp` (1200x630) plus `-twitter` and `-small` variants for posts without an image. `--force` regenerates all, `--default` rebuilds `og-default.webp`.
+- Posts are bundled at build time, so publishing means committing and deploying (`pnpm deploy`).
+
+New posts appear automatically in the blog list, home page "Recent Writing", `sitemap.xml`, `rss.xml` and `llms.txt`.
+
+## Design and theming
+
+Design tokens live in the `@theme` block of `app/app.css`. The site is dark-only; only blog routes (`BlogShell`) offer a light/dark toggle, scoped to a wrapper element so other pages never read `localStorage.theme`. The animated forest hero (`ForestHero`) is inline SVG + CSS keyframes (transform/opacity only), paused off-screen and disabled for `prefers-reduced-motion`.
+
 ## Project Structure
 
 ```
 app/
-├── components/          # Reusable React components
-│   ├── SynthwaveBackground/  # Three.js animated background
-│   ├── ShareButtons/   # Social media sharing buttons
-│   ├── MarkdownContent.tsx  # Markdown styling component
-│   ├── Navigation.tsx  # Site navigation
-│   ├── ThemeToggle.tsx # Dark/light mode switcher
-│   └── ...
-├── routes/             # Route modules (declared in app/routes.ts)
-│   ├── home.tsx        # Landing page
-│   ├── blog.tsx        # Blog listing with RSS link
-│   ├── blog.post.tsx   # Individual blog posts with sharing
-│   ├── rss[.]xml.tsx   # RSS feed generation
-│   └── sitemap[.]xml.tsx  # SEO sitemap
-├── utils/              # Utility functions
-│   ├── blog-config.ts  # Blog content configuration
-│   ├── cache.ts        # Public response cache policies
-│   └── ...
-└── __tests__/          # Comprehensive test suite
-content/blog/           # Markdown blog posts with frontmatter
-public/images/          # Blog post images (WebP format)
+├── layouts/site.tsx    # Shared nav + footer + skip link around page routes
+├── components/         # ForestHero, BranchHeader, BlogShell, Navigation, Footer, ShareButtons, ...
+├── routes/             # home, about, contact, resume, blog, blog.post + sitemap/rss/robots/llms resources
+├── utils/              # blog-config, cache policies, seo (pageMeta/canonicalLink), structuredData
+└── __tests__/          # test suite
+scripts/                # new-post, validate-posts, og-image (plain Node ESM)
+content/blog/           # Markdown posts with frontmatter
+public/images/          # Post images and og-default.webp (WebP)
 ```

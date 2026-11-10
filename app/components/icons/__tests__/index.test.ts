@@ -29,9 +29,9 @@ describe('Icons index', () => {
     expect(typeof Icons.XIcon).toBe('function')
   })
 
-  it('exports exactly 10 icons', () => {
+  it('exports exactly 11 icons', () => {
     const exportedItems = Object.keys(Icons)
-    expect(exportedItems).toHaveLength(10)
+    expect(exportedItems).toHaveLength(11)
   })
 
   describe('Edge cases', () => {

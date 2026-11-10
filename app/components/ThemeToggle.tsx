@@ -4,7 +4,14 @@ import { useDarkMode } from '~/hooks/useDarkMode'
 
 function SunIcon() {
   return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg
+      className="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -17,7 +24,14 @@ function SunIcon() {
 
 function MoonIcon() {
   return (
-    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg
+      className="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
       <path
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -39,7 +53,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <button
-        className="inline-flex items-center justify-center h-9 px-2.5 min-w-9 rounded-md text-sm font-medium text-white hover:text-cyan-300 transition-colors bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        className="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-300 bg-gray-100 px-2.5 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-200 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
         aria-label="Toggle theme"
       >
         <div className="h-4 w-4" />
@@ -51,8 +65,7 @@ export function ThemeToggle() {
     <button
       onClick={toggleDarkMode}
       aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
-      aria-pressed={isDarkMode}
-      className="inline-flex items-center justify-center h-9 px-2.5 min-w-9 rounded-md text-sm font-medium text-white hover:text-cyan-300 transition-colors bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+      className="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-300 bg-gray-100 px-2.5 text-sm font-medium text-gray-900 transition-colors hover:bg-gray-200 dark:border-white/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
     >
       {isDarkMode ? <SunIcon /> : <MoonIcon />}
     </button>

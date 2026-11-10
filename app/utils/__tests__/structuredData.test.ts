@@ -251,6 +251,7 @@ describe('structuredData', () => {
           'https://www.linkedin.com/in/burnettmatt/',
           'https://github.com/mawburn',
           'https://bsky.app/profile/mawburn.com',
+          'https://www.instagram.com/_mawburn',
           'https://x.com/_mawburn',
         ],
       })
@@ -279,6 +280,7 @@ describe('structuredData', () => {
           'https://www.linkedin.com/in/burnettmatt/',
           'https://github.com/mawburn',
           'https://bsky.app/profile/mawburn.com',
+          'https://www.instagram.com/_mawburn',
           'https://x.com/_mawburn',
         ],
         jobTitle: 'Senior / Staff Software Engineer',

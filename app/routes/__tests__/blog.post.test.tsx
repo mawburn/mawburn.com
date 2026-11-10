@@ -27,14 +27,6 @@ vi.mock('~/utils/blog-config', () => ({
   },
 }))
 
-vi.mock('~/components/Footer', () => ({
-  Footer: ({ maxWidth }: { maxWidth?: string }) => (
-    <footer data-testid="blog-footer" data-max-width={maxWidth}>
-      Blog Footer
-    </footer>
-  ),
-}))
-
 vi.mock('react-router', () => ({
   Link: ({ to, children, className, ...props }: any) => (
     <a href={to} className={className} {...props}>
@@ -128,8 +120,7 @@ describe('BlogPost Route', () => {
       expect(screen.getByText('This is the blog post content')).toBeInTheDocument()
       expect(screen.getByText('react, testing')).toBeInTheDocument()
       expect(screen.getByText('5 min read')).toBeInTheDocument()
-      expect(screen.getByTestId('blog-footer')).toBeInTheDocument()
-      expect(screen.getByTestId('blog-footer')).toHaveAttribute('data-max-width', 'max-w-3xl')
+      expect(screen.getByRole('button', { name: /Switch to/ })).toBeInTheDocument()
     })
 
     it('should display formatted date and navigation', () => {

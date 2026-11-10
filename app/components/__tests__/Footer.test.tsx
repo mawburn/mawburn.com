@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { Footer } from '~/components/Footer'
@@ -13,28 +14,30 @@ describe('Footer Component', () => {
     vi.useRealTimers()
   })
 
-  it('should render with correct structure and default max-width', () => {
-    render(<Footer />)
+  it('renders the copyright with the current year', () => {
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>
+    )
 
-    // Check copyright text
-    expect(screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)).toBeInTheDocument()
-
-    // Check structure and styling
-    const footer = screen.getByRole('contentinfo')
-    expect(footer).toHaveClass('mt-auto')
-
-    const container = document.querySelector('.container')
-    expect(container).toHaveClass('container', 'mx-auto', 'px-4', 'py-6', 'max-w-4xl')
-
-    const textElement = screen.getByText(/© \d{4} Matt Burnett\. All rights reserved\./)
-    expect(textElement).toHaveClass('text-black', 'dark:text-white')
+    expect(screen.getByRole('contentinfo')).toHaveTextContent(
+      `Matt Burnett © ${new Date().getFullYear()}`
+    )
   })
 
-  it('should use custom max-width when provided', () => {
-    render(<Footer maxWidth="max-w-3xl" />)
+  it('links to every social profile, safely opening in a new tab', () => {
+    render(
+      <MemoryRouter>
+        <Footer />
+      </MemoryRouter>
+    )
 
-    const container = document.querySelector('.container')
-    expect(container).toHaveClass('max-w-3xl')
-    expect(container).not.toHaveClass('max-w-4xl')
+    for (const name of ['GitHub', 'LinkedIn', 'Instagram', 'Reddit', 'Bluesky']) {
+      const link = screen.getByRole('link', { name: new RegExp(name) })
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    }
+    expect(screen.getByRole('link', { name: 'RSS' })).toHaveAttribute('href', '/rss.xml')
   })
 })

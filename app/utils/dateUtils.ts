@@ -25,15 +25,22 @@ export const isPostPublished = (dateString: string): boolean => {
   return postDate <= now
 }
 
-export const formatPublishDate = (dateString: string): string => {
-  // Always display just the date part, regardless of whether time was specified
-  const dateOnly = dateString.split('T')[0].split(' ')[0]
-  return new Date(dateOnly + 'T00:00:00.000Z').toLocaleDateString('en-US', {
+/** The calendar-date part of "YYYY-MM-DD", "YYYY-MM-DD HH:mm" or ISO strings. */
+export const datePart = (dateString: string): string =>
+  String(dateString).split('T')[0].split(' ')[0]
+
+/**
+ * Format a post date as a calendar date. Dates are authored as plain calendar days, so format
+ * in UTC: using the viewer's timezone would show the previous day to anyone west of UTC and make
+ * the server-rendered (UTC) and hydrated (local) output disagree.
+ */
+export const formatPublishDate = (dateString: string, style: 'long' | 'short' = 'long'): string =>
+  new Date(datePart(dateString) + 'T00:00:00.000Z').toLocaleDateString('en-US', {
     year: 'numeric',
-    month: 'long',
+    month: style === 'long' ? 'long' : 'short',
     day: 'numeric',
+    timeZone: 'UTC',
   })
-}
 
 export const isInDevelopment = (): boolean => {
   return import.meta.env.DEV

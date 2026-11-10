@@ -29,9 +29,6 @@ export default defineConfig({
             if (id.includes('react') || id.includes('react-dom')) {
               return 'react-vendor'
             }
-            if (id.includes('three')) {
-              return 'three'
-            }
             if (id.includes('markdown-it')) {
               return 'markdown'
             }
@@ -46,10 +43,6 @@ export default defineConfig({
           }
           if (id.includes('routes/home.')) {
             return 'home'
-          }
-          // Separate Three.js background into its own chunk
-          if (id.includes('SynthwaveBackground')) {
-            return 'synthwave'
           }
         },
         assetFileNames: assetInfo => {

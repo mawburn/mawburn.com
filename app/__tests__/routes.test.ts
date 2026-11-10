@@ -1,11 +1,35 @@
 import { describe, expect, it } from 'vitest'
 
-import routes from '../routes'
+import config from '../routes'
+
+type RouteEntry = { file: string; path?: string; index?: boolean; children?: RouteEntry[] }
+
+// Flatten the pathless site layout so tests see every leaf route.
+const layouts = (config as RouteEntry[]).filter(route => route.children)
+const routes: RouteEntry[] = (config as RouteEntry[]).flatMap(route => route.children ?? [route])
 
 describe('routes', () => {
   it('exports an array of route configurations', () => {
-    expect(Array.isArray(routes)).toBe(true)
+    expect(Array.isArray(config)).toBe(true)
     expect(routes.length).toBeGreaterThan(0)
+  })
+
+  it('wraps page routes in the shared site layout (nav + footer) and keeps resources outside', () => {
+    expect(layouts).toHaveLength(1)
+    expect(layouts[0].file).toBe('layouts/site.tsx')
+
+    const inLayout = layouts[0].children!.map(route => route.path ?? 'index')
+    expect(inLayout).toEqual(
+      expect.arrayContaining(['index', 'about', 'contact', 'resume', 'blog', 'blog/:slug'])
+    )
+    for (const resource of ['sitemap.xml', 'rss.xml', 'robots.txt', 'llms.txt', 'resume.md']) {
+      expect(inLayout).not.toContain(resource)
+    }
+  })
+
+  it('includes about and contact routes', () => {
+    expect(routes.find(route => route.path === 'about')?.file).toBe('routes/about.tsx')
+    expect(routes.find(route => route.path === 'contact')?.file).toBe('routes/contact.tsx')
   })
 
   it('includes home route as index', () => {
@@ -72,8 +96,8 @@ describe('routes', () => {
     )
   })
 
-  it('has exactly 10 routes', () => {
-    expect(routes).toHaveLength(10)
+  it('has exactly 12 routes', () => {
+    expect(routes).toHaveLength(12)
   })
 
   describe('Edge cases', () => {
@@ -110,7 +134,7 @@ describe('routes', () => {
       })
     })
 
-    it('all route files start with routes/', () => {
+    it('all leaf route files start with routes/', () => {
       routes.forEach(route => {
         expect(route.file).toMatch(/^routes\//)
       })

@@ -16,12 +16,16 @@ function getPreferredTheme(): Theme {
   const savedTheme = getSavedTheme()
   if (savedTheme) return savedTheme
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  // The site is dark-first: only go light when the visitor's system explicitly asks for it.
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
 }
 
+/** The theme is scoped to the blog wrapper (`data-blog-theme`), never <html>. */
 function applyTheme(theme: Theme) {
-  document.documentElement.classList.toggle('dark', theme === 'dark')
-  document.documentElement.style.colorScheme = theme
+  const target = document.querySelector<HTMLElement>('[data-blog-theme]')
+  if (!target) return
+  target.classList.toggle('dark', theme === 'dark')
+  target.style.colorScheme = theme
 }
 
 export function useDarkMode() {
@@ -35,13 +39,13 @@ export function useDarkMode() {
     applyTheme(theme)
     setIsDarkMode(theme === 'dark')
 
-    const colorScheme = window.matchMedia('(prefers-color-scheme: dark)')
+    const colorScheme = window.matchMedia('(prefers-color-scheme: light)')
     const handleSystemThemeChange = (event: MediaQueryListEvent) => {
       if (getSavedTheme()) return
 
-      const systemTheme = event.matches ? 'dark' : 'light'
+      const systemTheme = event.matches ? 'light' : 'dark'
       applyTheme(systemTheme)
-      setIsDarkMode(event.matches)
+      setIsDarkMode(!event.matches)
     }
 
     colorScheme.addEventListener('change', handleSystemThemeChange)
@@ -54,7 +58,11 @@ export function useDarkMode() {
 
     applyTheme(theme)
     setIsDarkMode(newMode)
-    localStorage.setItem(THEME_STORAGE_KEY, theme)
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme)
+    } catch {
+      // storage unavailable (private mode); the toggle still works for this page view
+    }
   }
 
   return { isDarkMode, toggleDarkMode }

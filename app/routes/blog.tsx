@@ -1,48 +1,37 @@
-import { formatPublishDate } from 'postflow'
 import { memo } from 'react'
 import { Link } from 'react-router'
 
-import { Footer } from '~/components/Footer'
-import { RSSIcon } from '~/components/icons'
+import { BlogShell, BlogToolbar } from '~/components/BlogShell'
+import { BranchHeader } from '~/components/BranchHeader'
 import {
   type BlogPostMetadataWithUpdated,
   getAllPostsMetadataWithUpdated,
 } from '~/utils/blog-config'
 import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
+import { datePart, formatPublishDate } from '~/utils/dateUtils'
+import { canonicalLink, pageMeta, SITE_URL } from '~/utils/seo'
 
 import type { Route } from './+types/blog'
 
 export const links: Route.LinksFunction = () => [
+  canonicalLink('/blog'),
   {
-    rel: 'canonical',
-    href: 'https://mawburn.com/blog',
+    rel: 'alternate',
+    type: 'application/rss+xml',
+    title: 'Matt Burnett — Blog',
+    href: `${SITE_URL}/rss.xml`,
   },
 ]
 
 export function meta() {
-  const url = 'https://mawburn.com/blog'
-  const description =
-    'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.'
-
-  return [
-    { title: 'Blog | Matt Burnett' },
-    { name: 'description', content: description },
-    {
-      name: 'keywords',
-      content:
-        'Software Engineering, Web Development, React, TypeScript, JavaScript, Frontend Development, Full Stack, Tabletop Gaming, Programming Blog, Tech Blog',
-    },
-    { name: 'author', content: 'mawburn' },
-    { name: 'robots', content: 'index, follow' },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:title', content: 'Blog | Matt Burnett' },
-    { property: 'og:description', content: description },
-    { property: 'og:url', content: url },
-    { property: 'og:site_name', content: 'mawburn.com' },
-    { name: 'twitter:card', content: 'summary' },
-    { name: 'twitter:title', content: 'Blog | Matt Burnett' },
-    { name: 'twitter:description', content: description },
-  ]
+  return pageMeta({
+    title: 'Blog | Matt Burnett',
+    description:
+      'Tech stack by day, stacks of games by night. Deep dives into software engineering, web development frameworks, and tabletop gaming.',
+    path: '/blog',
+    keywords:
+      'Software Engineering, Web Development, React, TypeScript, JavaScript, Frontend Development, Full Stack, Tabletop Gaming, Programming Blog, Tech Blog',
+  })
 }
 
 export async function loader() {
@@ -67,11 +56,11 @@ const BlogPostCard = memo(({ post }: { post: BlogPostMetadataWithUpdated }) => (
       className="block hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg p-4 -m-4 transition-colors"
       prefetch="intent"
     >
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-fuchsia-600 dark:hover:text-fuchsia-400 transition-colors">
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2 hover:text-emerald-700 dark:hover:text-moss-bright transition-colors">
         {post.title}
       </h2>
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs sm:text-sm text-gray-700 dark:text-gray-200 mb-3">
-        <time dateTime={post.date}>{formatPublishDate(post.date)}</time>
+        <time dateTime={datePart(post.date)}>{formatPublishDate(post.date)}</time>
         {post.wordCount ? (
           <>
             <span aria-hidden="true">•</span>
@@ -100,37 +89,22 @@ export default function Blog({ loaderData }: Route.ComponentProps) {
   const { posts } = loaderData as { posts: BlogPostMetadataWithUpdated[] }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[oklch(25%_0.015_260)] transition-colors flex flex-col">
-      <div className="container mx-auto max-w-3xl px-4 py-8">
-        <div className="flex justify-between items-start mb-6">
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-              <span className="text-gray-900 dark:text-white">Blog</span>
-            </h1>
-            <div className="w-16 h-1 bg-gradient-to-r from-black dark:from-white to-transparent"></div>
-          </div>
-          <a
-            href="/rss.xml"
-            className="flex items-center gap-2 text-gray-900 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-300 transition-colors"
-            title="RSS Feed"
-          >
-            <RSSIcon size={26} />
-            <span className="text-sm font-medium">RSS</span>
-          </a>
+    <>
+      <BranchHeader eyebrow="Writing" title="Engineering Essays & Notes">
+        <p className="max-w-2xl text-base leading-relaxed text-text-muted">
+          Software engineering, web development, and the occasional tabletop game. All posts are
+          written by me, though AI helps with proofreading and editing.
+        </p>
+      </BranchHeader>
+      <BlogShell>
+        <BlogToolbar />
+        <h2 className="sr-only">All posts</h2>
+        <div className="space-y-6">
+          {posts.map(post => (
+            <BlogPostCard key={post.slug} post={post} />
+          ))}
         </div>
-        <div className="text-gray-700 dark:text-gray-300">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-12">
-            All posts are written by me, though AI helps with proofreading and editing.
-          </p>
-
-          <div className="space-y-6">
-            {posts.map(post => (
-              <BlogPostCard key={post.slug} post={post} />
-            ))}
-          </div>
-        </div>
-      </div>
-      <Footer />
-    </main>
+      </BlogShell>
+    </>
   )
 }
