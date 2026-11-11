@@ -1,9 +1,11 @@
 import './app.css'
 
+import { useEffect } from 'react'
 import { isRouteErrorResponse, Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router'
 
 import type { Route } from './+types/root'
 import { cacheHeaders, cachePolicies } from './utils/cache'
+import { reloadOnce } from './utils/reload-once'
 import { generatePersonStructuredData, generateWebSiteStructuredData } from './utils/structuredData'
 
 export const links: Route.LinksFunction = () => [
@@ -100,8 +102,15 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = 'Oops!'
   let details = 'An unexpected error occurred.'
   let stack: string | undefined
+  const isRouteError = isRouteErrorResponse(error)
 
-  if (isRouteErrorResponse(error)) {
+  // Unexpected errors are usually a stale page/data/chunk from another deploy: reload once to heal.
+  useEffect(() => {
+    if (isRouteError) return
+    if (reloadOnce(window.location.pathname + window.location.search)) window.location.reload()
+  }, [isRouteError])
+
+  if (isRouteError) {
     message = error.status === 404 ? '404' : 'Error'
     details =
       error.status === 404 ? 'The requested page could not be found.' : error.statusText || details

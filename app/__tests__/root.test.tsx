@@ -2,6 +2,9 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import { ErrorBoundary } from '../root'
+import { reloadOnce } from '../utils/reload-once'
+
+vi.mock('../utils/reload-once', () => ({ reloadOnce: vi.fn(() => false) }))
 
 vi.mock('react-router', () => ({
   Links: () => null,
@@ -55,6 +58,18 @@ describe('Root Layout', () => {
 
       const mainContent = screen.getByText('Test Content').closest('.pt-16')
       expect(mainContent).toBeInTheDocument()
+    })
+
+    it('tries a one-time reload for unexpected errors, keyed by URL', () => {
+      vi.mocked(reloadOnce).mockClear()
+      render(<ErrorBoundary error={new Error('stale data')} params={{}} />)
+      expect(reloadOnce).toHaveBeenCalledWith(window.location.pathname + window.location.search)
+    })
+
+    it('does not reload for route error responses', () => {
+      vi.mocked(reloadOnce).mockClear()
+      render(<ErrorBoundary error={{ status: 404, statusText: 'Not Found' } as any} params={{}} />)
+      expect(reloadOnce).not.toHaveBeenCalled()
     })
 
     describe('Edge cases', () => {
