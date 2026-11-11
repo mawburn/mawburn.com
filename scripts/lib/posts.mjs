@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { readdir, readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -7,6 +8,11 @@ import { parse } from 'yaml'
 export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..')
 export const POSTS_DIR = path.join(ROOT, 'content', 'blog')
 export const IMAGES_DIR = path.join(ROOT, 'public', 'images')
+
+/** Category ids from content/blog/categories.json (shared with the app); the first is the default. */
+export const CATEGORY_IDS = JSON.parse(
+  readFileSync(path.join(POSTS_DIR, 'categories.json'), 'utf8')
+).map(category => category.id)
 
 /** Split a markdown file into parsed YAML frontmatter and body. */
 export function parseFrontmatter(raw) {

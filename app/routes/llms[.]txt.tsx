@@ -1,3 +1,4 @@
+import { BLOG_CATEGORIES } from '~/utils/blog-categories'
 import { getAllPostsMetadataWithUpdated } from '~/utils/blog-config'
 import { cacheHeaders, cachePolicies } from '~/utils/cache'
 
@@ -47,16 +48,22 @@ function normalizeDescription(description: string) {
 
 export async function loader() {
   const posts = await getAllPostsMetadataWithUpdated()
-  const blogPostsText = [...posts]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .map(post => {
-      const title = escapeMarkdownLinkText(post.title)
-      const url = `${baseUrl}/blog/${post.slug}`
-      const description = normalizeDescription(post.excerpt)
+  const sorted = [...posts].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const blogPostsText = BLOG_CATEGORIES.map(category => {
+    const lines = sorted
+      .filter(post => post.category === category.id)
+      .map(post => {
+        const title = escapeMarkdownLinkText(post.title)
+        const url = `${baseUrl}/blog/${post.slug}`
+        const description = normalizeDescription(post.excerpt)
 
-      return `- [${title}](${url}): ${description} ([Markdown](${url}.md))`
-    })
-    .join('\n')
+        return `- [${title}](${url}): ${description} ([Markdown](${url}.md))`
+      })
+
+    return lines.length ? `### ${category.label}\n\n${lines.join('\n')}` : ''
+  })
+    .filter(Boolean)
+    .join('\n\n')
 
   const llmsText = `${staticLlmsTextStart}
 ## Blog Posts

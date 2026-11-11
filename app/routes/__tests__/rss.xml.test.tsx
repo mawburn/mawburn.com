@@ -11,6 +11,7 @@ vi.mock('postflow', () => ({
 }))
 
 vi.mock('~/utils/blog-config', () => ({
+  getAllPostsMetadataWithUpdated: vi.fn(),
   blog: {
     getAllPostsMetadata: vi.fn(),
     getSiteConfig: vi.fn(() => ({
@@ -22,7 +23,7 @@ vi.mock('~/utils/blog-config', () => ({
   },
 }))
 
-import { blog } from '~/utils/blog-config'
+import { getAllPostsMetadataWithUpdated } from '~/utils/blog-config'
 
 describe('RSS Feed Route', () => {
   const mockPosts = [
@@ -33,6 +34,7 @@ describe('RSS Feed Route', () => {
       excerpt: 'This is test post 1',
       tags: ['test', 'post'],
       readTime: 5,
+      category: 'engineering',
       image: null,
       author: 'Test Author',
     },
@@ -43,6 +45,7 @@ describe('RSS Feed Route', () => {
       excerpt: 'This is test post 2 with <special> characters & "quotes"',
       tags: ['test', 'special'],
       readTime: 3,
+      category: 'hobbies',
       image: null,
       author: 'Test Author',
     },
@@ -50,7 +53,7 @@ describe('RSS Feed Route', () => {
 
   beforeEach(() => {
     vi.clearAllMocks()
-    vi.mocked(blog.getAllPostsMetadata).mockResolvedValue(mockPosts)
+    vi.mocked(getAllPostsMetadataWithUpdated).mockResolvedValue(mockPosts as any)
 
     const mockResponse = new Response(
       `<?xml version="1.0" encoding="UTF-8"?>
@@ -91,7 +94,10 @@ ${post.tags.map(tag => `<category>${tag}</category>`).join('\n')}
     await loader()
 
     expect(mockGenerateRSSResponse).toHaveBeenCalledWith(
-      mockPosts,
+      [
+        expect.objectContaining({ slug: 'test-post-1', tags: ['Engineering', 'test', 'post'] }),
+        expect.objectContaining({ slug: 'test-post-2', tags: ['Hobbies', 'test', 'special'] }),
+      ],
       expect.objectContaining({
         'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400',
         'Cloudflare-CDN-Cache-Control': 'max-age=86400, stale-while-revalidate=86400',
@@ -171,7 +177,7 @@ ${post.tags.map(tag => `<category>${tag}</category>`).join('\n')}
   })
 
   it('handles empty posts array', async () => {
-    vi.mocked(blog.getAllPostsMetadata).mockResolvedValue([])
+    vi.mocked(getAllPostsMetadataWithUpdated).mockResolvedValue([] as any)
 
     const emptyResponse = new Response(
       `<?xml version="1.0" encoding="UTF-8"?>

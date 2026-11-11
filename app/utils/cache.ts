@@ -10,6 +10,10 @@ export function cacheHeaders(
   { browserMaxAge, edgeMaxAge, staleWhileRevalidate }: CachePolicy,
   vary?: string
 ): Record<string, string> {
+  // Never cache in `pnpm dev`, or the browser keeps serving stale pages and loader data.
+  // (Vitest runs in MODE 'test', so tests still see the real policies.)
+  if (import.meta.env.MODE === 'development') return { 'Cache-Control': 'no-store' }
+
   const stale =
     staleWhileRevalidate === undefined ? '' : `, stale-while-revalidate=${staleWhileRevalidate}`
   return {
@@ -44,6 +48,26 @@ export function preventErrorCaching(response: Response): Response {
   // A route can inherit public cache headers even when its loader fails.
   const headers = new Headers(response.headers)
   headers.set('Cache-Control', 'no-store')
+  headers.delete('CDN-Cache-Control')
+  headers.delete('Cloudflare-CDN-Cache-Control')
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  })
+}
+
+/**
+ * Client-side navigations fetch loader data from `<path>.data`. If a browser or CDN caches it,
+ * a returning visitor can get new client JS with data shaped for the previous deploy and crash.
+ * Always revalidate route data; the HTML pages keep their normal cache policy.
+ */
+export function preventDataCaching(request: Request, response: Response): Response {
+  if (!new URL(request.url).pathname.endsWith('.data')) return response
+  if (response.headers.get('Cache-Control') === 'no-store') return response
+
+  const headers = new Headers(response.headers)
+  headers.set('Cache-Control', 'no-cache')
   headers.delete('CDN-Cache-Control')
   headers.delete('Cloudflare-CDN-Cache-Control')
   return new Response(response.body, {

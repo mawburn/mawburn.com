@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { BlogShell, BlogToolbar } from '~/components/BlogShell'
 import { MarkdownContent } from '~/components/MarkdownContent'
 import { ShareButtons } from '~/components/ShareButtons'
+import { categoryLabel, categoryPath } from '~/utils/blog-categories'
 import type { BlogPostWithUpdated } from '~/utils/blog-config'
 import { blogRawContent, getPostBySlugWithUpdated } from '~/utils/blog-config'
 import { cachePolicies, routeCacheHeaders } from '~/utils/cache'
@@ -187,7 +188,13 @@ export default function BlogPost({ loaderData, params }: Route.ComponentProps) {
                 </span>
               ) : null}
             </div>
-            <div className="flex flex-wrap gap-2 mb-6">
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <Link
+                to={categoryPath(post.category)}
+                className="rounded-full border border-emerald-700 px-2.5 py-0.5 text-xs font-medium text-emerald-700 transition-colors hover:bg-emerald-700 hover:text-white dark:border-moss-bright dark:text-moss-bright dark:hover:bg-moss-bright dark:hover:text-gray-900"
+              >
+                {categoryLabel(post.category)}
+              </Link>
               <span className="inline-block font-bold text-gray-700 dark:text-gray-200 text-xs">
                 Tags:
               </span>{' '}

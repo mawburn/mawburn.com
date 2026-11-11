@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Scaffold a new blog post.
- *   pnpm new-post "My post title" [--tags "react,typescript"]
+ *   pnpm new-post "My post title" [--category <id>] [--tags "react,typescript"]
  * Creates content/blog/YYYY-MM-DD-slug.md with valid frontmatter and generates OG images.
  */
 import { spawnSync } from 'node:child_process'
@@ -9,7 +9,7 @@ import { existsSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
-import { POSTS_DIR, ROOT, slugify } from './lib/posts.mjs'
+import { CATEGORY_IDS, POSTS_DIR, ROOT, slugify } from './lib/posts.mjs'
 
 const args = process.argv.slice(2)
 const tagsIndex = args.indexOf('--tags')
@@ -20,14 +20,21 @@ const tags =
         .map(t => t.trim())
         .filter(Boolean)
     : []
-const tagsValueIndex = tagsIndex >= 0 ? tagsIndex + 1 : -1
+const categoryIndex = args.indexOf('--category')
+const category = categoryIndex >= 0 ? (args[categoryIndex + 1] ?? '') : CATEGORY_IDS[0]
+const flagValueIndexes = [tagsIndex, categoryIndex].filter(i => i >= 0).map(i => i + 1)
 const title = args
-  .filter((arg, i) => !arg.startsWith('--') && i !== tagsValueIndex)
+  .filter((arg, i) => !arg.startsWith('--') && !flagValueIndexes.includes(i))
   .join(' ')
   .trim()
 
 if (!title) {
-  console.error('Usage: pnpm new-post "Post title" [--tags "one,two"]')
+  console.error('Usage: pnpm new-post "Post title" [--category <id>] [--tags "one,two"]')
+  process.exit(1)
+}
+
+if (!CATEGORY_IDS.includes(category)) {
+  console.error(`Unknown category "${category}". Use one of: ${CATEGORY_IDS.join(', ')}`)
   process.exit(1)
 }
 
@@ -48,6 +55,7 @@ const frontmatter = [
   `title: ${q(title)}`,
   `date: ${q(`${day} ${pad(now.getHours())}:${pad(now.getMinutes())}`)}`,
   `image: ${q(`${slug}.webp`)}`,
+  `category: ${q(category)}`,
   `excerpt: ${q('TODO: one or two sentences (50–160 characters) that work as the search result description.')}`,
   `tags: [${(tags.length ? tags : ['TODO']).map(q).join(', ')}]`,
   '',

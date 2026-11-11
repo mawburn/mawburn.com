@@ -1,17 +1,18 @@
 import { render, screen } from '@testing-library/react'
-import type { BlogPost as BlogPostType } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import BlogPost, { headers, loader, meta } from '~/routes/blog.post'
+import type { BlogPostWithUpdated } from '~/utils/blog-config'
 
-const mockPost: BlogPostType = {
+const mockPost: BlogPostWithUpdated = {
   slug: 'test-post',
   title: 'Test Blog Post',
   date: '2025-01-01',
   excerpt: 'This is a test post excerpt',
   tags: ['react', 'testing'],
   readTime: 5,
+  category: 'engineering',
   content: '<p>This is the blog post content</p>',
   image: undefined,
   images: undefined,

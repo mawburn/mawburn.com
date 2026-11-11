@@ -1,16 +1,19 @@
 import type { BlogPost, BlogPostMetadata } from 'postflow'
 import { BlogEngine, ContentLoader } from 'postflow'
 
+import { DEFAULT_CATEGORY, isBlogCategory } from './blog-categories'
 import { calculateReadTimeFromWordCount } from './readTime'
 
 export type BlogPostMetadataWithUpdated = BlogPostMetadata & {
   updated?: string
   wordCount?: number
+  category: string
 }
 
 export type BlogPostWithUpdated = BlogPost & {
   updated?: string
   wordCount?: number
+  category: string
 }
 
 function parseFrontmatterValue(content: string, field: string) {
@@ -123,25 +126,47 @@ for (const [path, content] of Object.entries(blogFiles)) {
 
 export const blogRawContent = blogContent
 
+type PostFrontmatter = {
+  tags: string[]
+  updated?: string
+  category: string
+  wordCount: number
+  hasImage: boolean
+}
+
+// Posts are bundled at build time, so parse each one's frontmatter once rather than per request.
+function parsePostFrontmatter(content: string): PostFrontmatter {
+  const category = parseFrontmatterValue(content, 'category')
+  return {
+    tags: parseTagsFrontmatter(content),
+    updated: parseUpdatedFrontmatter(content),
+    category: isBlogCategory(category) ? category : DEFAULT_CATEGORY,
+    wordCount: calculateWordCount(content),
+    hasImage: hasFrontmatterImage(content),
+  }
+}
+
+const postFrontmatter = new Map(
+  Object.entries(blogContent).map(([slug, content]) => [slug, parsePostFrontmatter(content)])
+)
+
+function getPostFrontmatter(slug: string) {
+  return postFrontmatter.get(slug) ?? parsePostFrontmatter('')
+}
+
 export function addFrontmatterToPost<T extends BlogPost | BlogPostMetadata>(
   post: T
-): T & { updated?: string } {
-  const content = blogContent[post.slug] ?? ''
-  const tags = parseTagsFrontmatter(content)
-  const updated = parseUpdatedFrontmatter(content)
-  const wordCount = calculateWordCount(content)
+): T & { updated?: string; wordCount?: number; category: string } {
+  const { tags, updated, category, wordCount } = getPostFrontmatter(post.slug)
   const result = {
     ...post,
     tags: tags.length > 0 ? tags : post.tags,
+    category,
     wordCount,
     readTime: calculateReadTimeFromWordCount(wordCount),
-  } as T & { updated?: string; wordCount?: number }
-
-  if (updated) {
-    result.updated = updated
   }
 
-  return result
+  return updated ? { ...result, updated } : result
 }
 
 export async function getPostBySlugWithUpdated(slug: string): Promise<BlogPostWithUpdated | null> {
@@ -149,7 +174,7 @@ export async function getPostBySlugWithUpdated(slug: string): Promise<BlogPostWi
   if (!post) return null
 
   const postWithUpdated = addFrontmatterToPost(post)
-  if (!hasFrontmatterImage(blogContent[slug] ?? '')) {
+  if (!getPostFrontmatter(slug).hasImage) {
     postWithUpdated.image = undefined
     postWithUpdated.images = undefined
   }

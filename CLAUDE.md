@@ -14,4 +14,4 @@ React Router v7 (SSR) on a Cloudflare Worker, Tailwind v4, pnpm. See README.md f
 
 ## Blog
 
-Posts are `content/blog/YYYY-MM-DD-slug.md`. Create with `pnpm new-post`; `pnpm validate-posts` runs in CI and before `pnpm build`. Images via `pnpm og-image`.
+Posts are `content/blog/YYYY-MM-DD-slug.md`. Each post has exactly one `category` (ids in `content/blog/categories.json`, the single source for app and scripts); `/blog` defaults to `engineering` and filters with `?category=<id>|all`. Create with `pnpm new-post`; `pnpm validate-posts` runs in CI and before `pnpm build`. Images via `pnpm og-image`.

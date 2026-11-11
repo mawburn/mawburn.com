@@ -37,13 +37,13 @@ Test against the deployed custom domain: local development does not prove edge c
 ## Writing a blog post
 
 ```bash
-pnpm new-post "My post title" --tags "react,typescript"   # scaffolds content/blog/YYYY-MM-DD-slug.md + OG images
+pnpm new-post "My post title" --category engineering --tags "react,typescript"   # scaffolds content/blog/YYYY-MM-DD-slug.md + OG images
 # write the post, replace the TODO excerpt/tags
 pnpm dev                                                 # preview at /blog/<slug>
 pnpm validate-posts                                      # frontmatter, filename, image checks (also run by CI and `pnpm build`)
 ```
 
-Frontmatter: `title`, `date` (`'YYYY-MM-DD HH:mm'`, must match the filename), `excerpt` (becomes the meta description, 50–160 chars ideal), `tags`, optional `image` and `updated`. Other commands:
+Frontmatter: `title`, `date` (`'YYYY-MM-DD HH:mm'`, must match the filename), `excerpt` (becomes the meta description, 50–160 chars ideal), `category` (exactly one id from `content/blog/categories.json`; drives the filter buttons on `/blog`), `tags`, optional `image` and `updated`. Other commands:
 
 - `pnpm og-image [slug]` generates branded `{slug}.webp` (1200x630) plus `-twitter` and `-small` variants for posts without an image. `--force` regenerates all, `--default` rebuilds `og-default.webp`.
 - Posts are bundled at build time, so publishing means committing and deploying (`pnpm deploy`).

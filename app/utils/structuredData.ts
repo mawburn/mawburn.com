@@ -69,7 +69,7 @@ export function generateCanonicalPersonReference() {
 }
 
 export function generateArticleStructuredData(
-  post: BlogPostWithUpdated,
+  post: Omit<BlogPostWithUpdated, 'category'>,
   url: string
 ): ArticleStructuredData {
   const images: string[] = []

@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react'
-import type { BlogPostMetadata } from 'postflow'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
 import Blog, { headers, loader, meta } from '~/routes/blog'
+import type { BlogPostMetadataWithUpdated } from '~/utils/blog-config'
 
-const mockPosts: BlogPostMetadata[] = [
+const mockPosts: BlogPostMetadataWithUpdated[] = [
   {
     slug: 'test-post-1',
     title: 'Test Post 1',
@@ -13,6 +13,7 @@ const mockPosts: BlogPostMetadata[] = [
     excerpt: 'This is a test excerpt for post 1',
     tags: ['react', 'typescript'],
     readTime: 5,
+    category: 'engineering',
   },
   {
     slug: 'test-post-2',
@@ -21,15 +22,31 @@ const mockPosts: BlogPostMetadata[] = [
     excerpt: 'This is a test excerpt for post 2',
     tags: ['javascript', 'web'],
     readTime: 3,
+    category: 'engineering',
+  },
+  {
+    slug: 'test-post-3',
+    title: 'Test Post 3',
+    date: '2025-01-03',
+    excerpt: 'This is a test excerpt for post 3',
+    tags: ['rpg'],
+    readTime: 4,
+    category: 'hobbies',
   },
 ]
+
+const engineering = 'engineering'
+const hobbies = 'hobbies'
+
+const request = (search = '') => new Request(`https://mawburn.com/blog${search}`)
 
 vi.mock('~/utils/blog-config', () => ({
   getAllPostsMetadataWithUpdated: vi.fn(async () => mockPosts),
 }))
 
 vi.mock('react-router', () => ({
-  Link: ({ to, children, ...props }: any) => (
+  redirect: (url: string) => new Response(null, { status: 302, headers: { Location: url } }),
+  Link: ({ to, children, prefetch: _prefetch, preventScrollReset: _psr, ...props }: any) => (
     <a href={to} {...props}>
       {children}
     </a>
@@ -87,16 +104,47 @@ describe('Blog Route', () => {
   })
 
   describe('Blog post loading', () => {
-    it('loads and provides blog post data', async () => {
-      const result = await loader()
+    it('defaults to Engineering posts', async () => {
+      const result = await loader({ request: request() })
 
-      expect(result).toHaveProperty('posts')
-      expect(Array.isArray(result.posts)).toBe(true)
-      expect(result.posts).toHaveLength(2)
-
-      expect(result.posts[0]).toHaveProperty('slug', 'test-post-1')
-      expect(result.posts[0]).toHaveProperty('title', 'Test Post 1')
+      expect(result.active).toBe('engineering')
+      expect(result.posts.map(post => post.slug)).toEqual(['test-post-1', 'test-post-2'])
       expect(result.posts[0]).toHaveProperty('readTime', 5)
+    })
+
+    it('filters by the category query param', async () => {
+      const result = await loader({ request: request('?category=hobbies') })
+
+      expect(result.active).toBe('hobbies')
+      expect(result.posts.map(post => post.slug)).toEqual(['test-post-3'])
+    })
+
+    it('shows every post for category=all', async () => {
+      const result = await loader({ request: request('?category=all') })
+
+      expect(result.posts).toHaveLength(3)
+    })
+
+    it('only offers categories that have posts', async () => {
+      const result = await loader({ request: request() })
+
+      expect(result.categories).toEqual(['engineering', 'hobbies'])
+    })
+
+    it.each(['?category=bogus', '?category=engineering'])('redirects %s to /blog', async search => {
+      const thrown = await loader({ request: request(search) }).catch(error => error)
+
+      expect(thrown).toBeInstanceOf(Response)
+      expect(thrown.headers.get('Location')).toBe('/blog')
+    })
+  })
+
+  describe('Category SEO', () => {
+    it('keeps the /blog canonical but names the category in the title', () => {
+      const result = meta({ data: { active: 'hobbies' } } as any)
+
+      expect(result).toContainEqual({ title: 'Hobbies | Blog | Matt Burnett' })
+      expect(result).toContainEqual({ property: 'og:url', content: 'https://mawburn.com/blog' })
     })
   })
 
@@ -106,7 +154,11 @@ describe('Blog Route', () => {
         {
           path: '/blog',
           Component: Blog as any,
-          loader: () => ({ posts: [mockPosts[0]] }),
+          loader: () => ({
+            posts: [mockPosts[0]],
+            active: 'engineering',
+            categories: [engineering, hobbies],
+          }),
         },
       ])
 
@@ -124,12 +176,60 @@ describe('Blog Route', () => {
       expect(screen.getByRole('button', { name: /Switch to/ })).toBeInTheDocument()
     })
 
+    it('renders category filter buttons with All first and Engineering active', () => {
+      const Stub = createRoutesStub([
+        {
+          path: '/blog',
+          Component: Blog as any,
+          loader: () => ({
+            posts: [mockPosts[0]],
+            active: 'engineering',
+            categories: [engineering, hobbies],
+          }),
+        },
+      ])
+
+      render(<Stub />)
+
+      const nav = screen.getByRole('navigation', { name: 'Post categories' })
+      const links = Array.from(nav.querySelectorAll('a'))
+      expect(links.map(link => [link.textContent, link.getAttribute('href')])).toEqual([
+        ['All', '/blog?category=all'],
+        ['Engineering', '/blog'],
+        ['Hobbies', '/blog?category=hobbies'],
+      ])
+      expect(links[0]).not.toHaveAttribute('aria-current')
+      expect(links[1]).toHaveAttribute('aria-current', 'page')
+    })
+
+    it('hides the All button when only one category has posts', () => {
+      const Stub = createRoutesStub([
+        {
+          path: '/blog',
+          Component: Blog as any,
+          loader: () => ({
+            posts: [mockPosts[0]],
+            active: 'engineering',
+            categories: [engineering],
+          }),
+        },
+      ])
+
+      render(<Stub />)
+
+      expect(screen.queryByRole('link', { name: 'All' })).not.toBeInTheDocument()
+    })
+
     it('renders RSS feed access link', () => {
       const Stub = createRoutesStub([
         {
           path: '/blog',
           Component: Blog as any,
-          loader: () => ({ posts: mockPosts }),
+          loader: () => ({
+            posts: mockPosts.slice(0, 2),
+            active: 'engineering',
+            categories: [engineering, hobbies],
+          }),
         },
       ])
 
@@ -144,7 +244,11 @@ describe('Blog Route', () => {
         {
           path: '/blog',
           Component: Blog as any,
-          loader: () => ({ posts: mockPosts }),
+          loader: () => ({
+            posts: mockPosts.slice(0, 2),
+            active: 'engineering',
+            categories: [engineering, hobbies],
+          }),
         },
       ])
 
@@ -163,7 +267,7 @@ describe('Blog Route', () => {
           {
             path: '/blog',
             Component: Blog as any,
-            loader: () => ({ posts: [] }),
+            loader: () => ({ posts: [], active: 'engineering', categories: [engineering] }),
           },
         ])
 
@@ -179,7 +283,11 @@ describe('Blog Route', () => {
           {
             path: '/blog',
             Component: Blog as any,
-            loader: () => ({ posts: mockPosts }),
+            loader: () => ({
+              posts: mockPosts.slice(0, 2),
+              active: 'engineering',
+              categories: [engineering, hobbies],
+            }),
           },
         ])
 

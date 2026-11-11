@@ -4,6 +4,7 @@ date: '2026-10-08 14:30'
 image: '2026-10-08-leaving-shopify.webp'
 updated: '2026-10-14'
 excerpt: "Looking back at nearly 5½ years at Shopify, from building the Checkout Editor to bringing LibreChat to thousands of employees, and the incredible engineers I worked alongside. It's made me realize just how much I accomplished, how much I'd forgotten, and why I wish I'd been writing it all down along the way."
+category: 'engineering'
 tags: ['Shopify', 'engineering career', 'personal journey', 'developer experience']
 ---
 

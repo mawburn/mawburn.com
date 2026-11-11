@@ -17,6 +17,7 @@ describe('llms.txt route', () => {
         date: '2025-01-01',
         excerpt: 'Older post excerpt.',
         tags: ['test'],
+        category: 'engineering',
         readTime: 4,
       },
       {
@@ -25,6 +26,7 @@ describe('llms.txt route', () => {
         date: '2025-02-01',
         excerpt: 'Newer post excerpt with extra\n whitespace.',
         tags: ['test'],
+        category: 'engineering',
         readTime: 5,
       },
     ])
@@ -41,6 +43,8 @@ describe('llms.txt route', () => {
     expect(text).toContain('## Writing')
     expect(text).toContain('## Technical areas')
     expect(text).toContain('## Blog Posts')
+    expect(text).toContain('### Engineering')
+    expect(text).not.toContain('### Hobbies')
 
     expect(text).toContain(
       '- [Newer \\[Post\\]](https://mawburn.com/blog/newer-post): Newer post excerpt with extra whitespace.'

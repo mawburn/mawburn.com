@@ -1,0 +1,18 @@
+[
+  {
+    "id": "engineering",
+    "label": "Engineering"
+  },
+  {
+    "id": "hobbies",
+    "label": "Hobbies"
+  },
+  {
+    "id": "stories",
+    "label": "Stories"
+  },
+  {
+    "id": "muses",
+    "label": "Muses"
+  }
+]

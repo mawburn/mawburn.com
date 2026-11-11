@@ -18,6 +18,7 @@ const good = {
     date: '2026-01-02 09:00',
     excerpt: 'A reasonably long excerpt that comfortably clears the fifty character minimum.',
     tags: ['testing'],
+    category: 'engineering',
   },
   body: 'Body text. '.repeat(20),
 }
@@ -56,6 +57,14 @@ describe('post validation', () => {
     expect(validatePosts([{ ...good, body: 'tiny' }])[0].errors).toContain(
       'post body is empty or too short'
     )
+  })
+
+  it('requires exactly one known category', () => {
+    const message = 'category must be exactly one of: engineering, hobbies, stories, muses'
+    expect(errorsFor({ category: undefined })).toContain(message)
+    expect(errorsFor({ category: 'cooking' })).toContain(message)
+    expect(errorsFor({ category: ['engineering', 'hobbies'] })).toContain(message)
+    expect(errorsFor({ category: 'hobbies' })).toEqual([])
   })
 
   it('rejects an updated date before the publish date', () => {

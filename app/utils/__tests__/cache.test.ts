@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest'
 
-import { cacheHeaders, cachePolicies, preventErrorCaching, routeCacheHeaders } from '~/utils/cache'
+import {
+  cacheHeaders,
+  cachePolicies,
+  preventDataCaching,
+  preventErrorCaching,
+  routeCacheHeaders,
+} from '~/utils/cache'
 
 describe('cacheHeaders', () => {
   it('sets separate browser and Cloudflare TTLs with stale revalidation', () => {
@@ -63,5 +69,30 @@ describe('routeCacheHeaders', () => {
     )
     expect(headers.get('Vary')).toBe('Accept-Encoding')
     expect(parent.get('Cache-Control')).toBe('public, max-age=3600')
+  })
+})
+
+describe('preventDataCaching', () => {
+  const cached = () =>
+    new Response('data', {
+      status: 200,
+      headers: { ...cacheHeaders(cachePolicies.blogList), 'X-Frame-Options': 'DENY' },
+    })
+
+  it('forces route data to revalidate and drops CDN caching', () => {
+    const response = preventDataCaching(
+      new Request('https://mawburn.com/blog.data?category=hobbies'),
+      cached()
+    )
+
+    expect(response.headers.get('Cache-Control')).toBe('no-cache')
+    expect(response.headers.get('CDN-Cache-Control')).toBeNull()
+    expect(response.headers.get('Cloudflare-CDN-Cache-Control')).toBeNull()
+    expect(response.headers.get('X-Frame-Options')).toBe('DENY')
+  })
+
+  it('leaves page responses unchanged', () => {
+    const response = cached()
+    expect(preventDataCaching(new Request('https://mawburn.com/blog'), response)).toBe(response)
   })
 })

@@ -1,7 +1,7 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
-import { IMAGES_DIR } from './posts.mjs'
+import { CATEGORY_IDS, IMAGES_DIR } from './posts.mjs'
 
 const FILE_RE = /^(\d{4}-\d{2}-\d{2})-[a-z0-9]+(?:-[a-z0-9]+)*\.md$/
 const DATE_RE = /^\d{4}-\d{2}-\d{2}( \d{2}:\d{2})?$/
@@ -54,6 +54,10 @@ export function validatePosts(posts) {
       data.tags.some(tag => typeof tag !== 'string' || !tag.trim())
     ) {
       errors.push('tags must be a non-empty list of strings')
+    }
+
+    if (!CATEGORY_IDS.includes(data.category)) {
+      errors.push(`category must be exactly one of: ${CATEGORY_IDS.join(', ')}`)
     }
 
     if (data.image !== undefined) {

@@ -3,6 +3,7 @@ title: 'Nine Brains, One Giant Rat, and a Million Credits: A Mothership 1e Missi
 date: '2025-06-06 09:00'
 image: '2025-06-06-mothership-shopify-summit.webp'
 excerpt: 'A simple salvage mission to retrieve a black box from a derelict casino ship turned into chaos when nine players faced swarms of rats and a giant mutant mascot. Flamethrowers, harmonicas, and one unexpectedly badass scientist saved the day.'
+category: 'hobbies'
 tags:
   [
     'Mothership RPG',

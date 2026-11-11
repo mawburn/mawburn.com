@@ -45,6 +45,7 @@ const basePost = {
   tags: ['SEO'],
   content: '<p>Body</p>',
   readTime: 3,
+  category: 'engineering',
   images: { default: '/images/example.webp' },
 }
 
